@@ -15,6 +15,7 @@ defmodule Bonfire.Web.Router do
   end
 
   pipeline :account_required do
+    plug Bonfire.Web.Plugs.LoadSessionAccount
     plug Bonfire.Web.Plugs.AccountRequired
   end
 
@@ -76,6 +77,9 @@ defmodule Bonfire.Web.Router do
 
   # include federation routes
   use ActivityPubWeb.Router
+
+  # include nodeinfo routes
+  use NodeinfoWeb.Router
 
   if Mix.env() in [:dev, :test] do
     scope "/" do
