@@ -51,6 +51,8 @@ defmodule Bonfire.MixProject do
       {:ex_machina, "~> 2.4", only: :test},
       {:mock, "~> 0.3.0", only: :test},
       {:zest, "~> 0.1"},
+      # dev playground
+      {:niex, git: "https://github.com/jonklein/niex", only: :dev}
     ])
     # |> IO.inspect()
   end

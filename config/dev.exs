@@ -1,5 +1,7 @@
 import Config
 
+import_config "niex_dev.exs"
+
 alias Bonfire.{Mailer, Repo, Web.Endpoint}
 
 config :bonfire, Mailer,
