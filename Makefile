@@ -2,13 +2,12 @@
 
 LIBS_PATH=./forks/
 ORG_NAME=bonfirenetworks
-APP_FLAVOUR ?= `git name-rev --name-only HEAD`
+APP_FLAVOUR=main
 APP_NAME=bonfire-$(APP_FLAVOUR)
 UID := $(shell id -u)
 GID := $(shell id -g)
 APP_REL_CONTAINER="$(ORG_NAME)_$(APP_NAME)_release"
-APP_REL_DOCKERFILE=Dockerfile.release
-APP_REL_DOCKERCOMPOSE=docker-compose.release.yml
+APP_REL_DOCKERCOMPOSE=docker-compose.yml
 APP_DOCKER_REPO="$(ORG_NAME)/$(APP_NAME)"
 
 export UID
@@ -24,7 +23,8 @@ init:
 help: init
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 	
-
+rel-pull: init docker-stop-web ## Run the app in Docker & starts a new `iex` console
+	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) pull
 
 rel-run: init docker-stop-web ## Run the app in Docker & starts a new `iex` console
 	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) run --name bonfire_web --service-ports --rm backend bin/bonfire start_iex
