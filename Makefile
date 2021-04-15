@@ -23,6 +23,11 @@ init:
 help: init
 	@perl -nle'print $& if m{^[a-zA-Z_-]+:.*?## .*$$}' $(MAKEFILE_LIST) | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
 	
+docker-stop-web: 
+	@docker stop bonfire_web 2> /dev/null || true
+	@docker rm bonfire_web 2> /dev/null || true
+
+
 rel-pull: init docker-stop-web ## Run the app in Docker & starts a new `iex` console
 	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) pull
 
