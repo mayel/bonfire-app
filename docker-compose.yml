@@ -2,10 +2,9 @@ version: "3.5"
 
 services:
   backend:
-    # You can build your own image from the source running:
-    # $ make rel-build
-    # $ make rel-tag-latest
+    # choose your flavour (TODO: derive from env config)
     image: "bonfirenetworks/bonfire-main:latest"
+    # image: "bonfirenetworks/bonfire-with-valueflows-api:latest"
     container_name: "bonfire_web"
     restart: always
     ports:
@@ -18,7 +17,7 @@ services:
     volumes:
       - type: bind
         source: ./data/uploads
-        target: /var/www/uploads
+        target: /opt/app/data/uploads
   frontend:
     image: "caddy:alpine"
     restart: always
