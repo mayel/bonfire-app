@@ -10,7 +10,8 @@ This repo includes configurations to run different [flavours of Bonfire](https:/
 
 ## Documentation
 
-* [Development guide](docs/HACKING.md) 
+* [Development guide](https://github.com/bonfire-networks/bonfire-app/blob/main/docs/HACKING.md) 
+* [Deployment guide](https://github.com/bonfire-networks/bonfire-app/blob/main/docs/DEPLOY.md) 
 
 
 ## Copyright and License
