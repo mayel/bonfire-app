@@ -47,8 +47,7 @@ define load_env
 endef
 
 pre-config: pre-init ## Initialise env files, and create some required folders, files and softlinks
-	@echo "You can now edit your config for flavour '$(FLAVOUR)' in config/dev/secrets.env, config/dev/public.env and ./config/ 
-more generally."
+	@echo "You can now edit your config for flavour '$(FLAVOUR)' in config/dev/secrets.env, config/dev/public.env and ./config/ more generally."
 
 pre-init:
 	@ln -sfn $(BONFIRE_FLAVOUR)/config ./config
