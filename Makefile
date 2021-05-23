@@ -16,13 +16,14 @@ WITH_DOCKER ?= total
 
 # other configs
 FORKS_PATH ?= ./forks/
+ENV ?= prod
 ORG_NAME ?= bonfirenetworks
 APP_NAME ?= bonfire-$(FLAVOUR)
 UID := $(shell id -u)
 GID := $(shell id -g)
 APP_REL_CONTAINER="$(ORG_NAME)_$(APP_NAME)_release"
 APP_REL_DOCKERFILE=Dockerfile.release
-APP_REL_DOCKERCOMPOSE=docker-compose.release.yml
+APP_REL_DOCKERCOMPOSE=docker-compose.yml
 APP_VSN ?= `grep -m 1 'version:' mix.exs | cut -d '"' -f2`
 APP_BUILD ?= `git rev-parse --short HEAD`
 APP_DOCKER_REPO="$(ORG_NAME)/$(APP_NAME)"
@@ -46,7 +47,8 @@ define load_env
 endef
 
 pre-config: pre-init ## Initialise env files, and create some required folders, files and softlinks
-	@echo "You can now edit your config for flavour '$(FLAVOUR)' in config/dev/secrets.env, config/dev/public.env and ./config/ more generally."
+	@echo "You can now edit your config for flavour '$(FLAVOUR)' in config/dev/secrets.env, config/dev/public.env and ./config/ 
+more generally."
 
 pre-init:
 	@ln -sfn $(BONFIRE_FLAVOUR)/config ./config
@@ -64,10 +66,10 @@ pre-run:
 	@mkdir -p data/search/dev
 
 init: pre-init pre-run
-	@$(call setup_env,dev)
-	@echo "Light that fire... $(APP_NAME) with $(FLAVOUR) flavour $(APP_VSN) - $(APP_BUILD)"
+	@$(call setup_env,$(ENV))
+	@echo "Light that fire... $(APP_NAME) with $(FLAVOUR) flavour in $(ENV) - $(APP_VSN) - $(APP_BUILD)"
 	@make --no-print-directory pre-init
-	@make --no-print-directory services
+#	@make --no-print-directory services
 
 help: init ## Makefile commands help
 	@perl -nle'print $& if m{^[a-zA-Z_-~.%]+:.*?## .*$$}' $(MAKEFILE_LIST) | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
