@@ -7,7 +7,7 @@ defmodule Bonfire.Web.LiveHandler do
   alias Bonfire.Me.Web.LiveHandlers.{Profiles, Circles}
   alias Bonfire.Social.Web.LiveHandlers.{Flags, Boosts, Likes, Posts, Feeds, Follows}
 
-  # TODO: make this whole thing config-driven
+  # TODO: make this whole thing config-driven and move to Bonfire.Common
   @profile_events ["profile_save"]
 
   @circle_events ["circle_save"]
@@ -67,9 +67,15 @@ defmodule Bonfire.Web.LiveHandler do
   # defp do_handle_event(event, attrs, socket) when binary_part(event, 0, 10) == "valueflows", do: ValueFlows.Web.LiveHandler.handle_event(event, attrs, socket)
 
   defp do_handle_event(event, attrs, socket) do
-    [mod, action] = String.split(event, ":", parts: 2)
+
+    [mod, action] = case String.split(event, ":", parts: 2) do
+      [mod, action] -> [mod, action]
+      [mod] -> [mod, ""]
+    end
+
     IO.inspect(mod)
     IO.inspect(action)
+
     case Utils.maybe_str_to_module(mod<>".LiveHandler") || Utils.maybe_str_to_module(mod) do
       module when is_atom(module) ->
         IO.inspect(module)
