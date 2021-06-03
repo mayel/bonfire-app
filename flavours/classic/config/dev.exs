@@ -26,26 +26,31 @@ config :bonfire, Bonfire.Web.Endpoint,
   check_origin: false,
   code_reloader: true,
   watchers: [
-    node: [
-      "node_modules/webpack/bin/webpack.js",
-      "--mode",
-      "development",
-      "--watch-stdin",
-      cd: Path.expand("assets", File.cwd!())
-    ]
+  #   node: [
+  #     "node_modules/webpack/bin/webpack.js",
+  #     "--mode",
+  #     "development",
+  #     "--watch-stdin",
+  #     cd: Path.expand("assets", File.cwd!())
+  #   ]
+     pnpm: ["run", "watch", cd: Path.expand("assets", File.cwd!())]
   ],
   live_reload: [
     patterns: [
-      # ~r"^priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
+      ~r"^priv/static/.*(png|jpeg|jpg|gif|svg)$",
       # ~r"^priv/gettext/.*(po)$",
       # ~r"^web/(live|views)/.*ex$",
       # ~r"^lib/.*_live\.ex$",
-      # ~r".*leex$",
-      ~r"lib/.*ex$",
-      ~r".*sface$",
+      ~r".*eex$",
+      ~r".*_live.ex$",
+      ~r".*.sface$",
     ] ++ path_dep_patterns
   ]
 
+# recompile when changes to source (incl. in extensions)
+config :exsync,
+  src_monitor: true,
+  extra_extensions: [".leex", ".js", ".css", ".sface"]
 
 config :logger, :console,
   level: :debug,
@@ -55,7 +60,3 @@ config :logger, :console,
 config :phoenix, :stacktrace_depth, 30
 
 config :phoenix, :plug_init_mode, :runtime
-
-config :exsync,
-  src_monitor: true,
-  extra_extensions: [".leex", ".js", ".css", ".sface"]

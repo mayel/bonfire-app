@@ -9,20 +9,9 @@ module.exports = {
   purge: {
     enabled: true,
     content: [
-      '../forks/**/lib/**/*.leex',
-      '../forks/**/lib/**/**/*.leex',
-      '../forks/**/lib/**/**/**/*.leex',
-      '../deps/bonfire_**/lib/**/*.leex',
-      '../deps/bonfire_**/lib/**/**/*.leex',
-      '../deps/bonfire_**/lib/**/**/**/*.leex',
-      '../lib/web/**/*.leex',
-      '../forks/**/lib/**/*.sface',
-      '../forks/**/lib/**/**/*.sface',
-      '../forks/**/lib/**/**/**/*.sface',
-      '../deps/bonfire_**/lib/**/*.sface',
-      '../deps/bonfire_**/lib/**/**/*.sface',
-      '../deps/bonfire_**/lib/**/**/**/*.sface',
-      '../lib/web/**/*.sface',
+      '../forks/**/*{.leex,.sface,_live.ex}',
+      '../deps/**/*{.leex,.sface,_live.ex}',
+      '../lib/**/*{.leex,.sface,_live.ex}'
     ]
   },
   darkMode: 'class',
