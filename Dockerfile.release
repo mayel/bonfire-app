@@ -21,7 +21,7 @@ ARG FLAVOUR
 ARG FLAVOUR_PATH
 
 #### STEP 1 - Build our app
-FROM elixir:${ELIXIR_VERSION}-alpine as builder 
+FROM elixir:${ELIXIR_VERSION}-alpine as builder
 
 ENV HOME=/opt/app/ TERM=xterm MIX_ENV=prod APP_NAME=$APP_NAME FLAVOUR=$FLAVOUR FLAVOUR_PATH=./
 WORKDIR $HOME
@@ -35,11 +35,11 @@ RUN apk add --no-cache make gcc libc-dev
 # Cache elixir deps
 COPY mix.exs mess.exs mix.lock ./
 # sometimes mix tries to read the config
-RUN mkdir -p ./config 
+RUN mkdir -p ./config
 COPY data/current_flavour/config/config_basics.exs ./config/config.exs
 
 # get deps from hex.pm
-COPY data/current_flavour/config/deps.hex ./config/ 
+COPY data/current_flavour/config/deps.hex ./config/
 RUN mix do local.hex --force, local.rebar --force
 RUN mix do deps.get --only prod
 
@@ -58,12 +58,12 @@ RUN rm ./config/deps.path
 # RUN ls -la ./config
 # RUN MIX_ENV=prod mix do deps.compile
 
-# Update Bonfire extensions to latest git version 
-RUN mix do bonfire.deps.update
+# Update Bonfire extensions to latest git version
+# RUN mix do bonfire.deps.update
 
 # Uncomment these lines only if you want to include locally-forked deps in the release
-# COPY data/current_flavour/config/deps.path ./config 
-# COPY forks/ ./ 
+# COPY data/current_flavour/config/deps.path ./config
+# COPY forks/ ./
 # RUN mix do deps.get --only prod
 
 # JS package manager
@@ -79,7 +79,7 @@ RUN MIX_ENV=prod mix do deps.compile
 # migrations
 COPY data/current_flavour/repo priv/repo
 
-# bonfire-app code & assets 
+# bonfire-app code & assets
 COPY lib lib
 COPY assets assets
 # COPY . .
@@ -114,9 +114,9 @@ RUN apk add --update --no-cache \
   openssh-client \
   openssl-dev \
   # ^ for HTTPS
-  git \ 
-  build-base \ 
-  # ^ required by tree_magic 
+  git \
+  build-base \
+  # ^ required by tree_magic
   tzdata \
   gettext \
   # ^ localisation
@@ -125,7 +125,7 @@ RUN apk add --update --no-cache \
 
 WORKDIR /opt/app
 
-# install app 
+# install app
 COPY --from=builder /opt/app/_build/prod/rel/bonfire /opt/app
 
 # start
