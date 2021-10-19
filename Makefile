@@ -355,7 +355,7 @@ rel.db.restore: rel.env init
 	cat $(file) | docker exec -i bonfire_release_db_1 /bin/bash -c "PGPASSWORD=$(POSTGRES_PASSWORD) psql -U $(POSTGRES_USER) $(POSTGRES_DB)"
 
 rel.setup: rel.env init
-	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) run --rm web bin/bonfire eval 'Process.sleep(5000); Ecto.Migrator.with_repo(Bonfire.Repo, &Ecto.Migrator.run(&1, :up, all: true))'
+	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) run --rm web bin/bonfire eval 'Process.sleep(6000); Bonfire.Repo.ReleaseTasks.migrate()'
 
 rel.tasks.create_user: rel.env init
 	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) run --rm web bin/bonfire eval 'Bonfire.ReleaseTasks.create_user_make!(~S{$(email)}, ~S{$(pass)}, ~S{$(user)}, ~S{$(name)})'
