@@ -9,8 +9,8 @@ FLAVOUR_PATH ?= flavours/$(FLAVOUR)
 
 # do we want to use Docker? set as env var:
 # - WITH_DOCKER=total : use docker for everything (default)
-# - WITH_DOCKER=partial : use docker for services like the DB 
-# - WITH_DOCKER=easy : use docker for services like the DB & compiled utilities like messctl 
+# - WITH_DOCKER=partial : use docker for services like the DB
+# - WITH_DOCKER=easy : use docker for services like the DB & compiled utilities like messctl
 # - WITH_DOCKER=no : please no
 WITH_DOCKER ?= total
 
@@ -93,7 +93,7 @@ dev: init dev.run ## Run the app in development
 
 dev.run:
 ifeq ($(WITH_DOCKER), total)
-	@make --no-print-directory docker.stop.web 
+	@make --no-print-directory docker.stop.web
 	docker-compose run --name $(WEB_CONTAINER) --service-ports web
 	# docker-compose --verbose run --name $(WEB_CONTAINER) --service-ports web
 else
@@ -139,15 +139,15 @@ db.rollback.all: mix~"ecto.rollback --all" ## Rollback ALL DB migrations (cautio
 update: init update.app build update.forks mix~deps.get mix~ecto.migrate js.deps.get ## Update the dev app and all dependencies/extensions/forks, and run migrations
 
 update.app: update.repo ## Update the app and Bonfire extensions in ./deps
-	@make --no-print-directory mix.remote~updates 
+	@make --no-print-directory mix.remote~updates
 
 update.repo:
 	git add --all .
 	git diff-index --quiet HEAD || git commit --all --verbose
 	git pull --rebase
 
-update.deps.bonfire: init mix.remote~bonfire.deps ## Update to the latest Bonfire extensions in ./deps 
-	
+update.deps.bonfire: init mix.remote~bonfire.deps ## Update to the latest Bonfire extensions in ./deps
+
 update.deps.all: ## Update evey single dependency (use with caution)
 	@make --no-print-directory update.dep~"--all"
 
@@ -186,7 +186,7 @@ deps.outdated:
 	@make mix.remote~"hex.outdated --all"
 
 dep.clean:
-	make --no-print-directory cmd cmd="mix deps.clean $(dep) --build" 
+	make --no-print-directory cmd cmd="mix deps.clean $(dep) --build"
 
 dep.clone.local: ## Clone a git dep and use the local version, eg: `make dep.clone.local dep="bonfire_me" repo=https://github.com/bonfire-networks/bonfire_me`
 	git clone $(repo) $(FORKS_PATH)$(dep) 2> /dev/null || (cd $(FORKS_PATH)$(dep) ; git pull)
@@ -195,7 +195,7 @@ dep.clone.local: ## Clone a git dep and use the local version, eg: `make dep.clo
 deps.clone.local.all: ## Clone all bonfire deps / extensions
 	@curl -s https://api.github.com/orgs/bonfire-networks/repos?per_page=500 | ruby -rrubygems -e 'require "json"; JSON.load(STDIN.read).each { |repo| %x[make dep.clone.local dep="#{repo["name"]}" repo="#{repo["ssh_url"]}" ]}'
 
-dep.go.local: 
+dep.go.local:
 	@make --no-print-directory dep.go.local.path dep=$(dep) path=$(FORKS_PATH)$(dep)
 
 dep.go.local~%: ## Switch to using a local path, eg: make dep.go.local~pointers
@@ -217,7 +217,7 @@ dep.go.hex: ## Switch to using a library from hex.pm, eg: make dep.go.hex dep="p
 	@make --no-print-directory dep.local~disable dep=$(dep) path=""
 
 dep.hex~%: ## add/enable/disable/delete a hex dep with messctl command, eg: `make dep.hex.enable dep=pointers version="~> 0.2"
-	@make --no-print-directory messctl args="$* $(dep) $(version) 
+	@make --no-print-directory messctl args="$* $(dep) $(version)
 
 dep.git~%: ## add/enable/disable/delete a git dep with messctl command, eg: `make dep.hex.enable dep=pointers repo=https://github.com/bonfire-networks/pointers#main
 	@make --no-print-directory messctl args="$* $(dep) $(repo) config/deps.git"
@@ -228,7 +228,7 @@ dep.local~%: ## add/enable/disable/delete a local dep with messctl command, eg: 
 messctl~%: ## Utility to manage the deps in deps.hex, deps.git, and deps.path (eg. `make messctl~help`)
 	@make --no-print-directory messctl args=$*
 
-messctl: init 
+messctl: init
 ifeq ($(WITH_DOCKER), total)
 	docker-compose run web messctl $(args)
 else ifeq ($(WITH_DOCKER), easy)
@@ -249,7 +249,7 @@ contrib.app.up: update.app git.publish ## Update ./deps and push all changes to 
 
 contrib.app.release: update.app contrib.app.release.increment git.publish ## Update ./deps, increment the app version number and push
 
-contrib.app.release.increment: 
+contrib.app.release.increment:
 	@cd lib/mix/tasks/release/ && mix escript.build && ./release ../../../../ beta
 
 contrib.forks.publish:
@@ -341,7 +341,7 @@ rel.build: rel.env init rel.config.prepare assets.prepare ## Build the Docker im
 		--build-arg APP_BUILD=$(APP_BUILD) \
 		-t $(APP_DOCKER_REPO):$(APP_VSN)-release-$(APP_BUILD) \
 		-f $(APP_REL_DOCKERFILE) .
-	@echo Build complete: $(APP_DOCKER_REPO):$(APP_VSN)-release-$(APP_BUILD) 
+	@echo Build complete: $(APP_DOCKER_REPO):$(APP_VSN)-release-$(APP_BUILD)
 	@echo "Remember to run make rel.tag.latest or make rel.push"
 
 rel.tag.latest: rel.env ## Add latest tag to last build
@@ -384,16 +384,22 @@ rel.db.dump: rel.env init
 rel.db.restore: rel.env init
 	cat $(file) | docker exec -i bonfire_release_db_1 /bin/bash -c "PGPASSWORD=$(POSTGRES_PASSWORD) psql -U $(POSTGRES_USER) $(POSTGRES_DB)"
 
+rel.setup: rel.env init
+	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) run --rm web bin/bonfire eval 'Process.sleep(5000); Ecto.Migrator.with_repo(Bonfire.Repo, &Ecto.Migrator.run(&1, :up, all: true))'
+
+rel.tasks.create_user: rel.env init
+	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) run --rm web bin/bonfire eval 'Bonfire.ReleaseTasks.create_user_make!(~S{$(email)}, ~S{$(pass)}, ~S{$(user)}, ~S{$(name)})'
+
 #### DOCKER-SPECIFIC COMMANDS ####
 
 services: ## Start background docker services (eg. db and search backends).
 ifeq ($(MIX_ENV), prod)
-	docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) up -d db search 
+	docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) up -d db search
 else
 ifeq ($(WITH_DOCKER), no)
 	@echo ....
 else
-	docker-compose up -d db search 
+	docker-compose up -d db search
 endif
 endif
 
@@ -424,13 +430,13 @@ endif
 shell: init ## Open the shell of the Docker web container, in dev mode
 	@make cmd~bash
 
-docker.stop.web: 
+docker.stop.web:
 	@docker stop $(WEB_CONTAINER) 2> /dev/null || true
 	@docker rm $(WEB_CONTAINER) 2> /dev/null || true
 
 #### MISC COMMANDS ####
 
-cmd: init 
+cmd: init
 ifeq ($(WITH_DOCKER), total)
 	docker-compose run web bash -c "$(cmd) $(args)"
 else
@@ -450,10 +456,10 @@ else
 	WITH_FORKS=0 mix $* $(args)
 endif
 
-licenses: init 
+licenses: init
 	@make --no-print-directory mix.remote~licenses
 
-localise.extract: 
+localise.extract:
 	@make --no-print-directory mix~"bonfire.localise.extract --merge"
 
 assets.prepare:
@@ -482,5 +488,5 @@ git.merge~%: ## Draft-merge another branch, eg `make git-merge-with-valueflows-a
 git.conflicts: ## Find any git conflicts in ./forks
 	find $(FORKS_PATH) -mindepth 1 -maxdepth 1 -type d -exec echo add {} \; -exec git -C '{}' diff --name-only --diff-filter=U \;
 
-pull: 
+pull:
 	git pull
