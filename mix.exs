@@ -94,7 +94,10 @@ defmodule Bonfire.MixProject do
 
       # security auditing
       # {:mix_audit, "~> 0.1", only: [:dev], runtime: false}
-      {:sobelow, "~> 0.8", only: :dev}
+      {:sobelow, "~> 0.8", only: :dev},
+
+      # temporary
+      {:http_signatures, git: "https://github.com/srfsh/http_signatures.git", override: true}
       ]
     )
 
