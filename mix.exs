@@ -3,7 +3,7 @@ defmodule Bonfire.MixProject do
   use Mix.Project
 
   @config [
-      version: "0.1.0-beta.251", # note that the flavour will automatically be added where the dash appears
+      version: "0.1.0-beta.252", # note that the flavour will automatically be added where the dash appears
       elixir: "~> 1.12",
       default_flavour: "classic",
       deps_prefixes: [
@@ -116,10 +116,7 @@ defmodule Bonfire.MixProject do
 
       # security auditing
       # {:mix_audit, "~> 0.1", only: [:dev], runtime: false}
-      {:sobelow, "~> 0.8", only: :dev},
-
-      # temporary
-      {:http_signatures, git: "https://github.com/srfsh/http_signatures.git", override: true}
+      {:sobelow, "~> 0.8", only: :dev}
       ]
     )
 
