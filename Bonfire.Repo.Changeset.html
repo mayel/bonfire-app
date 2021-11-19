@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.25.5">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.39">
+
+    <title>Bonfire.Repo.Changeset — bonfire v0.1.0-cooperation-beta.39</title>
+    <link rel="stylesheet" href="dist/elixir-d1506dba1db7cdc5483e.css" />
+
+    <script src="dist/sidebar_items-2190d642e1.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-7b632b26f13d5e0d20e1.js"></script>
+
+
+  </head>
+  <body data-type="modules">
+    <script>
+
+      try {
+        if (localStorage.getItem('night-mode') === 'true') {
+          document.body.classList.add('night-mode');
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="readme.html" class="sidebar-projectName">
+bonfire
+      </a>
+      <strong class="sidebar-projectVersion">
+        v0.1.0-cooperation-beta.39
+      </strong>
+    </div>
+
+      <a href="readme.html">
+        <img src="assets/logo.png" alt="bonfire" class="sidebar-projectImage">
+      </a>
+
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+      <li><a id="tasks-list-link" href="#full-list">Mix Tasks</a></li>
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+      <h1>
+Bonfire.Repo.Changeset <small class="app-vsn">(bonfire v0.1.0-cooperation-beta.39)</small>
+
+      </h1>
+
+
+        <section id="moduledoc">
+<p>Helper functions for changesets</p>
+        </section>
+
+
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#change_disabled/1">change_disabled(changeset)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Keeps disabled_at in accord with is_disabled</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#change_muted/1">change_muted(changeset)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Keeps muted_at in accord with is_muted</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#change_public/1">change_public(changeset)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Keeps published_at in accord with is_public</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#change_synced_timestamp/3">change_synced_timestamp(changeset, bool_field, timestamp_field)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>If a changeset includes a change to <code class="inline">bool_field</code>, we ensure that the
+<code class="inline">timestamp</code> field is updated if required. In the case of true, this
+means setting it to now if it is null and in the case of false, this
+means setting it to null if it is not null.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#change_synced_timestamps/5">change_synced_timestamps(changeset, bool_field, on_field, off_field, default \\ true)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>If a changeset includes a change to <code class="inline">bool_field</code>, we change two
+timestamps columns (representing activated and deactivated) so that
+only one is set to a non-null value at a time.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#claim_changeset/3">claim_changeset(it, column \\ :claimed_at, error \\ &quot;was already claimed&quot;)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Creates a changeset for claiming an entity</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#soft_delete_changeset/3">soft_delete_changeset(it, column \\ :deleted_at, error \\ &quot;was already deleted&quot;)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Creates a changeset for deleting an entity</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#validate_email/2">validate_email(changeset, field)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Validates an email for correctness</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#validate_email_domain/2">validate_email_domain(changeset, field)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#validate_exactly_one/3">validate_exactly_one(changeset, columns, message)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#validate_http_url/2">validate_http_url(changeset, field)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Validates that a URL uses HTTP(S) and has a correct format.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#validate_not_expired/4">validate_not_expired(cs, now \\ DateTime.utc_now(), column \\ :expires_at, message \\ &quot;expired&quot;)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Validates that the entity has not expired</p></div>
+
+</div>
+
+  </div>
+
+        </section>
+
+
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Functions
+          </h1>
+          <div class="functions-list">
+<section class="detail" id="change_disabled/1">
+
+  <div class="detail-header">
+    <a href="#change_disabled/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">change_disabled(changeset)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>change_disabled(<a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()) :: <a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
+
+<p>Keeps disabled_at in accord with is_disabled</p>
+  </section>
+</section>
+<section class="detail" id="change_muted/1">
+
+  <div class="detail-header">
+    <a href="#change_muted/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">change_muted(changeset)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>change_muted(<a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()) :: <a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
+
+<p>Keeps muted_at in accord with is_muted</p>
+  </section>
+</section>
+<section class="detail" id="change_public/1">
+
+  <div class="detail-header">
+    <a href="#change_public/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">change_public(changeset)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>change_public(<a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()) :: <a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
+
+<p>Keeps published_at in accord with is_public</p>
+  </section>
+</section>
+<section class="detail" id="change_synced_timestamp/3">
+
+  <div class="detail-header">
+    <a href="#change_synced_timestamp/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">change_synced_timestamp(changeset, bool_field, timestamp_field)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>change_synced_timestamp(<a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) ::
+  <a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
+
+<p>If a changeset includes a change to <code class="inline">bool_field</code>, we ensure that the
+<code class="inline">timestamp</code> field is updated if required. In the case of true, this
+means setting it to now if it is null and in the case of false, this
+means setting it to null if it is not null.</p>
+  </section>
+</section>
+<section class="detail" id="change_synced_timestamps/5">
+
+    <span id="change_synced_timestamps/4"></span>
+
+  <div class="detail-header">
+    <a href="#change_synced_timestamps/5" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">change_synced_timestamps(changeset, bool_field, on_field, off_field, default \\ true)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>change_synced_timestamps(<a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) ::
+  <a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
+
+<p>If a changeset includes a change to <code class="inline">bool_field</code>, we change two
+timestamps columns (representing activated and deactivated) so that
+only one is set to a non-null value at a time.</p>
+  </section>
+</section>
+<section class="detail" id="claim_changeset/3">
+
+    <span id="claim_changeset/1"></span>
+
+    <span id="claim_changeset/2"></span>
+
+  <div class="detail-header">
+    <a href="#claim_changeset/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">claim_changeset(it, column \\ :claimed_at, error \\ &quot;was already claimed&quot;)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Creates a changeset for claiming an entity</p>
+  </section>
+</section>
+<section class="detail" id="soft_delete_changeset/3">
+
+    <span id="soft_delete_changeset/1"></span>
+
+    <span id="soft_delete_changeset/2"></span>
+
+  <div class="detail-header">
+    <a href="#soft_delete_changeset/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">soft_delete_changeset(it, column \\ :deleted_at, error \\ &quot;was already deleted&quot;)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Creates a changeset for deleting an entity</p>
+  </section>
+</section>
+<section class="detail" id="validate_email/2">
+
+  <div class="detail-header">
+    <a href="#validate_email/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">validate_email(changeset, field)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>validate_email(<a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
+
+<p>Validates an email for correctness</p>
+  </section>
+</section>
+<section class="detail" id="validate_email_domain/2">
+
+  <div class="detail-header">
+    <a href="#validate_email_domain/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">validate_email_domain(changeset, field)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>validate_email_domain(<a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="validate_exactly_one/3">
+
+  <div class="detail-header">
+    <a href="#validate_exactly_one/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">validate_exactly_one(changeset, columns, message)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="validate_http_url/2">
+
+  <div class="detail-header">
+    <a href="#validate_http_url/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">validate_http_url(changeset, field)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>validate_http_url(<a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
+
+<p>Validates that a URL uses HTTP(S) and has a correct format.</p>
+  </section>
+</section>
+<section class="detail" id="validate_not_expired/4">
+
+    <span id="validate_not_expired/1"></span>
+
+    <span id="validate_not_expired/2"></span>
+
+    <span id="validate_not_expired/3"></span>
+
+  <div class="detail-header">
+    <a href="#validate_not_expired/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">validate_not_expired(cs, now \\ DateTime.utc_now(), column \\ :expires_at, message \\ &quot;expired&quot;)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>validate_not_expired(<a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>(), <a href="https://hexdocs.pm/elixir/DateTime.html#t:t/0">DateTime.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>()) ::
+  <a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
+
+<p>Validates that the entity has not expired</p>
+  </section>
+</section>
+
+          </div>
+        </section>
+
+      <footer class="footer">
+
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.25.5) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+
+            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>

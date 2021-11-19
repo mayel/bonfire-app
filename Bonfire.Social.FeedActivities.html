@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.25.5">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.39">
+
+    <title>Bonfire.Social.FeedActivities — bonfire v0.1.0-cooperation-beta.39</title>
+    <link rel="stylesheet" href="dist/elixir-d1506dba1db7cdc5483e.css" />
+
+    <script src="dist/sidebar_items-2190d642e1.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-7b632b26f13d5e0d20e1.js"></script>
+
+
+  </head>
+  <body data-type="modules">
+    <script>
+
+      try {
+        if (localStorage.getItem('night-mode') === 'true') {
+          document.body.classList.add('night-mode');
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="readme.html" class="sidebar-projectName">
+bonfire
+      </a>
+      <strong class="sidebar-projectVersion">
+        v0.1.0-cooperation-beta.39
+      </strong>
+    </div>
+
+      <a href="readme.html">
+        <img src="assets/logo.png" alt="bonfire" class="sidebar-projectImage">
+      </a>
+
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+      <li><a id="tasks-list-link" href="#full-list">Mix Tasks</a></li>
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+      <h1>
+Bonfire.Social.FeedActivities <small class="app-vsn">(bonfire v0.1.0-cooperation-beta.39)</small>
+
+      </h1>
+
+
+
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#context_module/0">context_module()</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#delete_for_object/1">delete_for_object(id)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Delete an activity (usage by things like unlike)</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#feed/4">feed(feed, current_user_or_socket \\ nil, cursor_after \\ nil, preloads \\ :all)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#feed/5">feed(_, _, _, _, _)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#feed_paginated/6">feed_paginated(filters \\ [], current_user \\ nil, cursor_after \\ nil, preloads \\ :all, query \\ FeedPublish, distinct \\ true)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#feeds_for_activity/1">feeds_for_activity(id)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#maybe_federate_activity/1">maybe_federate_activity(activity)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#maybe_feed_publish/4">maybe_feed_publish(subject, verb_or_activity, object \\ nil, feeds)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Creates a new local activity or takes an existing one and publishes to specified feeds</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#maybe_notify_creator/3">maybe_notify_creator(subject, verb_or_activity, object)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Takes or creates an activity and publishes to object creator's inbox</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#my_feed/3">my_feed(socket, cursor_after \\ nil, include_notifications? \\ true)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#notify_admins/3">notify_admins(subject, verb_or_activity, object)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Creates a new local activity or takes an existing one and publishes to creator's inbox</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#notify_characters/4">notify_characters(subject, verb_or_activity, object, characters)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Creates a new local activity or takes an existing one and publishes to object's inbox (if object is an actor)</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#notify_object/3">notify_object(subject, verb_or_activity, object)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Creates a new local activity or takes an existing one and publishes to object's inbox (assuming object is treated as a character)</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#publish/6">publish(subject, verb, object, circles \\ [], preset_boundary_OR_mentions_and_tags_are_private? \\ true, replies_are_private? \\ true)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Creates a new local activity and publishes to appropriate feeds</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#queries_module/0">queries_module()</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#query/5">query(filters \\ [], current_user \\ nil, preloads \\ :all, query \\ FeedPublish, distinct \\ true)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#save_fediverse_incoming_activity/3">save_fediverse_incoming_activity(subject, verb, object)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Records a remote activity and puts in appropriate feeds</p></div>
+
+</div>
+
+  </div>
+
+        </section>
+
+
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Functions
+          </h1>
+          <div class="functions-list">
+<section class="detail" id="context_module/0">
+
+  <div class="detail-header">
+    <a href="#context_module/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">context_module()</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="delete_for_object/1">
+
+  <div class="detail-header">
+    <a href="#delete_for_object/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">delete_for_object(id)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Delete an activity (usage by things like unlike)</p>
+  </section>
+</section>
+<section class="detail" id="feed/4">
+
+    <span id="feed/1"></span>
+
+    <span id="feed/2"></span>
+
+    <span id="feed/3"></span>
+
+  <div class="detail-header">
+    <a href="#feed/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">feed(feed, current_user_or_socket \\ nil, cursor_after \\ nil, preloads \\ :all)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="feed/5">
+
+  <div class="detail-header">
+    <a href="#feed/5" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">feed(_, _, _, _, _)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="feed_paginated/6">
+
+    <span id="feed_paginated/0"></span>
+
+    <span id="feed_paginated/1"></span>
+
+    <span id="feed_paginated/2"></span>
+
+    <span id="feed_paginated/3"></span>
+
+    <span id="feed_paginated/4"></span>
+
+    <span id="feed_paginated/5"></span>
+
+  <div class="detail-header">
+    <a href="#feed_paginated/6" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">feed_paginated(filters \\ [], current_user \\ nil, cursor_after \\ nil, preloads \\ :all, query \\ FeedPublish, distinct \\ true)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="feeds_for_activity/1">
+
+  <div class="detail-header">
+    <a href="#feeds_for_activity/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">feeds_for_activity(id)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="maybe_federate_activity/1">
+
+  <div class="detail-header">
+    <a href="#maybe_federate_activity/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">maybe_federate_activity(activity)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="maybe_feed_publish/4">
+
+    <span id="maybe_feed_publish/3"></span>
+
+  <div class="detail-header">
+    <a href="#maybe_feed_publish/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">maybe_feed_publish(subject, verb_or_activity, object \\ nil, feeds)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Creates a new local activity or takes an existing one and publishes to specified feeds</p>
+  </section>
+</section>
+<section class="detail" id="maybe_notify_creator/3">
+
+  <div class="detail-header">
+    <a href="#maybe_notify_creator/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">maybe_notify_creator(subject, verb_or_activity, object)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Takes or creates an activity and publishes to object creator's inbox</p>
+  </section>
+</section>
+<section class="detail" id="my_feed/3">
+
+    <span id="my_feed/1"></span>
+
+    <span id="my_feed/2"></span>
+
+  <div class="detail-header">
+    <a href="#my_feed/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">my_feed(socket, cursor_after \\ nil, include_notifications? \\ true)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="notify_admins/3">
+
+  <div class="detail-header">
+    <a href="#notify_admins/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">notify_admins(subject, verb_or_activity, object)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Creates a new local activity or takes an existing one and publishes to creator's inbox</p>
+  </section>
+</section>
+<section class="detail" id="notify_characters/4">
+
+  <div class="detail-header">
+    <a href="#notify_characters/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">notify_characters(subject, verb_or_activity, object, characters)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Creates a new local activity or takes an existing one and publishes to object's inbox (if object is an actor)</p>
+  </section>
+</section>
+<section class="detail" id="notify_object/3">
+
+  <div class="detail-header">
+    <a href="#notify_object/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">notify_object(subject, verb_or_activity, object)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Creates a new local activity or takes an existing one and publishes to object's inbox (assuming object is treated as a character)</p>
+  </section>
+</section>
+<section class="detail" id="publish/6">
+
+    <span id="publish/3"></span>
+
+    <span id="publish/4"></span>
+
+    <span id="publish/5"></span>
+
+  <div class="detail-header">
+    <a href="#publish/6" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">publish(subject, verb, object, circles \\ [], preset_boundary_OR_mentions_and_tags_are_private? \\ true, replies_are_private? \\ true)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Creates a new local activity and publishes to appropriate feeds</p>
+  </section>
+</section>
+<section class="detail" id="queries_module/0">
+
+  <div class="detail-header">
+    <a href="#queries_module/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">queries_module()</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="query/5">
+
+    <span id="query/0"></span>
+
+    <span id="query/1"></span>
+
+    <span id="query/2"></span>
+
+    <span id="query/3"></span>
+
+    <span id="query/4"></span>
+
+  <div class="detail-header">
+    <a href="#query/5" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">query(filters \\ [], current_user \\ nil, preloads \\ :all, query \\ FeedPublish, distinct \\ true)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="save_fediverse_incoming_activity/3">
+
+  <div class="detail-header">
+    <a href="#save_fediverse_incoming_activity/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">save_fediverse_incoming_activity(subject, verb, object)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Records a remote activity and puts in appropriate feeds</p>
+  </section>
+</section>
+
+          </div>
+        </section>
+
+      <footer class="footer">
+
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.25.5) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+
+            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>

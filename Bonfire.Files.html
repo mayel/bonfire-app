@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.25.5">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.39">
+
+    <title>Bonfire.Files — bonfire v0.1.0-cooperation-beta.39</title>
+    <link rel="stylesheet" href="dist/elixir-d1506dba1db7cdc5483e.css" />
+
+    <script src="dist/sidebar_items-2190d642e1.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-7b632b26f13d5e0d20e1.js"></script>
+
+
+  </head>
+  <body data-type="modules">
+    <script>
+
+      try {
+        if (localStorage.getItem('night-mode') === 'true') {
+          document.body.classList.add('night-mode');
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="readme.html" class="sidebar-projectName">
+bonfire
+      </a>
+      <strong class="sidebar-projectVersion">
+        v0.1.0-cooperation-beta.39
+      </strong>
+    </div>
+
+      <a href="readme.html">
+        <img src="assets/logo.png" alt="bonfire" class="sidebar-projectImage">
+      </a>
+
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+      <li><a id="tasks-list-link" href="#full-list">Mix Tasks</a></li>
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+      <h1>
+Bonfire.Files <small class="app-vsn">(bonfire v0.1.0-cooperation-beta.39)</small>
+
+      </h1>
+
+
+        <section id="moduledoc">
+<p>An uploader definition must be provided for each new upload.</p><p>A few uploaders exist as defaults inside of this namespace, but you can also define
+your own.</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyUploader</span><span class="w"> </span><span class="k" data-group-id="8421473291-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Bonfire.Files.Definition</span><span class="w">
+
+  </span><span class="na">@versions</span><span class="w"> </span><span class="p" data-group-id="8421473291-2">[</span><span class="ss">:original</span><span class="p">,</span><span class="w"> </span><span class="ss">:thumb</span><span class="p" data-group-id="8421473291-2">]</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">transform</span><span class="p" data-group-id="8421473291-3">(</span><span class="ss">:thumb</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p" data-group-id="8421473291-3">)</span><span class="w"> </span><span class="k" data-group-id="8421473291-4">do</span><span class="w">
+    </span><span class="p" data-group-id="8421473291-5">{</span><span class="ss">:convert</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;-thumbnail 100x100 -format png&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">:png</span><span class="p" data-group-id="8421473291-5">}</span><span class="w">
+  </span><span class="k" data-group-id="8421473291-4">end</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">filename</span><span class="p" data-group-id="8421473291-6">(</span><span class="n">version</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p" data-group-id="8421473291-6">)</span><span class="w"> </span><span class="k" data-group-id="8421473291-7">do</span><span class="w">
+    </span><span class="n">version</span><span class="w">
+  </span><span class="k" data-group-id="8421473291-7">end</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">storage_dir</span><span class="p" data-group-id="8421473291-8">(</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8421473291-9">{</span><span class="n">file</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p" data-group-id="8421473291-9">}</span><span class="p" data-group-id="8421473291-8">)</span><span class="w"> </span><span class="k" data-group-id="8421473291-10">do</span><span class="w">
+    </span><span class="s">&quot;uploads/my/&quot;</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">user_id</span><span class="w">
+  </span><span class="k" data-group-id="8421473291-10">end</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">allowed_media_types</span><span class="w"> </span><span class="k" data-group-id="8421473291-11">do</span><span class="w">
+    </span><span class="p" data-group-id="8421473291-12">[</span><span class="s">&quot;image/png&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;image/jpeg&quot;</span><span class="p" data-group-id="8421473291-12">]</span><span class="w">
+  </span><span class="k" data-group-id="8421473291-11">end</span><span class="w">
+</span><span class="k" data-group-id="8421473291-1">end</span></code></pre><p>You may have noticed that this definition is very similar to what a definition
+would look like in <a href="https://github.com/elixir-waffle/waffle">waffle</a>.
+A <a href="https://hexdocs.pm/bonfire_files/0.1.0/Bonfire.Files.Definition.html"><code class="inline">Bonfire.Files.Definition</code></a> is functionally the same as a <a href="https://hexdocs.pm/waffle/1.1.5/Waffle.Definition.html"><code class="inline">Waffle.Definition</code></a>,
+however the <code class="inline">allowed_media_types/0</code> callback is added, forcing you to define
+what media types are accepted for these types of uploads.
+(You can also return <code class="inline">:all</code> to accept everything).</p><p>To use the uploader:</p><pre><code class="makeup elixir"><span class="gp unselectable">iex&gt; </span><span class="p" data-group-id="1895439457-1">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">media</span><span class="p" data-group-id="1895439457-1">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Bonfire.Files</span><span class="o">.</span><span class="n">upload</span><span class="p" data-group-id="1895439457-2">(</span><span class="nc">MyUploader</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1895439457-3">%{</span><span class="ss">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./150.png&quot;</span><span class="p" data-group-id="1895439457-3">}</span><span class="p" data-group-id="1895439457-2">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="n">media</span><span class="o">.</span><span class="n">media_type</span><span class="w">
+</span><span class="s">&quot;image/png&quot;</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Files</span><span class="o">.</span><span class="n">remote_url</span><span class="p" data-group-id="1895439457-4">(</span><span class="nc">MyUploader</span><span class="p">,</span><span class="w"> </span><span class="n">media</span><span class="p" data-group-id="1895439457-4">)</span><span class="w">
+</span><span class="s">&quot;/uploads/my/01F3AY6JV30G06BY4DR9BTW5EH&quot;</span></code></pre>
+        </section>
+
+
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#hard_delete/2">hard_delete(upload_def, media)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Delete an upload, removing any associated files.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#many/1">many(filters \\ [])</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#one/1">one(filters)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#remote_url/2">remote_url(upload_def, media)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Return the URL that a local file has.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#soft_delete/1">soft_delete(media)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Delete an upload, removing it from indexing, but the files remain available.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#update_by/2">update_by(filters, updates)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#upload/4">upload(upload_def, user, file, attrs \\ %{})</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Attempt to store a file, returning an upload, for any parent item that
+participates in the meta abstraction, providing the actor responsible for
+the upload.</p></div>
+
+</div>
+
+  </div>
+
+        </section>
+
+
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Functions
+          </h1>
+          <div class="functions-list">
+<section class="detail" id="hard_delete/2">
+
+  <div class="detail-header">
+    <a href="#hard_delete/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">hard_delete(upload_def, media)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>hard_delete(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/bonfire_files/0.1.0/Bonfire.Files.Media.html#t:t/0">Bonfire.Files.Media.t</a>()) ::
+  :ok | {:error, <a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()}</pre>
+
+      </div>
+
+<p>Delete an upload, removing any associated files.</p>
+  </section>
+</section>
+<section class="detail" id="many/1">
+
+    <span id="many/0"></span>
+
+  <div class="detail-header">
+    <a href="#many/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">many(filters \\ [])</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="one/1">
+
+  <div class="detail-header">
+    <a href="#one/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">one(filters)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="remote_url/2">
+
+  <div class="detail-header">
+    <a href="#remote_url/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">remote_url(upload_def, media)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>remote_url(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/bonfire_files/0.1.0/Bonfire.Files.Media.html#t:t/0">Bonfire.Files.Media.t</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>()</pre>
+
+      </div>
+
+<p>Return the URL that a local file has.</p>
+  </section>
+</section>
+<section class="detail" id="soft_delete/1">
+
+  <div class="detail-header">
+    <a href="#soft_delete/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">soft_delete(media)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>soft_delete(<a href="https://hexdocs.pm/bonfire_files/0.1.0/Bonfire.Files.Media.html#t:t/0">Bonfire.Files.Media.t</a>()) ::
+  {:ok, <a href="https://hexdocs.pm/bonfire_files/0.1.0/Bonfire.Files.Media.html#t:t/0">Bonfire.Files.Media.t</a>()} | {:error, <a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()}</pre>
+
+      </div>
+
+<p>Delete an upload, removing it from indexing, but the files remain available.</p>
+  </section>
+</section>
+<section class="detail" id="update_by/2">
+
+  <div class="detail-header">
+    <a href="#update_by/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">update_by(filters, updates)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="upload/4">
+
+    <span id="upload/3"></span>
+
+  <div class="detail-header">
+    <a href="#upload/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">upload(upload_def, user, file, attrs \\ %{})</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Attempt to store a file, returning an upload, for any parent item that
+participates in the meta abstraction, providing the actor responsible for
+the upload.</p>
+  </section>
+</section>
+
+          </div>
+        </section>
+
+      <footer class="footer">
+
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.25.5) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+
+            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>
