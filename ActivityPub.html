@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.25.5">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.39">
+
+    <title>ActivityPub — bonfire v0.1.0-cooperation-beta.39</title>
+    <link rel="stylesheet" href="dist/elixir-d1506dba1db7cdc5483e.css" />
+
+    <script src="dist/sidebar_items-296b190fb1.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-7b632b26f13d5e0d20e1.js"></script>
+
+
+  </head>
+  <body data-type="modules">
+    <script>
+
+      try {
+        if (localStorage.getItem('night-mode') === 'true') {
+          document.body.classList.add('night-mode');
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="readme.html" class="sidebar-projectName">
+bonfire
+      </a>
+      <strong class="sidebar-projectVersion">
+        v0.1.0-cooperation-beta.39
+      </strong>
+    </div>
+
+      <a href="readme.html">
+        <img src="assets/logo.png" alt="bonfire" class="sidebar-projectImage">
+      </a>
+
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+      <li><a id="tasks-list-link" href="#full-list">Mix Tasks</a></li>
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+      <h1>
+ActivityPub <small class="app-vsn">(bonfire v0.1.0-cooperation-beta.39)</small>
+
+      </h1>
+
+
+        <section id="moduledoc">
+<p>ActivityPub API</p><p>In general, the functions in this module take object-like formatted struct as the input for actor parameters.
+Use the functions in the <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html"><code class="inline">ActivityPub.Actor</code></a> module (<a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html#get_by_ap_id/1"><code class="inline">ActivityPub.Actor.get_by_ap_id/1</code></a> for example) to retrieve those.</p>
+        </section>
+
+
+        <section id="summary" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#summary">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+            Summary
+          </h1>
+
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#accept/1">accept(params)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Generates and federates an Accept activity via the data passed through <code class="inline">params</code>.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#announce/6">announce(actor, object, activity_id \\ nil, local \\ true, public \\ true, summary \\ nil)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#block/4">block(blocker, blocked, activity_id \\ nil, local \\ true)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#create/2">create(params, pointer \\ nil)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Generates and federates a Create activity via the data passed through <code class="inline">params</code>.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#delete/3">delete(object, local \\ true, delete_actor \\ nil)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#flag/2">flag(params, pointer \\ nil)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#follow/4">follow(follower, followed, activity_id \\ nil, local \\ true)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Generates and federates a Follow activity.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#like/4">like(actor, object, activity_id \\ nil, local \\ true)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#maybe_forward_activity/1">maybe_forward_activity(activity)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#reject/1">reject(params)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Generates and federates a Reject activity via the data passed through <code class="inline">params</code>.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#unannounce/4">unannounce(actor, object, activity_id \\ nil, local \\ true)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#unblock/4">unblock(blocker, blocked, activity_id \\ nil, local \\ true)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#unfollow/4">unfollow(follower, followed, activity_id \\ nil, local \\ true)</a>
+
+  </div>
+
+    <div class="summary-synopsis"><p>Generates and federates an Unfollow activity.</p></div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#unlike/4">unlike(actor, object, activity_id \\ nil, local \\ true)</a>
+
+  </div>
+
+</div>
+<div class="summary-row">
+  <div class="summary-signature">
+    <a href="#update/1">update(params)</a>
+
+  </div>
+
+</div>
+
+  </div>
+
+        </section>
+
+
+        <section id="functions" class="details-list">
+          <h1 class="section-heading">
+            <a class="hover-link" href="#functions">
+              <span class="icon-link" aria-hidden="true"></span>
+              <span class="sr-only">Link to this section</span>
+            </a>
+Functions
+          </h1>
+          <div class="functions-list">
+<section class="detail" id="accept/1">
+
+  <div class="detail-header">
+    <a href="#accept/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">accept(params)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>accept(%{
+  :to =&gt; [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()],
+  :actor =&gt; <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  :object =&gt; <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
+  optional(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) =&gt; <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()
+}) :: {:ok, <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+
+      </div>
+
+<p>Generates and federates an Accept activity via the data passed through <code class="inline">params</code>.</p>
+  </section>
+</section>
+<section class="detail" id="announce/6">
+
+    <span id="announce/2"></span>
+
+    <span id="announce/3"></span>
+
+    <span id="announce/4"></span>
+
+    <span id="announce/5"></span>
+
+  <div class="detail-header">
+    <a href="#announce/6" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">announce(actor, object, activity_id \\ nil, local \\ true, public \\ true, summary \\ nil)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>announce(
+  <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(),
+  activity_id :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil,
+  local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>(),
+  public :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>(),
+  summary :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil
+) ::
+  {:ok, activity :: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(), object :: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()}
+  | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="block/4">
+
+    <span id="block/2"></span>
+
+    <span id="block/3"></span>
+
+  <div class="detail-header">
+    <a href="#block/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">block(blocker, blocked, activity_id \\ nil, local \\ true)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>block(
+  blocker :: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  blocked :: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  activity_id :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil,
+  local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()
+) :: {:ok, <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="create/2">
+
+    <span id="create/1"></span>
+
+  <div class="detail-header">
+    <a href="#create/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">create(params, pointer \\ nil)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Generates and federates a Create activity via the data passed through <code class="inline">params</code>.</p>
+  </section>
+</section>
+<section class="detail" id="delete/3">
+
+    <span id="delete/1"></span>
+
+    <span id="delete/2"></span>
+
+  <div class="detail-header">
+    <a href="#delete/3" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">delete(object, local \\ true, delete_actor \\ nil)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>delete(
+  <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>(),
+  delete_actor :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil
+) :: {:ok, <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+
+          <pre>delete(<a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(), local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>(), delete_actor :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>()) ::
+  {:ok, <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="flag/2">
+
+    <span id="flag/1"></span>
+
+  <div class="detail-header">
+    <a href="#flag/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">flag(params, pointer \\ nil)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="follow/4">
+
+    <span id="follow/2"></span>
+
+    <span id="follow/3"></span>
+
+  <div class="detail-header">
+    <a href="#follow/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">follow(follower, followed, activity_id \\ nil, local \\ true)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>follow(
+  follower :: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  follower :: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  activity_id :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil,
+  local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()
+) :: {:ok, <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+
+      </div>
+
+<p>Generates and federates a Follow activity.</p><p>Note: the follow should be reflected on the host database side only after receiving an <code class="inline">Accept</code> activity in response!</p>
+  </section>
+</section>
+<section class="detail" id="like/4">
+
+    <span id="like/2"></span>
+
+    <span id="like/3"></span>
+
+  <div class="detail-header">
+    <a href="#like/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">like(actor, object, activity_id \\ nil, local \\ true)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>like(
+  <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(),
+  activity_id :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil,
+  local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()
+) ::
+  {:ok, activity :: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(), object :: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()}
+  | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="maybe_forward_activity/1">
+
+  <div class="detail-header">
+    <a href="#maybe_forward_activity/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">maybe_forward_activity(activity)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="reject/1">
+
+  <div class="detail-header">
+    <a href="#reject/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">reject(params)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>reject(%{to: [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()], actor: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(), object: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>()}) ::
+  {:ok, <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+
+      </div>
+
+<p>Generates and federates a Reject activity via the data passed through <code class="inline">params</code>.</p>
+  </section>
+</section>
+<section class="detail" id="unannounce/4">
+
+    <span id="unannounce/2"></span>
+
+    <span id="unannounce/3"></span>
+
+  <div class="detail-header">
+    <a href="#unannounce/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">unannounce(actor, object, activity_id \\ nil, local \\ true)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>unannounce(
+  <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(),
+  activity_id :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil,
+  local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()
+) ::
+  {:ok, unannounce_activity :: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(),
+   object :: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()}
+  | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="unblock/4">
+
+    <span id="unblock/2"></span>
+
+    <span id="unblock/3"></span>
+
+  <div class="detail-header">
+    <a href="#unblock/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">unblock(blocker, blocked, activity_id \\ nil, local \\ true)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>unblock(
+  blocker :: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  blocked :: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  activity_id :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil,
+  local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()
+) :: {:ok, <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="unfollow/4">
+
+    <span id="unfollow/2"></span>
+
+    <span id="unfollow/3"></span>
+
+  <div class="detail-header">
+    <a href="#unfollow/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">unfollow(follower, followed, activity_id \\ nil, local \\ true)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>unfollow(
+  follower :: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  follower :: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  activity_id :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil,
+  local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()
+) :: {:ok, <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+
+      </div>
+
+<p>Generates and federates an Unfollow activity.</p>
+  </section>
+</section>
+<section class="detail" id="unlike/4">
+
+    <span id="unlike/2"></span>
+
+    <span id="unlike/3"></span>
+
+  <div class="detail-header">
+    <a href="#unlike/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">unlike(actor, object, activity_id \\ nil, local \\ true)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>unlike(
+  <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(),
+  activity_id :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil,
+  local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()
+) ::
+  {:ok, unlike_activity :: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(),
+   like_activity :: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(), object :: <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()}
+  | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="update/1">
+
+  <div class="detail-header">
+    <a href="#update/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature">update(params)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre>update(%{
+  :to =&gt; [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()],
+  :cc =&gt; [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()],
+  :actor =&gt; <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  :object =&gt; <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(),
+  optional(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) =&gt; <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()
+}) :: {:ok, <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+          </div>
+        </section>
+
+      <footer class="footer">
+
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.25.5) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+
+            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button night-mode-toggle">
+            Toggle night mode
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button tooltips-toggle">
+            <span class="tooltips-option-disable">Disable tooltips</span>
+            <span class="tooltips-option-enable">Enable tooltips</span>
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>
