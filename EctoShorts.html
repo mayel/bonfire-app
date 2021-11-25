@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.25.5">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.48">
+    <meta name="generator" content="ExDoc v0.26.0">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.52">
 
-    <title>EctoShorts — bonfire v0.1.0-cooperation-beta.48</title>
-    <link rel="stylesheet" href="dist/elixir-d1506dba1db7cdc5483e.css" />
+    <title>EctoShorts — bonfire v0.1.0-cooperation-beta.52</title>
+    <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
 
-    <script src="dist/sidebar_items-f5337e3597.js"></script>
+    <script src="dist/sidebar_items-3154a8102d.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-7b632b26f13d5e0d20e1.js"></script>
+    <script async src="dist/app-a404e1e870b77c874f9e.js"></script>
 
 
   </head>
@@ -54,11 +54,11 @@
 
   <div class="sidebar-header">
     <div class="sidebar-projectDetails">
-      <a href="readme.html" class="sidebar-projectName">
+      <a href="readme.html" class="sidebar-projectName" translate="no">
 bonfire
       </a>
-      <strong class="sidebar-projectVersion">
-        v0.1.0-cooperation-beta.48
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.1.0-cooperation-beta.52
       </strong>
     </div>
 
@@ -74,7 +74,7 @@ bonfire
       <li><a id="modules-list-link" href="#full-list">Modules</a></li>
 
 
-      <li><a id="tasks-list-link" href="#full-list">Mix Tasks</a></li>
+      <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
 
   </ul>
   <div class="gradient"></div>
@@ -85,58 +85,61 @@ bonfire
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-      <h1>
-EctoShorts <small class="app-vsn">(bonfire v0.1.0-cooperation-beta.48)</small>
-
-      </h1>
-
-
-        <section id="moduledoc">
-<p>Ecto Shorts is a library created to help shorten ecto queries</p><p>Common filters available include:</p><ul><li><code class="inline">preload</code> - Preloads fields onto the query results</li><li><code class="inline">start_date</code> - Query for items inserted after this date</li><li><code class="inline">end_date</code> - Query for items inserted before this date</li><li><code class="inline">before</code> - Get items with IDs before this value</li><li><code class="inline">after</code> - Get items with IDs after this value</li><li><code class="inline">ids</code> - Get items with a list of ids</li><li><code class="inline">first</code> - Gets the first n items</li><li><code class="inline">last</code> - Gets the last n items</li><li><code class="inline">limit</code> - Gets the first n items</li><li><code class="inline">offset</code> - Offsets limit by n items</li><li><code class="inline">search</code> - <strong><em>Warning:</em></strong> This requires schemas using this to have a <code class="inline">&amp;by_search(query, val)</code> function</li><li><code class="inline">join_preload</code> - WIP: Joins an associations and preloads its fields onto the query results (using only one query)</li></ul><p>You are also able to filter on any natural field of a model, as well as use</p><ul><li>gte/gt</li><li>lte/lt</li><li>like/ilike</li><li>is_nil/not(is_nil)</li></ul><pre><code class="makeup elixir"><span class="nc">EctoShorts</span><span class="o">.</span><span class="n">filter</span><span class="p" data-group-id="0145582472-1">(</span><span class="nc">User</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0145582472-2">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0145582472-3">%{</span><span class="ss">ilike</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;steve&quot;</span><span class="p" data-group-id="0145582472-3">}</span><span class="p" data-group-id="0145582472-2">}</span><span class="p" data-group-id="0145582472-1">)</span><span class="w">
-</span><span class="nc">EctoShorts</span><span class="o">.</span><span class="n">filter</span><span class="p" data-group-id="0145582472-4">(</span><span class="nc">User</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0145582472-5">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0145582472-6">%{</span><span class="ss">age</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0145582472-7">%{</span><span class="ss">gte</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="ss">lte</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p" data-group-id="0145582472-7">}</span><span class="p" data-group-id="0145582472-6">}</span><span class="p" data-group-id="0145582472-5">}</span><span class="p" data-group-id="0145582472-4">)</span><span class="w">
-</span><span class="nc">EctoShorts</span><span class="o">.</span><span class="n">filter</span><span class="p" data-group-id="0145582472-8">(</span><span class="nc">User</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0145582472-9">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0145582472-10">%{</span><span class="ss">is_banned</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0145582472-11">%{</span><span class="ss">!=</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="0145582472-11">}</span><span class="p" data-group-id="0145582472-10">}</span><span class="p" data-group-id="0145582472-9">}</span><span class="p" data-group-id="0145582472-8">)</span><span class="w">
-</span><span class="nc">EctoShorts</span><span class="o">.</span><span class="n">filter</span><span class="p" data-group-id="0145582472-12">(</span><span class="nc">User</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0145582472-13">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0145582472-14">%{</span><span class="ss">is_banned</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0145582472-15">%{</span><span class="ss">==</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="0145582472-15">}</span><span class="p" data-group-id="0145582472-14">}</span><span class="p" data-group-id="0145582472-13">}</span><span class="p" data-group-id="0145582472-12">)</span><span class="w">
-
-</span><span class="n">my_query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">EctoShorts</span><span class="o">.</span><span class="n">filter</span><span class="p" data-group-id="0145582472-16">(</span><span class="nc">User</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0145582472-17">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Billy&quot;</span><span class="p" data-group-id="0145582472-17">}</span><span class="p" data-group-id="0145582472-16">)</span><span class="w">
-</span><span class="nc">EctoShorts</span><span class="o">.</span><span class="n">filter</span><span class="p" data-group-id="0145582472-18">(</span><span class="n">my_query</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0145582472-19">%{</span><span class="ss">last_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Joe&quot;</span><span class="p" data-group-id="0145582472-19">}</span><span class="p" data-group-id="0145582472-18">)</span></code></pre>
-        </section>
+<h1>
+  <span translate="no">EctoShorts</span> 
+  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.52)</small>
 
 
-        <section id="summary" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#summary">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
-            Summary
-          </h1>
+</h1>
+
+
+  <section id="moduledoc">
+<p>Ecto Shorts is a library created to help shorten ecto queries</p><p>Common filters available include:</p><ul><li><code class="inline">preload</code> - Preloads fields onto the query results</li><li><code class="inline">start_date</code> - Query for items inserted after this date</li><li><code class="inline">end_date</code> - Query for items inserted before this date</li><li><code class="inline">before</code> - Get items with IDs before this value</li><li><code class="inline">after</code> - Get items with IDs after this value</li><li><code class="inline">ids</code> - Get items with a list of ids</li><li><code class="inline">first</code> - Gets the first n items</li><li><code class="inline">last</code> - Gets the last n items</li><li><code class="inline">limit</code> - Gets the first n items</li><li><code class="inline">offset</code> - Offsets limit by n items</li><li><code class="inline">search</code> - <strong><em>Warning:</em></strong> This requires schemas using this to have a <code class="inline">&amp;by_search(query, val)</code> function</li><li><code class="inline">join_preload</code> - WIP: Joins an associations and preloads its fields onto the query results (using only one query)</li></ul><p>You are also able to filter on any natural field of a model, as well as use</p><ul><li>gte/gt</li><li>lte/lt</li><li>like/ilike</li><li>is_nil/not(is_nil)</li></ul><pre><code class="makeup elixir"><span class="nc">EctoShorts</span><span class="o">.</span><span class="n">filter</span><span class="p" data-group-id="9164222973-1">(</span><span class="nc">User</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9164222973-2">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9164222973-3">%{</span><span class="ss">ilike</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;steve&quot;</span><span class="p" data-group-id="9164222973-3">}</span><span class="p" data-group-id="9164222973-2">}</span><span class="p" data-group-id="9164222973-1">)</span><span class="w">
+</span><span class="nc">EctoShorts</span><span class="o">.</span><span class="n">filter</span><span class="p" data-group-id="9164222973-4">(</span><span class="nc">User</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9164222973-5">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9164222973-6">%{</span><span class="ss">age</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9164222973-7">%{</span><span class="ss">gte</span><span class="p">:</span><span class="w"> </span><span class="mi">18</span><span class="p">,</span><span class="w"> </span><span class="ss">lte</span><span class="p">:</span><span class="w"> </span><span class="mi">30</span><span class="p" data-group-id="9164222973-7">}</span><span class="p" data-group-id="9164222973-6">}</span><span class="p" data-group-id="9164222973-5">}</span><span class="p" data-group-id="9164222973-4">)</span><span class="w">
+</span><span class="nc">EctoShorts</span><span class="o">.</span><span class="n">filter</span><span class="p" data-group-id="9164222973-8">(</span><span class="nc">User</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9164222973-9">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9164222973-10">%{</span><span class="ss">is_banned</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9164222973-11">%{</span><span class="ss">!=</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="9164222973-11">}</span><span class="p" data-group-id="9164222973-10">}</span><span class="p" data-group-id="9164222973-9">}</span><span class="p" data-group-id="9164222973-8">)</span><span class="w">
+</span><span class="nc">EctoShorts</span><span class="o">.</span><span class="n">filter</span><span class="p" data-group-id="9164222973-12">(</span><span class="nc">User</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9164222973-13">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9164222973-14">%{</span><span class="ss">is_banned</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9164222973-15">%{</span><span class="ss">==</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p" data-group-id="9164222973-15">}</span><span class="p" data-group-id="9164222973-14">}</span><span class="p" data-group-id="9164222973-13">}</span><span class="p" data-group-id="9164222973-12">)</span><span class="w">
+
+</span><span class="n">my_query</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">EctoShorts</span><span class="o">.</span><span class="n">filter</span><span class="p" data-group-id="9164222973-16">(</span><span class="nc">User</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9164222973-17">%{</span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Billy&quot;</span><span class="p" data-group-id="9164222973-17">}</span><span class="p" data-group-id="9164222973-16">)</span><span class="w">
+</span><span class="nc">EctoShorts</span><span class="o">.</span><span class="n">filter</span><span class="p" data-group-id="9164222973-18">(</span><span class="n">my_query</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9164222973-19">%{</span><span class="ss">last_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Joe&quot;</span><span class="p" data-group-id="9164222973-19">}</span><span class="p" data-group-id="9164222973-18">)</span></code></pre>
+  </section>
+
+
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <span class="icon-link" aria-hidden="true"></span>
+        <span class="sr-only">Link to this section</span>
+      </a>
+      Summary
+    </h1>
 
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
     </h2>
-<div class="summary-row">
-  <div class="summary-signature">
-    <a href="#filter/4">filter(module_or_query, filters, order_by_prop \\ :id, order_direction \\ :desc)</a>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#filter/4" translate="no">filter(module_or_query, filters, order_by_prop \\ :id, order_direction \\ :desc)</a>
+
+        </div>
+
+      </div>
 
   </div>
 
-</div>
-
-  </div>
-
-        </section>
+  </section>
 
 
-        <section id="functions" class="details-list">
-          <h1 class="section-heading">
-            <a class="hover-link" href="#functions">
-              <span class="icon-link" aria-hidden="true"></span>
-              <span class="sr-only">Link to this section</span>
-            </a>
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <span class="icon-link" aria-hidden="true"></span>
+        <span class="sr-only">Link to this section</span>
+      </a>
 Functions
-          </h1>
-          <div class="functions-list">
+    </h1>
+    <div class="functions-list">
 <section class="detail" id="filter/4">
 
     <span id="filter/2"></span>
@@ -148,7 +151,7 @@ Functions
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature">filter(module_or_query, filters, order_by_prop \\ :id, order_direction \\ :desc)</h1>
+    <h1 class="signature" translate="no">filter(module_or_query, filters, order_by_prop \\ :id, order_direction \\ :desc)</h1>
 
 
   </div>
@@ -159,20 +162,20 @@ Functions
   </section>
 </section>
 
-          </div>
-        </section>
+    </div>
+  </section>
 
       <footer class="footer">
 
         <p>
           <span class="line">
             Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener">ExDoc</a> (v0.25.5) for the
-            <a href="https://elixir-lang.org" title="Elixir" target="_blank">Elixir programming language</a>.
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.26.0) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>.
           </span>
           <span class="line">
             Designed by
-            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire">Friedel Ziegelmayer</a>.
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire" translate="no">Friedel Ziegelmayer</a>.
           </span>
         </p>
         <p>
@@ -182,15 +185,11 @@ Functions
           <button class="line footer-button display-shortcuts-help">
             Display keyboard shortcuts
           </button>
-          <button class="line footer-button night-mode-toggle">
-            Toggle night mode
-          </button>
           <button class="line footer-button display-quick-switch">
             Go to a HexDocs package
           </button>
-          <button class="line footer-button tooltips-toggle">
-            <span class="tooltips-option-disable">Disable tooltips</span>
-            <span class="tooltips-option-enable">Enable tooltips</span>
+          <button class="line footer-button display-settings">
+            Settings
           </button>
         </p>
       </footer>
