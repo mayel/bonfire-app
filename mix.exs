@@ -72,6 +72,9 @@ defmodule Bonfire.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:exsync, "~> 0.2", only: :dev},
 
+      # tmp
+      {:telemetry, "~> 0.4", override: true},
+
       # tests
       {:floki, ">= 0.0.0", only: [:dev, :test]},
       {:ex_machina, "~> 2.4", only: :test},
