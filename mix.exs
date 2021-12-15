@@ -3,7 +3,7 @@ defmodule Bonfire.MixProject do
   use Mix.Project
 
   @config [
-      version: "0.1.0-alpha.254", # note that the flavour will automatically be added where the dash appears
+      version: "0.1.0-alpha.255", # note that the flavour will automatically be added where the dash appears
       elixir: "~> 1.12",
       default_flavour: "classic",
       test_deps_prefixes: ["bonfire_", "pointers", "paginator"],
@@ -71,6 +71,9 @@ defmodule Bonfire.MixProject do
       # {:dbg, "~> 1.0", only: [:dev, :test]},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:exsync, "~> 0.2", only: :dev},
+
+      # tmp
+      {:telemetry, "~> 0.4", override: true},
 
       # tests
       {:floki, ">= 0.0.0", only: [:dev, :test]},
