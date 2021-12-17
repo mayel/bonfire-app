@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.26.0">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.76">
+
+    <title>README — bonfire v0.1.0-cooperation-beta.76</title>
+    <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
+
+    <script src="dist/sidebar_items-470821a58d.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-a404e1e870b77c874f9e.js"></script>
+
+
+  </head>
+  <body data-type="extras">
+    <script>
+
+      try {
+        if (localStorage.getItem('night-mode') === 'true') {
+          document.body.classList.add('night-mode');
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="readme.html" class="sidebar-projectName" translate="no">
+bonfire
+      </a>
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.1.0-cooperation-beta.76
+      </strong>
+    </div>
+
+      <a href="readme.html">
+        <img src="assets/logo.png" alt="bonfire" class="sidebar-projectImage">
+      </a>
+
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+      <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1 id="content">
+
+
+</h1>
+
+<p><a href="https://hex.pm/pointers"><img src="https://img.shields.io/hexpm/v/pointers" alt="hex.pm"/></a>
+<a href="https://hexdocs.pm/pointers">hexdocs</a></p><h1>pointers</h1><p>Ecto's missing universal foreign key</p><blockquote><p>One foreign key to rule them all and in the darkness, bind them.</p></blockquote><p>-- Gandalf, paraphrased.</p><p>A means of foreign keying many tables in one field. Designed for
+highly interlinked data in highly dynamic schemata where tracking all
+the foreign keys is neither desired nor practical.</p><p>Note: a universal foreign key is actually a hard problem. Many
+approaches are on offer with a variety of tradeoffs. You should
+carefully consider a variety of approaches rather than just blindly
+adopting the one that fitted our project's needs the best!</p><h2 id="background" class="section-heading">
+  <a href="#background" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Background
+</h2>
+<p>A <code class="inline">Table</code> is a record of a table that may be linked to by a pointer.
+A <code class="inline">Pointer</code> is a pointer id and a table id.</p><p>With these two ingredients, we can construct a means of pointing to
+any table that has a <code class="inline">Table</code> entry.</p><p><code class="inline">Pointer</code> and <code class="inline">Table</code> IDs are both <a href="./Pointers.ULID.html"><code class="inline">Pointers.ULID</code></a>, a UUID-like type
+that combines a millisecond-precision timestamp and some randomness to
+reduce the likelihood of a clash. It naturally sorts both in binary
+and text form by time and as far as postgres is concerned, it's a UUID.</p><h2 id="installation" class="section-heading">
+  <a href="#installation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Installation
+</h2>
+<p>Aside from the hex dependency, you will also need to write a simple
+migration to set up the database before you can start writing your
+regular migrations:</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Repo.Migrations.InitPointers</span><span class="w"> </span><span class="k" data-group-id="4272155999-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Ecto.Migration</span><span class="w">
+  </span><span class="kn">import</span><span class="w"> </span><span class="nc">Pointers.Migration</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">up</span><span class="p" data-group-id="4272155999-2">(</span><span class="p" data-group-id="4272155999-2">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">inits</span><span class="p" data-group-id="4272155999-3">(</span><span class="ss">:up</span><span class="p" data-group-id="4272155999-3">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">down</span><span class="p" data-group-id="4272155999-4">(</span><span class="p" data-group-id="4272155999-4">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">inits</span><span class="p" data-group-id="4272155999-5">(</span><span class="ss">:down</span><span class="p" data-group-id="4272155999-5">)</span><span class="w">
+
+  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">inits</span><span class="p" data-group-id="4272155999-6">(</span><span class="n">dir</span><span class="p" data-group-id="4272155999-6">)</span><span class="w"> </span><span class="k" data-group-id="4272155999-7">do</span><span class="w">
+    </span><span class="n">init_pointers_ulid_extra</span><span class="p" data-group-id="4272155999-8">(</span><span class="n">dir</span><span class="p" data-group-id="4272155999-8">)</span><span class="w"> </span><span class="c1"># this one is optional but recommended</span><span class="w">
+    </span><span class="n">init_pointers</span><span class="p" data-group-id="4272155999-9">(</span><span class="n">dir</span><span class="p" data-group-id="4272155999-9">)</span><span class="w"> </span><span class="c1"># this one is not optional</span><span class="w">
+  </span><span class="k" data-group-id="4272155999-7">end</span><span class="w">
+</span><span class="k" data-group-id="4272155999-1">end</span></code></pre><h2 id="defining-a-pointable-type" class="section-heading">
+  <a href="#defining-a-pointable-type" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Defining a Pointable Type
+</h2>
+<p>Pointable tables require a unique sentinel ULID to identify
+them. These must be 26 characters long and in the alphabet of
+<a href="https://en.wikipedia.org/wiki/Base32#Crockford's_Base32">Crockford's Base32</a>.
+They should be easy to identify in a printout and might be silly.</p><p>There is a helper function, <code class="inline">synthesise!/1</code> in <a href="./Pointers.ULID.html"><code class="inline">Pointers.ULID</code></a> to
+assist with this process - give it a 26-character long binary of ascii
+alphanumerics and it will give you the closest ULID that matches back.</p><p>Let's look at a simple schema:</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Greeting</span><span class="w"> </span><span class="k" data-group-id="8689613454-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Pointers.Pointable</span><span class="p">,</span><span class="w">
+    </span><span class="ss">otp_app</span><span class="p">:</span><span class="w"> </span><span class="ss">:my_app</span><span class="p">,</span><span class="w">
+    </span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;myapp_greeting&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="ss">table_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;GREET1NGSFR0MD0CEXAMP1E000&quot;</span><span class="w">
+
+  </span><span class="n">pointable_schema</span><span class="w"> </span><span class="k" data-group-id="8689613454-2">do</span><span class="w">
+    </span><span class="n">field</span><span class="w"> </span><span class="ss">:greeting</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
+  </span><span class="k" data-group-id="8689613454-2">end</span><span class="w">
+</span><span class="k" data-group-id="8689613454-1">end</span></code></pre><p>To declare a pointable schema, we start by using <a href="./Pointers.Pointable.html"><code class="inline">Pointers.Pointable</code></a>,
+providing the name of our otp application, the source table's name in
+the database and our chosen sentinel ULID.</p><p>We then call <code class="inline">pointable_schema</code> and define any fields we wish to put
+directly in the table. For the most part, <code class="inline">pointable_schema</code> is like
+Ecto's <code class="inline">schema</code> macro, except you do not provide the table name and
+let it handle the primary key.</p><p>If for some reason you wished to turn autogeneration off, you could
+pass <code class="inline">autogenerate: false</code> to the options provided when using
+<a href="./Pointers.Pointable.html"><code class="inline">Pointers.Pointable</code></a>.</p><p>Now let's define the migration for our schema:</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Repo.Migrations.Greeting</span><span class="w"> </span><span class="k" data-group-id="8430702464-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Ecto.Migration</span><span class="w">
+  </span><span class="kn">import</span><span class="w"> </span><span class="nc">Pointers.Migration</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">up</span><span class="p" data-group-id="8430702464-2">(</span><span class="p" data-group-id="8430702464-2">)</span><span class="w"> </span><span class="k" data-group-id="8430702464-3">do</span><span class="w">
+    </span><span class="n">create_pointable_table</span><span class="p" data-group-id="8430702464-4">(</span><span class="ss">:greeting</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;GREET1NGSFR0MD0CEXAMP1E000&quot;</span><span class="p" data-group-id="8430702464-4">)</span><span class="w"> </span><span class="k" data-group-id="8430702464-5">do</span><span class="w">
+      </span><span class="n">add</span><span class="w"> </span><span class="ss">:greeting</span><span class="p">,</span><span class="w"> </span><span class="ss">:text</span><span class="p">,</span><span class="w"> </span><span class="ss">null</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="w">
+    </span><span class="k" data-group-id="8430702464-5">end</span><span class="w">
+  </span><span class="k" data-group-id="8430702464-3">end</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">down</span><span class="p" data-group-id="8430702464-6">(</span><span class="p" data-group-id="8430702464-6">)</span><span class="w"> </span><span class="k" data-group-id="8430702464-7">do</span><span class="w">
+    </span><span class="n">drop_pointable_table</span><span class="p" data-group-id="8430702464-8">(</span><span class="ss">:greeting</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;GREET1NGSFR0MD0CEXAMP1E000&quot;</span><span class="p" data-group-id="8430702464-8">)</span><span class="w">
+  </span><span class="k" data-group-id="8430702464-7">end</span><span class="w">
+</span><span class="k" data-group-id="8430702464-1">end</span></code></pre><p>As you can see, it's pretty similar to defining a regular migration,
+except you use <code class="inline">create_pointable_table</code> and
+<code class="inline">drop_pointable_table</code>. Notice that our sentinel ULID makes an
+appearance again here. It's <em>very</em> important that these match what we
+declared in the schema.</p><h2 id="referencing-pointers" class="section-heading">
+  <a href="#referencing-pointers" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Referencing Pointers
+</h2>
+<p>Ecto does not know anything about our scheme, so unless we
+specifically want something to reference one of the pointed tables, we
+typically <code class="inline">belongs_to</code> with <a href="./Pointers.Pointer.html"><code class="inline">Pointers.Pointer</code></a>. The table in which we
+do this does not itself need to be pointable.</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Foo</span><span class="w"> </span><span class="k" data-group-id="3269577285-1">do</span><span class="w">
+
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Ecto.Schema</span><span class="w">
+  </span><span class="kn">alias</span><span class="w"> </span><span class="nc">Pointers.Pointer</span><span class="w">
+
+  </span><span class="c1"># regular ecto table, not pointable!</span><span class="w">
+  </span><span class="n">schema</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="w"> </span><span class="k" data-group-id="3269577285-2">do</span><span class="w">
+    </span><span class="n">belongs_to</span><span class="w"> </span><span class="ss">:pointer</span><span class="p">,</span><span class="w"> </span><span class="nc">Pointer</span><span class="w"> </span><span class="c1"># who knows what it points to?</span><span class="w">
+  </span><span class="k" data-group-id="3269577285-2">end</span><span class="w">
+</span><span class="k" data-group-id="3269577285-1">end</span></code></pre><p>You may choose to reference a specific schema rather than Pointer if it
+will only point to a single table. If you do this, you must ensure
+that the referenced record exists in that table in the normal
+way. There may be some performance benefit, we didn't benchmark it.</p><p>The migration is slightly more complex, we have to decide what type of
+a pointer it is. Pointers come in three categories:</p><ul><li>A strong pointer is not nullable and is deleted when the object it
+points to is deleted.</li><li>A weak pointer is nullable and is nilified when the object it points
+to is deleted.</li><li>An unbreakable pointer will raise when you attempt to delete the
+object it points to.</li></ul><table><thead><tr><th style="text-align: left;">Type</th><th style="text-align: left;">Nullable?</th><th style="text-align: left;">On Delete</th></tr></thead><tbody><tr><td style="text-align: left;">Strong</td><td style="text-align: left;">No</td><td style="text-align: left;">Cascade</td></tr><tr><td style="text-align: left;">Weak</td><td style="text-align: left;">Yes</td><td style="text-align: left;">Set Null</td></tr><tr><td style="text-align: left;">Unbreakable</td><td style="text-align: left;">No</td><td style="text-align: left;">Raise</td></tr></tbody></table><p>In this case we will use a strong pointer, because we want it to be
+deleted if the pointed object is deleted.</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyApp.Repo.Migrations.Hello</span><span class="w"> </span><span class="k" data-group-id="1371656509-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Ecto.Migration</span><span class="w">
+  </span><span class="kn">import</span><span class="w"> </span><span class="nc">Pointers.Migration</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">change</span><span class="p" data-group-id="1371656509-2">(</span><span class="p" data-group-id="1371656509-2">)</span><span class="w"> </span><span class="k" data-group-id="1371656509-3">do</span><span class="w">
+    </span><span class="n">create_if_not_exists</span><span class="w"> </span><span class="n">table</span><span class="p" data-group-id="1371656509-4">(</span><span class="ss">:hello</span><span class="p" data-group-id="1371656509-4">)</span><span class="w"> </span><span class="k" data-group-id="1371656509-5">do</span><span class="w">
+      </span><span class="n">add</span><span class="w"> </span><span class="ss">:pointer</span><span class="p">,</span><span class="w"> </span><span class="n">strong_pointer</span><span class="p" data-group-id="1371656509-6">(</span><span class="p" data-group-id="1371656509-6">)</span><span class="p">,</span><span class="w"> </span><span class="ss">null</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="w">
+      </span><span class="n">add</span><span class="w"> </span><span class="ss">:greeting</span><span class="p">,</span><span class="w"> </span><span class="ss">:text</span><span class="p">,</span><span class="w"> </span><span class="ss">null</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="w">
+    </span><span class="k" data-group-id="1371656509-5">end</span><span class="w">
+  </span><span class="k" data-group-id="1371656509-3">end</span><span class="w">
+</span><span class="k" data-group-id="1371656509-1">end</span></code></pre><p>If you are pointing to a specific table instead of pointer,
+<code class="inline">strong_pointer/1</code> allows you to pass the name of that module
+(<code class="inline">strong_pointer/0</code> calls this with <a href="./Pointers.Pointer.html"><code class="inline">Pointers.Pointer</code></a>).</p><h2 id="dereferencing-pointers" class="section-heading">
+  <a href="#dereferencing-pointers" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Dereferencing Pointers
+</h2>
+<p>It is common that even though you have a universal foreign key, you
+will want to issue different queries based upon the type that is being
+pointed to. For this reason, it is up to you to decide how to perform
+an onward query.</p><p><a href="./Pointers.html#schema/1"><code class="inline">Pointers.schema/1</code></a> turns a <code class="inline">Pointer</code> into an Ecto schema module name
+you can switch against. <code class="inline">Pointers.plan</code> breaks down a list of Pointers
+into a map of ids keyed by schema module. It is handy to define some
+functions in your (non-library) application that can load any type of
+pointer in given contexts.</p><h2 id="querying-pointers" class="section-heading">
+  <a href="#querying-pointers" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Querying Pointers
+</h2>
+<p>Since <code class="inline">Pointer</code> has a table, you can use its <code class="inline">table_id</code> field to
+filter by pointed type. <a href="./Pointers.Tables.html#id!/1"><code class="inline">Pointers.Tables.id!/1</code></a> (or <code class="inline">ids!/1</code> for a
+list) can be used to obtain the IDs for a table or tables.</p><p>Then you run into another problem, that even though you know all of
+the tables you're working with will have a certain field, you need to
+know which table they are to work with them! The solution to this is
+what we are calling 'mixin tables' for convenience.</p><p>A mixin table has a <code class="inline">Pointer</code> primary key along with any other fields
+you wish to store in this mixin. By moving fields out to mixin tables,
+you gain knowledge of the table name to which you need to join.</p><p>An example mixin schema:</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">My.Creator</span><span class="w"> </span><span class="k" data-group-id="7411461287-1">do</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Pointers.Mixin</span><span class="p">,</span><span class="w">
+    </span><span class="ss">otp_app</span><span class="p">:</span><span class="w"> </span><span class="ss">:my_app</span><span class="p">,</span><span class="w">
+    </span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;creator&quot;</span><span class="w">
+
+  </span><span class="n">mixin_schema</span><span class="w"> </span><span class="k" data-group-id="7411461287-2">do</span><span class="w">
+    </span><span class="n">belongs_to</span><span class="w"> </span><span class="ss">:creator</span><span class="p">,</span><span class="w"> </span><span class="nc">My.User</span><span class="w">
+  </span><span class="k" data-group-id="7411461287-2">end</span><span class="w">
+</span><span class="k" data-group-id="7411461287-1">end</span></code></pre><p>Mixin tables are not themselves pointable, so there is no need to
+specify a table id as when defining a pointable schema.</p><p>The migration for this is slightly more complicated:</p><pre><code class="makeup elixir"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">My.Creator.Migration</span><span class="w"> </span><span class="k" data-group-id="7132573289-1">do</span><span class="w">
+
+  </span><span class="kn">import</span><span class="w"> </span><span class="nc">Ecto.Migration</span><span class="w">
+  </span><span class="kn">import</span><span class="w"> </span><span class="nc">Pointers.Migration</span><span class="w">
+
+  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">creator_table</span><span class="p" data-group-id="7132573289-2">(</span><span class="p" data-group-id="7132573289-2">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="nc">My.Creator</span><span class="o">.</span><span class="c">__schema__</span><span class="p" data-group-id="7132573289-3">(</span><span class="ss">:source</span><span class="p" data-group-id="7132573289-3">)</span><span class="w">
+  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">user_table</span><span class="p" data-group-id="7132573289-4">(</span><span class="p" data-group-id="7132573289-4">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="nc">My.User</span><span class="o">.</span><span class="c">__schema__</span><span class="p" data-group-id="7132573289-5">(</span><span class="ss">:source</span><span class="p" data-group-id="7132573289-5">)</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_creator</span><span class="p" data-group-id="7132573289-6">(</span><span class="n">index_opts</span><span class="w"> </span><span class="o">\\</span><span class="w"> </span><span class="p" data-group-id="7132573289-7">[</span><span class="p" data-group-id="7132573289-7">]</span><span class="p" data-group-id="7132573289-6">)</span><span class="p">,</span><span class="w">
+    </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">migrate_creator</span><span class="p" data-group-id="7132573289-8">(</span><span class="n">index_opts</span><span class="p">,</span><span class="w"> </span><span class="n">direction</span><span class="p" data-group-id="7132573289-9">(</span><span class="p" data-group-id="7132573289-9">)</span><span class="p" data-group-id="7132573289-8">)</span><span class="w">
+
+  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">migrate_creator</span><span class="p" data-group-id="7132573289-10">(</span><span class="n">index_opts</span><span class="p">,</span><span class="w"> </span><span class="ss">:up</span><span class="p" data-group-id="7132573289-10">)</span><span class="w"> </span><span class="k" data-group-id="7132573289-11">do</span><span class="w">
+    </span><span class="n">create_mixin_table</span><span class="p" data-group-id="7132573289-12">(</span><span class="n">creator_table</span><span class="p" data-group-id="7132573289-13">(</span><span class="p" data-group-id="7132573289-13">)</span><span class="p" data-group-id="7132573289-12">)</span><span class="w"> </span><span class="k" data-group-id="7132573289-14">do</span><span class="w">
+      </span><span class="n">add</span><span class="w"> </span><span class="ss">:creator_id</span><span class="p">,</span><span class="w"> </span><span class="n">strong_pointer</span><span class="p" data-group-id="7132573289-15">(</span><span class="n">user_table</span><span class="p" data-group-id="7132573289-16">(</span><span class="p" data-group-id="7132573289-16">)</span><span class="p" data-group-id="7132573289-15">)</span><span class="p">,</span><span class="w"> </span><span class="ss">null</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="w"> 
+    </span><span class="k" data-group-id="7132573289-14">end</span><span class="w">
+    </span><span class="n">create_if_not_exists</span><span class="p" data-group-id="7132573289-17">(</span><span class="n">unique_index</span><span class="p" data-group-id="7132573289-18">(</span><span class="n">creator_table</span><span class="p" data-group-id="7132573289-19">(</span><span class="p" data-group-id="7132573289-19">)</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7132573289-20">[</span><span class="ss">:creator_id</span><span class="p" data-group-id="7132573289-20">]</span><span class="p">,</span><span class="w"> </span><span class="n">index_opts</span><span class="p" data-group-id="7132573289-18">)</span><span class="p" data-group-id="7132573289-17">)</span><span class="w">
+  </span><span class="k" data-group-id="7132573289-11">end</span><span class="w">
+
+  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">migrate_creator</span><span class="p" data-group-id="7132573289-21">(</span><span class="n">index_opts</span><span class="p">,</span><span class="w"> </span><span class="ss">:down</span><span class="p" data-group-id="7132573289-21">)</span><span class="w"> </span><span class="k" data-group-id="7132573289-22">do</span><span class="w">
+    </span><span class="n">drop_if_exists</span><span class="p" data-group-id="7132573289-23">(</span><span class="n">unique_index</span><span class="p" data-group-id="7132573289-24">(</span><span class="n">creator_table</span><span class="p" data-group-id="7132573289-25">(</span><span class="p" data-group-id="7132573289-25">)</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7132573289-26">[</span><span class="ss">:creator_id</span><span class="p" data-group-id="7132573289-26">]</span><span class="p">,</span><span class="w"> </span><span class="n">index_opts</span><span class="p" data-group-id="7132573289-24">)</span><span class="p" data-group-id="7132573289-23">)</span><span class="w">
+    </span><span class="n">drop_mixin_table</span><span class="p" data-group-id="7132573289-27">(</span><span class="n">creator_table</span><span class="p" data-group-id="7132573289-28">(</span><span class="p" data-group-id="7132573289-28">)</span><span class="p" data-group-id="7132573289-27">)</span><span class="w">
+  </span><span class="k" data-group-id="7132573289-22">end</span><span class="w">
+</span><span class="k" data-group-id="7132573289-1">end</span></code></pre><h2 id="elixir-based-logic" class="section-heading">
+  <a href="#elixir-based-logic" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Elixir-based logic
+</h2>
+<p>The practical result of pointers is that it pushes a certain amount of
+validation and consistency logic back into elixir land. It is
+therefore your elixir code's responsibility to ensure that data is
+inserted into the appropriate mixin tables when inserting a pointable
+object and to manage deletions as appropriate.</p><p>When assembling queries with mixin tables, pay careful attention to
+the type of join you are performing. An inner join is explicitly
+asking not to be shown objects that do not have a record for that
+mixin. You quite possibly wanted to left join.</p><h2 id="configuration-and-overrides" class="section-heading">
+  <a href="#configuration-and-overrides" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Configuration and overrides
+</h2>
+<p>Every pointable or mixin schema is overrideable with configuration
+during compilation (this is why using them requires an <code class="inline">:otp_app</code> to
+be specified). For example, we could override <a href="./Pointers.Table.html"><code class="inline">Pointers.Table</code></a> (which
+is a pointable table) thus:</p><pre><code class="makeup elixir"><span class="n">config</span><span class="w"> </span><span class="ss">:pointers</span><span class="p">,</span><span class="w"> </span><span class="nc">Pointers.Table</span><span class="p">,</span><span class="w"> </span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;my_pointers_table&quot;</span></code></pre><p>The <code class="inline">table_id</code> is also configurable, but we don't recommend you change it.</p><p>In addition, all pointable and mixin schemas permit extension with
+<a href="https://github.com/commonspub/flexto">Flexto</a>. See the <a href="https://hexdocs.pm/flexto/">Flexto
+docs</a> for more information about how to
+extend schemas via configuration. You will probably at the very least
+want to insert some <code class="inline">has_one</code> for mixins off your pointables.</p><h2 id="tradeoffs" class="section-heading">
+  <a href="#tradeoffs" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Tradeoffs
+</h2>
+<p>All solutions to the universal foreign key problem have tradeofs. Here
+are what we see as the deficiencies in our approach:</p><ol><li>It forces a ULID on you. This is great for us, but not
+everyone. ULID exposes a timestamp with millisecond precision. If
+the time of creation of a resource is sensitive information for
+your purposes, ULIDs are not going to be suitable for you.</li><li>Ecto has no knowledge of the specialty of <code class="inline">Pointer</code>,
+e.g. <code class="inline">Repo.preload</code> does not work and you need to specify a join
+condition to join through a pointer. Use our functions.</li><li>Dereferencing a list of pointers requires a select query per table
+type that occurs in the input set.</li><li>Reliance on user attention. You have to follow the instructions
+correctly to make the system work at all.</li><li>There is likely some performance impact from postgres not
+understanding the relationships between the various tables
+properly. It's hard to gauge and we haven't even tried.</li></ol><p>These are not likely to change. If you're going to pick
+this library, do so in the full knowledge of the tradeoffs it makes.</p><p>Alternatives include (I'm sure you can think of others):</p><ul><li>Storing the table name in a second column alongside every foreign key.</li><li>A compound datatype of id and table name.</li><li>Byte/String manipulation tricks.</li><li>Evil SQL hacks based upon compile time configuration.</li></ul><p>While we have our gripes with this approach, once you've gotten the
+hang of using it, it works out pretty well for most purposes and it's
+one of the simpler options to work with.</p><h2 id="todo" class="section-heading">
+  <a href="#todo" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  TODO
+</h2>
+<ul><li>Docs!</li><li>Tests!</li><li><code class="inline">mix pointers.gen.migration.init</code> task to generate an init migration.</li><li><code class="inline">mix pointers.gen.schema.pointable</code> task to generate a pointable schema.</li><li><code class="inline">mix pointers.gen.schema.mixin</code> task to generate a mixin schema.</li></ul><h2 id="copyright-and-license" class="section-heading">
+  <a href="#copyright-and-license" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Copyright and License
+</h2>
+<p>Copyright (c) 2020 pointers Contributors</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at</p><p>   <a href="http://www.apache.org/licenses/LICENSE-2.0">http://www.apache.org/licenses/LICENSE-2.0</a></p><p>Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</p>
+<div class="bottom-actions">
+  <div class="bottom-actions-item">
+
+      <a href="bonfire_mailer.html" class="bottom-actions-button" rel="prev">
+        <span class="subheader">
+          ← Previous Page
+        </span>
+        <span class="title">
+Bonfire.Mailer
+        </span>
+      </a>
+
+  </div>
+  <div class="bottom-actions-item">
+
+      <a href="pointers_ulid.html" class="bottom-actions-button" rel="next">
+        <span class="subheader">
+          Next Page →
+        </span>
+        <span class="title">
+README
+        </span>
+      </a>
+
+  </div>
+</div>
+
+      <footer class="footer">
+
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.26.0) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire" translate="no">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+
+            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button display-settings">
+            Settings
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.26.0">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.76">
+
+    <title>Ecto Sparkles — bonfire v0.1.0-cooperation-beta.76</title>
+    <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
+
+    <script src="dist/sidebar_items-470821a58d.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-a404e1e870b77c874f9e.js"></script>
+
+
+  </head>
+  <body data-type="extras">
+    <script>
+
+      try {
+        if (localStorage.getItem('night-mode') === 'true') {
+          document.body.classList.add('night-mode');
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle">
+  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+    </button>
+    <label class="search-label">
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+    <div class="sidebar-projectDetails">
+      <a href="readme.html" class="sidebar-projectName" translate="no">
+bonfire
+      </a>
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.1.0-cooperation-beta.76
+      </strong>
+    </div>
+
+      <a href="readme.html">
+        <img src="assets/logo.png" alt="bonfire" class="sidebar-projectImage">
+      </a>
+
+  </div>
+
+  <ul class="sidebar-listNav">
+    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+      <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
+
+  </ul>
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1 id="content">
+Ecto Sparkles
+
+</h1>
+
+<p>Some helpers to sparkle on top of <a href="https://hexdocs.pm/ecto/Ecto.html">Ecto</a> to better join + preload associations.</p><ul><li><a href="#JoinPreload-documentation"><code class="inline">JoinPreload</code></a></li><li><a href="#reusablejoin-documentation"><code class="inline">ReusableJoin</code></a></li></ul><h2 id="joinpreload-documentation" class="section-heading">
+  <a href="#joinpreload-documentation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  JoinPreload Documentation
+</h2>
+<p>The <code class="inline">join_preload</code> macro tells Ecto to perform a join and preload of (up to 5 nested levels of) associations.</p><p>By default, Ecto preloads associations using a separate query for each association, which can degrade performance.</p><p>You could make it run faster by using a combination of join/preload, but that requires a bit of boilerplate (see examples below).</p><h3 id="examples-using-just-ecto" class="section-heading">
+  <a href="#examples-using-just-ecto" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Examples using just Ecto
+</h3>
+<pre><code class="makeup elixir"><span class="w">  </span><span class="n">query</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">join</span><span class="p" data-group-id="5802281461-1">(</span><span class="ss">:left</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5802281461-2">[</span><span class="n">o</span><span class="p">,</span><span class="w"> </span><span class="ss">activity</span><span class="p">:</span><span class="w"> </span><span class="n">activity</span><span class="p" data-group-id="5802281461-2">]</span><span class="p">,</span><span class="w"> </span><span class="n">assoc</span><span class="p" data-group-id="5802281461-3">(</span><span class="ss">:object</span><span class="p" data-group-id="5802281461-3">)</span><span class="p">,</span><span class="w"> </span><span class="ss">as</span><span class="p">:</span><span class="w"> </span><span class="ss">:object</span><span class="p" data-group-id="5802281461-1">)</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">preload</span><span class="p" data-group-id="5802281461-4">(</span><span class="p" data-group-id="5802281461-5">[</span><span class="n">l</span><span class="p">,</span><span class="w"> </span><span class="ss">activity</span><span class="p">:</span><span class="w"> </span><span class="n">activity</span><span class="p">,</span><span class="w"> </span><span class="ss">object</span><span class="p">:</span><span class="w"> </span><span class="n">object</span><span class="p" data-group-id="5802281461-5">]</span><span class="p">,</span><span class="w"> </span><span class="ss">activity</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5802281461-6">{</span><span class="n">activity</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5802281461-7">[</span><span class="ss">object</span><span class="p">:</span><span class="w"> </span><span class="n">object</span><span class="p" data-group-id="5802281461-7">]</span><span class="p" data-group-id="5802281461-6">}</span><span class="p" data-group-id="5802281461-4">)</span></code></pre><p>Ecto requires calling <code class="inline">Query.join/4</code>, <code class="inline">Query.assoc/3</code> and <code class="inline">Query.preload/2</code>. Here's another example:</p><pre><code class="makeup elixir"><span class="w">  </span><span class="nc">Invoice</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">join</span><span class="p" data-group-id="1880546111-1">(</span><span class="ss">:left</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1880546111-2">[</span><span class="n">i</span><span class="p" data-group-id="1880546111-2">]</span><span class="p">,</span><span class="w"> </span><span class="n">assoc</span><span class="p" data-group-id="1880546111-3">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="ss">:customer</span><span class="p" data-group-id="1880546111-3">)</span><span class="p">,</span><span class="w"> </span><span class="ss">as</span><span class="p">:</span><span class="w"> </span><span class="ss">:customer</span><span class="p" data-group-id="1880546111-1">)</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">join</span><span class="p" data-group-id="1880546111-4">(</span><span class="ss">:left</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1880546111-5">[</span><span class="n">i</span><span class="p" data-group-id="1880546111-5">]</span><span class="p">,</span><span class="w"> </span><span class="n">assoc</span><span class="p" data-group-id="1880546111-6">(</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="ss">:lines</span><span class="p" data-group-id="1880546111-6">)</span><span class="p">,</span><span class="w"> </span><span class="ss">as</span><span class="p">:</span><span class="w"> </span><span class="ss">:lines</span><span class="p" data-group-id="1880546111-4">)</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">preload</span><span class="p" data-group-id="1880546111-7">(</span><span class="p" data-group-id="1880546111-8">[</span><span class="ss">lines</span><span class="p">:</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="ss">customers</span><span class="p">:</span><span class="w"> </span><span class="n">c</span><span class="p" data-group-id="1880546111-8">]</span><span class="p">,</span><span class="w"> </span><span class="ss">lines</span><span class="p">:</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="ss">customer</span><span class="p">:</span><span class="w"> </span><span class="n">c</span><span class="p" data-group-id="1880546111-7">)</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">all</span><span class="p" data-group-id="1880546111-9">(</span><span class="p" data-group-id="1880546111-9">)</span></code></pre><h2 id="example-using-joinpreload" class="section-heading">
+  <a href="#example-using-joinpreload" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Example using JoinPreload
+</h2>
+<p>With <code class="inline">JoinPreload</code>, you can accomplish this with just one line of code.</p><pre><code class="makeup elixir"><span class="w">  </span><span class="n">query</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">join_preload</span><span class="p" data-group-id="0817623083-1">(</span><span class="p" data-group-id="0817623083-2">[</span><span class="ss">:activity</span><span class="p">,</span><span class="w"> </span><span class="ss">:object</span><span class="p" data-group-id="0817623083-2">]</span><span class="p" data-group-id="0817623083-1">)</span></code></pre><pre><code class="makeup elixir"><span class="w">  </span><span class="nc">Invoice</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">join_preload</span><span class="p" data-group-id="2037147182-1">(</span><span class="ss">:customer</span><span class="p" data-group-id="2037147182-1">)</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">join_preload</span><span class="p" data-group-id="2037147182-2">(</span><span class="ss">:lines</span><span class="p" data-group-id="2037147182-2">)</span><span class="w">
+  </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">Repo</span><span class="o">.</span><span class="n">all</span><span class="p" data-group-id="2037147182-3">(</span><span class="p" data-group-id="2037147182-3">)</span></code></pre><p>As a bonus, <code class="inline">join_preload</code> automatically makes use of <code class="inline">reusable_join</code> so calling it multiple times for the same association has no ill effects.</p><h2 id="reusablejoin-documentation" class="section-heading">
+  <a href="#reusablejoin-documentation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  ReusableJoin Documentation
+</h2>
+<p>The <code class="inline">reusable_join</code> macro is similar to <code class="inline">Ecto.Query.join/{4,5}</code>, but can be called multiple times 
+with the same alias.</p><p>Note that only the first join operation is performed, the subsequent ones that use the same alias
+are just ignored. Also note that because of this behaviour, its mandatory to specify an alias when
+using this function.</p><p>This is helpful when you need to perform a join while building queries one filter at a time,
+because the same filter could be used multiple times or you could have multiple filters that
+require the same join, which poses a problem with how the <code class="inline">filter/3</code> callback work, as you
+need to return a dynamic with the filtering, which means that the join must have an alias,
+and by default Ecto raises an error when you add multiple joins with the same alias.</p><p>To solve this, it is recommended to use this macro instead of the default <code class="inline">Ecto.Query.join/{4,5}</code>,
+in which case there will be only one join in the query that can be reused by multiple filters.</p><h3 id="creating-reusable-joins" class="section-heading">
+  <a href="#creating-reusable-joins" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Creating reusable joins
+</h3>
+<pre><code class="makeup elixir"><span class="n">query</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">reusable_join</span><span class="p" data-group-id="4878229212-1">(</span><span class="ss">:left</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4878229212-2">[</span><span class="n">t1</span><span class="p" data-group-id="4878229212-2">]</span><span class="p">,</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="s">&quot;other_table&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">on</span><span class="p">:</span><span class="w"> </span><span class="n">t1</span><span class="o">.</span><span class="n">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">t2</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="ss">as</span><span class="p">:</span><span class="w"> </span><span class="ss">:other_a</span><span class="p" data-group-id="4878229212-1">)</span><span class="w">
+</span><span class="o">|&gt;</span><span class="w"> </span><span class="n">reusable_join</span><span class="p" data-group-id="4878229212-3">(</span><span class="ss">:left</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4878229212-4">[</span><span class="n">t1</span><span class="p" data-group-id="4878229212-4">]</span><span class="p">,</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="s">&quot;other_table&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">on</span><span class="p">:</span><span class="w"> </span><span class="n">t1</span><span class="o">.</span><span class="n">id</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">t2</span><span class="o">.</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="ss">as</span><span class="p">:</span><span class="w"> </span><span class="ss">:other_b</span><span class="p" data-group-id="4878229212-3">)</span></code></pre><h2 id="copyright" class="section-heading">
+  <a href="#copyright" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Copyright
+</h2>
+<ul><li><p>Copyright (c) 2021 Bonfire</p></li><li><p>Copyright (c) 2020 Up Learn</p></li><li><p>Copyright (c) 2019 Joshua Nussbaum </p></li><li><p>JoinPreload was orginally forked from <a href="https://github.com/joshnuss/ecto_preloader">Ecto.Preloader</a>, licensed under WTFPL)</p></li><li><p>ReusableJoin was originally forked from <a href="https://gitlab.com/up-learn-uk/query-elf">QueryElf</a>, licensed under Apache License Version 2.0</p></li></ul>
+<div class="bottom-actions">
+  <div class="bottom-actions-item">
+
+      <a href="ecto_shorts.html" class="bottom-actions-button" rel="prev">
+        <span class="subheader">
+          ← Previous Page
+        </span>
+        <span class="title">
+EctoShorts
+        </span>
+      </a>
+
+  </div>
+  <div class="bottom-actions-item">
+
+      <a href="emote.html" class="bottom-actions-button" rel="next">
+        <span class="subheader">
+          Next Page →
+        </span>
+        <span class="title">
+Emote
+        </span>
+      </a>
+
+  </div>
+</div>
+
+      <footer class="footer">
+
+        <p>
+          <span class="line">
+            Built using
+            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.26.0) for the
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>.
+          </span>
+          <span class="line">
+            Designed by
+            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire" translate="no">Friedel Ziegelmayer</a>.
+          </span>
+        </p>
+        <p>
+
+            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
+
+          <button class="line footer-button display-shortcuts-help">
+            Display keyboard shortcuts
+          </button>
+          <button class="line footer-button display-quick-switch">
+            Go to a HexDocs package
+          </button>
+          <button class="line footer-button display-settings">
+            Settings
+          </button>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>
