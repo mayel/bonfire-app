@@ -15,6 +15,7 @@ jobs:
     env:
       FLAVOUR: classic
       MIX_ENV: test
+      WITH_DOCKER: no
       POSTGRES_HOST: postgres
       POSTGRES_PASSWORD: postgres
       CI: true
@@ -23,8 +24,7 @@ jobs:
       ENCRYPTION_SALT: "l+QT/gkdX722f57qSAUc+bZcqm5ZduXY4D0hp0glEiKdR267JsZ1/CZlrlhADcD8kzuaZGFWvJ2dlr6sujbzGQV5e04lKVIsZh3gfd8eqQBckIqH6L8TDRRz4M07YE+F"
     services:
       postgres:
-        # image: postgres
-        image: postgis/postgis:12-3.0-alpine
+        image: postgres:12-alpine
         env:
           POSTGRES_DB: bonfire_test
           POSTGRES_PASSWORD: postgres
@@ -88,12 +88,13 @@ jobs:
       run: mix test
 
   test_cooperation_flavour:
-    name: Test coordination flavour
+    name: Test cooperation flavour
     runs-on: ubuntu-latest
     container: elixir:alpine
     env:
       FLAVOUR: cooperation
       MIX_ENV: test
+      WITH_DOCKER: no
       POSTGRES_HOST: postgres
       POSTGRES_PASSWORD: postgres
       CI: true
@@ -103,7 +104,7 @@ jobs:
     services:
       postgres:
         # image: postgres
-        image: postgis/postgis:12-3.0-alpine
+        image: postgis/postgis:12-3.1-alpine
         env:
           POSTGRES_DB: bonfire_test
           POSTGRES_PASSWORD: postgres
@@ -154,8 +155,6 @@ jobs:
       run: mix bonfire.deps.clean
     - name: Compile deps & app
       run: mix
-    - name: Set up database
-      run: mix ecto.setup
     - name: Generate docs
       run: mix docs
     - name: Deploy docs
@@ -164,6 +163,8 @@ jobs:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./docs/exdoc
         cname: doc.bonfirenetworks.org
+    - name: Set up database
+      run: mix ecto.setup
     - name: Check that database migrations can rollback
       run: mix ecto.rollback --all && mix ecto.migrate
     - name: Run tests

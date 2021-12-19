@@ -28,6 +28,8 @@ APP_REL_DOCKERCOMPOSE=docker-compose.release.yml
 APP_VSN ?= `grep -m 1 'version:' mix.exs | cut -d '"' -f2`
 APP_BUILD ?= `git rev-parse --short HEAD`
 APP_DOCKER_REPO ?= "$(ORG_NAME)/$(APP_NAME)-$(FLAVOUR)"
+DB_DOCKER_IMAGE ?= postgis/postgis:12-3.1-alpine
+CONFIG_PATH=$(FLAVOUR_PATH)/config
 
 #### GENERAL SETUP RELATED COMMANDS ####
 
@@ -35,14 +37,14 @@ export UID
 export GID
 
 define setup_env
-	$(eval ENV_DIR := config/$(MIX_ENV))
+	$(eval ENV_DIR := $(CONFIG_PATH)/$(MIX_ENV))
 	@echo "Loading environment variables from $(ENV_DIR)"
 	@$(call load_env,$(ENV_DIR)/public.env)
 	@$(call load_env,$(ENV_DIR)/secrets.env)
 endef
 define load_env
 	$(eval ENV_FILE := $(1))
-	@echo "Loading env vars from $(ENV_FILE)"
+	# @echo "Loading env vars from $(ENV_FILE)"
 	$(eval include $(ENV_FILE)) # import env into make
 	$(eval export) # export env from make
 endef
@@ -55,13 +57,13 @@ pre-init:
 	@ln -sfn $(FLAVOUR_PATH)/config ./config
 	@mkdir -p data/
 	@ln -sf ../$(FLAVOUR_PATH) ./data/current_flavour
-	@mkdir -p config/prod
-	@mkdir -p config/dev
-	@touch config/deps.path
-	@cp -n config/templates/public.env config/dev/ | true
-	@cp -n config/templates/public.env config/prod/ | true
-	@cp -n config/templates/not_secret.env config/dev/secrets.env | true
-	@cp -n config/templates/not_secret.env config/prod/secrets.env | true
+	@mkdir -p $(CONFIG_PATH)/prod
+	@mkdir -p $(CONFIG_PATH)/dev
+	@touch $(CONFIG_PATH)/deps.path
+	@cp -n $(CONFIG_PATH)/templates/public.env $(CONFIG_PATH)/dev/ | true
+	@cp -n $(CONFIG_PATH)/templates/public.env $(CONFIG_PATH)/prod/ | true
+	@cp -n $(CONFIG_PATH)/templates/not_secret.env $(CONFIG_PATH)/dev/secrets.env | true
+	@cp -n $(CONFIG_PATH)/templates/not_secret.env $(CONFIG_PATH)/prod/secrets.env | true
 
 pre-run:
 	@mkdir -p forks/
@@ -99,6 +101,9 @@ ifeq ($(WITH_DOCKER), total)
 else
 	iex -S mix phx.server
 endif
+
+doc: ## Generate docs from code & readmes
+	@make --no-print-directory cmd cmd="mix docs"
 
 recompile: ## Force the app to recompile
 	@make --no-print-directory cmd cmd="mix compile --force"
