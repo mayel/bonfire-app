@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.26.0">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.80">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.82">
 
-    <title>Bonfire.Repo.Query — bonfire v0.1.0-cooperation-beta.80</title>
+    <title>Bonfire.Repo.Common — bonfire v0.1.0-cooperation-beta.82</title>
     <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
 
-    <script src="dist/sidebar_items-d7343b7fa3.js"></script>
+    <script src="dist/sidebar_items-160ad0377e.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.80
+        v0.1.0-cooperation-beta.82
       </strong>
     </div>
 
@@ -86,12 +86,16 @@ bonfire
     <div id="content" class="content-inner">
 
 <h1>
-  <span translate="no">Bonfire.Repo.Query</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.80)</small>
+  <span translate="no">Bonfire.Repo.Common</span> 
+  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.82)</small>
 
 
 </h1>
 
+
+  <section id="moduledoc">
+<p>Helper functions for changesets</p>
+  </section>
 
 
   <section id="summary" class="details-list">
@@ -110,9 +114,31 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#filter/2" translate="no">filter(q, arg)</a>
+          <a href="#change_disabled/1" translate="no">change_disabled(changeset)</a>
 
         </div>
+
+          <div class="summary-synopsis"><p>Keeps disabled_at in accord with is_disabled</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#change_muted/1" translate="no">change_muted(changeset)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Keeps muted_at in accord with is_muted</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#change_public/1" translate="no">change_public(changeset)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Keeps published_at in accord with is_public</p></div>
 
       </div>
 
@@ -126,15 +152,17 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#order_by_recently_updated/1" translate="no">order_by_recently_updated(query)</a>
+          <a href="#validate_email/2" translate="no">validate_email(changeset, field)</a>
 
         </div>
+
+          <div class="summary-synopsis"><p>Validates an email for correctness</p></div>
 
       </div>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#unroll/2" translate="no">unroll(items, key \\ :context)</a>
+          <a href="#validate_email_domain/2" translate="no">validate_email_domain(changeset, field)</a>
 
         </div>
 
@@ -154,21 +182,76 @@ bonfire
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="filter/2">
+<section class="detail" id="change_disabled/1">
 
   <div class="detail-header">
-    <a href="#filter/2" class="detail-link" title="Link to this function">
+    <a href="#change_disabled/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">filter(q, arg)</h1>
+    <h1 class="signature" translate="no">change_disabled(changeset)</h1>
 
 
   </div>
 
   <section class="docstring">
 
+      <h2>Specs</h2>
+      <div class="specs">
 
+          <pre translate="no">change_disabled(<a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()) :: <a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
+
+<p>Keeps disabled_at in accord with is_disabled</p>
+  </section>
+</section>
+<section class="detail" id="change_muted/1">
+
+  <div class="detail-header">
+    <a href="#change_muted/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">change_muted(changeset)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre translate="no">change_muted(<a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()) :: <a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
+
+<p>Keeps muted_at in accord with is_muted</p>
+  </section>
+</section>
+<section class="detail" id="change_public/1">
+
+  <div class="detail-header">
+    <a href="#change_public/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">change_public(changeset)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre translate="no">change_public(<a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()) :: <a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
+
+<p>Keeps published_at in accord with is_public</p>
   </section>
 </section>
 <section class="detail" id="match_admin/0">
@@ -190,38 +273,50 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="order_by_recently_updated/1">
+<section class="detail" id="validate_email/2">
 
   <div class="detail-header">
-    <a href="#order_by_recently_updated/1" class="detail-link" title="Link to this function">
+    <a href="#validate_email/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">order_by_recently_updated(query)</h1>
+    <h1 class="signature" translate="no">validate_email(changeset, field)</h1>
 
 
   </div>
 
   <section class="docstring">
 
+      <h2>Specs</h2>
+      <div class="specs">
 
+          <pre translate="no">validate_email(<a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
+
+<p>Validates an email for correctness</p>
   </section>
 </section>
-<section class="detail" id="unroll/2">
-
-    <span id="unroll/1"></span>
+<section class="detail" id="validate_email_domain/2">
 
   <div class="detail-header">
-    <a href="#unroll/2" class="detail-link" title="Link to this function">
+    <a href="#validate_email_domain/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">unroll(items, key \\ :context)</h1>
+    <h1 class="signature" translate="no">validate_email_domain(changeset, field)</h1>
 
 
   </div>
 
   <section class="docstring">
+
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre translate="no">validate_email_domain(<a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
 
 
   </section>

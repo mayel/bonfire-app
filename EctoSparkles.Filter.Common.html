@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.26.0">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.80">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.82">
 
-    <title>EctoSparkles.ReusableJoin — bonfire v0.1.0-cooperation-beta.80</title>
+    <title>EctoSparkles.Filter.Common — bonfire v0.1.0-cooperation-beta.82</title>
     <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
 
-    <script src="dist/sidebar_items-d7343b7fa3.js"></script>
+    <script src="dist/sidebar_items-160ad0377e.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.80
+        v0.1.0-cooperation-beta.82
       </strong>
     </div>
 
@@ -86,12 +86,17 @@ bonfire
     <div id="content" class="content-inner">
 
 <h1>
-  <span translate="no">EctoSparkles.ReusableJoin</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.80)</small>
+  <span translate="no">EctoSparkles.Filter.Common</span> 
+  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.82)</small>
 
 
 </h1>
 
+
+  <section id="moduledoc">
+<p>This module contains query building parts for common things such
+as preload, start/end date and others</p>
+  </section>
 
 
   <section id="summary" class="details-list">
@@ -110,19 +115,19 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#do_reusable_join_as/6" translate="no">do_reusable_join_as(query, qual, bindings, expr, opts, as)</a>
+          <a href="#filter/2" translate="no">filter(arg, query)</a>
 
         </div>
+
+          <div class="summary-synopsis"><p>Callback implementation for <a href="./EctoSparkles.Filter.Build.html#c:filter/2"><code class="inline">EctoSparkles.Filter.Build.filter/2</code></a>.</p></div>
 
       </div>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#reusable_join/5" translate="no">reusable_join(query, qual \\ :left, bindings, expr, opts)</a>
+          <a href="#filters/0" translate="no">filters()</a>
 
         </div>
-
-          <div class="summary-synopsis"><p>Similar to <code class="inline">Ecto.Query.join/{4,5}</code>, but can be called multiple times with the same alias.</p></div>
 
       </div>
 
@@ -140,51 +145,45 @@ bonfire
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="do_reusable_join_as/6">
+<section class="detail" id="filter/2">
 
   <div class="detail-header">
-    <a href="#do_reusable_join_as/6" class="detail-link" title="Link to this macro">
+    <a href="#filter/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this macro</span>
+      <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">do_reusable_join_as(query, qual, bindings, expr, opts, as)</h1>
+    <h1 class="signature" translate="no">filter(arg, query)</h1>
 
-
-      <span class="note">(macro)</span>
 
   </div>
 
   <section class="docstring">
 
-
+<p>Callback implementation for <a href="./EctoSparkles.Filter.Build.html#c:filter/2"><code class="inline">EctoSparkles.Filter.Build.filter/2</code></a>.</p>
   </section>
 </section>
-<section class="detail" id="reusable_join/5">
-
-    <span id="reusable_join/4"></span>
+<section class="detail" id="filters/0">
 
   <div class="detail-header">
-    <a href="#reusable_join/5" class="detail-link" title="Link to this macro">
+    <a href="#filters/0" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this macro</span>
+      <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">reusable_join(query, qual \\ :left, bindings, expr, opts)</h1>
+    <h1 class="signature" translate="no">filters()</h1>
 
-
-      <span class="note">(macro)</span>
 
   </div>
 
   <section class="docstring">
 
-<p>Similar to <code class="inline">Ecto.Query.join/{4,5}</code>, but can be called multiple times with the same alias.</p><p>Note that only the first join operation is performed, the subsequent ones that use the same alias
-are just ignored. Also note that because of this behaviour, its mandatory to specify an alias when
-using this function.</p><p>This is helpful when you need to perform a join while building queries one filter at a time,
-because the same filter could be used multiple times or you could have multiple filters that
-require the same join, which poses a problem with how the <code class="inline">filter/3</code> callback work, as you
-need to return a dynamic with the filtering, which means that the join must have an alias,
-and by default Ecto raises an error when you add multiple joins with the same alias.</p><p>To solve this, it is recommended to use this macro instead of the default <code class="inline">Ecto.Query.join/{4,5}</code>,
-in which case there will be only one join in the query that can be reused by multiple filters.</p>
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre translate="no">filters() :: [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()]</pre>
+
+      </div>
+
+
   </section>
 </section>
 
