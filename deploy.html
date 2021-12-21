@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.26.0">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.83">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.84">
 
-    <title>Backend Configuration and Deployment — bonfire v0.1.0-cooperation-beta.83</title>
+    <title>Backend Configuration and Deployment — bonfire v0.1.0-cooperation-beta.84</title>
     <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
 
-    <script src="dist/sidebar_items-fdb9d2e5e8.js"></script>
+    <script src="dist/sidebar_items-2de813a23d.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.83
+        v0.1.0-cooperation-beta.84
       </strong>
     </div>
 
@@ -104,7 +104,7 @@ Backend Configuration and Deployment
 </h2>
 <ol><li>Clone this repository and change into the directory:</li></ol><pre><code class="makeup sh"><span class="gp unselectable">$ </span><span class="">git clone https://github.com/bonfire-networks/bonfire-app.git bonfire
 </span><span class="gp unselectable">$ </span><span class="">cd bonfire
-</span></code></pre><ol start="2"><li>The first thing to do is choosing what flavour of Bonfire you want to deploy (the default is <code class="inline">classic</code>), as each flavour has its own Docker image and config. </li></ol><p>For example if you want to run the <code class="inline">cooperation</code> flavour (you may want to use direnv or something similar to persist this):</p><p><code class="inline">export FLAVOUR=cooperation MIX_ENV=prod</code></p><ol start="3"><li>Once you've picked a flavour, run this command to initialise some default config (.env files which won't be checked into git):</li></ol><p><code class="inline">make pre-config</code></p><ol start="4"><li>Edit the config (especially the secrets) for the current flavour in these files:</li></ol><ul><li><code class="inline">config/prod/secrets.env</code></li><li><code class="inline">config/prod/public.env</code></li></ul><p>These are the config keys you should especially pay attention to, in secrets.env:</p><ul><li>SECRET_KEY_BASE</li><li>SIGNING_SALT</li><li>ENCRYPTION_SALT</li><li>POSTGRES_PASSWORD</li><li>MEILI_MASTER_KEY</li></ul><p>You can use <code class="inline">make secrets</code> to generate some secrets keys to use.</p><p>And in public.env:</p><ul><li>HOSTNAME</li><li>PUBLIC_PORT</li></ul><h3 id="further-information-on-config" class="section-heading">
+</span></code></pre><ol start="2"><li>The first thing to do is choosing what flavour of Bonfire you want to deploy (the default is <code class="inline">classic</code>), as each flavour has its own Docker image and config. </li></ol><p>For example if you want to run the <code class="inline">cooperation</code> flavour (you may want to use direnv or something similar to persist this):</p><p><code class="inline">export FLAVOUR=cooperation MIX_ENV=prod</code></p><ol start="3"><li>Once you've picked a flavour, run this command to initialise some default config (.env files which won't be checked into git):</li></ol><p><code class="inline">make pre-config</code></p><ol start="4"><li>Edit the config (especially the secrets) for the current flavour in these files:</li></ol><ul><li><code class="inline">config/prod/secrets.env</code></li><li><code class="inline">config/prod/public.env</code></li></ul><p>These are the config keys you should especially pay attention to, in secrets.env:</p><ul><li>SECRET_KEY_BASE</li><li>SIGNING_SALT</li><li>ENCRYPTION_SALT</li><li>POSTGRES_PASSWORD</li><li>MEILI_MASTER_KEY</li></ul><p>You can use <code class="inline">make secrets</code> to generate some secrets keys to use.</p><p>And in public.env:</p><ul><li>HOSTNAME</li><li>PUBLIC_PORT</li></ul><p>You can make registrations on your instance invite-only by setting <code class="inline">INVITE_ONLY=true</code> in public.env and setting an <code class="inline">INVITE_KEY</code> in secrets.env. You can then invite people by sending them to <a href="https://yourinstance.tld/signup/invitation/your_INVITE_KEY_here">https://yourinstance.tld/signup/invitation/your_INVITE_KEY_here</a></p><h3 id="further-information-on-config" class="section-heading">
   <a href="#further-information-on-config" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
   Further information on config
 </h3>
