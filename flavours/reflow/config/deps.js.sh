@@ -1,10 +1,6 @@
-#!/bin/bash 
+#!/bin/sh
 
-DEPS="bonfire_geolocate" 
+# add more modules separated by $IFS
+DEPS='bonfire_geolocate'
 
-for dep in $DEPS 
-do
- echo "Install JS deps from $dep"
- cd "forks/$dep/assets" && pnpm install || cd "deps/$dep/assets" && pnpm install || echo "Extension $dep not available"
- cd ../../../
-done
+./priv/deps.js.sh "$DEPS"
