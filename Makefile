@@ -56,6 +56,7 @@ pre-init:
 	@echo "Setting flavour to $(FLAVOUR_PATH)"
 	@ln -sfn $(FLAVOUR_PATH)/config ./config
 	@mkdir -p data/
+	@rm -rf ./data/current_flavour
 	@ln -sf ../$(FLAVOUR_PATH) ./data/current_flavour
 	@mkdir -p $(CONFIG_PATH)/prod
 	@mkdir -p $(CONFIG_PATH)/dev
@@ -324,7 +325,8 @@ rel.env:
 	$(eval export)
 
 rel.config.prepare: rel.env # copy current flavour's config, without using symlinks
-	@cp -rfL $(FLAVOUR_PATH) ./data/current_flavour
+	rm -rf ./data/current_flavour
+	cp -rfL $(FLAVOUR_PATH) ./data/current_flavour
 
 rel.rebuild: rel.env init rel.config.prepare assets.prepare ## Build the Docker image
 	docker build \
