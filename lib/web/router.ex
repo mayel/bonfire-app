@@ -66,6 +66,9 @@ defmodule Bonfire.Web.Router do
   # include GraphQL API
   use_if_enabled Bonfire.GraphQL.Router
 
+  # include JSON API
+  use_if_enabled Bonfire.API.JSON.Router
+
   # include federation routes
   use_if_enabled ActivityPubWeb.Router
 
