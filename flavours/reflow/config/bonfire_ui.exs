@@ -9,9 +9,9 @@ config :bonfire, :ui,
       instance_description: "This is a Reflow demo instance"
    ],
    sidebar_components: [
+      {Bonfire.UI.Social.SidebarNavigationLive, []},
       {Bonfire.UI.Reflow.SidebarNavigationLive, []},
-      {Bonfire.UI.ValueFlows.ProcessesListLive, [title: "Processes", process_url: "/process/"]},
-      # {Bonfire.UI.ValueFlows.ProcessesListLive, [title: "Task Lists", process_url: "/list/"]}
+      # {Bonfire.UI.ValueFlows.ProcessesListLive, [title: "Processes", process_url: "/process/"]},
    ],
    smart_input: [
       post: false,
