@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.26.0">
+    <meta name="generator" content="ExDoc v0.27.3">
     <meta name="project" content="bonfire v0.1.0-cooperation-beta.107">
 
     <title>Development guide — bonfire v0.1.0-cooperation-beta.107</title>
-    <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
+    <link rel="stylesheet" href="dist/elixir-784c12ef29cae13371ff.css" />
 
-    <script src="dist/sidebar_items-b326056455.js"></script>
+    <script src="dist/sidebar_items-947ea39207.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-a404e1e870b77c874f9e.js"></script>
+    <script async src="dist/app-38f5da25bdde1981e2f0.js"></script>
 
 
   </head>
@@ -31,16 +31,16 @@
 <div class="main">
 
 <button class="sidebar-button sidebar-toggle">
-  <span class="icon-menu" title="Collapse/expand sidebar"></span>
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
 </button>
 
 <section class="sidebar">
   <form class="sidebar-search" action="search.html">
     <button type="submit" class="search-button" aria-label="Submit Search">
-      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
     </button>
     <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
-      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
     </button>
     <label class="search-label">
       <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
@@ -53,6 +53,11 @@
   </div>
 
   <div class="sidebar-header">
+
+      <a href="readme.html">
+        <img src="assets/logo.png" alt="bonfire" class="sidebar-projectImage">
+      </a>
+
     <div class="sidebar-projectDetails">
       <a href="readme.html" class="sidebar-projectName" translate="no">
 bonfire
@@ -61,22 +66,17 @@ bonfire
         v0.1.0-cooperation-beta.107
       </strong>
     </div>
+    <ul class="sidebar-listNav">
+      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
 
-      <a href="readme.html">
-        <img src="assets/logo.png" alt="bonfire" class="sidebar-projectImage">
-      </a>
+        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
 
+
+        <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
+
+    </ul>
   </div>
 
-  <ul class="sidebar-listNav">
-    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
-
-      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
-
-
-      <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
-
-  </ul>
   <div class="gradient"></div>
   <ul id="full-list" class="sidebar-fullList"></ul>
 </section>
@@ -85,64 +85,79 @@ bonfire
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h1 id="content">
-Development guide
+<h1>
+<button class="settings display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
 
+
+  <span>Development guide</span>
 </h1>
 
-<p><em>These instructions are for hacking on Bonfire. If you wish to deploy in production, please refer to our <a href="deploy.html">Deployment Guide</a>!</em></p><p>Hello, potential contributor! :-)</p><p>This is a work in progress guide to getting up and running as a developer. Please ask questions in the issue tracker if something is not clear.</p><p>Happy hacking!</p><h2 id="getting-set-up" class="section-heading">
-  <a href="#getting-set-up" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
-  Getting set up
+<p><em>These instructions are for hacking on Bonfire. If you wish to deploy in production, please refer to our <a href="deploy.html">Deployment Guide</a>!</em></p><p>Hello, potential contributor! :-)</p><p>This is a work in progress guide to getting up and running as a
+developer. Please ask questions in the issue tracker if something is
+not clear and we'll try to improve it.</p><p>Happy hacking!</p><h2 id="status-alpha-have-fun-but-don-t-run-in-production" class="section-heading">
+  <a href="#status-alpha-have-fun-but-don-t-run-in-production" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  Status: alpha - have fun but don't run in production.
 </h2>
-<p>There are three main options depending on your needs and preferences.</p><p>Either way, you need to first clone this repository and change into the directory and then do some configuration:</p><pre><code class="makeup sh"><span class="gp unselectable">$ </span><span class="">git clone https://github.com/bonfire-networks/bonfire-app.git bonfire
+<p>Bonfire is currently alpha software. While it's fun to play with it,
+we would <em>absolutely not</em> recommend running any production instances
+yet because it's just not ready for that today.</p><p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream
+Either way, you need to first clone this repository and change into the directory and then do some configuration:</p><pre><code class="makeup sh" translate="no"><span class="gp unselectable">$ </span><span class="">git clone https://github.com/bonfire-networks/bonfire-app.git bonfire
 </span><span class="gp unselectable">$ </span><span class="">cd bonfire
-</span></code></pre><h3 id="configuration" class="section-heading">
-  <a href="#configuration" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+</span></code></pre><p>
+The team is working hard on a beta release of bonfire social which
+should be ready in Q1 2022. Other flavours/apps will probably lag
+behind for a while and may not always build cleanly. We recommend
+sticking with bonfire social (aka the 'classic' flavour) for now.</p><blockquote><blockquote><blockquote><blockquote><blockquote><blockquote><blockquote><p>Stashed changes</p></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote><p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; Updated upstream
+For example if you want to run the <code class="inline">cooperation</code> flavour:</p><h1><code class="inline">export FLAVOUR=cooperation</code></h1><blockquote><blockquote><blockquote><blockquote><blockquote><blockquote><blockquote><p>Stashed changes</p></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote></blockquote><h2 id="configuration" class="section-heading">
+  <a href="#configuration" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Configuration
-</h3>
-<ul><li>The first thing to do is choosing what flavour of Bonfire you want to hack on (the default is <code class="inline">classic</code>), as each flavour has its own config.</li></ul><p>For example if you want to run the <code class="inline">cooperation</code> flavour:</p><p><code class="inline">export FLAVOUR=cooperation</code></p><ul><li>Once you've picked a flavour, run this command to initialise some default config (.env files which won't be checked into git):</li></ul><p><code class="inline">make pre-config</code></p><ul><li>Edit the config (especially the secrets) for the current flavour in these files:<ul><li><code class="inline">config/dev/secrets.env</code></li><li><code class="inline">config/dev/public.env</code></li></ul></li></ul><h3 id="option-a-the-entry-way-fully-managed-via-docker-compose-recommended-when-you-re-first-exploring" class="section-heading">
-  <a href="#option-a-the-entry-way-fully-managed-via-docker-compose-recommended-when-you-re-first-exploring" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+</h2>
+<ul><li>Run this command to initialise some default config (.env files which won't be checked into git):</li></ul><p><code class="inline">make pre-config</code></p><ul><li>Edit the config (especially the secrets) for the current flavour in these files:<ul><li><code class="inline">config/dev/secrets.env</code></li><li><code class="inline">config/dev/public.env</code></li></ul></li></ul><h3 id="option-a-the-entry-way-fully-managed-via-docker-compose-recommended-when-you-re-first-exploring" class="section-heading">
+  <a href="#option-a-the-entry-way-fully-managed-via-docker-compose-recommended-when-you-re-first-exploring" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Option A - the entry way (fully managed via docker-compose, recommended when you're first exploring)
 </h3>
 <ul><li><p>Dependencies:</p><ul><li><code class="inline">make</code></li><li>Recent versions of Docker &amp; <a href="https://docs.docker.com/compose/install/">docker-compose</a></li></ul></li><li><p>Make sure you've edited your .env files (see above) before getting started and proceed to Hello world!</p></li></ul><h3 id="option-b-the-easy-way-with-docker-managed-database-search-index-recommended-for-active-development" class="section-heading">
-  <a href="#option-b-the-easy-way-with-docker-managed-database-search-index-recommended-for-active-development" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#option-b-the-easy-way-with-docker-managed-database-search-index-recommended-for-active-development" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Option B - the easy way (with docker-managed database &amp; search index, recommended for active development)
 </h3>
 <ul><li><p>Dependencies:</p><ul><li><code class="inline">make</code></li><li>Recent versions of <a href="https://elixir-lang.org/install.html">Elixir</a> (1.12+) and OTP/erlang (24+)</li><li>Recent versions of <a href="https://www.rust-lang.org/tools/install">Rust</a> and Cargo</li><li><a href="https://pnpm.io">pnpm</a></li><li>Recent versions of Docker &amp; <a href="https://docs.docker.com/compose/install/">docker-compose</a></li></ul></li><li><p>Set an environment variable to indicate your choice: <code class="inline">export WITH_DOCKER=partial</code></p></li><li><p>Make sure you've edited your .env files (see above) before getting started and proceed to Hello world!</p></li></ul><h3 id="option-c-the-bare-metal-if-you-don-t-use-docker" class="section-heading">
-  <a href="#option-c-the-bare-metal-if-you-don-t-use-docker" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#option-c-the-bare-metal-if-you-don-t-use-docker" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Option C - the bare metal (if you don't use docker)
 </h3>
 <ul><li><p>Dependencies:</p><ul><li><code class="inline">make</code></li><li>Recent versions of <a href="https://elixir-lang.org/install.html">Elixir</a> (1.12+) and OTP/erlang (24+)</li><li>Recent versions of <a href="https://www.rust-lang.org/tools/install">Rust</a> and Cargo</li><li><a href="https://pnpm.io">pnpm</a></li><li>Postgres 12+ (or rather <a href="https://postgis.net/install/">Postgis</a> if using the bonfire_geolocate extension)</li><li><a href="https://docs.meilisearch.com/learn/getting_started/installation.html">Meili Search</a> (optional)</li></ul></li><li><p>You will need to set the relevant environment variables in the .env files (see above) to match your local install of Postgres.</p></li><li><p>If you want search capabilities, you'll also need to setup a Meili server and set the relevant env variables as well.</p></li><li><p>Set an environment variable to indicate your choice: <code class="inline">export WITH_DOCKER=no</code> and proceed to Hello world!</p></li></ul><h3 id="option-d-the-experimental-one-dev-environment-with-nix" class="section-heading">
-  <a href="#option-d-the-experimental-one-dev-environment-with-nix" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#option-d-the-experimental-one-dev-environment-with-nix" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Option D - the experimental one (dev environment with Nix)
 </h3>
 <ul><li>run a recent version of Nix or NixOS: <a href="https://nixos.wiki">https://nixos.wiki</a></li><li>enable Flakes: <a href="https://nixos.wiki/wiki/Flakes#Installing_flakes">https://nixos.wiki/wiki/Flakes#Installing_flakes</a></li><li>add <code class="inline">sandbox = false</code> in your nix.conf</li></ul><p>If you use direnv, just cd in the directory and you will have all the dependencies.
 If you just have nix, running <code class="inline">nix shell .</code> (inside the repository) will set you up with a shell.</p><p>You will need to create and init the db directory (keeping all your Postgres data inside this directory):</p><ul><li>create the db directory <code class="inline">initdb ./db</code></li><li>create the postgres user <code class="inline">createuser postgres -ds</code></li><li>create the db <code class="inline">createdb bonfire_dev</code></li><li>start the postgres instance <code class="inline">pg_ctl -l &quot;$PGDATA/server.log&quot; start</code></li><li><a href="https://hexdocs.pm/mix/Mix.Tasks.Deps.Get.html"><code class="inline">mix deps.get</code></a> to get elixir dependencies</li><li><code class="inline">pushd assets &amp;&amp; npm install &amp;&amp; popd</code> to get the frontend dependencies</li><li><a href="https://hexdocs.pm/ecto_sql/3.7.1/Mix.Tasks.Ecto.Migrate.html"><code class="inline">mix ecto.migrate</code></a> to compile &amp; get an up to date database</li><li><code class="inline">iex -S mix phx.server</code> to start the server</li><li>check out the app on <code class="inline">localhost:4000</code> in your browser</li></ul><h2 id="hello-world" class="section-heading">
-  <a href="#hello-world" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#hello-world" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Hello world!
 </h2>
-<ul><li>From a fresh checkout of this repository, this command will fetch the app's dependencies and setup the database (the same commands apply for all three options above):</li></ul><pre><code class="makeup elixir"><span class="n">make</span><span class="w"> </span><span class="n">setup</span></code></pre><ul><li>You should then be able to run the app with:</li></ul><pre><code class="makeup elixir"><span class="n">make</span><span class="w"> </span><span class="n">dev</span></code></pre><ul><li>See the <code class="inline">make</code> commands below for more things you may want to do.</li></ul><h2 id="onboarding" class="section-heading">
-  <a href="#onboarding" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+<ul><li>From a fresh checkout of this repository, this command will fetch the app's dependencies and setup the database (the same commands apply for all three options above):</li></ul><pre><code class="makeup elixir" translate="no"><span class="n">make</span><span class="w"> </span><span class="n">setup</span></code></pre><ul><li>You should then be able to run the app with:</li></ul><pre><code class="makeup elixir" translate="no"><span class="n">make</span><span class="w"> </span><span class="n">dev</span></code></pre><ul><li>See the <code class="inline">make</code> commands below for more things you may want to do.</li></ul><h2 id="onboarding" class="section-heading">
+  <a href="#onboarding" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Onboarding
 </h2>
 <p>By default, the back-end listens on port 4000 (TCP), so you can access it on <a href="http://localhost:4000/">http://localhost:4000/</a></p><p>If you haven't set up transactional emails, while in development, you will see a signup confirmation path appear in the iex console.</p><p>Note that the first account to be registered is automatically an instance admin.</p><h2 id="documentation" class="section-heading">
-  <a href="#documentation" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#documentation" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Documentation
 </h2>
-<p>The code is somewhat documented inline. You can generate HTML docs (using <code class="inline">Exdoc</code>) by running <a href="https://hexdocs.pm/ex_doc/0.26.0/Mix.Tasks.Docs.html"><code class="inline">mix docs</code></a>.</p><h2 id="additional-information" class="section-heading">
-  <a href="#additional-information" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+<p>The code is somewhat documented inline. You can generate HTML docs (using <code class="inline">Exdoc</code>) by running <a href="https://hexdocs.pm/ex_doc/0.27.3/Mix.Tasks.Docs.html"><code class="inline">mix docs</code></a>.</p><h2 id="additional-information" class="section-heading">
+  <a href="#additional-information" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Additional information
 </h2>
 <ul><li><p>messctl is a little utility for programmatically updating the .deps files from which the final elixir dependencies list is compiled by the mess script. The only use of it is in the dep-* tasks of the Makefile. It is used by some of the project developers and the build does not rely on it.</p></li><li><p><code class="inline">./forks/</code> is used to hack on local copies of dependencies. You can clone a dependency from its git repo (like a bonfire extension) and use the local version during development, eg: <code class="inline">make dep.clone.local dep=bonfire_me repo=https://github.com/bonfire-networks/bonfire_me</code></p></li><li><p>You can migrate the DB when the app is running (useful in a release): <code class="inline">EctoSparkles.ReleaseTasks.migrate</code></p></li></ul><h3 id="usage-under-windows-msys-or-cygwin" class="section-heading">
-  <a href="#usage-under-windows-msys-or-cygwin" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#usage-under-windows-msys-or-cygwin" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Usage under Windows (MSYS or CYGWIN)
 </h3>
 <p>If you plan on using the <code class="inline">Makefile</code> (its rather handy), you must have symlinks enabled.
 You must enable developer mode, and set <code class="inline">core.symlink = true</code>, <a href="https://stackoverflow.com/a/59761201">see link.</a></p><h2 id="make-commands" class="section-heading">
-  <a href="#make-commands" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#make-commands" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Make commands
 </h2>
-<p>Run <code class="inline">make</code> followed by any of these commands when appropriate rather than directly using the equivalent commands like <code class="inline">mix</code>, <code class="inline">docker</code>, <code class="inline">docker-compose</code>, etc. For example, <code class="inline">make setup</code> will get you started, and <code class="inline">make dev</code> will run the app.</p><p>You can first set an env variable to control which mode these commands will assume you're using. Here are your options:</p><ul><li><code class="inline">WITH_DOCKER=total</code> : use docker for everything (default)</li><li><code class="inline">WITH_DOCKER=partial</code> : use docker for services like the DB</li><li><code class="inline">WITH_DOCKER=easy</code> : use docker for services like the DB &amp; compiled utilities like messctl</li><li><code class="inline">WITH_DOCKER=no</code> : please no</li></ul><pre><code class="makeup elixir"><span class="n">make</span><span class="w"> </span><span class="n">help</span><span class="w">                           </span><span class="nc">Makefile</span><span class="w"> </span><span class="n">commands</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="o">*</span><span class="o">*</span><span class="p" data-group-id="4375745824-1">(</span><span class="n">run</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span><span class="w"> </span><span class="n">commands</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">available</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">document</span><span class="p" data-group-id="4375745824-1">)</span><span class="o">*</span><span class="o">*</span><span class="w">
+<p>Run <code class="inline">make</code> followed by any of these commands when appropriate rather than directly using the equivalent commands like <code class="inline">mix</code>, <code class="inline">docker</code>, <code class="inline">docker-compose</code>, etc. For example, <code class="inline">make setup</code> will get you started, and <code class="inline">make dev</code> will run the app.</p><p>You can first set an env variable to control which mode these commands will assume you're using. Here are your options:</p><ul><li><code class="inline">WITH_DOCKER=total</code> : use docker for everything (default)</li><li><code class="inline">WITH_DOCKER=partial</code> : use docker for services like the DB</li><li><code class="inline">WITH_DOCKER=easy</code> : use docker for services like the DB &amp; compiled utilities like messctl</li><li><code class="inline">WITH_DOCKER=no</code> : please no</li></ul><pre><code class="makeup elixir" translate="no"><span class="n">make</span><span class="w"> </span><span class="n">help</span><span class="w">                           </span><span class="nc">Makefile</span><span class="w"> </span><span class="n">commands</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="o">*</span><span class="o">*</span><span class="p" data-group-id="8438098014-1">(</span><span class="n">run</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">get</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">up</span><span class="o">-</span><span class="n">to</span><span class="o">-</span><span class="n">date</span><span class="w"> </span><span class="n">commands</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">than</span><span class="w"> </span><span class="n">available</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">document</span><span class="p" data-group-id="8438098014-1">)</span><span class="o">*</span><span class="o">*</span><span class="w">
 </span><span class="n">make</span><span class="w"> </span><span class="n">mix</span><span class="err">~</span><span class="n">help</span><span class="w">                       </span><span class="nc">Help</span><span class="w"> </span><span class="n">info</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">elixir</span><span class="sc">&#39;s mix commands
 make env.exports                    Display the vars from dotenv files that you need to load in your environment
 
@@ -193,7 +208,7 @@ make test.watch                     Run stale tests, and wait for changes to any
 </span><span class="n">make</span><span class="w"> </span><span class="n">rel</span><span class="o">.</span><span class="n">stop</span><span class="w">                       </span><span class="nc">Run</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">app</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">Docker</span><span class="p">,</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">keep</span><span class="w"> </span><span class="n">running</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">background</span><span class="w">
 </span><span class="n">make</span><span class="w"> </span><span class="n">rel</span><span class="o">.</span><span class="n">shell</span><span class="w">                      </span><span class="nc">Runs</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">simple</span><span class="w"> </span><span class="n">shell</span><span class="w"> </span><span class="n">inside</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">container</span><span class="p">,</span><span class="w"> </span><span class="n">useful</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">explore</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">image</span><span class="w">
 
-</span><span class="n">make</span><span class="w"> </span><span class="n">services</span><span class="w">                       </span><span class="nc">Start</span><span class="w"> </span><span class="n">background</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">services</span><span class="w"> </span><span class="p" data-group-id="4375745824-2">(</span><span class="n">eg</span><span class="o">.</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">search</span><span class="w"> </span><span class="n">backends</span><span class="p" data-group-id="4375745824-2">)</span><span class="o">.</span><span class="w"> </span><span class="nc">This</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">automatically</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="nc">Docker</span><span class="o">.</span><span class="w">
+</span><span class="n">make</span><span class="w"> </span><span class="n">services</span><span class="w">                       </span><span class="nc">Start</span><span class="w"> </span><span class="n">background</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">services</span><span class="w"> </span><span class="p" data-group-id="8438098014-2">(</span><span class="n">eg</span><span class="o">.</span><span class="w"> </span><span class="n">db</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">search</span><span class="w"> </span><span class="n">backends</span><span class="p" data-group-id="8438098014-2">)</span><span class="o">.</span><span class="w"> </span><span class="nc">This</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">automatically</span><span class="w"> </span><span class="n">done</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="nc">Docker</span><span class="o">.</span><span class="w">
 </span><span class="n">make</span><span class="w"> </span><span class="n">build</span><span class="w">                          </span><span class="nc">Build</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">docker</span><span class="w"> </span><span class="n">image</span><span class="w">
 </span><span class="n">make</span><span class="w"> </span><span class="n">cmd</span><span class="err">~</span><span class="p">%</span><span class="w">                          </span><span class="nc">Run</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">specific</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">container</span><span class="p">,</span><span class="w"> </span><span class="ss">eg</span><span class="p">:</span><span class="w"> </span><span class="err">`</span><span class="n">make</span><span class="w"> </span><span class="n">cmd</span><span class="o">-</span><span class="n">messclt</span><span class="err">`</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="err">`</span><span class="n">make</span><span class="w"> </span><span class="n">cmd</span><span class="err">~</span><span class="n">time</span><span class="err">`</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="err">`</span><span class="n">make</span><span class="w"> </span><span class="n">cmd</span><span class="err">~</span><span class="n">echo</span><span class="w"> </span><span class="n">args</span><span class="o">=</span><span class="n">hello</span><span class="err">`</span><span class="w">
 </span><span class="n">make</span><span class="w"> </span><span class="n">shell</span><span class="w">                          </span><span class="nc">Open</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">shell</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nc">Docker</span><span class="w"> </span><span class="n">web</span><span class="w"> </span><span class="n">container</span><span class="p">,</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">dev</span><span class="w"> </span><span class="n">mode</span><span class="w">
@@ -202,31 +217,31 @@ make test.watch                     Run stale tests, and wait for changes to any
 </span><span class="n">make</span><span class="w"> </span><span class="n">deps</span><span class="o">.</span><span class="n">git</span><span class="o">.</span><span class="n">fix</span><span class="w">                   </span><span class="nc">Run</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">each</span><span class="w"> </span><span class="n">dep</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">ignore</span><span class="w"> </span><span class="n">chmod</span><span class="w"> </span><span class="n">changes</span><span class="w">
 </span><span class="n">make</span><span class="w"> </span><span class="n">git</span><span class="o">.</span><span class="n">merge</span><span class="err">~</span><span class="p">%</span><span class="w">                    </span><span class="nc">Draft</span><span class="o">-</span><span class="n">merge</span><span class="w"> </span><span class="n">another</span><span class="w"> </span><span class="n">branch</span><span class="p">,</span><span class="w"> </span><span class="n">eg</span><span class="w"> </span><span class="err">`</span><span class="n">make</span><span class="w"> </span><span class="n">git</span><span class="o">-</span><span class="n">merge</span><span class="o">-</span><span class="k">with</span><span class="o">-</span><span class="n">valueflows</span><span class="o">-</span><span class="n">api</span><span class="err">`</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">merge</span><span class="w"> </span><span class="n">branch</span><span class="w"> </span><span class="err">`</span><span class="k">with</span><span class="o">-</span><span class="n">valueflows</span><span class="o">-</span><span class="n">api</span><span class="err">`</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">current</span><span class="w"> </span><span class="n">one</span><span class="w">
 </span><span class="n">make</span><span class="w"> </span><span class="n">git</span><span class="o">.</span><span class="n">conflicts</span><span class="w">                  </span><span class="nc">Find</span><span class="w"> </span><span class="n">any</span><span class="w"> </span><span class="n">git</span><span class="w"> </span><span class="n">conflicts</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="o">.</span><span class="o">/</span><span class="n">forks</span></code></pre><h2 id="troubleshooting" class="section-heading">
-  <a href="#troubleshooting" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#troubleshooting" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Troubleshooting
 </h2>
 <h3 id="eacces-permissions-error" class="section-heading">
-  <a href="#eacces-permissions-error" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#eacces-permissions-error" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   EACCES Permissions Error
 </h3>
-<p>If you get a permissions error when following any of the steps, run the following command and it should be fixed:</p><pre><code class="makeup shell"><span class="">cd bonfire &amp;&amp; sudo chown -R yourusername:yourusername .
+<p>If you get a permissions error when following any of the steps, run the following command and it should be fixed:</p><pre><code class="makeup shell" translate="no"><span class="">cd bonfire &amp;&amp; sudo chown -R yourusername:yourusername .
 </span></code></pre><p>Note that the command should be modified so your shell is pointing to wherever you have bonfire installed. If you are already in the bonfire directory then you only need to worry about running the <code class="inline">chown</code> portion of the command.</p><h3 id="unable-to-access-postgres-database" class="section-heading">
-  <a href="#unable-to-access-postgres-database" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#unable-to-access-postgres-database" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Unable to access Postgres database
 </h3>
-<p>If you are getting any <code class="inline">:nxdomain</code> errors, check if you have any firewalls that may be blocking the port on your system.</p><p>For example, if you are running UFW (a lot of Linux distros do), run the following command to allow access to port 4000:</p><pre><code class="makeup shell"><span class="">sudo ufw allow 4000
+<p>If you are getting any <code class="inline">:nxdomain</code> errors, check if you have any firewalls that may be blocking the port on your system.</p><p>For example, if you are running UFW (a lot of Linux distros do), run the following command to allow access to port 4000:</p><pre><code class="makeup shell" translate="no"><span class="">sudo ufw allow 4000
 </span></code></pre><h3 id="mix-package-fetch-failed" class="section-heading">
-  <a href="#mix-package-fetch-failed" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#mix-package-fetch-failed" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   (Mix) Package fetch failed
 </h3>
-<p>Example:</p><pre><code class="makeup elixir"><span class="gt">** (Mix) Package fetch failed and no cached copy available (https://repo.hex.pm/tarballs/distillery-2.0.12.tar)</span></code></pre><p>In this case, distillery (as an example of a dependency) made a new release and retired the old release from hex. The new version (<code class="inline">2.0.14</code>) is quite close to the version we were depending on (<code class="inline">2.0.12</code>), so we chose to upgrade:</p><pre><code class="makeup shell"><span class="">mix deps.update distillery
+<p>Example:</p><pre><code class="makeup elixir" translate="no"><span class="gt">** (Mix) Package fetch failed and no cached copy available (https://repo.hex.pm/tarballs/distillery-2.0.12.tar)</span></code></pre><p>In this case, distillery (as an example of a dependency) made a new release and retired the old release from hex. The new version (<code class="inline">2.0.14</code>) is quite close to the version we were depending on (<code class="inline">2.0.12</code>), so we chose to upgrade:</p><pre><code class="makeup shell" translate="no"><span class="">mix deps.update distillery
 </span></code></pre><p>This respects the version bounds in <code class="inline">mix.exs</code> (<code class="inline">~&gt; 2.0</code>), so increment that if required.</p><h3 id="dbconnection-connectionerror-tcp-recv-closed" class="section-heading">
-  <a href="#dbconnection-connectionerror-tcp-recv-closed" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#dbconnection-connectionerror-tcp-recv-closed" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   <code class="inline">(DBConnection.ConnectionError) tcp recv: closed</code>
 </h3>
-<p>Example:</p><pre><code class="makeup elixir"><span class="gt">** (DBConnection.ConnectionError) tcp recv: closed (the connection was closed by the pool, possibly due to a timeout or because the pool has been terminated)</span></code></pre><p>In this case, the seeds were unable to complete because a query took too long to execute on your machine. You can configure the timeout to be larger in the <code class="inline">dev</code> environment:</p><ol><li>Open <code class="inline">config/dev.exs</code> in your editor.</li><li>Find the database configuration (search for <a href="./Bonfire.Repo.html"><code class="inline">Bonfire.Repo</code></a>).</li><li>Add <code class="inline">timeout: 60_000</code> to the list of options:</li></ol><pre><code class="makeup elixir"><span class="n">config</span><span class="w"> </span><span class="ss">:bonfire</span><span class="p">,</span><span class="w"> </span><span class="nc">Bonfire.Repo</span><span class="p">,</span><span class="w">
+<p>Example:</p><pre><code class="makeup elixir" translate="no"><span class="gt">** (DBConnection.ConnectionError) tcp recv: closed (the connection was closed by the pool, possibly due to a timeout or because the pool has been terminated)</span></code></pre><p>In this case, the seeds were unable to complete because a query took too long to execute on your machine. You can configure the timeout to be larger in the <code class="inline">dev</code> environment:</p><ol><li>Open <code class="inline">config/dev.exs</code> in your editor.</li><li>Find the database configuration (search for <a href="./Bonfire.Repo.html"><code class="inline">Bonfire.Repo</code></a>).</li><li>Add <code class="inline">timeout: 60_000</code> to the list of options:</li></ol><pre><code class="makeup elixir" translate="no"><span class="n">config</span><span class="w"> </span><span class="ss">:bonfire</span><span class="p">,</span><span class="w"> </span><span class="nc">Bonfire.Repo</span><span class="p">,</span><span class="w">
   </span><span class="ss">timeout</span><span class="p">:</span><span class="w"> </span><span class="mi">60_000</span><span class="p">,</span><span class="w">
-  </span><span class="p" data-group-id="8803830378-1">[</span><span class="n">...</span><span class="p" data-group-id="8803830378-1">]</span></code></pre>
+  </span><span class="p" data-group-id="1089766857-1">[</span><span class="n">...</span><span class="p" data-group-id="1089766857-1">]</span></code></pre>
 <div class="bottom-actions">
   <div class="bottom-actions-item">
 
@@ -257,29 +272,9 @@ Backend Configuration and Deployment
       <footer class="footer">
 
         <p>
-          <span class="line">
-            Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.26.0) for the
-            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>.
-          </span>
-          <span class="line">
-            Designed by
-            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire" translate="no">Friedel Ziegelmayer</a>.
-          </span>
-        </p>
-        <p>
-
-            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
-
-          <button class="line footer-button display-shortcuts-help">
-            Display keyboard shortcuts
-          </button>
-          <button class="line footer-button display-quick-switch">
-            Go to a HexDocs package
-          </button>
-          <button class="line footer-button display-settings">
-            Settings
-          </button>
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.27.3) for the
+          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>
     </div>
