@@ -1,6 +1,6 @@
 # Backend Configuration and Deployment
 
-# WARNING: Bonfire is still under heavy development and is not ready to be deployed or used other than for development and testing purposes. 
+### WARNING: Bonfire is still under development and deploying is only recommended for development and testing purposes.  
 
 _These instructions are for setting up Bonfire in production. If you want to run the backend in development, please refer to our [Developer Guide](./HACKING.md)!_
 
@@ -27,9 +27,9 @@ $ cd bonfire
 
 2. The first thing to do is choosing what flavour of Bonfire you want to deploy (the default is `classic`), as each flavour has its own Docker image and config. 
 
-For example if you want to run the `coordination` flavour (you may want to use direnv or something similar to persist this):
+For example if you want to run the `cooperation` flavour (you may want to use direnv or something similar to persist this):
 
-`export FLAVOUR=coordination MIX_ENV=prod`
+`export FLAVOUR=cooperation MIX_ENV=prod`
 
 3. Once you've picked a flavour, run this command to initialise some default config (.env files which won't be checked into git):
 
@@ -51,6 +51,9 @@ You can use `make secrets` to generate some secrets keys to use.
 And in public.env:
 - HOSTNAME
 - PUBLIC_PORT
+
+You can make registrations on your instance invite-only by setting `INVITE_ONLY=true` in public.env and setting an `INVITE_KEY` in secrets.env. You can then invite people by sending them to https://yourinstance.tld/signup/invitation/your_INVITE_KEY_here
+
 
 ### Further information on config
 
@@ -74,14 +77,14 @@ You should *not* have to modify the files above. Instead, overload any settings 
 
 ---
 
-### Option A - Install using Docker containers (recommended)
+### Option A - Install using Docker comtainers (recommended)
 
 The easiest way to launch the docker image is using the make commands.
 The `docker-compose.release.yml` uses `config/prod/public.env` and `config/prod/secrets.env` to launch a container with the necessary environment variables along with its dependencies, currently that means an extra postgres container, along with a reverse proxy (Caddy server, which you may want to replace with nginx or whatever you prefer).
 
 #### Install with docker-compose
 
-A-1. Make sure you have [Docker](https://www.docker.com/), a recent [docker-compose](https://docs.docker.com/compose/install/#install-compose) (which supports v3 configs), and [make](https://www.gnu.org/software/make/) installed:
+Make sure you have [Docker](https://www.docker.com/), a recent [docker-compose](https://docs.docker.com/compose/install/#install-compose) (which supports v3 configs), and [make](https://www.gnu.org/software/make/) installed:
 
 ```sh
 $ docker version
@@ -95,9 +98,15 @@ GNU Make 4.2.1
 ...
 ```
 
-A-2. Edit the `image` entry in `docker-compose.release.yml` to reflect the image on Docker Hub which corresponds to your chosen flavour. (If your flavour does not have a prebuilt image on Docker Hub you can build one yourself, see the section on Building a Docker image below, or set up a CI workflow.)
+Now that your tooling is set up, you have the choice of using pre-built images or building your own. For example if your flavour does not have a prebuilt image on Docker Hub, or if you want to customise any of the extensions, you can build one yourself - see option A2 below. 
 
-A-3. Start the docker containers with docker-compose:
+#### Option A1 - Using pre-built Docker images (recommend to start with)
+
+- The `image` entry in `docker-compose.release.yml` will by default use the image on Docker Hub which corresponds to your chosen flavour (see step 1 above for choosing your flavour).
+
+You can see the images available per flavour, version (we currently recommend using the `latest` tag), and architecture at https://hub.docker.com/r/bonfirenetworks/bonfire/tags 
+
+- Start the docker containers with docker-compose:
 
 ```
 make rel.run
@@ -105,7 +114,7 @@ make rel.run
 
 The backend should now be running at [http://localhost:4000/](http://localhost:4000/).
 
-A-4. If that worked, start the app as a daemon next time:
+- If that worked, start the app as a daemon next time:
 
 ```
 make rel.run.bg
@@ -135,7 +144,7 @@ The known commands are:
 - `pid`            Prints the operating system PID of the running system via a remote command
 - `version`        Prints the release name and version to be booted
 
-There are some useful database-related release tasks under `Bonfire.Repo.ReleaseTasks.` that can be run in an `iex` console (which you get to with `make rel.shell` followed by `bin/bonfire remote`, assuming the app is already running):
+There are some useful database-related release tasks under `EctoSparkles.ReleaseTasks.` that can be run in an `iex` console (which you get to with `make rel.shell` followed by `bin/bonfire remote`, assuming the app is already running):
 
 - `migrate` runs all up migrations
 - `rollback(step)` roll back to step X
@@ -143,21 +152,25 @@ There are some useful database-related release tasks under `Bonfire.Repo.Release
 - `rollback_all` rolls back all migrations back to zero (caution: this means loosing all data)
 
 For example:
-`iex> Bonfire.Repo.ReleaseTasks.migrate` to create your database if it doesn't already exist.
+`iex> EctoSparkles.ReleaseTasks.migrate` to create your database if it doesn't already exist.
 
-#### Building a Docker image
+#### Option A2 - Building your own Docker image
 
-The Dockerfile uses the [multistage build](https://docs.docker.com/develop/develop-images/multistage-build/) feature to make the image as small as possible. It is a very common release using OTP releases. It generates the release which is later copied into the final image.
+`Dockerfile.release` uses the [multistage build](https://docs.docker.com/develop/develop-images/multistage-build/) feature to make the image as small as possible. It generates the OTP release which is later copied into the final image packaged in an Alpine linux container.
 
 There is a `Makefile` with relevant commands (make sure you set the `MIX_ENV=prod` env first):
 
 - `make rel.build` which builds the docker image 
 - `make rel.tag.latest` adds the "latest" tag to your last build, so that it will be used when running
-- `make rel.push` add latest tag to last build and push to Docker Hub
+- `make rel.push` if you want to push your latest build to Docker Hub
+
+Once you've built and tagged your image, you may need to update the `image` name in `docker-compose.release.yml` to match (either your local image name if running on the same machine you used for the build, or a remote image on Docker Hub if you pushed it) and then follow the same steps as for option A1.
+
+For production, we recommend to set up a CI workflow to automate this, for an example you can look at the one [we currently use](../github/workflows/release.yaml).
 
 ---
 
-### Option B - Manual installation without Docker
+### Option B - Manual installation (without Docker)
 
 #### Dependencies
 
@@ -179,7 +192,7 @@ There is a `Makefile` with relevant commands (make sure you set the `MIX_ENV=pro
 
 - `cd _build/prod/rel/bonfire/`
 
-- Create a database and run the migrations with `bin/bonfire eval 'Bonfire.Repo.ReleaseTasks.migrate()'`.
+- Create a database and run the migrations with `bin/bonfire eval 'EctoSparkles.ReleaseTasks.migrate()'`.
 - If you’re using RDS or some other locked down DB, you may need to run `CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;` on your database with elevated privileges.
 
 * You can check if your instance is configured correctly by running it with `bin/bonfire start`

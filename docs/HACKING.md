@@ -12,15 +12,20 @@ Happy hacking!
 
 There are three main options depending on your needs and preferences.
 
-You first need to set set some configuration regardless of which option you choose.
+Either way, you need to first clone this repository and change into the directory and then do some configuration:
+
+```sh
+$ git clone https://github.com/bonfire-networks/bonfire-app.git bonfire
+$ cd bonfire
+```
 
 ### Configuration
 
 - The first thing to do is choosing what flavour of Bonfire you want to hack on (the default is `classic`), as each flavour has its own config.
 
-For example if you want to run the `coordination` flavour:
+For example if you want to run the `cooperation` flavour:
 
-`export FLAVOUR=coordination`
+`export FLAVOUR=cooperation`
 
 - Once you've picked a flavour, run this command to initialise some default config (.env files which won't be checked into git):
 
@@ -35,8 +40,7 @@ For example if you want to run the `coordination` flavour:
 - Dependencies:
 
   - `make`
-  - Docker
-  - Docker Compose (recent version)
+  - Recent versions of Docker & [docker-compose](https://docs.docker.com/compose/install/)
 
 - Make sure you've edited your .env files (see above) before getting started and proceed to Hello world!
 
@@ -45,9 +49,10 @@ For example if you want to run the `coordination` flavour:
 - Dependencies:
 
   - `make`
-  - Recent versions of elixir (1.11+) and OTP/erlang (23+)
-  - Docker
-  - Docker Compose (recent version)
+  - Recent versions of [Elixir](https://elixir-lang.org/install.html) (1.12+) and OTP/erlang (24+)
+  - Recent versions of [Rust](https://www.rust-lang.org/tools/install) and Cargo
+  - [pnpm](https://pnpm.io)
+  - Recent versions of Docker & [docker-compose](https://docs.docker.com/compose/install/)
 
 - Set an environment variable to indicate your choice: `export WITH_DOCKER=partial`
 
@@ -58,9 +63,11 @@ For example if you want to run the `coordination` flavour:
 - Dependencies:
 
   - `make`
-  - Recent versions of elixir (1.11+) and OTP/erlang (23+)
-  - Postgres 12+ (or Postgis if using the bonfire_geolocate extension)
-  - Meili Search (optional)
+  - Recent versions of [Elixir](https://elixir-lang.org/install.html) (1.12+) and OTP/erlang (24+)
+  - Recent versions of [Rust](https://www.rust-lang.org/tools/install) and Cargo
+  - [pnpm](https://pnpm.io)
+  - Postgres 12+ (or rather [Postgis](https://postgis.net/install/) if using the bonfire_geolocate extension)
+  - [Meili Search](https://docs.meilisearch.com/learn/getting_started/installation.html) (optional)
 
 - You will need to set the relevant environment variables in the .env files (see above) to match your local install of Postgres.
 
@@ -122,7 +129,7 @@ The code is somewhat documented inline. You can generate HTML docs (using `Exdoc
 
 - `./forks/` is used to hack on local copies of dependencies. You can clone a dependency from its git repo (like a bonfire extension) and use the local version during development, eg: `make dep.clone.local dep=bonfire_me repo=https://github.com/bonfire-networks/bonfire_me`
 
-- You can migrate the DB when the app is running (useful in a release): `Bonfire.Repo.ReleaseTasks.migrate`
+- You can migrate the DB when the app is running (useful in a release): `EctoSparkles.ReleaseTasks.migrate`
 
 ### Usage under Windows (MSYS or CYGWIN)
 
@@ -203,7 +210,27 @@ make git.merge~%                    Draft-merge another branch, eg `make git-mer
 make git.conflicts                  Find any git conflicts in ./forks
 ```
 
-## What happens when I get this error?
+## Troubleshooting
+
+### EACCES Permissions Error
+
+If you get a permissions error when following any of the steps, run the following command and it should be fixed:
+
+```shell
+cd bonfire && sudo chown -R yourusername:yourusername .
+```
+
+Note that the command should be modified so your shell is pointing to wherever you have bonfire installed. If you are already in the bonfire directory then you only need to worry about running the `chown` portion of the command.
+
+### Unable to access Postgres database
+
+If you are getting any `:nxdomain` errors, check if you have any firewalls that may be blocking the port on your system.
+
+For example, if you are running UFW (a lot of Linux distros do), run the following command to allow access to port 4000:
+
+```shell
+sudo ufw allow 4000
+```
 
 ### (Mix) Package fetch failed
 

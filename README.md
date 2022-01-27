@@ -1,17 +1,31 @@
-## Bonfire 
-[Bonfire](https://bonfirenetworks.org/) - a federated social network for individuals and communities to design, operate and control their own digital lives.
+# Bonfire 
 
-### Flavours
-This repo includes configurations to run different [flavours of Bonfire](https://bonfirenetworks.org/apps), currently that is:
-* [Classic](flavours/classic) 
-* [Coordination](flavours/coordination) 
-* [Breadpub](flavours/breadpub) 
-* [Reflow](flavours/reflow) 
+[Bonfire](https://bonfirenetworks.org/) - a place your community is happy to call home.
+
+Self-host your online community and shape your experience at the most granular level: add and remove features, change behaviours and appearance, tune, swap or turn off algorithms. You are in total control.
+
+Empower your community with tools to perform social, economic and political activities. Create safe and private spaces, and connect with the fediverse on your own terms.
+
+### ⚠️ Warning
+This project is in the alpha stage. All APIs may change without warning and no guarantees are given about stability. Do not use it in production. You can keep track of progress [in our milestones](https://github.com/bonfire-networks/bonfire-app/milestones?direction=asc&sort=due_date&state=open)
+
+### 🔥 Flavours
+This repo includes configurations to run two main [flavours of Bonfire](https://bonfirenetworks.org/use-bonfire/) you can choose from:
+* [Classic](https://github.com/bonfire-networks/bonfire-app/tree/main/flavours/classic) for basic social networking
+* [Cooperation](https://github.com/bonfire-networks/bonfire-app/tree/main/flavours/cooperation) with a bunch more extensions and features 
+
+As well as app flavours being built by others, including: 
+* [Haha Academy](https://github.com/bonfire-networks/bonfire-app/tree/main/flavours/haha) by haha.academy 
+* [Reflow](https://github.com/bonfire-networks/bonfire-app/tree/main/flavours/reflow) by reflowproject.eu and dyne.org
 
 
-## Documentation
+## 📖 Documentation
 
-* [Development guide](docs/HACKING.md) 
+* [Website](https://bonfirenetworks.org) 
+* [Set up an instance](docs/DEPLOY.md) 
+* [Hacking on Bonfire](docs/HACKING.md) 
+* [Code reference](https://doc.bonfirenetworks.org/api-reference.html#content) 
+* [Community chat](https://matrix.to/#/%23bonfire-networks:matrix.org) 
 
 
 ## Copyright and License

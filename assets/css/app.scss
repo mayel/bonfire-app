@@ -1,39 +1,39 @@
+/* This file is for your main application css. */
+
+@import "../node_modules/nprogress/nprogress.css";
+@import "../node_modules/@yaireo/tagify/dist/tagify.css";
+
 @tailwind base;
 
-/* This file is for your main application css. */
-@import "../node_modules/nprogress/nprogress.css";
-
-/* TODO: switch to `deps` instead of `forks`, also find a better way to include css from deps */
 
 .h-90vh {
   height: 90vh;
 }
 
+
 [x-cloak] {
   display: none !important;
-}
+} 
+
 
 .w-center {
   width: 100%;
 }
-@media (min-width: 640px) { 
+@media (min-width: 580px) { 
   .w-center {width: 100% !important}
 }
 @media (min-width: 768px) { 
   .w-center {width: 100% !important}
 }
 @media (min-width: 1024px) { 
-  .w-center {width: 600px !important} 
+  .w-center {width: 580px !important} 
 }
 
 @media (min-width: 1280px) { 
   .w-center {
-    width: 640px !important
+    width: 580px !important
   }
 
-}
-*[x-cloak] {
-  display: none
 }
 
 details > summary { 
@@ -102,6 +102,41 @@ details > summary::marker { display: none; }
   width: 640px;
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+.scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+
+.main_reply_to {
+  padding-left: 0.75rem !important
+}
+
+
+.kanban-scrollbar::-webkit-scrollbar-track {
+  box-shadow: none !important;
+  border-radius: 4px !important;
+}
+
+.kanban-scrollbar::-webkit-scrollbar {
+  height: 8px !important;
+  width: 8px !important;
+}
+
+.kanban-scrollbar::-webkit-scrollbar-thumb {
+  background: #091e4214 !important;
+  border-radius: 4px !important;
+}
+
+
+.kanban-scrollbar::-webkit-scrollbar-track-piece {
+  background: #091e4214 !important;
+}
+
+
 /* LiveView specific classes for your customizations */
 .phx-no-feedback.invalid-feedback,
 .phx-no-feedback .invalid-feedback {
@@ -156,34 +191,6 @@ details > summary::marker { display: none; }
 }
 
 
-/* Alerts and form errors */
-.alert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-}
-.alert-info {
-  color: #31708f;
-  background-color: #d9edf7;
-  border-color: #bce8f1;
-}
-.alert-warning {
-  color: #8a6d3b;
-  background-color: #fcf8e3;
-  border-color: #faebcc;
-}
-.alert-danger {
-  color: #a94442;
-  background-color: #f2dede;
-  border-color: #ebccd1;
-}
-.alert p {
-  margin-bottom: 0;
-}
-.alert:empty {
-  display: none;
-}
 .invalid-feedback {
   color: #a94442;
   display: block;
@@ -199,23 +206,99 @@ iframe {
 @tailwind utilities;
 
 
-.btn-primary {
-  @apply inline-flex items-center px-4 py-2 text-sm font-medium leading-5 text-gray-100 transition duration-150 ease-in-out bg-pink-500 rounded-md hover:bg-pink-700 hover:text-gray-100 focus:outline-none focus:ring-2 focus:bg-pink-600 focus:ring-opacity-50;
+/* Import with  */
+/* @import './scrollbar-color.css';  */
+
+:root {
+  --scrollbarTrack: hsla(var(--b1));
+  --scrollbarThumb: hsla(var(--b3));
+  --scrollbarThumbHover: hsla(var(--p));
+}
+/* Scrollbar colors*/
+/* width */
+::-webkit-scrollbar {
+  width: 12px;
 }
 
-.btn-secondary {
-  background: #fff;
-  @apply inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2;
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--scrollbarTrack);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbarThumb);
+  border-radius: 3px
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbarThumbHover);
+}
+
+.menu .menu-title>a, .menu .menu-title>span {
+  font-weight: normal
+}
+
+.feed_activity_action {
+  @apply flex items-center py-1 space-x-1 rounded cursor-pointer;
+}
+
+.feed_activity .dropdown-content {
+  transform: none
+}
+
+.feed_activity_text_active {
+  @apply text-primary;
+}
+
+.feed_activity_action:hover .feed_activity_icon {
+    @apply bg-primary bg-opacity-70;
+}
+
+.feed_activity_action:hover .feed_activity_text {
+  @apply text-opacity-100;
+}
+
+.feed_activity_action:hover .feed_activity_icon svg {
+  @apply text-primary-content;
+}
+
+.feed_activity_icon_active {
+  @apply text-primary;
+}
+
+
+.feed_activity_icon {
+  @apply flex items-center rounded-full h-7 w-7 place-content-center;
+}
+
+.feed_activity_icon svg {
+  @apply w-4 h-4 text-base-content text-opacity-80; 
+}
+
+
+.feed_activity_text {
+  @apply text-xs font-normal text-base-content text-opacity-80;
+}
+
+.reply_to {
+  margin-left: 0 !important;
 }
 
 .comment_lined:before {
   position: absolute;
   content: "";
-  top: 36px;
-  bottom: 10px;
+  top: 55px;
+  bottom: 0px;
   width: 2px;
-  left: 19px;
-  @apply bg-blueGray-500;
+  left: 30px;
+  @apply bg-base-200;
+}
+
+
+.profile_item:hover {
+  background-color: hsla(var(--bc)/var(--tw-bg-opacity,1));
 }
 
 .shadow-tick {
@@ -233,4 +316,35 @@ iframe {
   margin: 8px !important;
   margin-left: 0 !important;
 
+}
+
+
+.sortable-ghost {
+  @apply bg-gray-300 text-gray-300;
+}
+
+.h-modal {
+  height: calc(100vh - 48px);
+}
+
+.h-bonfire-logged {
+  height: calc(100vh - 96px);
+}
+
+
+html, body, a {
+  @apply text-base-content;
+
+}
+
+
+:root {
+  @apply text-base-content;
+}
+
+.alert-error { 
+  @apply bg-red-50;
+}
+.alert-info {
+  @apply bg-blue-50;
 }

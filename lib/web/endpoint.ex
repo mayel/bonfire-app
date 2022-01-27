@@ -3,6 +3,9 @@ defmodule Bonfire.Web.Endpoint do
   use Phoenix.Endpoint, otp_app: :bonfire
   alias Bonfire.Common.Utils
   alias Bonfire.Common.Config
+  import Bonfire.Common.Extend
+
+  use_if_enabled Absinthe.Phoenix.Endpoint
 
   # The session will be stored in the cookie and signed,
   # this means its contents can be read but not tampered with.
@@ -16,6 +19,12 @@ defmodule Bonfire.Web.Endpoint do
 
   socket "/live", Phoenix.LiveView.Socket,
     websocket: [connect_info: [session: @session_options]]
+
+  if module_enabled?(Bonfire.GraphQL.UserSocket) do
+    socket "/api/socket", Bonfire.GraphQL.UserSocket,
+      websocket: true,
+      longpoll: false
+  end
 
   # plug Plug.Static,
   #   at: "/data/uploads",
@@ -75,6 +84,8 @@ defmodule Bonfire.Web.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
 
+  plug CORSPlug, origin: "*"
+
   plug Bonfire.Web.Router
 
   def include_assets(conn) do
@@ -84,10 +95,11 @@ defmodule Bonfire.Web.Endpoint do
       static_path("/js/bonfire_basic.js")
     end
 
-    if Config.get!(:env) == :dev do
-      "<link phx-track-static rel='stylesheet' href='"<> static_path("/css/bonfire.css") <>"'/> <script defer phx-track-static crossorigin='anonymous' src='"<> js <>"'></script>"
-    else
+    # if Config.get!(:env) == :dev do
+    #   "<link phx-track-static rel='stylesheet' href='"<> static_path("/css/bonfire.css") <>"'/> <script defer phx-track-static crossorigin='anonymous' src='"<> js <>"'></script>"
+    # else
+      (PhoenixGon.View.render_gon_script(conn) |> Phoenix.HTML.safe_to_string) <>
       "<link phx-track-static rel='stylesheet' href='"<> static_path("/css/bonfire.css") <>"'/> <script defer phx-track-static crossorigin='anonymous' src='"<> js <>"'></script> "
-    end
+    # end
   end
 end

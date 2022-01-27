@@ -26,15 +26,15 @@ services:
         source: .
         target: /opt/app
       # do not mount the following:
-      - /opt/app/_build
-      - /opt/app/assets/node_modules
+      # - /opt/app/_build
+      # - /opt/app/assets/node_modules
       - /opt/app/data/postgres 
       - /opt/app/data/search
     stdin_open: true # like docker run -i
     tty: true # like docker run -t
     # user: $UID:$GID
   db:
-    image: postgis/postgis:12-3.1-alpine
+    image: ${DB_DOCKER_IMAGE}
     # volumes:
       # - ./data/postgres/dev:/var/lib/postgresql/data:z
       # - /etc/passwd:/etc/passwd:ro 

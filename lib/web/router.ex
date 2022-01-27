@@ -1,28 +1,34 @@
 defmodule Bonfire.Web.Router do
   use Bonfire.Web, :router
   # use Plug.ErrorHandler
+  alias Bonfire.Common.Config
 
   pipeline :basic do
-    # plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
     plug :put_root_layout, {Bonfire.UI.Social.Web.LayoutView, :root}
-    # plug :protect_from_forgery
-    # plug :put_secure_browser_headers
-    # plug Bonfire.Web.Plugs.LoadCurrentAccount
     plug Bonfire.Web.Plugs.LoadCurrentUser
   end
 
   pipeline :browser do
-    plug :accepts, ["html"]
+    plug :accepts, ["html", "activity+json"]
     plug :fetch_session
-    plug :fetch_live_flash
+    plug PhoenixGon.Pipeline,
+      assets: Map.new(Config.get(:js_config, []))
     plug :put_root_layout, {Bonfire.UI.Social.Web.LayoutView, :root}
+    plug Cldr.Plug.SetLocale,
+      default: Bonfire.Web.Localise.default_locale,
+	    apps: [:cldr, :gettext],
+	    from: [:session, :cookie, :accept_language],
+	    gettext: Bonfire.Web.Gettext,
+	    cldr: Bonfire.Web.Cldr
+    plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Bonfire.Web.Plugs.ActivityPub
     plug Bonfire.Web.Plugs.LoadCurrentAccount
     plug Bonfire.Web.Plugs.LoadCurrentUser
-    plug Bonfire.Web.Plugs.Locale # TODO: skip guessing a locale if the user has one in preferences
+    # plug Bonfire.Web.Plugs.Locale # TODO: skip guessing a locale if the user has one in preferences
   end
 
   pipeline :guest_only do
@@ -50,16 +56,21 @@ defmodule Bonfire.Web.Router do
   use_if_enabled Bonfire.Social.Web.Routes
 
   use_if_enabled Bonfire.Search.Web.Routes
+  use_if_enabled Bonfire.Tag.Web.Routes
   use_if_enabled Bonfire.Classify.Web.Routes
   use_if_enabled Bonfire.Geolocate.Web.Routes
 
   use_if_enabled Bonfire.UI.Reflow.Routes
   use_if_enabled Bonfire.UI.Coordination.Routes
-  use_if_enabled Bonfire.Breadpub.Routes
+  use_if_enabled Bonfire.Breadpub.Web.Routes
   use_if_enabled Bonfire.Recyclapp.Routes
+  use_if_enabled Bonfire.UI.Kanban.Routes
 
   # include GraphQL API
   use_if_enabled Bonfire.GraphQL.Router
+
+  # include JSON API
+  use_if_enabled Bonfire.API.JSON.Router
 
   # include federation routes
   use_if_enabled ActivityPubWeb.Router
@@ -70,16 +81,21 @@ defmodule Bonfire.Web.Router do
   # optionally include Livebook for developers
   use_if_enabled Bonfire.Livebook.Web.Routes
 
+  # optionally include Surface Catalogue for the stylebook
+  require_if_enabled Surface.Catalogue.Router
+
 
   ## Below you can define routes specific to your flavour of Bonfire (which aren't handled by extensions)
 
   # pages anyone can view
   scope "/", Bonfire do
     pipe_through :browser
+
     live "/", Web.HomeLive, as: :home
     # a default homepage which you can customise (at path "/")
     # can be replaced with something else (eg. bonfire_website extension or similar), in which case you may want to rename the path (eg. to "/home")
-    live "/home", Web.HomeLive, as: :home
+    # live "/", Website.HomeGuestLive, as: :landing
+    # live "/home", Web.HomeLive, as: :home
 
     live "/error", Common.Web.ErrorLive
 
@@ -113,17 +129,20 @@ defmodule Bonfire.Web.Router do
 
   end
 
+
+
+
   scope "/" do
     pipe_through :browser
 
-    if module_enabled?(Surface.Catalogue.Router) do
-      import_if_enabled Surface.Catalogue.Router
-      Surface.Catalogue.Router.surface_catalogue "/ui/components"
-    end
+    # if module_enabled?(Surface.Catalogue.Router) do # FIXME - getting function surface_catalogue/1 is undefined or private
+    #   Surface.Catalogue.Router.surface_catalogue "/ui/"
+    # end
 
     if module_enabled?(Phoenix.LiveDashboard.Router) do
       import Phoenix.LiveDashboard.Router
       pipe_through :admin_required
+
       live_dashboard "/admin/system", metrics: Bonfire.Web.Telemetry, ecto_repos: [Bonfire.Repo]
     end
 

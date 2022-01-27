@@ -1,8 +1,8 @@
 defmodule Bonfire.Application do
-  @moduledoc false
 
   @sup_name Bonfire.Supervisor
   @name Mix.Project.config()[:name]
+  @otp_app Bonfire.Common.Config.get!(:otp_app)
   @version Mix.Project.config()[:version]
   @repository Mix.Project.config()[:source_url]
   @deps Bonfire.Common.Extend.loaded_deps()
@@ -11,7 +11,7 @@ defmodule Bonfire.Application do
 
   def start(_type, _args) do
 
-    Bonfire.Repo.LogSlow.setup()
+    EctoSparkles.LogSlow.setup(@otp_app)
 
     :telemetry.attach("oban-errors", [:oban, :job, :exception], &Bonfire.ObanLogger.handle_event/4, [])
     Oban.Telemetry.attach_default_logger()
@@ -25,13 +25,18 @@ defmodule Bonfire.Application do
   def applications(true) do
     [
       {Absinthe.Schema, Bonfire.GraphQL.Schema} # use persistent_term backend for Absinthe
-    ] ++ applications(false)
+    ]
+    ++ applications(false)
+    ++
+    [
+      {Absinthe.Subscription, Bonfire.Web.Endpoint}
+    ]
   end
 
   def applications(_) do
     [ Bonfire.Web.Telemetry,                  # Metrics
       Bonfire.Repo,                           # Database
-      {Phoenix.PubSub, name: Bonfire.PubSub}, # PubSub
+      {Phoenix.PubSub, [name: Bonfire.PubSub, adapter: Phoenix.PubSub.PG2]}, # PubSub
       # Persistent Data Services
       Pointers.Tables,
       Bonfire.Common.ContextModules,

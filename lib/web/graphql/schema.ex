@@ -1,7 +1,11 @@
-if Bonfire.Common.Utils.module_enabled?(Bonfire.GraphQL) and Bonfire.Common.Utils.module_enabled?(ValueFlows.Schema) do
+if Code.ensure_loaded?(Bonfire.GraphQL) and Bonfire.Common.Utils.module_enabled?(Bonfire.GraphQL) and Bonfire.Common.Utils.module_enabled?(ValueFlows.Schema) do
 # SPDX-License-Identifier: AGPL-3.0-only
 defmodule Bonfire.GraphQL.Schema do
-  @moduledoc "Root GraphQL Schema"
+  @moduledoc """
+  Root GraphQL Schema.
+  Only active if the `Bonfire.GraphQL` extension is present.
+  """
+
   use Absinthe.Schema
   @schema_provider Absinthe.Schema.PersistentTerm
   # @pipeline_modifier Bonfire.GraphQL.SchemaPipelines
@@ -9,10 +13,29 @@ defmodule Bonfire.GraphQL.Schema do
   require Logger
   alias Bonfire.GraphQL.SchemaUtils
   alias Bonfire.GraphQL.Middleware.CollapseErrors
-  alias Absinthe.Middleware.{Async, Batch}
 
+  @doc """
+  Define dataloaders
+  see https://hexdocs.pm/absinthe/1.4.6/ecto.html#dataloader
+  """
+  def context(ctx) do
+    # IO.inspect(ctx: ctx)
+    loader =
+      Dataloader.new
+      |> Dataloader.add_source(Pointers.Pointer, Bonfire.Common.Pointers.dataloader(ctx))
+      # |> Dataloader.add_source(Bonfire.Data.Social.Posts, Bonfire.Common.Pointers.dataloader(ctx) )
 
-  def plugins, do: [Async, Batch]
+    Map.put(ctx, :loader, loader)
+  end
+
+  def plugins do
+    [
+      Absinthe.Middleware.Async,
+      Absinthe.Middleware.Batch,
+      Absinthe.Middleware.Dataloader
+    ]
+    ++ Absinthe.Plugin.defaults()
+  end
 
   def middleware(middleware, _field, _object) do
     # [{Bonfire.GraphQL.Middleware.Debug, :start}] ++
@@ -24,14 +47,11 @@ defmodule Bonfire.GraphQL.Schema do
 
   import_types(Bonfire.GraphQL.CommonSchema)
 
-  # import_types(CommonsPub.Web.GraphQL.MiscSchema)
 
 
   # Extension Modules
-  # import_types(CommonsPub.Profiles.GraphQL.Schema)
-  # import_types(CommonsPub.Characters.GraphQL.Schema)
-
-  # import_types(Organisation.GraphQL.Schema)
+  import_types(Bonfire.Me.API.GraphQL)
+  import_types(Bonfire.Social.API.GraphQL)
 
   # import_types(CommonsPub.Locales.GraphQL.Schema)
 
@@ -42,6 +62,7 @@ defmodule Bonfire.GraphQL.Schema do
   import_types(Bonfire.Geolocate.GraphQL)
 
   import_types(ValueFlows.Schema)
+  import_types(ValueFlows.GraphQL.Subscriptions)
 
   import_types(ValueFlows.Observe.GraphQL)
 
@@ -50,6 +71,8 @@ defmodule Bonfire.GraphQL.Schema do
     import_fields(:common_queries)
 
     # Extension Modules
+    import_fields(:me_queries)
+    import_fields(:social_queries)
     # import_fields(:profile_queries)
     # import_fields(:character_queries)
 
@@ -74,12 +97,9 @@ defmodule Bonfire.GraphQL.Schema do
   mutation do
     import_fields(:common_mutations)
 
-
     # Extension Modules
-    # import_fields(:profile_mutations)
-    # import_fields(:character_mutations)
-
-    # import_fields(:organisations_mutations)
+    import_fields(:me_mutations)
+    import_fields(:social_mutations)
 
     import_fields(:tag_mutations)
     import_fields(:classify_mutations)
@@ -94,6 +114,13 @@ defmodule Bonfire.GraphQL.Schema do
     import_fields(:valueflows_observe_mutations)
 
   end
+
+  subscription do
+
+    import_fields(:valueflows_subscriptions)
+
+  end
+
 
   @doc """
   hydrate SDL schema with resolvers
@@ -112,11 +139,28 @@ defmodule Bonfire.GraphQL.Schema do
     []
   end
 
+  union :any_character do
+    description("Any type of character (eg. Category, Thread, Geolocation, etc), actor (eg. User/Person), or agent (eg. Organisation)")
+
+    # TODO: autogenerate from extensions
+    # types(SchemaUtils.context_types)
+
+    types([
+      # :community,
+      # :collection,
+      :user,
+      # :organisation,
+      :category,
+      :spatial_thing
+    ])
+
+    resolve_type(&schema_to_api_type/2)
+  end
+
   union :any_context do
     description("Any type of known object")
 
-    # TODO: autogenerate
-
+    # TODO: autogenerate from extensions or pointers
     # types(SchemaUtils.context_types)
 
     types([
@@ -124,62 +168,65 @@ defmodule Bonfire.GraphQL.Schema do
       # :collection,
       # :comment,
       # :flag,
-      # :follow,
-      # :like,
-      # :user,
+      :follow,
+      :activity,
+      :post,
+      :user,
       # :organisation,
       :category,
       :tag,
       :spatial_thing,
-      :intent
+      :intent,
+      :process,
+      :economic_event
     ])
 
-    resolve_type(fn
-      # %CommonsPub.Users.User{}, _ ->
-      #   :user
+    resolve_type(&schema_to_api_type/2)
+  end
 
-      # %CommonsPub.Communities.Community{}, _ ->
-      #   :community
+  def schema_to_api_type(object, recursing) do
+    case object do
+      %Bonfire.Data.Identity.User{} -> :user
 
-      # %CommonsPub.Collections.Collection{}, _ ->
-      #   :collection
+      %Bonfire.Data.Social.Post{} -> :post
 
-      # %CommonsPub.Threads.Thread{}, _ ->
-      #   :thread
+      %Bonfire.Data.Social.Activity{} -> :activity
 
-      # %CommonsPub.Threads.Comment{}, _ ->
-      #   :comment
+      %Bonfire.Data.Social.Follow{} -> :follow
 
-      # %CommonsPub.Follows.Follow{}, _ ->
-      #   :follow
+      # %Bonfire.Data.SharedUser{} ->
+        #   :organisation
 
-      # %CommonsPub.Likes.Like{}, _ ->
-      #   :like
+      %Bonfire.Geolocate.Geolocation{} -> :spatial_thing
 
-      # %CommonsPub.Flags.Flag{}, _ ->
-      #   :flag
+      %Bonfire.Classify.Category{} -> :category
 
-      # %CommonsPub.Features.Feature{}, _ ->
-      #   :feature
+      %Bonfire.Tag{} -> :tag
 
-      # %Organisation{}, _ ->
-      #   :organisation
+      %ValueFlows.Planning.Intent{} -> :intent
 
-      %Bonfire.Geolocate.Geolocation{}, _ ->
-        :spatial_thing
+      %ValueFlows.Process{} -> :process
 
-      %Bonfire.Classify.Category{}, _ ->
-        :category
+      %ValueFlows.EconomicEvent{} -> :economic_event
 
-      %Bonfire.Tag{}, _ ->
-        :tag
+      object ->
 
-      %ValueFlows.Planning.Intent{}, _ ->
-        :intent
+        case Bonfire.Common.Types.object_type(object) do
+          type when is_atom(type) and not is_nil(type) ->
+            Logger.debug("API any_context: object_type recognised: #{type}")
+            if recursing != true do
+              schema_to_api_type(struct(type), true)
+            else
+              Logger.error("API any_context: no API type is defined for schema #{type}")
+              IO.inspect(object, label: "API any_context object")
+              nil
+            end
 
-      o, _ ->
-        Logger.warn("Any context resolved to an unknown type: #{inspect(o, pretty: true)}")
-    end)
+          _ ->
+          Logger.warn("API any_context: resolved to an unknown type: #{inspect(object, pretty: true)}")
+          nil
+        end
+    end
   end
 end
 end

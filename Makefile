@@ -22,11 +22,15 @@ APP_NAME ?= bonfire
 UID := $(shell id -u)
 GID := $(shell id -g)
 APP_REL_CONTAINER="$(APP_NAME)_release"
+WEB_CONTAINER ?= $(APP_NAME)_web
 APP_REL_DOCKERFILE=Dockerfile.release
 APP_REL_DOCKERCOMPOSE=docker-compose.release.yml
 APP_VSN ?= `grep -m 1 'version:' mix.exs | cut -d '"' -f2`
+APP_VSN_EXTRA ?= beta
 APP_BUILD ?= `git rev-parse --short HEAD`
 APP_DOCKER_REPO ?= "$(ORG_NAME)/$(APP_NAME)-$(FLAVOUR)"
+DB_DOCKER_IMAGE ?= postgis/postgis:12-3.1-alpine
+CONFIG_PATH=$(FLAVOUR_PATH)/config
 
 #### GENERAL SETUP RELATED COMMANDS ####
 
@@ -34,14 +38,14 @@ export UID
 export GID
 
 define setup_env
-	$(eval ENV_DIR := config/$(1))
+	$(eval ENV_DIR := $(CONFIG_PATH)/$(MIX_ENV))
 	@echo "Loading environment variables from $(ENV_DIR)"
 	@$(call load_env,$(ENV_DIR)/public.env)
 	@$(call load_env,$(ENV_DIR)/secrets.env)
 endef
 define load_env
 	$(eval ENV_FILE := $(1))
-	@echo "Loading env vars from $(ENV_FILE)"
+	# @echo "Loading env vars from $(ENV_FILE)"
 	$(eval include $(ENV_FILE)) # import env into make
 	$(eval export) # export env from make
 endef
@@ -50,14 +54,18 @@ pre-config: pre-init ## Initialise env files, and create some required folders, 
 	@echo "You can now edit your config for flavour '$(FLAVOUR)' in config/$(MIX_ENV)/secrets.env, config/$(MIX_ENV)/public.env and ./config/ more generally."
 
 pre-init:
+	@echo "Setting flavour to $(FLAVOUR_PATH)"
 	@ln -sfn $(FLAVOUR_PATH)/config ./config
-	@mkdir -p config/prod
-	@mkdir -p config/dev
-	@touch config/deps.path
-	@cp -n config/templates/public.env config/dev/ | true
-	@cp -n config/templates/public.env config/prod/ | true
-	@cp -n config/templates/not_secret.env config/dev/secrets.env | true
-	@cp -n config/templates/not_secret.env config/prod/secrets.env | true
+	@mkdir -p data/
+	@rm -rf ./data/current_flavour
+	@ln -sf ../$(FLAVOUR_PATH) ./data/current_flavour
+	@mkdir -p $(CONFIG_PATH)/prod
+	@mkdir -p $(CONFIG_PATH)/dev
+	@touch $(CONFIG_PATH)/deps.path
+	@cp -n $(CONFIG_PATH)/templates/public.env $(CONFIG_PATH)/dev/ | true
+	@cp -n $(CONFIG_PATH)/templates/public.env $(CONFIG_PATH)/prod/ | true
+	@cp -n $(CONFIG_PATH)/templates/not_secret.env $(CONFIG_PATH)/dev/secrets.env | true
+	@cp -n $(CONFIG_PATH)/templates/not_secret.env $(CONFIG_PATH)/prod/secrets.env | true
 
 pre-run:
 	@mkdir -p forks/
@@ -65,9 +73,10 @@ pre-run:
 	@mkdir -p priv/static/data
 	@ln -s data/uploads priv/static/data/ | true
 	@mkdir -p data/search/dev
+	@chmod 700 .erlang.cookie
 
 init: pre-init pre-run
-	@$(call setup_env,$(MIX_ENV))
+	@$(call setup_env)
 	@echo "Light that fire... $(APP_NAME) with $(FLAVOUR) flavour in $(MIX_ENV) - $(APP_VSN) - $(APP_BUILD) - $(FLAVOUR_PATH)"
 	@make --no-print-directory pre-init
 	@make --no-print-directory services
@@ -89,28 +98,43 @@ dev: init dev.run ## Run the app in development
 dev.run:
 ifeq ($(WITH_DOCKER), total)
 	@make --no-print-directory docker.stop.web
-	docker-compose run --name bonfire_web --service-ports web
-	# docker-compose --verbose run --name bonfire_web --service-ports web
+	docker-compose run --name $(WEB_CONTAINER) --service-ports web
+#	docker-compose --verbose run --name $(WEB_CONTAINER) --service-ports web
 else
 	iex -S mix phx.server
 endif
+
+doc: ## Generate docs from code & readmes
+	@make --no-print-directory cmd cmd="mix docs"
+
+recompile: ## Force the app to recompile
+	@make --no-print-directory cmd cmd="mix compile --force"
 
 dev.test: init test.env dev.run
 
 dev.bg: init  ## Run the app in dev mode, as a background service
 ifeq ($(WITH_DOCKER), total)
 	@make --no-print-directory docker.stop.web
-	docker-compose run --detach --name bonfire_web --service-ports web elixir -S mix phx.server
+	docker-compose run --detach --name $(WEB_CONTAINER) --service-ports web elixir -S mix phx.server
 else
 	elixir --erl "-detached" -S mix phx.server
 	echo Running in background...
 	ps au | grep beam
 endif
 
-db.reset: dev.search.reset db.pre-migrations mix~ecto.reset  ## Reset the DB (caution: this means DATA LOSS)
+db.migrate: mix~ecto.migrate ## Run latest database migrations (eg. after adding/upgrading an app/extension)
+
+db.seeds: mix~ecto.migrate mix~ecto.seeds ## Run latest database seeds (eg. inserting required data after adding/upgrading an app/extension)
+
+db.reset: init dev.search.reset db.pre-migrations mix~ecto.reset  ## Reset the DB (caution: this means DATA LOSS)
 
 dev.search.reset:
+ifeq ($(WITH_DOCKER), no)
+	echo ...
+else
 	@docker-compose rm -s -v search
+endif
+	rm -rf data/search/dev
 
 db.rollback: mix~ecto.rollback ## Rollback previous DB migration (caution: this means DATA LOSS)
 
@@ -125,41 +149,50 @@ update.app: update.repo ## Update the app and Bonfire extensions in ./deps
 	@make --no-print-directory mix.remote~updates
 
 update.repo:
-	git add --all .
-	git diff-index --quiet HEAD || git commit --all --verbose
-	git pull --rebase
+	@chmod +x git-publish.sh && ./git-publish.sh . pull
 
-update.deps.bonfire: init mix.remote~bonfire.deps ## Update to the latest Bonfire extensions in ./deps
+update.repo.pull:
+	@chmod +x git-publish.sh && ./git-publish.sh . pull only
+
+update.deps.bonfire: init mix.remote~bonfire.deps ## Update to the latest Bonfire extensions in ./deps 
 
 update.deps.all: ## Update evey single dependency (use with caution)
 	@make --no-print-directory update.dep~"--all"
 
 update.dep~%: ## Update a specify dep (eg. `make update.dep~pointers`)
 	@make --no-print-directory mix.remote~"deps.update $*"
-	@chmod +x git-publish.sh
-	./git-publish.sh $(FORKS_PATH)/$* pull
+	@chmod +x git-publish.sh && ./git-publish.sh $(FORKS_PATH)/$* pull
 
-#update.forks: git.forks~pull ## Pull the latest commits from all ./forks
 update.forks: ## Pull the latest commits from all ./forks
-	@chmod +x git-publish.sh
-	find $(FORKS_PATH) -mindepth 1 -maxdepth 1 -type d -exec ./git-publish.sh {} pull \;
+	@jungle git fetch || echo "Jungle not available, will fetch one by one instead."
+	@chmod +x git-publish.sh && find $(FORKS_PATH) -mindepth 1 -maxdepth 1 -type d -exec ./git-publish.sh {} maybe-pull \;
+# TODO: run in parallel? find $(FORKS_PATH) -mindepth 1 -maxdepth 1 -type d | xargs -P 50 -I '{}' ./git-publish.sh '{}'
 
 update.fork~%: ## Pull the latest commits from all ./forks
-	@chmod +x git-publish.sh
-	find $(FORKS_PATH)/$* -mindepth 0 -maxdepth 0 -type d -exec ./git-publish.sh {} pull \;
+	@chmod +x git-publish.sh && find $(FORKS_PATH)/$* -mindepth 0 -maxdepth 0 -type d -exec ./git-publish.sh {} pull \;
 
-deps.get: mix.remote~deps.get mix~deps.get ## Fetch locked version of non-forked deps
+deps.get: mix.remote~deps.get mix~deps.get js.ext.deps.get ## Fetch locked version of non-forked deps
+
+deps.data.clean: mix~bonfire.deps.clean
 
 #### DEPENDENCY & EXTENSION RELATED COMMANDS ####
 
-js.deps.get:
-	@chmod +x ./assets/install.sh
-	@chmod +x ./config/deps.js.sh
-	./assets/install.sh
-	./config/deps.js.sh
+js.deps.get: js.assets.deps.get js.ext.deps.get
 
-dep.clean~%:
-	@make mix~"deps.clean $* --build"
+js.assets.deps.get:
+	@pnpm -v || npm -g install pnpm
+	@chmod +x ./assets/install.sh
+	@make --no-print-directory cmd cmd=./assets/install.sh
+
+js.ext.deps.get:
+	@chmod +x ./config/deps.js.sh
+	@make --no-print-directory cmd cmd=./config/deps.js.sh
+
+deps.outdated:
+	@make mix.remote~"hex.outdated --all"
+
+dep.clean:
+	make --no-print-directory cmd cmd="mix deps.clean $(dep) --build"
 
 dep.clone.local: ## Clone a git dep and use the local version, eg: `make dep.clone.local dep="bonfire_me" repo=https://github.com/bonfire-networks/bonfire_me`
 	git clone $(repo) $(FORKS_PATH)$(dep) 2> /dev/null || (cd $(FORKS_PATH)$(dep) ; git pull)
@@ -190,7 +223,7 @@ dep.go.hex: ## Switch to using a library from hex.pm, eg: make dep.go.hex dep="p
 	@make --no-print-directory dep.local~disable dep=$(dep) path=""
 
 dep.hex~%: ## add/enable/disable/delete a hex dep with messctl command, eg: `make dep.hex.enable dep=pointers version="~> 0.2"
-	@make --no-print-directory messctl args="$* $(dep) $(version)
+	@make --no-print-directory messctl args="$* $(dep) $(version)"
 
 dep.git~%: ## add/enable/disable/delete a git dep with messctl command, eg: `make dep.hex.enable dep=pointers repo=https://github.com/bonfire-networks/pointers#main
 	@make --no-print-directory messctl args="$* $(dep) $(repo) config/deps.git"
@@ -223,17 +256,18 @@ contrib.app.up: update.app git.publish ## Update ./deps and push all changes to 
 contrib.app.release: update.app contrib.app.release.increment git.publish ## Update ./deps, increment the app version number and push
 
 contrib.app.release.increment:
-	@cd lib/mix/tasks/release/ && mix escript.build && ./release ../../../../ alpha
+	@cd lib/mix/tasks/release/ && mix escript.build && ./release ../../../../ $(APP_VSN_EXTRA)
 
 contrib.forks.publish:
-	@chmod +x git-publish.sh
-	find $(FORKS_PATH) -mindepth 1 -maxdepth 1 -type d -exec ./git-publish.sh {} \;
+	@jungle git fetch || echo "Jungle not available, will fetch one by one instead."
+	@chmod +x git-publish.sh && find $(FORKS_PATH) -mindepth 1 -maxdepth 1 -type d -exec ./git-publish.sh {} \;
+# TODO: run in parallel?
 
 git.forks.add: deps.git.fix ## Run the git add command on each fork
 	find $(FORKS_PATH) -mindepth 1 -maxdepth 1 -type d -exec echo add {} \; -exec git -C '{}' add --all . \;
 
 git.forks.status: ## Run a git status on each fork
-	@find $(FORKS_PATH) -mindepth 1 -maxdepth 1 -type d -exec echo {} \; -exec git -C '{}' status -s \;
+	@jungle git status || find $(FORKS_PATH) -mindepth 1 -maxdepth 1 -type d -exec echo {} \; -exec git -C '{}' status \;
 
 git.forks~%: ## Run a git command on each fork (eg. `make git.forks~pull` pulls the latest version of all local deps from its git remote
 	@find $(FORKS_PATH) -mindepth 1 -maxdepth 1 -type d -exec echo $* {} \; -exec git -C '{}' $* \;
@@ -292,9 +326,10 @@ rel.env:
 	$(eval export)
 
 rel.config.prepare: rel.env # copy current flavour's config, without using symlinks
-	@cp -rfL $(FLAVOUR_PATH) ./data/current_flavour
+	rm -rf ./data/current_flavour
+	cp -rfL $(FLAVOUR_PATH) ./data/current_flavour
 
-rel.build.no-cache: rel.env init rel.config.prepare assets.prepare ## Build the Docker image
+rel.rebuild: rel.env init rel.config.prepare assets.prepare ## Build the Docker image
 	docker build \
 		--no-cache \
 		--build-arg FLAVOUR_PATH=data/current_flavour \
@@ -324,7 +359,7 @@ rel.push: rel.env ## Add latest tag to last build and push to Docker Hub
 	@docker push $(APP_DOCKER_REPO):latest
 
 rel.run: rel.env init docker.stop.web ## Run the app in Docker & starts a new `iex` console
-	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) run --name bonfire_web --service-ports --rm web bin/bonfire start_iex
+	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) run --name $(WEB_CONTAINER) --service-ports --rm web bin/bonfire start_iex
 
 rel.run.bg: rel.env init docker.stop.web ## Run the app in Docker, and keep running in the background
 	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) up -d
@@ -332,15 +367,18 @@ rel.run.bg: rel.env init docker.stop.web ## Run the app in Docker, and keep runn
 rel.stop: rel.env ## Stop the running release
 	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) stop
 
-rel.update: rel.env update.repo
+rel.update: rel.env update.repo.pull
 	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) pull
 	@echo Remember to run migrations on your DB...
+
+rel.logs:
+	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) logs
 
 rel.down: rel.env rel.stop ## Stop the running release
 	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) down
 
 rel.shell: rel.env init docker.stop.web ## Runs a the app container and opens a simple shell inside of the container, useful to explore the image
-	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) run --name bonfire_web --service-ports --rm web /bin/bash
+	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) run --name $(WEB_CONTAINER) --service-ports --rm web /bin/bash
 
 rel.shell.bg: rel.env init ## Runs a simple shell inside of the running app container, useful to explore the image
 	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) exec web /bin/bash
@@ -355,7 +393,7 @@ rel.db.restore: rel.env init
 	cat $(file) | docker exec -i bonfire_release_db_1 /bin/bash -c "PGPASSWORD=$(POSTGRES_PASSWORD) psql -U $(POSTGRES_USER) $(POSTGRES_DB)"
 
 rel.setup: rel.env init
-	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) run --rm web bin/bonfire eval 'Process.sleep(6000); Bonfire.Repo.ReleaseTasks.migrate()'
+	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) run --rm web bin/bonfire eval 'Process.sleep(6000); EctoSparkles.ReleaseTasks.migrate()'
 
 rel.tasks.create_user: rel.env init
 	@docker-compose -p $(APP_REL_CONTAINER) -f $(APP_REL_DOCKERCOMPOSE) run --rm web bin/bonfire eval 'Bonfire.ReleaseTasks.create_user_make!(~S{$(email)}, ~S{$(pass)}, ~S{$(user)}, ~S{$(name)})'
@@ -378,7 +416,16 @@ ifeq ($(WITH_DOCKER), no)
 	@echo Skip building container...
 else
 	@mkdir -p deps
+	docker-compose pull
 	docker-compose build
+endif
+
+rebuild: init ## Build the docker image
+ifeq ($(WITH_DOCKER), no)
+	@echo Skip building container...
+else
+	@mkdir -p deps
+	docker-compose build --no-cache
 endif
 
 cmd~%: init ## Run a specific command in the container, eg: `make cmd-messclt` or `make cmd~time` or `make cmd~echo args=hello`
@@ -392,8 +439,8 @@ shell: init ## Open the shell of the Docker web container, in dev mode
 	@make cmd~bash
 
 docker.stop.web:
-	@docker stop bonfire_web 2> /dev/null || true
-	@docker rm bonfire_web 2> /dev/null || true
+	@docker stop $(WEB_CONTAINER) 2> /dev/null || true
+	@docker rm $(WEB_CONTAINER) 2> /dev/null || true
 
 #### MISC COMMANDS ####
 
@@ -405,7 +452,7 @@ else
 endif
 
 cmd~%: init ## Run a specific command, eg: `make cmd~"mix deps.get"` or `make cmd~deps.update args=pointers`
-	@make --no-print-directory cmd cmd="mix $*" $(args)
+	@make --no-print-directory cmd cmd="$*" $(args)
 
 mix~%: init ## Run a specific mix command, eg: `make mix~deps.get` or `make mix~deps.update args=pointers`
 	@make --no-print-directory cmd cmd="mix $*" $(args)
