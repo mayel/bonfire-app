@@ -24,7 +24,8 @@ else
     # ssl: true,
     username: System.get_env("POSTGRES_USER", "postgres"),
     password: System.get_env("POSTGRES_PASSWORD", "postgres"),
-    hostname: System.get_env("POSTGRES_HOST", "localhost")
+    hostname: System.get_env("POSTGRES_HOST", "localhost"),
+    connect_timeout: String.to_integer(System.get_env("POSTGRES_TIMEOUT", "10000"))
 end
 
 secret_key_base =
