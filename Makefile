@@ -143,10 +143,12 @@ db.rollback.all: mix~"ecto.rollback --all" ## Rollback ALL DB migrations (cautio
 
 #### UPDATE COMMANDS ####
 
-update: init update.app build update.forks mix~deps.get mix~ecto.migrate js.deps.get ## Update the dev app and all dependencies/extensions/forks, and run migrations
+update: init update.repo update.app build update.forks mix~deps.get mix~ecto.migrate js.deps.get ## Update the dev app and all dependencies/extensions/forks, and run migrations
 
-update.app: update.repo ## Update the app and Bonfire extensions in ./deps
-	@make --no-print-directory mix.remote~updates
+update.app: update.repo update.deps ## Update the app and Bonfire extensions in ./deps
+
+update.deps: ## Update Bonfire extensions in ./deps
+	@make --no-print-directory mix.remote~updates 
 
 update.repo:
 	@chmod +x git-publish.sh && ./git-publish.sh . pull
@@ -247,7 +249,7 @@ endif
 
 #### CONTRIBUTION RELATED COMMANDS ####
 
-contrib.forks: contrib.forks.publish contrib.app.up ## Push all changes to the app and extensions in ./forks
+contrib.forks: contrib.forks.publish git.publish ## Push all changes to the app and extensions in ./forks
 
 contrib.release: contrib.forks.publish contrib.app.release ## Push all changes to the app and extensions in ./forks, increment the app version number, and push a new version/release
 

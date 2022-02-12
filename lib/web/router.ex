@@ -62,9 +62,10 @@ defmodule Bonfire.Web.Router do
 
   use_if_enabled Bonfire.UI.Reflow.Routes
   use_if_enabled Bonfire.UI.Coordination.Routes
+  use_if_enabled Bonfire.UI.Kanban.Routes
   use_if_enabled Bonfire.Breadpub.Web.Routes
   use_if_enabled Bonfire.Recyclapp.Routes
-  use_if_enabled Bonfire.UI.Kanban.Routes
+  use_if_enabled Bonfire.Upcycle.Web.Routes
 
   # include GraphQL API
   use_if_enabled Bonfire.GraphQL.Router
@@ -88,45 +89,41 @@ defmodule Bonfire.Web.Router do
   ## Below you can define routes specific to your flavour of Bonfire (which aren't handled by extensions)
 
   # pages anyone can view
-  scope "/", Bonfire do
+  scope "/" do
     pipe_through :browser
 
-    live "/", Web.HomeLive, as: :home
+    live "/", Bonfire.Web.HomeLive, as: :home
     # a default homepage which you can customise (at path "/")
     # can be replaced with something else (eg. bonfire_website extension or similar), in which case you may want to rename the path (eg. to "/home")
     # live "/", Website.HomeGuestLive, as: :landing
     # live "/home", Web.HomeLive, as: :home
 
-    live "/error", Common.Web.ErrorLive
+    live "/error", Bonfire.Common.Web.ErrorLive
 
   end
 
   # pages only guests can view
-  scope "/", Bonfire.Me.Web do
+  scope "/", Bonfire do
     pipe_through :browser
     pipe_through :guest_only
-
   end
 
   # pages you need an account to view
   scope "/", Bonfire do
     pipe_through :browser
     pipe_through :account_required
-
  end
 
   # pages you need to view as a user
   scope "/", Bonfire do
     pipe_through :browser
     pipe_through :user_required
-
   end
 
   # pages only admins can view
   scope "/settings/admin" do
     pipe_through :browser
     pipe_through :admin_required
-
   end
 
 

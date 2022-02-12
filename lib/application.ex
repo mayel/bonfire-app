@@ -39,11 +39,10 @@ defmodule Bonfire.Application do
       {Phoenix.PubSub, [name: Bonfire.PubSub, adapter: Phoenix.PubSub.PG2]}, # PubSub
       # Persistent Data Services
       Pointers.Tables,
+      # Bonfire.Data.AccessControl.Accesses,
       Bonfire.Common.ContextModules,
       Bonfire.Common.QueryModules,
       Bonfire.Federate.ActivityPub.FederationModules,
-      Bonfire.Data.AccessControl.Verbs,
-      Bonfire.Data.AccessControl.Accesses,
       # Stuff that uses all the above
       Bonfire.Web.Endpoint,                       # Web app
       {Oban, Application.fetch_env!(:bonfire, Oban)} # Job Queue

@@ -25,6 +25,9 @@ config :bonfire,
   user_schema: Bonfire.Data.Identity.User,
   org_schema: Bonfire.Data.Identity.User,
   home_page: Bonfire.Web.HomeLive,
+  default_pagination_limit: 40, # high limit for prod
+  thread_default_pagination_limit: 500, # very high limit for prod
+  thread_default_max_depth: 3, # how many nested replies to show
   localisation_path: "priv/localisation",
   ap_base_path: System.get_env("AP_BASE_PATH", "/pub"),
   signing_salt: "this-will-be-overriden-by-a-secure-string-in-runtime.exs",
@@ -46,6 +49,7 @@ config :bonfire, :ecto_repos, [Bonfire.Repo]
 config :bonfire, Bonfire.Repo,
   types: Bonfire.PostgresTypes,
   priv: flavour_path <> "/repo"
+config :ecto_sparkles, :otp_app, :bonfire
 
 # ecto query filtering
 # config :query_elf, :id_types, [:id, :binary_id, Pointers.ULID]
@@ -66,6 +70,7 @@ config :bonfire, Oban,
 
 config :mime, :types, %{
   "application/activity+json" => ["activity+json"],
+  "application/ld+json" => ["ld+json"],
   "application/jrd+json" => ["jrd+json"]
 }
 
