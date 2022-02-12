@@ -3,7 +3,7 @@ defmodule Bonfire.MixProject do
   use Mix.Project
 
   @config [ # TODO: put these in ENV or an external writeable config file similar to deps.*
-      version: "0.1.0-beta.271", # note that the flavour will automatically be added where the dash appears
+      version: "0.1.0-beta.272", # note that the flavour will automatically be added where the dash appears
       elixir: "~> 1.12",
       default_flavour: "classic",
       logo: "assets/static/images/bonfire-icon.png",
@@ -75,16 +75,16 @@ defmodule Bonfire.MixProject do
       "bonfire.seeds": [
         # "phil_columns.seed",
       ],
-      "bonfire.deps.update": ["deps.update " <>deps_to_update()],
-      "bonfire.deps.clean": ["deps.clean " <>deps_to_clean()<>" --build"],
-      "bonfire.deps.recompile": ["deps.compile " <>deps_to_update()<>" --force"],
+      "bonfire.deps.update": ["deps.update " <> deps_to_update()],
+      "bonfire.deps.clean": ["deps.clean " <> deps_to_clean() <> " --build"],
+      "bonfire.deps.recompile": ["deps.compile " <> deps_to_update() <> " --force"],
       "bonfire.deps": ["bonfire.deps.update", "bonfire.deps.clean"],
       setup: ["hex.setup", "rebar.setup", "deps.get", "bonfire.deps.clean", "ecto.setup"],
       updates: ["deps.get", "bonfire.deps"],
       upgrade: ["updates", "ecto.migrate"],
       "ecto.setup": ["ecto.create", "ecto.migrate"],
       "ecto.migrate": ["ecto.migrate", "bonfire.seeds"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
+      "ecto.reset": ["ecto.drop --force", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
     ]
 
@@ -100,7 +100,7 @@ defmodule Bonfire.MixProject do
       {:phoenix_live_reload, "~> 1.3", only: :dev},
       {:exsync, "~> 0.2", only: :dev},
       {:mix_unused, "~> 0.3.0", only: :dev},
-      {:ex_doc, "~> 0.24", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.26.0", only: [:dev, :test], runtime: false},
 
       # tests
       {:floki, ">= 0.0.0", only: [:dev, :test]},

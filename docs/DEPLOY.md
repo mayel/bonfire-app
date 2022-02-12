@@ -112,6 +112,11 @@ You can see the images available per flavour, version (we currently recommend us
 make rel.run
 ```
 
+Run this at the prompt: 
+
+`bin/bonfire remote` to enter Elixir's iex environment
+`EctoSparkles.ReleaseTasks.migrate` to initialise your database
+
 The backend should now be running at [http://localhost:4000/](http://localhost:4000/).
 
 - If that worked, start the app as a daemon next time:
@@ -151,8 +156,9 @@ There are some useful database-related release tasks under `EctoSparkles.Release
 - `rollback_to(version)` roll back to a specific version
 - `rollback_all` rolls back all migrations back to zero (caution: this means loosing all data)
 
-For example:
-`iex> EctoSparkles.ReleaseTasks.migrate` to create your database if it doesn't already exist.
+You can also directly call some functions in the code from the command line, for example:
+- to migrate: `docker exec bonfire_web bin/bonfire rpc 'EctoSparkles.ReleaseTasks.migrate'`
+- to make yourself an admin: `docker exec bonfire_web bin/bonfire rpc 'Bonfire.Me.Users.make_admin("my_username")'`
 
 #### Option A2 - Building your own Docker image
 
