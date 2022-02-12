@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.26.0">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.107">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.126">
 
-    <title>Bonfire.Social.Flags — bonfire v0.1.0-cooperation-beta.107</title>
+    <title>Bonfire.Social.Flags — bonfire v0.1.0-cooperation-beta.126</title>
     <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
 
-    <script src="dist/sidebar_items-b326056455.js"></script>
+    <script src="dist/sidebar_items-67ec40a56c.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.107
+        v0.1.0-cooperation-beta.126
       </strong>
     </div>
 
@@ -87,7 +87,7 @@ bonfire
 
 <h1>
   <span translate="no">Bonfire.Social.Flags</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.107)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.126)</small>
 
 
 </h1>
@@ -118,7 +118,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#by_any/1" translate="no">by_any(user)</a>
+          <a href="#by_flagged/1" translate="no">by_flagged(object)</a>
 
         </div>
 
@@ -126,15 +126,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#by_flagged/1" translate="no">by_flagged(user)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#by_flagger/1" translate="no">by_flagger(user)</a>
+          <a href="#by_flagger/1" translate="no">by_flagger(subject)</a>
 
         </div>
 
@@ -158,7 +150,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#filter/3" translate="no">filter(arg1, id, query)</a>
+          <a href="#flag/3" translate="no">flag(flagger, flagged, opts \\ [])</a>
 
         </div>
 
@@ -166,7 +158,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#flag/2" translate="no">flag(flagger, flagged)</a>
+          <a href="#flagged?/2" translate="no">flagged?(user, object)</a>
 
         </div>
 
@@ -174,7 +166,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#flagged?/2" translate="no">flagged?(user, flagged)</a>
+          <a href="#get/3" translate="no">get(subject, object, opts \\ [])</a>
 
         </div>
 
@@ -182,7 +174,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#get/2" translate="no">get(user, flagged)</a>
+          <a href="#get!/3" translate="no">get!(subject, object, opts \\ [])</a>
 
         </div>
 
@@ -190,7 +182,37 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#get!/2" translate="no">get!(user, flagged)</a>
+          <a href="#list_by/2" translate="no">list_by(by_user, opts \\ [])</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>List flags by the user and which are in their outbox</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#list_my/1" translate="no">list_my(opts)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>List current user's flags, which are in their outbox</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#list_of/2" translate="no">list_of(object, opts \\ [])</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>List flag of an object and which are in a feed</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#list_paginated/2" translate="no">list_paginated(filters, current_user_or_socket_or_opts \\ [])</a>
 
         </div>
 
@@ -198,41 +220,17 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#list/3" translate="no">list(current_user, opts \\ [], preloads \\ :all)</a>
+          <a href="#queries_module/0" translate="no">queries_module()</a>
 
         </div>
-
-          <div class="summary-synopsis"><p>List all flags I can see</p></div>
 
       </div>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#list_by/4" translate="no">list_by(by_user, current_user \\ nil, opts \\ [], preloads \\ :all)</a>
+          <a href="#query/2" translate="no">query(filters, opts)</a>
 
         </div>
-
-          <div class="summary-synopsis"><p>List flags by a user</p></div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#list_my/3" translate="no">list_my(current_user_or_socket, opts \\ [], preloads \\ :all)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>List current user's flags</p></div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#list_of/4" translate="no">list_of(id, current_user \\ nil, opts \\ [], preloads \\ :all)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>List flags of an object</p></div>
 
       </div>
 
@@ -275,23 +273,6 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="by_any/1">
-
-  <div class="detail-header">
-    <a href="#by_any/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">by_any(user)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
 <section class="detail" id="by_flagged/1">
 
   <div class="detail-header">
@@ -299,7 +280,7 @@ Functions
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">by_flagged(user)</h1>
+    <h1 class="signature" translate="no">by_flagged(object)</h1>
 
 
   </div>
@@ -316,7 +297,7 @@ Functions
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">by_flagger(user)</h1>
+    <h1 class="signature" translate="no">by_flagger(subject)</h1>
 
 
   </div>
@@ -360,31 +341,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="filter/3">
+<section class="detail" id="flag/3">
+
+    <span id="flag/2"></span>
 
   <div class="detail-header">
-    <a href="#filter/3" class="detail-link" title="Link to this function">
+    <a href="#flag/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">filter(arg1, id, query)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="flag/2">
-
-  <div class="detail-header">
-    <a href="#flag/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">flag(flagger, flagged)</h1>
+    <h1 class="signature" translate="no">flag(flagger, flagged, opts \\ [])</h1>
 
 
   </div>
@@ -401,7 +367,7 @@ Functions
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">flagged?(user, flagged)</h1>
+    <h1 class="signature" translate="no">flagged?(user, object)</h1>
 
 
   </div>
@@ -411,14 +377,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="get/2">
+<section class="detail" id="get/3">
+
+    <span id="get/2"></span>
 
   <div class="detail-header">
-    <a href="#get/2" class="detail-link" title="Link to this function">
+    <a href="#get/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">get(user, flagged)</h1>
+    <h1 class="signature" translate="no">get(subject, object, opts \\ [])</h1>
 
 
   </div>
@@ -428,14 +396,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="get!/2">
+<section class="detail" id="get!/3">
+
+    <span id="get!/2"></span>
 
   <div class="detail-header">
-    <a href="#get!/2" class="detail-link" title="Link to this function">
+    <a href="#get!/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">get!(user, flagged)</h1>
+    <h1 class="signature" translate="no">get!(subject, object, opts \\ [])</h1>
 
 
   </div>
@@ -445,92 +415,112 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="list/3">
-
-    <span id="list/1"></span>
-
-    <span id="list/2"></span>
-
-  <div class="detail-header">
-    <a href="#list/3" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">list(current_user, opts \\ [], preloads \\ :all)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>List all flags I can see</p>
-  </section>
-</section>
-<section class="detail" id="list_by/4">
+<section class="detail" id="list_by/2">
 
     <span id="list_by/1"></span>
 
-    <span id="list_by/2"></span>
-
-    <span id="list_by/3"></span>
-
   <div class="detail-header">
-    <a href="#list_by/4" class="detail-link" title="Link to this function">
+    <a href="#list_by/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">list_by(by_user, current_user \\ nil, opts \\ [], preloads \\ :all)</h1>
+    <h1 class="signature" translate="no">list_by(by_user, opts \\ [])</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>List flags by a user</p>
+<p>List flags by the user and which are in their outbox</p>
   </section>
 </section>
-<section class="detail" id="list_my/3">
-
-    <span id="list_my/1"></span>
-
-    <span id="list_my/2"></span>
+<section class="detail" id="list_my/1">
 
   <div class="detail-header">
-    <a href="#list_my/3" class="detail-link" title="Link to this function">
+    <a href="#list_my/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">list_my(current_user_or_socket, opts \\ [], preloads \\ :all)</h1>
+    <h1 class="signature" translate="no">list_my(opts)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>List current user's flags</p>
+<p>List current user's flags, which are in their outbox</p>
   </section>
 </section>
-<section class="detail" id="list_of/4">
+<section class="detail" id="list_of/2">
 
     <span id="list_of/1"></span>
 
-    <span id="list_of/2"></span>
-
-    <span id="list_of/3"></span>
-
   <div class="detail-header">
-    <a href="#list_of/4" class="detail-link" title="Link to this function">
+    <a href="#list_of/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">list_of(id, current_user \\ nil, opts \\ [], preloads \\ :all)</h1>
+    <h1 class="signature" translate="no">list_of(object, opts \\ [])</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>List flags of an object</p>
+<p>List flag of an object and which are in a feed</p>
+  </section>
+</section>
+<section class="detail" id="list_paginated/2">
+
+    <span id="list_paginated/1"></span>
+
+  <div class="detail-header">
+    <a href="#list_paginated/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">list_paginated(filters, current_user_or_socket_or_opts \\ [])</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="queries_module/0">
+
+  <div class="detail-header">
+    <a href="#queries_module/0" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">queries_module()</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="query/2">
+
+  <div class="detail-header">
+    <a href="#query/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">query(filters, opts)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 <section class="detail" id="unflag/2">

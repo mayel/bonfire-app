@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.26.0">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.107">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.126">
 
-    <title>Bonfire.Social.Likes — bonfire v0.1.0-cooperation-beta.107</title>
+    <title>Bonfire.Social.Likes — bonfire v0.1.0-cooperation-beta.126</title>
     <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
 
-    <script src="dist/sidebar_items-b326056455.js"></script>
+    <script src="dist/sidebar_items-67ec40a56c.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.107
+        v0.1.0-cooperation-beta.126
       </strong>
     </div>
 
@@ -87,7 +87,7 @@ bonfire
 
 <h1>
   <span translate="no">Bonfire.Social.Likes</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.107)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.126)</small>
 
 
 </h1>
@@ -126,7 +126,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#by_any/1" translate="no">by_any(user)</a>
+          <a href="#by_liked/1" translate="no">by_liked(subject)</a>
 
         </div>
 
@@ -134,23 +134,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#by_liked/1" translate="no">by_liked(user)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#by_liker/1" translate="no">by_liker(user)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#by_liker/2" translate="no">by_liker(user, type)</a>
+          <a href="#by_liker/1" translate="no">by_liker(subject)</a>
 
         </div>
 
@@ -174,7 +158,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#filter/3" translate="no">filter(atom, user_id, query)</a>
+          <a href="#get/3" translate="no">get(subject, object, opts \\ [])</a>
 
         </div>
 
@@ -182,15 +166,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#get/2" translate="no">get(user, liked)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#get!/2" translate="no">get!(user, liked)</a>
+          <a href="#get!/3" translate="no">get!(subject, object, opts \\ [])</a>
 
         </div>
 
@@ -206,7 +182,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#liked?/2" translate="no">liked?(user, liked)</a>
+          <a href="#liked?/2" translate="no">liked?(user, object)</a>
 
         </div>
 
@@ -245,6 +221,14 @@ bonfire
       <div class="summary-row">
         <div class="summary-signature">
           <a href="#queries_module/0" translate="no">queries_module()</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#query/2" translate="no">query(filters, opts)</a>
 
         </div>
 
@@ -306,23 +290,6 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="by_any/1">
-
-  <div class="detail-header">
-    <a href="#by_any/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">by_any(user)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
 <section class="detail" id="by_liked/1">
 
   <div class="detail-header">
@@ -330,7 +297,7 @@ Functions
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">by_liked(user)</h1>
+    <h1 class="signature" translate="no">by_liked(subject)</h1>
 
 
   </div>
@@ -347,24 +314,7 @@ Functions
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">by_liker(user)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="by_liker/2">
-
-  <div class="detail-header">
-    <a href="#by_liker/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">by_liker(user, type)</h1>
+    <h1 class="signature" translate="no">by_liker(subject)</h1>
 
 
   </div>
@@ -408,14 +358,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="filter/3">
+<section class="detail" id="get/3">
+
+    <span id="get/2"></span>
 
   <div class="detail-header">
-    <a href="#filter/3" class="detail-link" title="Link to this function">
+    <a href="#get/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">filter(atom, user_id, query)</h1>
+    <h1 class="signature" translate="no">get(subject, object, opts \\ [])</h1>
 
 
   </div>
@@ -425,31 +377,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="get/2">
+<section class="detail" id="get!/3">
+
+    <span id="get!/2"></span>
 
   <div class="detail-header">
-    <a href="#get/2" class="detail-link" title="Link to this function">
+    <a href="#get!/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">get(user, liked)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="get!/2">
-
-  <div class="detail-header">
-    <a href="#get!/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">get!(user, liked)</h1>
+    <h1 class="signature" translate="no">get!(subject, object, opts \\ [])</h1>
 
 
   </div>
@@ -483,7 +420,7 @@ Functions
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">liked?(user, liked)</h1>
+    <h1 class="signature" translate="no">liked?(user, object)</h1>
 
 
   </div>
@@ -568,6 +505,23 @@ Functions
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">queries_module()</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="query/2">
+
+  <div class="detail-header">
+    <a href="#query/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">query(filters, opts)</h1>
 
 
   </div>

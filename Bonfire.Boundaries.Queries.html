@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.26.0">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.107">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.126">
 
-    <title>Bonfire.Boundaries.Queries — bonfire v0.1.0-cooperation-beta.107</title>
+    <title>Bonfire.Boundaries.Queries — bonfire v0.1.0-cooperation-beta.126</title>
     <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
 
-    <script src="dist/sidebar_items-b326056455.js"></script>
+    <script src="dist/sidebar_items-67ec40a56c.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.107
+        v0.1.0-cooperation-beta.126
       </strong>
     </div>
 
@@ -87,7 +87,7 @@ bonfire
 
 <h1>
   <span translate="no">Bonfire.Boundaries.Queries</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.107)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.126)</small>
 
 
 </h1>
@@ -140,7 +140,7 @@ providing) the return type of a subquery.</p>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#can?/3" translate="no">can?(controlled, user, verb \\ :see)</a>
+          <a href="#boundarise/3" translate="no">boundarise(query, field_ref, opts)</a>
 
         </div>
 
@@ -148,36 +148,12 @@ providing) the return type of a subquery.</p>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#can_delete?/2" translate="no">can_delete?(controlled, user)</a>
+          <a href="#filter_where_not/2" translate="no">filter_where_not(user, verbs \\ [:see, :read])</a>
 
         </div>
 
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#can_edit?/2" translate="no">can_edit?(controlled, user)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#can_read?/2" translate="no">can_read?(controlled, user)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#can_see?/2" translate="no">can_see?(controlled, user)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>A subquery to join to which filters out results the current user is
-not permitted to see.</p></div>
+          <div class="summary-synopsis"><p>A subquery which filters out results the current user is
+not permitted to perform <em>all</em> of the verbs on.</p></div>
 
       </div>
 
@@ -191,12 +167,17 @@ not permitted to see.</p></div>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#permitted_on/2" translate="no">permitted_on(controlled_schema, user)</a>
+          <a href="#skip_boundary_check?/1" translate="no">skip_boundary_check?(opts)</a>
 
         </div>
 
-          <div class="summary-synopsis"><p>FIXME
-Lists permitted interactions on something for the current user.</p></div>
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#user_and_circle_ids/1" translate="no">user_and_circle_ids(user)</a>
+
+        </div>
 
       </div>
 
@@ -252,16 +233,14 @@ Functions
 <p>Call the <code class="inline">agg_perms(bool?)</code> postgres aggregate for combining permissions.</p>
   </section>
 </section>
-<section class="detail" id="can?/3">
-
-    <span id="can?/2"></span>
+<section class="detail" id="boundarise/3">
 
   <div class="detail-header">
-    <a href="#can?/3" class="detail-link" title="Link to this macro">
+    <a href="#boundarise/3" class="detail-link" title="Link to this macro">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this macro</span>
     </a>
-    <h1 class="signature" translate="no">can?(controlled, user, verb \\ :see)</h1>
+    <h1 class="signature" translate="no">boundarise(query, field_ref, opts)</h1>
 
 
       <span class="note">(macro)</span>
@@ -273,83 +252,25 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="can_delete?/2">
+<section class="detail" id="filter_where_not/2">
+
+    <span id="filter_where_not/1"></span>
 
   <div class="detail-header">
-    <a href="#can_delete?/2" class="detail-link" title="Link to this macro">
+    <a href="#filter_where_not/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this macro</span>
+      <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">can_delete?(controlled, user)</h1>
+    <h1 class="signature" translate="no">filter_where_not(user, verbs \\ [:see, :read])</h1>
 
-
-      <span class="note">(macro)</span>
 
   </div>
 
   <section class="docstring">
 
-
-  </section>
-</section>
-<section class="detail" id="can_edit?/2">
-
-  <div class="detail-header">
-    <a href="#can_edit?/2" class="detail-link" title="Link to this macro">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this macro</span>
-    </a>
-    <h1 class="signature" translate="no">can_edit?(controlled, user)</h1>
-
-
-      <span class="note">(macro)</span>
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="can_read?/2">
-
-  <div class="detail-header">
-    <a href="#can_read?/2" class="detail-link" title="Link to this macro">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this macro</span>
-    </a>
-    <h1 class="signature" translate="no">can_read?(controlled, user)</h1>
-
-
-      <span class="note">(macro)</span>
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="can_see?/2">
-
-  <div class="detail-header">
-    <a href="#can_see?/2" class="detail-link" title="Link to this macro">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this macro</span>
-    </a>
-    <h1 class="signature" translate="no">can_see?(controlled, user)</h1>
-
-
-      <span class="note">(macro)</span>
-
-  </div>
-
-  <section class="docstring">
-
-<p>A subquery to join to which filters out results the current user is
-not permitted to see.</p><p>Parameters are the alias for the controlled item in the parent
-query and an expression evaluating to the current user.</p><p>Currently requires a lateral join, but this shouldn't be necessary
-once we've figured out how to make ecto support what we do better.</p>
+<p>A subquery which filters out results the current user is
+not permitted to perform <em>all</em> of the verbs on.</p><p>Parameters are the alias for the controlled item in the parent
+query and an expression evaluating to the current user.</p>
   </section>
 </section>
 <section class="detail" id="object_only_visible_for/2">
@@ -371,24 +292,38 @@ once we've figured out how to make ecto support what we do better.</p>
 
   </section>
 </section>
-<section class="detail" id="permitted_on/2">
+<section class="detail" id="skip_boundary_check?/1">
 
   <div class="detail-header">
-    <a href="#permitted_on/2" class="detail-link" title="Link to this function">
+    <a href="#skip_boundary_check?/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">permitted_on(controlled_schema, user)</h1>
+    <h1 class="signature" translate="no">skip_boundary_check?(opts)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>FIXME
-Lists permitted interactions on something for the current user.</p><p>Parameters are the alias for the controlled item in the parent
-query and an expression evaluating to the current user.</p><p>Currently requires a left lateral join. The final version may or may
-not, depending on how it is used.</p><p>Does not recognise admins correctly right now, they're treated as regular users.</p>
+
+  </section>
+</section>
+<section class="detail" id="user_and_circle_ids/1">
+
+  <div class="detail-header">
+    <a href="#user_and_circle_ids/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">user_and_circle_ids(user)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 

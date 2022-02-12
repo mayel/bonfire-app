@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.26.0">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.107">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.126">
 
-    <title>Bonfire.Social.FeedActivities — bonfire v0.1.0-cooperation-beta.107</title>
+    <title>Bonfire.Social.FeedActivities — bonfire v0.1.0-cooperation-beta.126</title>
     <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
 
-    <script src="dist/sidebar_items-b326056455.js"></script>
+    <script src="dist/sidebar_items-67ec40a56c.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.107
+        v0.1.0-cooperation-beta.126
       </strong>
     </div>
 
@@ -87,7 +87,7 @@ bonfire
 
 <h1>
   <span translate="no">Bonfire.Social.FeedActivities</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.107)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.126)</small>
 
 
 </h1>
@@ -110,6 +110,14 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#cast_data/4" translate="no">cast_data(changeset, activity, creator, preset_or_custom_boundary)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#context_module/0" translate="no">context_module()</a>
 
         </div>
@@ -128,7 +136,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#feed/4" translate="no">feed(feed, current_user_or_socket \\ nil, opts \\ [], preloads \\ :all)</a>
+          <a href="#feed/3" translate="no">feed(feed, current_user_or_socket_or_opts \\ [], preloads \\ :all)</a>
 
         </div>
 
@@ -136,18 +144,9 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#feed/5" translate="no">feed(_, _, _, _, _)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#feed_paginated/5" translate="no">feed_paginated(
+          <a href="#feed_paginated/4" translate="no">feed_paginated(
   filters \\ [],
-  current_user \\ nil,
-  opts \\ nil,
+  current_user_or_socket_or_opts \\ [],
   preloads \\ :all,
   query \\ FeedPublish
 )</a>
@@ -163,24 +162,6 @@ bonfire
           <a href="#feeds_for_activity/1" translate="no">feeds_for_activity(id)</a>
 
         </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#maybe_federate_activity/1" translate="no">maybe_federate_activity(activity)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#maybe_feed_publish/4" translate="no">maybe_feed_publish(subject, verb_or_activity, object \\ nil, feeds)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>Creates a new local activity or takes an existing one and publishes to specified feeds</p></div>
 
       </div>
 
@@ -224,7 +205,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#notify_inboxes/4" translate="no">notify_inboxes(subject, verb_or_activity, object, inbox_ids)</a>
+          <a href="#notify_feeds/4" translate="no">notify_feeds(subject, verb_or_activity, object, feed_ids)</a>
 
         </div>
 
@@ -236,20 +217,13 @@ bonfire
 
         </div>
 
-          <div class="summary-synopsis"><p>Creates a new local activity or takes an existing one and publishes to object's inbox (assuming object is treated as a character)</p></div>
+          <div class="summary-synopsis"><p>Creates a new local activity or takes an existing one and publishes to object's inbox (assuming object is a character)</p></div>
 
       </div>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#publish/6" translate="no">publish(
-  subject,
-  verb,
-  object,
-  circles \\ [],
-  preset_boundary_OR_mentions_and_tags_are_private? \\ true,
-  replies_are_private? \\ true
-)</a>
+          <a href="#publish/4" translate="no">publish(subject, verb_or_activity, object, preset_or_custom_boundary \\ nil)</a>
 
         </div>
 
@@ -267,7 +241,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#query/4" translate="no">query(filters \\ [], opts \\ nil, preloads \\ :all, query \\ FeedPublish)</a>
+          <a href="#query/4" translate="no">query(filters \\ [], current_user_or_socket_or_opts \\ [], preloads \\ :all, query \\ FeedPublish)</a>
 
         </div>
 
@@ -275,10 +249,9 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#query_paginated/5" translate="no">query_paginated(
+          <a href="#query_paginated/4" translate="no">query_paginated(
   filters \\ [],
-  current_user \\ nil,
-  opts \\ [],
+  current_user_or_socket_or_opts \\ [],
   preloads \\ :all,
   query \\ FeedPublish
 )</a>
@@ -311,6 +284,23 @@ bonfire
 Functions
     </h1>
     <div class="functions-list">
+<section class="detail" id="cast_data/4">
+
+  <div class="detail-header">
+    <a href="#cast_data/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">cast_data(changeset, activity, creator, preset_or_custom_boundary)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
 <section class="detail" id="context_module/0">
 
   <div class="detail-header">
@@ -345,20 +335,18 @@ Functions
 <p>Delete an activity (usage by things like unlike)</p>
   </section>
 </section>
-<section class="detail" id="feed/4">
+<section class="detail" id="feed/3">
 
     <span id="feed/1"></span>
 
     <span id="feed/2"></span>
 
-    <span id="feed/3"></span>
-
   <div class="detail-header">
-    <a href="#feed/4" class="detail-link" title="Link to this function">
+    <a href="#feed/3" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">feed(feed, current_user_or_socket \\ nil, opts \\ [], preloads \\ :all)</h1>
+    <h1 class="signature" translate="no">feed(feed, current_user_or_socket_or_opts \\ [], preloads \\ :all)</h1>
 
 
   </div>
@@ -368,24 +356,7 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="feed/5">
-
-  <div class="detail-header">
-    <a href="#feed/5" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">feed(_, _, _, _, _)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="feed_paginated/5">
+<section class="detail" id="feed_paginated/4">
 
     <span id="feed_paginated/0"></span>
 
@@ -395,17 +366,14 @@ Functions
 
     <span id="feed_paginated/3"></span>
 
-    <span id="feed_paginated/4"></span>
-
   <div class="detail-header">
-    <a href="#feed_paginated/5" class="detail-link" title="Link to this function">
+    <a href="#feed_paginated/4" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">feed_paginated(
   filters \\ [],
-  current_user \\ nil,
-  opts \\ nil,
+  current_user_or_socket_or_opts \\ [],
   preloads \\ :all,
   query \\ FeedPublish
 )</h1>
@@ -433,42 +401,6 @@ Functions
   <section class="docstring">
 
 
-  </section>
-</section>
-<section class="detail" id="maybe_federate_activity/1">
-
-  <div class="detail-header">
-    <a href="#maybe_federate_activity/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">maybe_federate_activity(activity)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="maybe_feed_publish/4">
-
-    <span id="maybe_feed_publish/3"></span>
-
-  <div class="detail-header">
-    <a href="#maybe_feed_publish/4" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">maybe_feed_publish(subject, verb_or_activity, object \\ nil, feeds)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Creates a new local activity or takes an existing one and publishes to specified feeds</p>
   </section>
 </section>
 <section class="detail" id="maybe_notify_creator/3">
@@ -543,14 +475,14 @@ Functions
 <p>Creates a new local activity or takes an existing one and publishes to object's inbox (if object is an actor)</p>
   </section>
 </section>
-<section class="detail" id="notify_inboxes/4">
+<section class="detail" id="notify_feeds/4">
 
   <div class="detail-header">
-    <a href="#notify_inboxes/4" class="detail-link" title="Link to this function">
+    <a href="#notify_feeds/4" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">notify_inboxes(subject, verb_or_activity, object, inbox_ids)</h1>
+    <h1 class="signature" translate="no">notify_feeds(subject, verb_or_activity, object, feed_ids)</h1>
 
 
   </div>
@@ -574,30 +506,19 @@ Functions
 
   <section class="docstring">
 
-<p>Creates a new local activity or takes an existing one and publishes to object's inbox (assuming object is treated as a character)</p>
+<p>Creates a new local activity or takes an existing one and publishes to object's inbox (assuming object is a character)</p>
   </section>
 </section>
-<section class="detail" id="publish/6">
+<section class="detail" id="publish/4">
 
     <span id="publish/3"></span>
 
-    <span id="publish/4"></span>
-
-    <span id="publish/5"></span>
-
   <div class="detail-header">
-    <a href="#publish/6" class="detail-link" title="Link to this function">
+    <a href="#publish/4" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">publish(
-  subject,
-  verb,
-  object,
-  circles \\ [],
-  preset_boundary_OR_mentions_and_tags_are_private? \\ true,
-  replies_are_private? \\ true
-)</h1>
+    <h1 class="signature" translate="no">publish(subject, verb_or_activity, object, preset_or_custom_boundary \\ nil)</h1>
 
 
   </div>
@@ -639,7 +560,7 @@ Functions
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">query(filters \\ [], opts \\ nil, preloads \\ :all, query \\ FeedPublish)</h1>
+    <h1 class="signature" translate="no">query(filters \\ [], current_user_or_socket_or_opts \\ [], preloads \\ :all, query \\ FeedPublish)</h1>
 
 
   </div>
@@ -649,7 +570,7 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="query_paginated/5">
+<section class="detail" id="query_paginated/4">
 
     <span id="query_paginated/0"></span>
 
@@ -659,17 +580,14 @@ Functions
 
     <span id="query_paginated/3"></span>
 
-    <span id="query_paginated/4"></span>
-
   <div class="detail-header">
-    <a href="#query_paginated/5" class="detail-link" title="Link to this function">
+    <a href="#query_paginated/4" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">query_paginated(
   filters \\ [],
-  current_user \\ nil,
-  opts \\ [],
+  current_user_or_socket_or_opts \\ [],
   preloads \\ :all,
   query \\ FeedPublish
 )</h1>

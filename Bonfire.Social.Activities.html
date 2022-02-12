@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.26.0">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.107">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.126">
 
-    <title>Bonfire.Social.Activities — bonfire v0.1.0-cooperation-beta.107</title>
+    <title>Bonfire.Social.Activities — bonfire v0.1.0-cooperation-beta.126</title>
     <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
 
-    <script src="dist/sidebar_items-b326056455.js"></script>
+    <script src="dist/sidebar_items-67ec40a56c.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.107
+        v0.1.0-cooperation-beta.126
       </strong>
     </div>
 
@@ -87,7 +87,7 @@ bonfire
 
 <h1>
   <span translate="no">Bonfire.Social.Activities</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.107)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.126)</small>
 
 
 </h1>
@@ -110,7 +110,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#activity_preloads/3" translate="no">activity_preloads(query, current_user, preloads)</a>
+          <a href="#activity_preloads/3" translate="no">activity_preloads(query, opts, preloads)</a>
 
         </div>
 
@@ -134,7 +134,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#as_permitted_for/2" translate="no">as_permitted_for(q, opts \\ nil)</a>
+          <a href="#as_permitted_for/2" translate="no">as_permitted_for(q, opts \\ [])</a>
 
         </div>
 
@@ -143,6 +143,14 @@ bonfire
       <div class="summary-row">
         <div class="summary-signature">
           <a href="#by_subject_verb_object_q/3" translate="no">by_subject_verb_object_q(subject, verb, object)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#cast/4" translate="no">cast(changeset, verb, creator, preset_or_custom_boundary)</a>
 
         </div>
 
@@ -171,7 +179,7 @@ bonfire
         </div>
 
           <div class="summary-synopsis"><p>Create an Activity
-NOTE: you will usually want to use <code class="inline">FeedActivities.publish/3</code> instead</p></div>
+NOTE: you will usually want to use <code class="inline">cast/3</code> instead</p></div>
 
       </div>
 
@@ -198,30 +206,6 @@ NOTE: you will usually want to use <code class="inline">FeedActivities.publish/3
       <div class="summary-row">
         <div class="summary-signature">
           <a href="#load_object/1" translate="no">load_object(id_or_pointer)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#maybe_my_boost/2" translate="no">maybe_my_boost(q, current_user)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#maybe_my_flag/2" translate="no">maybe_my_flag(q, current_user)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#maybe_my_like/2" translate="no">maybe_my_like(q, current_user)</a>
 
         </div>
 
@@ -273,7 +257,7 @@ NOTE: you will usually want to use <code class="inline">FeedActivities.publish/3
   q,
   verb \\ :create,
   object_id_field \\ :id,
-  current_user \\ nil,
+  opts \\ [],
   preloads \\ :default
 )</a>
 
@@ -283,7 +267,7 @@ NOTE: you will usually want to use <code class="inline">FeedActivities.publish/3
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#query_object_preload_create_activity/3" translate="no">query_object_preload_create_activity(q, current_user, preloads \\ :default)</a>
+          <a href="#query_object_preload_create_activity/3" translate="no">query_object_preload_create_activity(q, opts \\ [], preloads \\ :default)</a>
 
         </div>
 
@@ -296,6 +280,30 @@ NOTE: you will usually want to use <code class="inline">FeedActivities.publish/3
         </div>
 
           <div class="summary-synopsis"><p>Get an activity by its object ID (usually a create activity)</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#verb/1" translate="no">verb(verb)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#verb_display/1" translate="no">verb_display(verb)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#verb_maybe_modify/2" translate="no">verb_maybe_modify(verb, arg2)</a>
+
+        </div>
 
       </div>
 
@@ -320,7 +328,7 @@ Functions
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">activity_preloads(query, current_user, preloads)</h1>
+    <h1 class="signature" translate="no">activity_preloads(query, opts, preloads)</h1>
 
 
   </div>
@@ -373,7 +381,7 @@ Functions
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">as_permitted_for(q, opts \\ nil)</h1>
+    <h1 class="signature" translate="no">as_permitted_for(q, opts \\ [])</h1>
 
 
   </div>
@@ -391,6 +399,23 @@ Functions
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">by_subject_verb_object_q(subject, verb, object)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="cast/4">
+
+  <div class="detail-header">
+    <a href="#cast/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">cast(changeset, verb, creator, preset_or_custom_boundary)</h1>
 
 
   </div>
@@ -451,7 +476,7 @@ Functions
   <section class="docstring">
 
 <p>Create an Activity
-NOTE: you will usually want to use <code class="inline">FeedActivities.publish/3</code> instead</p>
+NOTE: you will usually want to use <code class="inline">cast/3</code> instead</p>
   </section>
 </section>
 <section class="detail" id="delete_by_subject_verb_object/3">
@@ -496,57 +521,6 @@ NOTE: you will usually want to use <code class="inline">FeedActivities.publish/3
       <span class="sr-only">Link to this function</span>
     </a>
     <h1 class="signature" translate="no">load_object(id_or_pointer)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="maybe_my_boost/2">
-
-  <div class="detail-header">
-    <a href="#maybe_my_boost/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">maybe_my_boost(q, current_user)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="maybe_my_flag/2">
-
-  <div class="detail-header">
-    <a href="#maybe_my_flag/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">maybe_my_flag(q, current_user)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="maybe_my_like/2">
-
-  <div class="detail-header">
-    <a href="#maybe_my_like/2" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">maybe_my_like(q, current_user)</h1>
 
 
   </div>
@@ -670,7 +644,7 @@ NOTE: you will usually want to use <code class="inline">FeedActivities.publish/3
   q,
   verb \\ :create,
   object_id_field \\ :id,
-  current_user \\ nil,
+  opts \\ [],
   preloads \\ :default
 )</h1>
 
@@ -684,6 +658,8 @@ NOTE: you will usually want to use <code class="inline">FeedActivities.publish/3
 </section>
 <section class="detail" id="query_object_preload_create_activity/3">
 
+    <span id="query_object_preload_create_activity/1"></span>
+
     <span id="query_object_preload_create_activity/2"></span>
 
   <div class="detail-header">
@@ -691,7 +667,7 @@ NOTE: you will usually want to use <code class="inline">FeedActivities.publish/3
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">query_object_preload_create_activity(q, current_user, preloads \\ :default)</h1>
+    <h1 class="signature" translate="no">query_object_preload_create_activity(q, opts \\ [], preloads \\ :default)</h1>
 
 
   </div>
@@ -718,6 +694,57 @@ NOTE: you will usually want to use <code class="inline">FeedActivities.publish/3
   <section class="docstring">
 
 <p>Get an activity by its object ID (usually a create activity)</p>
+  </section>
+</section>
+<section class="detail" id="verb/1">
+
+  <div class="detail-header">
+    <a href="#verb/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">verb(verb)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="verb_display/1">
+
+  <div class="detail-header">
+    <a href="#verb_display/1" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">verb_display(verb)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="verb_maybe_modify/2">
+
+  <div class="detail-header">
+    <a href="#verb_maybe_modify/2" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">verb_maybe_modify(verb, arg2)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 

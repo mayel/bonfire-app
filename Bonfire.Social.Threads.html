@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.26.0">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.107">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.126">
 
-    <title>Bonfire.Social.Threads — bonfire v0.1.0-cooperation-beta.107</title>
+    <title>Bonfire.Social.Threads — bonfire v0.1.0-cooperation-beta.126</title>
     <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
 
-    <script src="dist/sidebar_items-b326056455.js"></script>
+    <script src="dist/sidebar_items-67ec40a56c.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -58,7 +58,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.107
+        v0.1.0-cooperation-beta.126
       </strong>
     </div>
 
@@ -87,7 +87,7 @@ bonfire
 
 <h1>
   <span translate="no">Bonfire.Social.Threads</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.107)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.126)</small>
 
 
 </h1>
@@ -118,6 +118,17 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#cast/4" translate="no">cast(changeset, attrs, user, preset_or_custom_boundary)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Handles casting related to the reply and threading.
+If it's not a reply or the user is not permitted to reply to the thing, a new thread will be created.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#changeset/2" translate="no">changeset(replied \\ %Replied{}, attrs)</a>
 
         </div>
@@ -142,14 +153,6 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#get_replied/1" translate="no">get_replied(id)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
           <a href="#list_participants/4" translate="no">list_participants(thread_id, current_user \\ nil, opts \\ [], preloads \\ :minimal)</a>
 
         </div>
@@ -160,23 +163,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#list_replies/5" translate="no">list_replies(thread, current_user, cursor \\ nil, max_depth \\ 3, limit \\ 500)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#maybe_push_thread/3" translate="no">maybe_push_thread(creator, activity, reply)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#maybe_reply/1" translate="no">maybe_reply(reply_attrs)</a>
+          <a href="#list_replies/2" translate="no">list_replies(thread, opts \\ [])</a>
 
         </div>
 
@@ -192,7 +179,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#query/3" translate="no">query(filter, current_user_or_socket, max_depth \\ 3)</a>
+          <a href="#query/2" translate="no">query(filter, opts)</a>
 
         </div>
 
@@ -235,6 +222,24 @@ Functions
   <section class="docstring">
 
 
+  </section>
+</section>
+<section class="detail" id="cast/4">
+
+  <div class="detail-header">
+    <a href="#cast/4" class="detail-link" title="Link to this function">
+      <span class="icon-link" aria-hidden="true"></span>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">cast(changeset, attrs, user, preset_or_custom_boundary)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Handles casting related to the reply and threading.
+If it's not a reply or the user is not permitted to reply to the thing, a new thread will be created.</p>
   </section>
 </section>
 <section class="detail" id="changeset/2">
@@ -290,23 +295,6 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="get_replied/1">
-
-  <div class="detail-header">
-    <a href="#get_replied/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">get_replied(id)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
 <section class="detail" id="list_participants/4">
 
     <span id="list_participants/1"></span>
@@ -330,54 +318,16 @@ Functions
 <p>List participants in a thread (depending on user's boundaries)</p>
   </section>
 </section>
-<section class="detail" id="list_replies/5">
+<section class="detail" id="list_replies/2">
 
-    <span id="list_replies/2"></span>
-
-    <span id="list_replies/3"></span>
-
-    <span id="list_replies/4"></span>
+    <span id="list_replies/1"></span>
 
   <div class="detail-header">
-    <a href="#list_replies/5" class="detail-link" title="Link to this function">
+    <a href="#list_replies/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">list_replies(thread, current_user, cursor \\ nil, max_depth \\ 3, limit \\ 500)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="maybe_push_thread/3">
-
-  <div class="detail-header">
-    <a href="#maybe_push_thread/3" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">maybe_push_thread(creator, activity, reply)</h1>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="maybe_reply/1">
-
-  <div class="detail-header">
-    <a href="#maybe_reply/1" class="detail-link" title="Link to this function">
-      <span class="icon-link" aria-hidden="true"></span>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">maybe_reply(reply_attrs)</h1>
+    <h1 class="signature" translate="no">list_replies(thread, opts \\ [])</h1>
 
 
   </div>
@@ -404,16 +354,14 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="query/3">
-
-    <span id="query/2"></span>
+<section class="detail" id="query/2">
 
   <div class="detail-header">
-    <a href="#query/3" class="detail-link" title="Link to this function">
+    <a href="#query/2" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">query(filter, current_user_or_socket, max_depth \\ 3)</h1>
+    <h1 class="signature" translate="no">query(filter, opts)</h1>
 
 
   </div>

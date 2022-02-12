@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.26.0">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.107">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.126">
 
-    <title>Bonfire.Boundaries.DataCase — bonfire v0.1.0-cooperation-beta.107</title>
+    <title>mix bonfire.account.new — bonfire v0.1.0-cooperation-beta.126</title>
     <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
 
-    <script src="dist/sidebar_items-b326056455.js"></script>
+    <script src="dist/sidebar_items-67ec40a56c.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -18,7 +18,7 @@
 
 
   </head>
-  <body data-type="modules">
+  <body data-type="tasks">
     <script>
 
       try {
@@ -58,7 +58,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.107
+        v0.1.0-cooperation-beta.126
       </strong>
     </div>
 
@@ -86,22 +86,19 @@ bonfire
     <div id="content" class="content-inner">
 
 <h1>
-  <span translate="no">Bonfire.Boundaries.DataCase</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.107)</small>
+  <span translate="no">mix bonfire.account.new</span> 
+  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.126)</small>
 
 
 </h1>
 
 
   <section id="moduledoc">
-<p>This module defines the setup for tests requiring
-access to the application's data layer.</p><p>You may define functions here to be used as helpers in
-your tests.</p><p>Finally, if the test case interacts with the database,
-we enable the SQL sandbox, so changes done to the database
-are reverted at the end of every test. If you are using
-PostgreSQL, you can even run database tests asynchronously
-by setting <code class="inline">use Bonfire.Boundaries.DataCase, async: true</code>, although
-this option is not recommended for other databases.</p>
+<p>Creates an account in the database, automatically activated</p><h2 id="module-usage" class="section-heading">
+  <a href="#module-usage" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  Usage
+</h2>
+<pre><code class="makeup elixir"><span class="n">mix</span><span class="w"> </span><span class="n">bonfire</span><span class="o">.</span><span class="n">account</span><span class="o">.</span><span class="n">new</span><span class="w"> </span><span class="p" data-group-id="9537219630-1">[</span><span class="n">email</span><span class="na">@address</span><span class="p" data-group-id="9537219630-1">]</span></code></pre><p>You will be prompted for a password and an email if it was not provided.</p>
   </section>
 
 
@@ -121,11 +118,11 @@ this option is not recommended for other databases.</p>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#errors_on/1" translate="no">errors_on(changeset)</a>
+          <a href="#run/1" translate="no">run(args)</a>
 
         </div>
 
-          <div class="summary-synopsis"><p>A helper that transforms changeset errors into a map of messages.</p></div>
+          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/mix/Mix.Task.html#c:run/1"><code class="inline">Mix.Task.run/1</code></a>.</p></div>
 
       </div>
 
@@ -143,23 +140,28 @@ this option is not recommended for other databases.</p>
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="errors_on/1">
+<section class="detail" id="run/1">
 
   <div class="detail-header">
-    <a href="#errors_on/1" class="detail-link" title="Link to this function">
+    <a href="#run/1" class="detail-link" title="Link to this function">
       <span class="icon-link" aria-hidden="true"></span>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">errors_on(changeset)</h1>
+    <h1 class="signature" translate="no">run(args)</h1>
 
 
   </div>
 
   <section class="docstring">
 
-<p>A helper that transforms changeset errors into a map of messages.</p><pre><code class="makeup elixir"><span class="n">assert</span><span class="w"> </span><span class="p" data-group-id="0707498009-1">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="n">changeset</span><span class="p" data-group-id="0707498009-1">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Accounts</span><span class="o">.</span><span class="n">create_user</span><span class="p" data-group-id="0707498009-2">(</span><span class="p" data-group-id="0707498009-3">%{</span><span class="ss">password</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;short&quot;</span><span class="p" data-group-id="0707498009-3">}</span><span class="p" data-group-id="0707498009-2">)</span><span class="w">
-</span><span class="n">assert</span><span class="w"> </span><span class="s">&quot;password is too short&quot;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">errors_on</span><span class="p" data-group-id="0707498009-4">(</span><span class="n">changeset</span><span class="p" data-group-id="0707498009-4">)</span><span class="o">.</span><span class="n">password</span><span class="w">
-</span><span class="n">assert</span><span class="w"> </span><span class="p" data-group-id="0707498009-5">%{</span><span class="ss">password</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0707498009-6">[</span><span class="s">&quot;password is too short&quot;</span><span class="p" data-group-id="0707498009-6">]</span><span class="p" data-group-id="0707498009-5">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">errors_on</span><span class="p" data-group-id="0707498009-7">(</span><span class="n">changeset</span><span class="p" data-group-id="0707498009-7">)</span></code></pre>
+      <h2>Specs</h2>
+      <div class="specs">
+
+          <pre translate="no">run(<a href="https://hexdocs.pm/elixir/OptionParser.html#t:argv/0">OptionParser.argv</a>()) :: :ok</pre>
+
+      </div>
+
+<p>Callback implementation for <a href="https://hexdocs.pm/mix/Mix.Task.html#c:run/1"><code class="inline">Mix.Task.run/1</code></a>.</p>
   </section>
 </section>
 
