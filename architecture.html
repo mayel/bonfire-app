@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.26.0">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.135">
+    <meta name="generator" content="ExDoc v0.28.0">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.136">
 
-    <title>Bonfire Architecture — bonfire v0.1.0-cooperation-beta.135</title>
-    <link rel="stylesheet" href="dist/elixir-b5076885a795c65e636c.css" />
+    <title>Bonfire Architecture — bonfire v0.1.0-cooperation-beta.136</title>
+    <link rel="stylesheet" href="dist/elixir-a816d167216329cc463d.css" />
 
-    <script src="dist/sidebar_items-092130eed5.js"></script>
+    <script src="dist/sidebar_items-03773d4b2f.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-a404e1e870b77c874f9e.js"></script>
+    <script async src="dist/app-80aa23c1d96b6dc3c064.js"></script>
 
 
   </head>
@@ -30,17 +30,18 @@
 
 <div class="main">
 
-<button class="sidebar-button sidebar-toggle">
-  <span class="icon-menu" title="Collapse/expand sidebar"></span>
-</button>
 
 <section class="sidebar">
+  <button class="sidebar-button sidebar-toggle">
+    <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+  </button>
+
   <form class="sidebar-search" action="search.html">
     <button type="submit" class="search-button" aria-label="Submit Search">
-      <span class="icon-search" aria-hidden="true" title="Submit search"></span>
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
     </button>
     <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
-      <span class="icon-cross" aria-hidden="true" title="Cancel search"></span>
+      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
     </button>
     <label class="search-label">
       <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
@@ -53,30 +54,30 @@
   </div>
 
   <div class="sidebar-header">
-    <div class="sidebar-projectDetails">
-      <a href="readme.html" class="sidebar-projectName" translate="no">
-bonfire
-      </a>
-      <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.135
-      </strong>
-    </div>
 
       <a href="readme.html">
         <img src="assets/logo.png" alt="bonfire" class="sidebar-projectImage">
       </a>
 
+    <div class="sidebar-projectDetails">
+      <a href="readme.html" class="sidebar-projectName" translate="no">
+bonfire
+      </a>
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.1.0-cooperation-beta.136
+      </strong>
+    </div>
+    <ul class="sidebar-listNav">
+      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+        <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
+
+    </ul>
   </div>
 
-  <ul class="sidebar-listNav">
-    <li><a id="extras-list-link" href="#full-list">Pages</a></li>
-
-      <li><a id="modules-list-link" href="#full-list">Modules</a></li>
-
-
-      <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
-
-  </ul>
   <div class="gradient"></div>
   <ul id="full-list" class="sidebar-fullList"></ul>
 </section>
@@ -85,32 +86,37 @@ bonfire
   <div class="content-outer">
     <div id="content" class="content-inner">
 
-<h1 id="content">
-Bonfire Architecture
+<h1>
+<button class="settings display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
 
+
+  <span>Bonfire Architecture</span>
 </h1>
 
 <h2 id="hacking" class="section-heading">
-  <a href="#hacking" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#hacking" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Hacking
 </h2>
 <p>Bonfire is an unusual piece of software, developed in an unusual way. 
 It originally started with requests by Moodle users to be able to share and collaborate on educational resources with their peers and has been forked and evolved a lot since then.</p><p>Hacking on it is actually pretty fun. The codebase has a unique feeling to work with and we've relentlessly refactored to manage the ever-growing complexity that a distributed social networking toolkit implies. 
 That said, it is not easy to understand without context, which is what this document is here to provide.</p><h2 id="design-decisions" class="section-heading">
-  <a href="#design-decisions" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#design-decisions" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Design Decisions
 </h2>
 <p>Feature goals:</p><ul><li>Flexibility for developers and users.</li><li>Extreme configurability and extensibility.</li><li>Integrated federation with the existing fediverse.</li></ul><p>Operational goals:</p><ul><li>Easy to set up and run.</li><li>Light on resources for small deployments.</li><li>Scalable for large deployments.</li></ul><h2 id="stack" class="section-heading">
-  <a href="#stack" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#stack" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Stack
 </h2>
 <p>Our main implementation language is <a href="https://www.elixir-lang.org/">Elixir</a>, which is designed for building reliable systems. </p><p>We use the <a href="https://www.phoenixframework.org/">Phoenix</a> web framework with <a href="https://hexdocs.pm/phoenix_live_view/">LiveView</a> and <a href="https://surface-ui.org/documentation">Surface</a> for UI components and views.</p><p>Surface is a different syntax for LiveView that is designed to be more convenient and understandable to frontend developers, with extra compile time checks. Surface views and components are compiled into LiveView code (so once you hit runtime, Surface in effect doesn't exist any more). </p><p>Some extensions use the <a href="https://absinthe-graphql.org/">Absinthe</a> GraphQL library to expose an API.</p><h2 id="core-concepts" class="section-heading">
-  <a href="#core-concepts" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#core-concepts" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Core Concepts
 </h2>
 <p>There are a few things we take for granted in the bonfire ecosystem. Knowing a little about them will make understanding
 the code a lot simpler:</p><ul><li>The pointers system.</li><li>Our access control system.</li></ul><h2 id="the-pointers-system" class="section-heading">
-  <a href="#the-pointers-system" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#the-pointers-system" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   The pointers system
 </h2>
 <p>Social networks are essentially graphs. The most important part of them is not any particular piece of content, but how
@@ -123,37 +129,37 @@ don't know what type they are? Our solution for this comes in two parts:</p><ul>
 related fields that may be common to multiple pointables. In essence, they allow you to work with data regardless of
 which pointable you are working with. Mixins have a pointer ID as a primary key, thus each object may only 'use' a mixin once.</p><p>A good example of this is our access control mixin, <code class="inline">controlled</code>, which contains a foreign key to an <code class="inline">acl</code>. Thus
 <code class="inline">controlled</code> represents &quot;mixing in&quot; access control to a pointable.</p><h2 id="code-structure" class="section-heading">
-  <a href="#code-structure" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#code-structure" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Code Structure
 </h2>
-<p>The code is broadly composed of these namespaces:</p><ul><li><code class="inline">Bonfire.*</code> - Core application logic (very little code).</li><li><code class="inline">Bonfire.*.*</code> - Bonfire extensions (eg <a href="./Bonfire.Social.Posts.html"><code class="inline">Bonfire.Social.Posts</code></a>) containing mostly context modules, APIs, and routes</li><li><code class="inline">Bonfire.Data.*</code> - Extensions containing database schemas and migrations </li><li><code class="inline">Bonfire.UI.*</code> - UI component extensions</li><li><code class="inline">Bonfire.*.*.LiveHandler</code> - Backend logic to handle events in the frontend</li><li><code class="inline">Bonfire.Editor.*</code> (pluggable text editors, eg. CKEditor for WYSIWYG markdown input)</li><li><code class="inline">Bonfire.GraphQL.*</code> - Optional GraphQL API</li><li><code class="inline">Bonfire.Federate.*</code> - Optional Federation hooks</li><li><a href="./ActivityPub.html"><code class="inline">ActivityPub</code></a> - ActivityPub S2S models, logic and various helper modules </li><li><a href="./ActivityPubWeb.html"><code class="inline">ActivityPubWeb</code></a> - ActivityPub S2S REST endpoints, activity ingestion and push federation facilities </li><li><code class="inline">ValueFlows.*</code> - economic extensions implementing the <a href="https://www.valueflo.ws">ValueFlows vocabulary</a></li></ul><p>Contexts are were we put any core logic. A context often is circumscribed to providing logic for a particular object type (e. g. <a href="./Bonfire.Social.Posts.html"><code class="inline">Bonfire.Social.Posts</code></a> implements <a href="./Bonfire.Data.Social.Post.html"><code class="inline">Bonfire.Data.Social.Post</code></a>). </p><p>All Bonfire objects use an ULID as their primary key. We use the <a href="./Pointers.html"><code class="inline">Pointers</code></a> library (with extra logic in <a href="./Bonfire.Common.Pointers.html"><code class="inline">Bonfire.Common.Pointers</code></a>) to reference any object by its primary key without knowing what type it is beforehand. This is very useful as it allows for example following or liking many different types of objects (as opposed to say only a user or a post) and this approach allows us to store the context of the like/follow by only storing its primary key (see <a href="./Bonfire.Data.Social.Follow.html"><code class="inline">Bonfire.Data.Social.Follow</code></a>) for an example.</p><p>Context modules usually have <code class="inline">one/2</code>, <code class="inline">many/2</code>, and <code class="inline">many_paginated/1</code> functions for fetching objects, which in turn call a <code class="inline">query/2</code> function. These take a keyword list as filters (and an optional <code class="inline">opts</code> argument) allowing objects to be fetched by arbitrary criteria.</p><p>Examples:</p><pre><code class="makeup elixir"><span class="nc">Users</span><span class="o">.</span><span class="n">one</span><span class="p" data-group-id="0615159004-1">(</span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;bob&quot;</span><span class="p" data-group-id="0615159004-1">)</span><span class="w"> </span><span class="c1"># Fetching by username</span><span class="w">
-</span><span class="nc">Posts</span><span class="o">.</span><span class="n">many_paginated</span><span class="p" data-group-id="0615159004-2">(</span><span class="ss">by</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;01E9TQP93S8XFSV2ZATX1FQ528&quot;</span><span class="p" data-group-id="0615159004-2">)</span><span class="w"> </span><span class="c1"># List a page of posts by its author</span><span class="w">
-</span><span class="nc">EconomicResources</span><span class="o">.</span><span class="n">many</span><span class="p" data-group-id="0615159004-3">(</span><span class="ss">deleted</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="0615159004-3">)</span><span class="w"> </span><span class="c1"># List any deleted resources</span></code></pre><p>Context modules also have functions for creating, updating and deleting objects, as well as hooks for federating or indexing in the search engine.</p><p>Here is an incomplete sample of some of current extensions and modules:</p><ul><li><a href="./Bonfire.Me.Accounts.html"><code class="inline">Bonfire.Me.Accounts</code></a> (for managing and querying local user accounts)</li><li><a href="./Bonfire.Me.Users.html"><code class="inline">Bonfire.Me.Users</code></a> (for managing and querying both local and remote user identities and profiles)</li><li><a href="./Bonfire.Boundaries.html"><code class="inline">Bonfire.Boundaries</code></a> (for managing and querying circles, ACLs, permissions...)</li><li><a href="./Bonfire.Social.FeedActivities.html"><code class="inline">Bonfire.Social.FeedActivities</code></a>, <a href="./Bonfire.Social.Feeds.html"><code class="inline">Bonfire.Social.Feeds</code></a> and <a href="./Bonfire.Social.Activities.html"><code class="inline">Bonfire.Social.Activities</code></a> (for managing and querying activities and feeds)</li><li><a href="./Bonfire.Social.Posts.html"><code class="inline">Bonfire.Social.Posts</code></a> and <a href="./Bonfire.Social.PostContents.html"><code class="inline">Bonfire.Social.PostContents</code></a> (for managing and querying posts)</li><li><a href="./Bonfire.Social.Threads.html"><code class="inline">Bonfire.Social.Threads</code></a> (for managing and querying threads and comments)</li><li><a href="./Bonfire.Social.Flags.html"><code class="inline">Bonfire.Social.Flags</code></a> (for managing and querying flags)</li><li><a href="./Bonfire.Social.Follows.html"><code class="inline">Bonfire.Social.Follows</code></a> (for managing and querying follows)</li><li><a href="./Bonfire.Classify.html"><code class="inline">Bonfire.Classify</code></a> (for managing and querying categories, topics, and the like)</li><li><a href="./Bonfire.Tag.html"><code class="inline">Bonfire.Tag</code></a> (for managing and querying tags and mentions)</li><li><a href="./Bonfire.Geolocate.html"><code class="inline">Bonfire.Geolocate</code></a> (for managing and querying locations and geographical coordinates)</li><li><a href="./Bonfire.Quantify.html"><code class="inline">Bonfire.Quantify</code></a> (for managing and querying units and measures)</li></ul><h4>Additional extensions, libraries, and modules</h4><ul><li><a href="./Bonfire.Common.html"><code class="inline">Bonfire.Common</code></a> and <a href="./Bonfire.Common.Utils.html"><code class="inline">Bonfire.Common.Utils</code></a> (stuff that gets used everywhere)</li><li><a href="Bonfire.Application.html"><code class="inline">Bonfire.Application</code></a> (OTP application)</li><li><a href="Bonfire.MixProject.html"><code class="inline">Bonfire.MixProject</code></a> (Mix application configuration and helpers)</li><li><a href="./Bonfire.Me.Characters.html"><code class="inline">Bonfire.Me.Characters</code></a> (a shared abstraction over users, organisations, categories, and other objects that need to have feeds and behave as an actor in ActivityPub land)</li><li><a href="./Bonfire.Federate.ActivityPub.html"><code class="inline">Bonfire.Federate.ActivityPub</code></a> and <a href="./ActivityPub.html"><code class="inline">ActivityPub</code></a> (ActivityPub integration)</li><li><a href="./Bonfire.Search.html"><code class="inline">Bonfire.Search</code></a> (local search indexing and search API, powered by Meili)</li><li><a href="./Bonfire.Mailer.html"><code class="inline">Bonfire.Mailer</code></a>, <a href="./Bonfire.Me.Mails.html"><code class="inline">Bonfire.Me.Mails</code></a>, and <code class="inline">Bamboo</code> (for rendering and sending emails)</li><li><a href="./Bonfire.Files.html"><code class="inline">Bonfire.Files</code></a>, <a href="https://hexdocs.pm/waffle/1.1.5/Waffle.html"><code class="inline">Waffle</code></a>, <code class="inline">TreeMagic</code> and <a href="https://hexdocs.pm/twinkle_star/0.1.0/TwinkleStar.html"><code class="inline">TwinkleStar</code></a> (for managing uploaded content)</li><li><a href="./Bonfire.GraphQL.html"><code class="inline">Bonfire.GraphQL</code></a> (GraphQL API abstractions)</li><li><code class="inline">Queery</code> and <code class="inline">Bonfire.Repo.Query</code> (Helpers for making queries on the database)</li><li><a href="./Bonfire.Repo.html"><code class="inline">Bonfire.Repo</code></a> (Ecto repository)</li><li><a href="./Flexto.html"><code class="inline">Flexto</code></a> (to extend DB schemas in config, especially useful for adding associations)</li><li><a href="./AbsintheClient.html"><code class="inline">AbsintheClient</code></a> (for querying the API from within the server)</li></ul><h3 id="general-structure" class="section-heading">
-  <a href="#general-structure" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+<p>The code is broadly composed of these namespaces:</p><ul><li><code class="inline">Bonfire.*</code> - Core application logic (very little code).</li><li><code class="inline">Bonfire.*.*</code> - Bonfire extensions (eg <a href="./Bonfire.Social.Posts.html"><code class="inline">Bonfire.Social.Posts</code></a>) containing mostly context modules, APIs, and routes</li><li><code class="inline">Bonfire.Data.*</code> - Extensions containing database schemas and migrations </li><li><code class="inline">Bonfire.UI.*</code> - UI component extensions</li><li><code class="inline">Bonfire.*.*.LiveHandler</code> - Backend logic to handle events in the frontend</li><li><code class="inline">Bonfire.Editor.*</code> (pluggable text editors, eg. CKEditor for WYSIWYG markdown input)</li><li><code class="inline">Bonfire.GraphQL.*</code> - Optional GraphQL API</li><li><code class="inline">Bonfire.Federate.*</code> - Optional Federation hooks</li><li><a href="./ActivityPub.html"><code class="inline">ActivityPub</code></a> - ActivityPub S2S models, logic and various helper modules </li><li><a href="./ActivityPubWeb.html"><code class="inline">ActivityPubWeb</code></a> - ActivityPub S2S REST endpoints, activity ingestion and push federation facilities </li><li><code class="inline">ValueFlows.*</code> - economic extensions implementing the <a href="https://www.valueflo.ws">ValueFlows vocabulary</a></li></ul><p>Contexts are were we put any core logic. A context often is circumscribed to providing logic for a particular object type (e. g. <a href="./Bonfire.Social.Posts.html"><code class="inline">Bonfire.Social.Posts</code></a> implements <a href="./Bonfire.Data.Social.Post.html"><code class="inline">Bonfire.Data.Social.Post</code></a>). </p><p>All Bonfire objects use an ULID as their primary key. We use the <a href="./Pointers.html"><code class="inline">Pointers</code></a> library (with extra logic in <a href="./Bonfire.Common.Pointers.html"><code class="inline">Bonfire.Common.Pointers</code></a>) to reference any object by its primary key without knowing what type it is beforehand. This is very useful as it allows for example following or liking many different types of objects (as opposed to say only a user or a post) and this approach allows us to store the context of the like/follow by only storing its primary key (see <a href="./Bonfire.Data.Social.Follow.html"><code class="inline">Bonfire.Data.Social.Follow</code></a>) for an example.</p><p>Context modules usually have <code class="inline">one/2</code>, <code class="inline">many/2</code>, and <code class="inline">many_paginated/1</code> functions for fetching objects, which in turn call a <code class="inline">query/2</code> function. These take a keyword list as filters (and an optional <code class="inline">opts</code> argument) allowing objects to be fetched by arbitrary criteria.</p><p>Examples:</p><pre><code class="makeup elixir" translate="no"><span class="nc">Users</span><span class="o">.</span><span class="n">one</span><span class="p" data-group-id="8646473320-1">(</span><span class="ss">username</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;bob&quot;</span><span class="p" data-group-id="8646473320-1">)</span><span class="w"> </span><span class="c1"># Fetching by username</span><span class="w">
+</span><span class="nc">Posts</span><span class="o">.</span><span class="n">many_paginated</span><span class="p" data-group-id="8646473320-2">(</span><span class="ss">by</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;01E9TQP93S8XFSV2ZATX1FQ528&quot;</span><span class="p" data-group-id="8646473320-2">)</span><span class="w"> </span><span class="c1"># List a page of posts by its author</span><span class="w">
+</span><span class="nc">EconomicResources</span><span class="o">.</span><span class="n">many</span><span class="p" data-group-id="8646473320-3">(</span><span class="ss">deleted</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="8646473320-3">)</span><span class="w"> </span><span class="c1"># List any deleted resources</span></code></pre><p>Context modules also have functions for creating, updating and deleting objects, as well as hooks for federating or indexing in the search engine.</p><p>Here is an incomplete sample of some of current extensions and modules:</p><ul><li><a href="./Bonfire.Me.Accounts.html"><code class="inline">Bonfire.Me.Accounts</code></a> (for managing and querying local user accounts)</li><li><a href="./Bonfire.Me.Users.html"><code class="inline">Bonfire.Me.Users</code></a> (for managing and querying both local and remote user identities and profiles)</li><li><a href="./Bonfire.Boundaries.html"><code class="inline">Bonfire.Boundaries</code></a> (for managing and querying circles, ACLs, permissions...)</li><li><a href="./Bonfire.Social.FeedActivities.html"><code class="inline">Bonfire.Social.FeedActivities</code></a>, <a href="./Bonfire.Social.Feeds.html"><code class="inline">Bonfire.Social.Feeds</code></a> and <a href="./Bonfire.Social.Activities.html"><code class="inline">Bonfire.Social.Activities</code></a> (for managing and querying activities and feeds)</li><li><a href="./Bonfire.Social.Posts.html"><code class="inline">Bonfire.Social.Posts</code></a> and <a href="./Bonfire.Social.PostContents.html"><code class="inline">Bonfire.Social.PostContents</code></a> (for managing and querying posts)</li><li><a href="./Bonfire.Social.Threads.html"><code class="inline">Bonfire.Social.Threads</code></a> (for managing and querying threads and comments)</li><li><a href="./Bonfire.Social.Flags.html"><code class="inline">Bonfire.Social.Flags</code></a> (for managing and querying flags)</li><li><a href="./Bonfire.Social.Follows.html"><code class="inline">Bonfire.Social.Follows</code></a> (for managing and querying follows)</li><li><a href="./Bonfire.Classify.html"><code class="inline">Bonfire.Classify</code></a> (for managing and querying categories, topics, and the like)</li><li><a href="./Bonfire.Tag.html"><code class="inline">Bonfire.Tag</code></a> (for managing and querying tags and mentions)</li><li><a href="./Bonfire.Geolocate.html"><code class="inline">Bonfire.Geolocate</code></a> (for managing and querying locations and geographical coordinates)</li><li><a href="./Bonfire.Quantify.html"><code class="inline">Bonfire.Quantify</code></a> (for managing and querying units and measures)</li></ul><h4>Additional extensions, libraries, and modules</h4><ul><li><a href="./Bonfire.Common.html"><code class="inline">Bonfire.Common</code></a> and <a href="./Bonfire.Common.Utils.html"><code class="inline">Bonfire.Common.Utils</code></a> (stuff that gets used everywhere)</li><li><a href="Bonfire.Application.html"><code class="inline">Bonfire.Application</code></a> (OTP application)</li><li><a href="Bonfire.MixProject.html"><code class="inline">Bonfire.MixProject</code></a> (Mix application configuration and helpers)</li><li><a href="./Bonfire.Me.Characters.html"><code class="inline">Bonfire.Me.Characters</code></a> (a shared abstraction over users, organisations, categories, and other objects that need to have feeds and behave as an actor in ActivityPub land)</li><li><a href="./Bonfire.Federate.ActivityPub.html"><code class="inline">Bonfire.Federate.ActivityPub</code></a> and <a href="./ActivityPub.html"><code class="inline">ActivityPub</code></a> (ActivityPub integration)</li><li><a href="./Bonfire.Search.html"><code class="inline">Bonfire.Search</code></a> (local search indexing and search API, powered by Meili)</li><li><a href="./Bonfire.Mailer.html"><code class="inline">Bonfire.Mailer</code></a>, <a href="./Bonfire.Me.Mails.html"><code class="inline">Bonfire.Me.Mails</code></a>, and <code class="inline">Bamboo</code> (for rendering and sending emails)</li><li><a href="./Bonfire.Files.html"><code class="inline">Bonfire.Files</code></a>, <a href="https://hexdocs.pm/waffle/1.1.5/Waffle.html"><code class="inline">Waffle</code></a>, <code class="inline">TreeMagic</code> and <a href="https://hexdocs.pm/twinkle_star/0.1.0/TwinkleStar.html"><code class="inline">TwinkleStar</code></a> (for managing uploaded content)</li><li><a href="./Bonfire.GraphQL.html"><code class="inline">Bonfire.GraphQL</code></a> (GraphQL API abstractions)</li><li><code class="inline">Queery</code> and <code class="inline">Bonfire.Repo.Query</code> (Helpers for making queries on the database)</li><li><a href="./Bonfire.Repo.html"><code class="inline">Bonfire.Repo</code></a> (Ecto repository)</li><li><a href="./Flexto.html"><code class="inline">Flexto</code></a> (to extend DB schemas in config, especially useful for adding associations)</li><li><a href="./AbsintheClient.html"><code class="inline">AbsintheClient</code></a> (for querying the API from within the server)</li></ul><h3 id="general-structure" class="section-heading">
+  <a href="#general-structure" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   General structure
 </h3>
-<ul><li>Bonfire app<ul><li>A <a href="readme.html#flavours">flavour</a> running <a href="Bonfire.Application.html"><code class="inline">Bonfire.Application</code></a> as supervisor<ul><li>Configs assembled from extensions at <code class="inline">flavour/$FLAVOUR/config</code></li><li>Phoenix at <a href="Bonfire.Web.Endpoint.html"><code class="inline">Bonfire.Web.Endpoint</code></a><ul><li>Routes assembled from extensions at <a href="Bonfire.Web.Router.html"><code class="inline">Bonfire.Web.Router</code></a> </li></ul></li><li>GraphQL schema assembled from extensions at <a href="Bonfire.GraphQL.Schema.html"><code class="inline">Bonfire.GraphQL.Schema</code></a></li><li>Database migrations assembled from extensions at <code class="inline">flavour/$FLAVOUR/repo/migrations</code></li><li>Data seeds assembled from extensions at <code class="inline">flavour/$FLAVOUR/repo/seeds</code></li><li>Extensions and libraries as listed in <code class="inline">flavour/$FLAVOUR/config/deps.*</code><ul><li>Extensions defining schemas and migrations (usually <code class="inline">Bonfire.Data.*</code>)<ul><li>Schemas</li><li>Migrations defined as functions in the schema modules in <code class="inline">lib/</code></li><li>Migration templates calling those functions in <code class="inline">priv/repo/migrations</code> which are then copied into an app flavour's migrations</li></ul></li><li>Extensions implementing features or groups of features (eg. <code class="inline">Bonfire.Me</code>)<ul><li>Config template which is then copied into an app flavour's config (eg <code class="inline">config/bonfire_me.exs</code>)</li><li>Contexts (eg <a href="./Bonfire.Me.Users.html"><code class="inline">Bonfire.Me.Users</code></a>)<ul><li>Sometimes LiveHandlers for handling frontend events in the backend (eg <a href="./Bonfire.Me.Users.LiveHandler.html"><code class="inline">Bonfire.Me.Users.LiveHandler</code></a>)</li></ul></li><li>Routes (eg <a href="./Bonfire.Me.Web.Routes.html"><code class="inline">Bonfire.Me.Web.Routes</code></a>)<ul><li>Controllers and/or Views (eg <a href="./Bonfire.Me.Web.CreateUserController.html"><code class="inline">Bonfire.Me.Web.CreateUserController</code></a> and <a href="./Bonfire.Me.Web.CreateUserLive.html"><code class="inline">Bonfire.Me.Web.CreateUserLive</code></a>)</li></ul></li><li>API (eg <a href="./Bonfire.Me.API.GraphQL.html"><code class="inline">Bonfire.Me.API.GraphQL</code></a>), refer to <a href="graphql.html">GraphQL API documentation</a><ul><li>Schemas</li><li>Resolvers</li></ul></li><li>Sometimes Plugs (eg <a href="./Bonfire.Web.Plugs.UserRequired.html"><code class="inline">Bonfire.Web.Plugs.UserRequired</code></a> and <a href="./Bonfire.Web.LivePlugs.UserRequired.html"><code class="inline">Bonfire.Web.LivePlugs.UserRequired</code></a>)</li></ul></li><li>Other extensions or libraries (eg <a href="./Pointers.html"><code class="inline">Pointers</code></a> or <a href="./Bonfire.Common.html"><code class="inline">Bonfire.Common</code></a> which are used by most other extensions)</li></ul></li></ul></li></ul></li></ul><h2 id="naming" class="section-heading">
-  <a href="#naming" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+<ul><li>Bonfire app<ul><li>A <a href="licensir.html#flavours">flavour</a> running <a href="Bonfire.Application.html"><code class="inline">Bonfire.Application</code></a> as supervisor<ul><li>Configs assembled from extensions at <code class="inline">flavour/$FLAVOUR/config</code></li><li>Phoenix at <a href="Bonfire.Web.Endpoint.html"><code class="inline">Bonfire.Web.Endpoint</code></a><ul><li>Routes assembled from extensions at <a href="Bonfire.Web.Router.html"><code class="inline">Bonfire.Web.Router</code></a> </li></ul></li><li>GraphQL schema assembled from extensions at <a href="Bonfire.GraphQL.Schema.html"><code class="inline">Bonfire.GraphQL.Schema</code></a></li><li>Database migrations assembled from extensions at <code class="inline">flavour/$FLAVOUR/repo/migrations</code></li><li>Data seeds assembled from extensions at <code class="inline">flavour/$FLAVOUR/repo/seeds</code></li><li>Extensions and libraries as listed in <code class="inline">flavour/$FLAVOUR/config/deps.*</code><ul><li>Extensions defining schemas and migrations (usually <code class="inline">Bonfire.Data.*</code>)<ul><li>Schemas</li><li>Migrations defined as functions in the schema modules in <code class="inline">lib/</code></li><li>Migration templates calling those functions in <code class="inline">priv/repo/migrations</code> which are then copied into an app flavour's migrations</li></ul></li><li>Extensions implementing features or groups of features (eg. <code class="inline">Bonfire.Me</code>)<ul><li>Config template which is then copied into an app flavour's config (eg <code class="inline">config/bonfire_me.exs</code>)</li><li>Contexts (eg <a href="./Bonfire.Me.Users.html"><code class="inline">Bonfire.Me.Users</code></a>)<ul><li>Sometimes LiveHandlers for handling frontend events in the backend (eg <a href="./Bonfire.Me.Users.LiveHandler.html"><code class="inline">Bonfire.Me.Users.LiveHandler</code></a>)</li></ul></li><li>Routes (eg <a href="./Bonfire.Me.Web.Routes.html"><code class="inline">Bonfire.Me.Web.Routes</code></a>)<ul><li>Controllers and/or Views (eg <a href="./Bonfire.Me.Web.CreateUserController.html"><code class="inline">Bonfire.Me.Web.CreateUserController</code></a> and <a href="./Bonfire.Me.Web.CreateUserLive.html"><code class="inline">Bonfire.Me.Web.CreateUserLive</code></a>)</li></ul></li><li>API (eg <a href="./Bonfire.Me.API.GraphQL.html"><code class="inline">Bonfire.Me.API.GraphQL</code></a>), refer to <a href="graphql.html">GraphQL API documentation</a><ul><li>Schemas</li><li>Resolvers</li></ul></li><li>Sometimes Plugs (eg <a href="./Bonfire.Web.Plugs.UserRequired.html"><code class="inline">Bonfire.Web.Plugs.UserRequired</code></a> and <a href="./Bonfire.Web.LivePlugs.UserRequired.html"><code class="inline">Bonfire.Web.LivePlugs.UserRequired</code></a>)</li></ul></li><li>Other extensions or libraries (eg <a href="./Pointers.html"><code class="inline">Pointers</code></a> or <a href="./Bonfire.Common.html"><code class="inline">Bonfire.Common</code></a> which are used by most other extensions)</li></ul></li></ul></li></ul></li></ul><h2 id="naming" class="section-heading">
+  <a href="#naming" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Naming
 </h2>
 <p>It is said that naming is one of the four hard problems of computer science (along with cache management and off-by-one errors). We don't claim our scheme is the best, but we do strive for consistency.</p><h3 id="naming-guidelines" class="section-heading">
-  <a href="#naming-guidelines" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#naming-guidelines" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Naming guidelines
 </h3>
 <ul><li>Module names mostly begin with <code class="inline">Bonfire.</code> unless they belong to a more generic library (eg <a href="./Pointers.html"><code class="inline">Pointers</code></a> or <a href="./ValueFlows.html"><code class="inline">ValueFlows</code></a>)</li><li>Everything within an extension begins with the context name and a <code class="inline">.</code> (eg <a href="./Bonfire.Social.Migrations.html"><code class="inline">Bonfire.Social.Migrations</code></a>)</li><li>Database schemas should be named in the singular (eg <a href="./Bonfire.Data.Social.Post.html"><code class="inline">Bonfire.Data.Social.Post</code></a>)</li><li>Context modules are named in plural where possible (eg <a href="./Bonfire.Social.Posts.html"><code class="inline">Bonfire.Social.Posts</code></a>)</li><li>Other modules within a context begins with the context name and a <code class="inline">.</code> (eg <a href="./Bonfire.Social.Posts.LiveHandler.html"><code class="inline">Bonfire.Social.Posts.LiveHandler</code></a>)</li><li>Modules use UpperCamelCase while functions use snake_case</li><li>Acronyms in module names should be all uppercase (eg <a href="./Bonfire.Social.APActivities.html"><code class="inline">Bonfire.Social.APActivities</code></a>)</li></ul><h2 id="federation-libraries" class="section-heading">
-  <a href="#federation-libraries" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#federation-libraries" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   Federation libraries
 </h2>
 <h3 id="activitypub" class="section-heading">
-  <a href="#activitypub" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#activitypub" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   <a href="./ActivityPub.html"><code class="inline">ActivityPub</code></a>
 </h3>
 <p>This namespace handles the ActivityPub logic and stores AP activities. It is largely adapted Pleroma code with some modifications, for example merging of the activity and object tables and new actor object abstraction.</p><p>Also refer to <a href="mrf.html">MRF documentation</a> to learn how to rewrite or discard messages.</p><p><a href="./ActivityPub.html"><code class="inline">ActivityPub</code></a> contains the main API and is documented there. </p><p><a href="./ActivityPub.Adapter.html"><code class="inline">ActivityPub.Adapter</code></a> defines callback functions for the AP library.</p><p><a href="./ActivityPub.html"><code class="inline">ActivityPub</code></a> also contains some functionality that isn't part of the AP spec but is required for federation:</p><ul><li><a href="./ActivityPub.Keys.html"><code class="inline">ActivityPub.Keys</code></a> - Generating and handling RSA keys for messagage signing</li><li><a href="./ActivityPub.Signature.html"><code class="inline">ActivityPub.Signature</code></a> - Adapter for the HTTPSignature library</li><li><a href="./ActivityPub.WebFinger.html"><code class="inline">ActivityPub.WebFinger</code></a> - Implementation of the WebFinger protocol</li><li><a href="./ActivityPub.HTTP.html"><code class="inline">ActivityPub.HTTP</code></a> - Module for making HTTP requests (wrapper around tesla)</li><li><a href="./ActivityPub.Instances.html"><code class="inline">ActivityPub.Instances</code></a> - Module for storing reachability information about remote instances</li></ul><h3 id="activitypubweb" class="section-heading">
-  <a href="#activitypubweb" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#activitypubweb" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   <a href="./ActivityPubWeb.html"><code class="inline">ActivityPubWeb</code></a>
 </h3>
 <p>This namespace contains the AP S2S REST API, the activity ingestion pipeline (<a href="./ActivityPubWeb.Transmogrifier.html"><code class="inline">ActivityPubWeb.Transmogrifier</code></a>) and the push federation facilities (<a href="./ActivityPubWeb.Federator.html"><code class="inline">ActivityPubWeb.Federator</code></a>, <a href="./ActivityPubWeb.Publisher.html"><code class="inline">ActivityPubWeb.Publisher</code></a> and others). The outgoing federation module is designed in a modular way allowing federating through different protocols in the future.</p><h3 id="activitypub-interaction-in-our-application-logic" class="section-heading">
-  <a href="#activitypub-interaction-in-our-application-logic" class="hover-link"><span class="icon-link" aria-hidden="true"></span></a>
+  <a href="#activitypub-interaction-in-our-application-logic" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
   <a href="./ActivityPub.html"><code class="inline">ActivityPub</code></a> interaction in our application logic
 </h3>
 <p>The callback functions defined in <a href="./ActivityPub.Adapter.html"><code class="inline">ActivityPub.Adapter</code></a> are implemented in <code class="inline">Bonfire.ActivityPub.Adapter</code>. Facilities for calling the ActivityPub API are implemented in <code class="inline">Bonfire.ActivityPub.Publisher</code>. When implementing federation for a new object type it needs to be implemented both ways: both for outgoing federation in <code class="inline">Bonfire.ActivityPub.Publisher</code> and for incoming federation in <code class="inline">Bonfire.ActivityPub.Adapter</code>.</p>
@@ -187,29 +193,9 @@ Bonfire GraphQL Guide
       <footer class="footer">
 
         <p>
-          <span class="line">
-            Built using
-            <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.26.0) for the
-            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>.
-          </span>
-          <span class="line">
-            Designed by
-            <a href="https://twitter.com/dignifiedquire" target="_blank" rel="noopener" title="@dignifiedquire" translate="no">Friedel Ziegelmayer</a>.
-          </span>
-        </p>
-        <p>
-
-            <a href="api-reference.html" title="API reference" class="line footer-button">API Reference</a>
-
-          <button class="line footer-button display-shortcuts-help">
-            Display keyboard shortcuts
-          </button>
-          <button class="line footer-button display-quick-switch">
-            Go to a HexDocs package
-          </button>
-          <button class="line footer-button display-settings">
-            Settings
-          </button>
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.0) for the
+          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>
     </div>
