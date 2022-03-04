@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.0">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.138">
+    <meta name="generator" content="ExDoc v0.28.1">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.152">
 
-    <title>Backend Configuration and Deployment — bonfire v0.1.0-cooperation-beta.138</title>
-    <link rel="stylesheet" href="dist/elixir-a816d167216329cc463d.css" />
+    <title>Backend Configuration and Deployment — bonfire v0.1.0-cooperation-beta.152</title>
+    <link rel="stylesheet" href="dist/elixir-b2f127a8512920f0fe13.css" />
 
-    <script src="dist/sidebar_items-54bc222294.js"></script>
+    <script src="dist/sidebar_items-582e1465c9.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-80aa23c1d96b6dc3c064.js"></script>
+    <script async src="dist/app-073abeeda7b7e6d5d7e9.js"></script>
 
 
   </head>
@@ -32,7 +32,7 @@
 
 
 <section class="sidebar">
-  <button class="sidebar-button sidebar-toggle">
+  <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
     <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
   </button>
 
@@ -44,6 +44,7 @@
       <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
     </button>
     <label class="search-label">
+      <p class="sr-only">Search</p>
       <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
     </label>
   </form>
@@ -64,7 +65,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.138
+        v0.1.0-cooperation-beta.152
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -97,29 +98,41 @@ bonfire
 </h1>
 
 <h3 id="warning-bonfire-is-still-under-development-and-deploying-is-only-recommended-for-development-and-testing-purposes" class="section-heading">
-  <a href="#warning-bonfire-is-still-under-development-and-deploying-is-only-recommended-for-development-and-testing-purposes" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  <a href="#warning-bonfire-is-still-under-development-and-deploying-is-only-recommended-for-development-and-testing-purposes" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">warning-bonfire-is-still-under-development-and-deploying-is-only-recommended-for-development-and-testing-purposes</p>
+  </a>
   WARNING: Bonfire is still under development and deploying is only recommended for development and testing purposes.
 </h3>
 <p><em>These instructions are for setting up Bonfire in production. If you want to run the backend in development, please refer to our <a href="hacking.html">Developer Guide</a>!</em></p><hr class="thin"/><h2 id="step-0-configure-your-database" class="section-heading">
-  <a href="#step-0-configure-your-database" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  <a href="#step-0-configure-your-database" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">step-0-configure-your-database</p>
+  </a>
   Step 0 - Configure your database
 </h2>
 <p>You must provide a postgresql database for data storage. We require postgres 12 or above (or Postgis).</p><p>If you are running in a restricted environment such as Amazon RDS, you will need to execute some sql against the database:</p><pre><code class="makeup elixir" translate="no"><span class="nc">CREATE</span><span class="w"> </span><span class="nc">EXTENSION</span><span class="w"> </span><span class="nc">IF</span><span class="w"> </span><span class="nc">NOT</span><span class="w"> </span><span class="nc">EXISTS</span><span class="w"> </span><span class="n">citext</span><span class="p">;</span></code></pre><h2 id="step-1-download-and-configure-the-app" class="section-heading">
-  <a href="#step-1-download-and-configure-the-app" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  <a href="#step-1-download-and-configure-the-app" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">step-1-download-and-configure-the-app</p>
+  </a>
   Step 1 - Download and configure the app
 </h2>
 <ol><li>Clone this repository and change into the directory:</li></ol><pre><code class="makeup sh" translate="no"><span class="gp unselectable">$ </span><span class="">git clone https://github.com/bonfire-networks/bonfire-app.git bonfire
 </span><span class="gp unselectable">$ </span><span class="">cd bonfire
 </span></code></pre><ol start="2"><li>The first thing to do is choosing what flavour of Bonfire you want to deploy (the default is <code class="inline">classic</code>), as each flavour has its own Docker image and config. </li></ol><p>For example if you want to run the <code class="inline">cooperation</code> flavour (you may want to use direnv or something similar to persist this):</p><p><code class="inline">export FLAVOUR=cooperation MIX_ENV=prod</code></p><ol start="3"><li>Once you've picked a flavour, run this command to initialise some default config (.env files which won't be checked into git):</li></ol><p><code class="inline">make pre-config</code></p><ol start="4"><li>Edit the config (especially the secrets) for the current flavour in these files:</li></ol><ul><li><code class="inline">config/prod/secrets.env</code></li><li><code class="inline">config/prod/public.env</code></li></ul><p>These are the config keys you should especially pay attention to, in secrets.env:</p><ul><li>SECRET_KEY_BASE</li><li>SIGNING_SALT</li><li>ENCRYPTION_SALT</li><li>POSTGRES_PASSWORD</li><li>MEILI_MASTER_KEY</li></ul><p>You can use <code class="inline">make secrets</code> to generate some secrets keys to use.</p><p>And in public.env:</p><ul><li>HOSTNAME</li><li>PUBLIC_PORT</li></ul><p>You can make registrations on your instance invite-only by setting <code class="inline">INVITE_ONLY=true</code> in public.env and setting an <code class="inline">INVITE_KEY</code> in secrets.env. You can then invite people by sending them to <a href="https://yourinstance.tld/signup/invitation/your_INVITE_KEY_here">https://yourinstance.tld/signup/invitation/your_INVITE_KEY_here</a></p><h3 id="further-information-on-config" class="section-heading">
-  <a href="#further-information-on-config" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  <a href="#further-information-on-config" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">further-information-on-config</p>
+  </a>
   Further information on config
 </h3>
 <p>The app needs some environment variables to be configured in order to work. The easy way to manage that is whit the <code class="inline">make</code> commands which take care of loading the environment for you.</p><p>In the <code class="inline">${FLAVOUR_PATH}/config/</code> (depending on which flavour you choose to run) directory of the codebase, there are following default config files:</p><ul><li><code class="inline">config.exs</code>: default base configuration, which itself loads many other config files, such as one for each installed Bonfire extension.</li><li><code class="inline">dev.exs</code>: default extra configuration for <code class="inline">MIX_ENV=dev</code></li><li><code class="inline">prod.exs</code>: default extra configuration for <code class="inline">MIX_ENV=prod</code></li><li><code class="inline">runtime.exs</code>: extra configuration which is loaded at runtime (vs the others which are only loaded once at compile time, i.e. when you build a release)</li><li><code class="inline">bonfire_*.exs</code>: configs specific to different extensions, which are automatically imported by <code class="inline">config.exs</code></li></ul><p>You should <em>not</em> have to modify the files above. Instead, overload any settings from the above files using env variables (a list of which can be found in the file <code class="inline">${FLAVOUR_PATH}/config/templates/public.env</code> and <code class="inline">${FLAVOUR_PATH}/config/templates/secrets.env</code> in this same repository, both in the <code class="inline">main</code> and <code class="inline">release</code> branches). </p><p><code class="inline">MAIL_DOMAIN</code> and <code class="inline">MAIL_KEY</code> are needed to configure transactional email, you can for example sign up at <a href="https://www.mailgun.com/">Mailgun</a> and then configure the domain name and key.</p><hr class="thin"/><h2 id="step-2-install" class="section-heading">
-  <a href="#step-2-install" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  <a href="#step-2-install" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">step-2-install</p>
+  </a>
   Step 2 - Install
 </h2>
 <hr class="thin"/><h3 id="option-a-install-using-docker-comtainers-recommended" class="section-heading">
-  <a href="#option-a-install-using-docker-comtainers-recommended" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  <a href="#option-a-install-using-docker-comtainers-recommended" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">option-a-install-using-docker-comtainers-recommended</p>
+  </a>
   Option A - Install using Docker comtainers (recommended)
 </h3>
 <p>The easiest way to launch the docker image is using the make commands.
@@ -135,11 +148,15 @@ The <code class="inline">docker-compose.release.yml</code> uses <code class="inl
 </span></code></pre><p>Now that your tooling is set up, you have the choice of using pre-built images or building your own. For example if your flavour does not have a prebuilt image on Docker Hub, or if you want to customise any of the extensions, you can build one yourself - see option A2 below. </p><h4>Option A1 - Using pre-built Docker images (recommend to start with)</h4><ul><li>The <code class="inline">image</code> entry in <code class="inline">docker-compose.release.yml</code> will by default use the image on Docker Hub which corresponds to your chosen flavour (see step 1 above for choosing your flavour).</li></ul><p>You can see the images available per flavour, version (we currently recommend using the <code class="inline">latest</code> tag), and architecture at <a href="https://hub.docker.com/r/bonfirenetworks/bonfire/tags">https://hub.docker.com/r/bonfirenetworks/bonfire/tags</a> </p><ul><li>Start the docker containers with docker-compose:</li></ul><pre><code class="makeup elixir" translate="no"><span class="n">make</span><span class="w"> </span><span class="n">rel</span><span class="o">.</span><span class="n">run</span></code></pre><p>Run this at the prompt: </p><p><code class="inline">bin/bonfire remote</code> to enter Elixir's iex environment
 <code class="inline">EctoSparkles.ReleaseTasks.migrate</code> to initialise your database</p><p>The backend should now be running at <a href="http://localhost:4000/">http://localhost:4000/</a>.</p><ul><li>If that worked, start the app as a daemon next time:</li></ul><pre><code class="makeup elixir" translate="no"><span class="n">make</span><span class="w"> </span><span class="n">rel</span><span class="o">.</span><span class="n">run</span><span class="o">.</span><span class="n">bg</span></code></pre><h4>Docker-related handy commands</h4><ul><li><code class="inline">docker-compose pull</code> to update to the latest release of Bonfire (only if using a Docker Hub image) and other services (Postgres &amp; Meili)</li><li><code class="inline">make rel.run</code>                        Run the app in Docker, in the foreground</li><li><code class="inline">make rel.run.bg</code>                     Run the app in Docker, and keep running in the background</li><li><code class="inline">make rel.stop</code>                       Stop the running release</li><li><code class="inline">make rel.shell</code>                      Runs a simple shell inside of the container, useful to explore the image </li></ul><p>Once in the shell, you can run <code class="inline">bin/bonfire</code> with the following commands:
 Usage: <code class="inline">bonfire COMMAND [ARGS]</code></p><p>The known commands are:</p><ul><li><code class="inline">start</code>          Starts the system</li><li><code class="inline">start_iex</code>      Starts the system with IEx attached</li><li><code class="inline">daemon</code>         Starts the system as a daemon</li><li><code class="inline">daemon_iex</code>     Starts the system as a daemon with IEx attached</li><li><code class="inline">eval &quot;EXPR&quot;</code>    Executes the given expression on a new, non-booted system</li><li><code class="inline">rpc &quot;EXPR&quot;</code>     Executes the given expression remotely on the running system</li><li><code class="inline">remote</code>         Connects to the running system via a IEx remote shell</li><li><code class="inline">restart</code>        Restarts the running system via a remote command</li><li><code class="inline">stop</code>           Stops the running system via a remote command</li><li><code class="inline">pid</code>            Prints the operating system PID of the running system via a remote command</li><li><code class="inline">version</code>        Prints the release name and version to be booted</li></ul><p>There are some useful database-related release tasks under <code class="inline">EctoSparkles.ReleaseTasks.</code> that can be run in an <code class="inline">iex</code> console (which you get to with <code class="inline">make rel.shell</code> followed by <code class="inline">bin/bonfire remote</code>, assuming the app is already running):</p><ul><li><code class="inline">migrate</code> runs all up migrations</li><li><code class="inline">rollback(step)</code> roll back to step X</li><li><code class="inline">rollback_to(version)</code> roll back to a specific version</li><li><code class="inline">rollback_all</code> rolls back all migrations back to zero (caution: this means loosing all data)</li></ul><p>You can also directly call some functions in the code from the command line, for example:</p><ul><li>to migrate: <code class="inline">docker exec bonfire_web bin/bonfire rpc 'EctoSparkles.ReleaseTasks.migrate'</code></li><li>to make yourself an admin: <code class="inline">docker exec bonfire_web bin/bonfire rpc 'Bonfire.Me.Users.make_admin(&quot;my_username&quot;)'</code></li></ul><h4>Option A2 - Building your own Docker image</h4><p><code class="inline">Dockerfile.release</code> uses the <a href="https://docs.docker.com/develop/develop-images/multistage-build/">multistage build</a> feature to make the image as small as possible. It generates the OTP release which is later copied into the final image packaged in an Alpine linux container.</p><p>There is a <code class="inline">Makefile</code> with relevant commands (make sure you set the <code class="inline">MIX_ENV=prod</code> env first):</p><ul><li><code class="inline">make rel.build</code> which builds the docker image </li><li><code class="inline">make rel.tag.latest</code> adds the &quot;latest&quot; tag to your last build, so that it will be used when running</li><li><code class="inline">make rel.push</code> if you want to push your latest build to Docker Hub</li></ul><p>Once you've built and tagged your image, you may need to update the <code class="inline">image</code> name in <code class="inline">docker-compose.release.yml</code> to match (either your local image name if running on the same machine you used for the build, or a remote image on Docker Hub if you pushed it) and then follow the same steps as for option A1.</p><p>For production, we recommend to set up a CI workflow to automate this, for an example you can look at the one <a href="../github/workflows/release.yaml">we currently use</a>.</p><hr class="thin"/><h3 id="option-b-manual-installation-without-docker" class="section-heading">
-  <a href="#option-b-manual-installation-without-docker" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  <a href="#option-b-manual-installation-without-docker" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">option-b-manual-installation-without-docker</p>
+  </a>
   Option B - Manual installation (without Docker)
 </h3>
 <h4>Dependencies</h4><ul><li>Postgres (or Postgis) version 12 or newer</li><li>Build tools</li><li>Elixir version 1.11.0 with OTP 23 (or newer). If your distribution only has an old version available, check <a href="https://elixir-lang.org/install.html">Elixir's install page</a> or use a tool like <a href="https://github.com/asdf-vm/asdf">asdf</a> (run <code class="inline">asdf install</code> in this directory).</li></ul><h4>B-1. Building the release</h4><ul><li><p>Make sure you have erlang and elixir installed (check <code class="inline">Dockerfile</code> for what version we're currently using)</p></li><li><p>Run <code class="inline">mix deps.get --only prod</code> to install elixir dependencies.</p></li><li><p>Prepare assets with <code class="inline">make js.deps.get</code>, <code class="inline">make assets.release</code> and <a href="https://hexdocs.pm/phoenix/1.6.6/Mix.Tasks.Phx.Digest.html"><code class="inline">mix phx.digest</code></a></p></li><li><p>Run <a href="https://hexdocs.pm/mix/Mix.Tasks.Release.html"><code class="inline">mix release</code></a> to create an elixir release. This will create an executable in your <code class="inline">_build/prod/rel/bonfire</code> directory. We will be using the <code class="inline">bin/bonfire</code> executable from here on.</p></li></ul><h4>B-2. Running the release</h4><ul><li><p><code class="inline">cd _build/prod/rel/bonfire/</code></p></li><li><p>Create a database and run the migrations with <code class="inline">bin/bonfire eval 'EctoSparkles.ReleaseTasks.migrate()'</code>.</p></li><li><p>If you’re using RDS or some other locked down DB, you may need to run <code class="inline">CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;</code> on your database with elevated privileges.</p></li></ul><ul><li><p>You can check if your instance is configured correctly by running it with <code class="inline">bin/bonfire start</code></p></li><li><p>To run the instance as a daemon, use <code class="inline">bin/bonfire start daemon</code>.</p></li></ul><hr class="thin"/><h3 id="option-c-with-nix" class="section-heading">
-  <a href="#option-c-with-nix" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  <a href="#option-c-with-nix" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">option-c-with-nix</p>
+  </a>
   Option C - with Nix
 </h3>
 <p>This repo is a Flake and includes a Nix module.</p><p>Here are the detailed steps to deploy it:</p><ul><li>run a recent version of Nix or NixOS: <a href="https://nixos.wiki">https://nixos.wiki</a></li><li>enable Flakes: <a href="https://nixos.wiki/wiki/Flakes#Installing_flakes">https://nixos.wiki/wiki/Flakes#Installing_flakes</a></li><li>add <code class="inline">sandbox = false</code> in your nix.conf</li><li>fetch and build the app and dependencies: <code class="inline">nix run github:bonfire-networks/bonfire-app start_iex</code></li><li>add it as an input to your system flake.</li><li>add an overlay to make the package available</li><li>add the required configuration in your system</li></ul><p>Your <code class="inline">flake.nix</code> file would look like the following. Remember to replace <code class="inline">myHostName</code> with your actual hostname or however your deployed system is called.</p><pre><code class="nix">{
@@ -191,7 +208,9 @@ Usage: <code class="inline">bonfire COMMAND [ARGS]</code></p><p>The known comman
     }];
   };
 }</code></pre><h3 id="option-c-with-nixos" class="section-heading">
-  <a href="#option-c-with-nixos" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  <a href="#option-c-with-nixos" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">option-c-with-nixos</p>
+  </a>
   Option C with nixos
 </h3>
 <p>this repo is a flake and includes a nixos module.
@@ -244,7 +263,9 @@ Here are the detailed steps to deploy it.</p><ul><li>add it as an input to your 
     }];
   };
 }</code></pre><h2 id="step-3-run" class="section-heading">
-  <a href="#step-3-run" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  <a href="#step-3-run" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">step-3-run</p>
+  </a>
   Step 3 - Run
 </h2>
 <p>By default, the backend listens on port 4000 (TCP), so you can access it on <a href="http://localhost:4000/">http://localhost:4000/</a> (if you are on the same machine). In case of an error it will restart automatically.</p><p>Once you've signed up, you will automatically be an instance admin if you were the first to register.</p><hr class="thin"/><h4>Step 4 - Adding HTTPS</h4><p>The common and convenient way for adding HTTPS is by using a reverse proxy like Nginx or Caddyserver (the latter of which is bundled as part of the docker-compose setup).</p><p>Caddyserver and other servers can handle generating and setting up HTTPS certificates automatically, but if you need TLS/SSL certificates for nginx, you can look get some for free with <a href="https://letsencrypt.org/">letsencrypt</a>. The simplest way to obtain and install a certificate is to use <a href="https://certbot.eff.org">Certbot.</a>. Depending on your specific setup, certbot may be able to get a certificate and configure your web server automatically.</p>
@@ -279,7 +300,7 @@ Bonfire Architecture
 
         <p>
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.0) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.1) for the
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>

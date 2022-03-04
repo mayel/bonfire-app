@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.0">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.138">
+    <meta name="generator" content="ExDoc v0.28.1">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.152">
 
-    <title>Bonfire.Boundaries — bonfire v0.1.0-cooperation-beta.138</title>
-    <link rel="stylesheet" href="dist/elixir-a816d167216329cc463d.css" />
+    <title>Bonfire.Boundaries — bonfire v0.1.0-cooperation-beta.152</title>
+    <link rel="stylesheet" href="dist/elixir-b2f127a8512920f0fe13.css" />
 
-    <script src="dist/sidebar_items-54bc222294.js"></script>
+    <script src="dist/sidebar_items-582e1465c9.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-80aa23c1d96b6dc3c064.js"></script>
+    <script async src="dist/app-073abeeda7b7e6d5d7e9.js"></script>
 
 
   </head>
@@ -32,7 +32,7 @@
 
 
 <section class="sidebar">
-  <button class="sidebar-button sidebar-toggle">
+  <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
     <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
   </button>
 
@@ -44,6 +44,7 @@
       <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
     </button>
     <label class="search-label">
+      <p class="sr-only">Search</p>
       <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
     </label>
   </form>
@@ -64,7 +65,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.138
+        v0.1.0-cooperation-beta.152
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -94,7 +95,7 @@ bonfire
 
 
   <span translate="no">Bonfire.Boundaries</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.138)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.152)</small>
 
 </h1>
 
@@ -116,7 +117,27 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#mailer/0" translate="no">mailer()</a>
+          <a href="#block/3" translate="no">block(user_or_instance_to_block, block_type, opts)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Block something for the current user (current_user should be passed in opts)</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#instance_wide_block/2" translate="no">instance_wide_block(user_or_instance_to_block, block_type)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Block something for everyone on the instance (only doable by admins)</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#is_blocked?/3" translate="no">is_blocked?(peered, block_type \\ :any, opts \\ [])</a>
 
         </div>
 
@@ -124,7 +145,31 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#repo/0" translate="no">repo()</a>
+          <a href="#maybe_compose_ad_hoc_acl/2" translate="no">maybe_compose_ad_hoc_acl(base_acl, user)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#maybe_custom_circles_or_users/1" translate="no">maybe_custom_circles_or_users(preset_and_custom_boundary)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#maybe_from_opts/3" translate="no">maybe_from_opts(preset_and_custom_boundary, key, fallback \\ [])</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#preset/1" translate="no">preset(preset)</a>
 
         </div>
 
@@ -138,6 +183,22 @@ bonfire
 
           <div class="summary-synopsis"><p>Assigns the user as the caretaker of the given object or objects,
 replacing the existing caretaker, if any.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#types_blocked/1" translate="no">types_blocked(types)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#user_default_boundaries/0" translate="no">user_default_boundaries()</a>
+
+        </div>
 
       </div>
 
@@ -155,14 +216,52 @@ replacing the existing caretaker, if any.</p></div>
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="mailer/0">
+<section class="detail" id="block/3">
 
   <div class="detail-header">
-    <a href="#mailer/0" class="detail-link" title="Link to this function">
+    <a href="#block/3" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">mailer()</h1>
+    <h1 class="signature" translate="no">block(user_or_instance_to_block, block_type, opts)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Block something for the current user (current_user should be passed in opts)</p>
+  </section>
+</section>
+<section class="detail" id="instance_wide_block/2">
+
+  <div class="detail-header">
+    <a href="#instance_wide_block/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">instance_wide_block(user_or_instance_to_block, block_type)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Block something for everyone on the instance (only doable by admins)</p>
+  </section>
+</section>
+<section class="detail" id="is_blocked?/3">
+
+    <span id="is_blocked?/1"></span>
+
+    <span id="is_blocked?/2"></span>
+
+  <div class="detail-header">
+    <a href="#is_blocked?/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">is_blocked?(peered, block_type \\ :any, opts \\ [])</h1>
 
 
   </div>
@@ -172,14 +271,67 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="repo/0">
+<section class="detail" id="maybe_compose_ad_hoc_acl/2">
 
   <div class="detail-header">
-    <a href="#repo/0" class="detail-link" title="Link to this function">
+    <a href="#maybe_compose_ad_hoc_acl/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">repo()</h1>
+    <h1 class="signature" translate="no">maybe_compose_ad_hoc_acl(base_acl, user)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="maybe_custom_circles_or_users/1">
+
+  <div class="detail-header">
+    <a href="#maybe_custom_circles_or_users/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">maybe_custom_circles_or_users(preset_and_custom_boundary)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="maybe_from_opts/3">
+
+    <span id="maybe_from_opts/2"></span>
+
+  <div class="detail-header">
+    <a href="#maybe_from_opts/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">maybe_from_opts(preset_and_custom_boundary, key, fallback \\ [])</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="preset/1">
+
+  <div class="detail-header">
+    <a href="#preset/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">preset(preset)</h1>
 
 
   </div>
@@ -207,6 +359,40 @@ Functions
 replacing the existing caretaker, if any.</p>
   </section>
 </section>
+<section class="detail" id="types_blocked/1">
+
+  <div class="detail-header">
+    <a href="#types_blocked/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">types_blocked(types)</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="user_default_boundaries/0">
+
+  <div class="detail-header">
+    <a href="#user_default_boundaries/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">user_default_boundaries()</h1>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
 
     </div>
   </section>
@@ -215,7 +401,7 @@ replacing the existing caretaker, if any.</p>
 
         <p>
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.0) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.1) for the
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>

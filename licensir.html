@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.0">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.138">
+    <meta name="generator" content="ExDoc v0.28.1">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.152">
 
-    <title>Licensir — bonfire v0.1.0-cooperation-beta.138</title>
-    <link rel="stylesheet" href="dist/elixir-a816d167216329cc463d.css" />
+    <title>README — bonfire v0.1.0-cooperation-beta.152</title>
+    <link rel="stylesheet" href="dist/elixir-b2f127a8512920f0fe13.css" />
 
-    <script src="dist/sidebar_items-54bc222294.js"></script>
+    <script src="dist/sidebar_items-582e1465c9.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-80aa23c1d96b6dc3c064.js"></script>
+    <script async src="dist/app-073abeeda7b7e6d5d7e9.js"></script>
 
 
   </head>
@@ -32,7 +32,7 @@
 
 
 <section class="sidebar">
-  <button class="sidebar-button sidebar-toggle">
+  <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
     <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
   </button>
 
@@ -44,6 +44,7 @@
       <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
     </button>
     <label class="search-label">
+      <p class="sr-only">Search</p>
       <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
     </label>
   </form>
@@ -64,7 +65,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.138
+        v0.1.0-cooperation-beta.152
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -93,19 +94,29 @@ bonfire
 </button>
 
 
-  <span>Licensir <a href="https://travis-ci.org/unnawut/licensir"><img src="https://travis-ci.org/unnawut/licensir.svg?branch=master" alt="Build Status"/></a> <a href="https://coveralls.io/github/unnawut/licensir?branch=master"><img src="https://coveralls.io/repos/github/unnawut/licensir/badge.svg?branch=master" alt="Coverage Status"/></a></span>
+  <span>README</span>
 </h1>
 
-<p>An Elixir mix task that list the license(s) of all installed packages in your project.</p><h2 id="installation" class="section-heading">
-  <a href="#installation" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+<p><strong>Notice: This repository is now archived.</strong> Thank you for over 192,000 downloads since December 2017. While I think Elixir is an awesome ecosystem, I no longer have the chance to be developing using Elixir on a regular basis. :'(</p><hr class="thin"/><h1>Licensir</h1><p><a href="https://travis-ci.org/unnawut/licensir"><img src="https://travis-ci.org/unnawut/licensir.svg?branch=master" alt="Build Status"/></a>
+<a href="https://coveralls.io/github/unnawut/licensir?branch=master"><img src="https://coveralls.io/repos/github/unnawut/licensir/badge.svg?branch=master" alt="Coverage Status"/></a>
+<a href="https://hex.pm/packages/licensir"><img src="https://img.shields.io/hexpm/v/licensir.svg" alt="Module Version"/></a>
+<a href="https://hexdocs.pm/licensir/"><img src="https://img.shields.io/badge/hex-docs-lightgreen.svg" alt="Hex Docs"/></a>
+<a href="https://hex.pm/packages/licensir"><img src="https://img.shields.io/hexpm/dt/licensir.svg" alt="Total Download"/></a>
+<a href="https://github.com/unnawut/licensir/blob/master/LICENSE.md"><img src="https://img.shields.io/hexpm/l/licensir.svg" alt="License"/></a>
+<a href="https://github.com/unnawut/licensir/commits/master"><img src="https://img.shields.io/github/last-commit/unnawut/licensir.svg" alt="Last Updated"/></a></p><p>An Elixir mix task that list the license(s) of all installed packages in your project.</p><h2 id="installation" class="section-heading">
+  <a href="#installation" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">installation</p>
+  </a>
   Installation
 </h2>
-<p>The package can be installed by adding <code class="inline">licensir</code> to your list of dependencies in <code class="inline">mix.exs</code>:</p><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">deps</span><span class="w"> </span><span class="k" data-group-id="9583411479-1">do</span><span class="w">
-  </span><span class="p" data-group-id="9583411479-2">[</span><span class="w">
-    </span><span class="p" data-group-id="9583411479-3">{</span><span class="ss">:licensir</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;~&gt; 0.6&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">only</span><span class="p">:</span><span class="w"> </span><span class="ss">:dev</span><span class="p">,</span><span class="w"> </span><span class="ss">runtime</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="p" data-group-id="9583411479-3">}</span><span class="w">
-  </span><span class="p" data-group-id="9583411479-2">]</span><span class="w">
-</span><span class="k" data-group-id="9583411479-1">end</span></code></pre><p>This mix task in most cases only needs to be run on a development machine and independent from the runtime applications, hence the <code class="inline">only: dev, runtime: false</code> options.</p><h4>Install locally</h4><p>If you do not wish to include this tool as part of your dependencies, you may also install it locally by running:</p><pre><code class="makeup elixir" translate="no"><span class="err">$</span><span class="w"> </span><span class="n">mix</span><span class="w"> </span><span class="n">archive</span><span class="o">.</span><span class="n">install</span><span class="w"> </span><span class="n">hex</span><span class="w"> </span><span class="n">licensir</span><span class="w"> </span><span class="mf">0.6</span><span class="o">.</span><span class="mi">2</span></code></pre><p>Now you can access this tool from any path on your local machine that has access to <code class="inline">mix</code>.</p><h2 id="usage" class="section-heading">
-  <a href="#usage" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+<p>The package can be installed by adding <code class="inline">:licensir</code> to your list of dependencies in <code class="inline">mix.exs</code>:</p><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">deps</span><span class="w"> </span><span class="k" data-group-id="2621249696-1">do</span><span class="w">
+  </span><span class="p" data-group-id="2621249696-2">[</span><span class="w">
+    </span><span class="p" data-group-id="2621249696-3">{</span><span class="ss">:licensir</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;~&gt; 0.7&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">only</span><span class="p">:</span><span class="w"> </span><span class="ss">:dev</span><span class="p">,</span><span class="w"> </span><span class="ss">runtime</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="p" data-group-id="2621249696-3">}</span><span class="w">
+  </span><span class="p" data-group-id="2621249696-2">]</span><span class="w">
+</span><span class="k" data-group-id="2621249696-1">end</span></code></pre><p>This mix task in most cases only needs to be run on a development machine and independent from the runtime applications, hence the <code class="inline">only: dev, runtime: false</code> options.</p><h4>Install locally</h4><p>If you do not wish to include this tool as part of your dependencies, you may also install it locally by running:</p><pre><code class="makeup elixir" translate="no"><span class="err">$</span><span class="w"> </span><span class="n">mix</span><span class="w"> </span><span class="n">archive</span><span class="o">.</span><span class="n">install</span><span class="w"> </span><span class="n">hex</span><span class="w"> </span><span class="n">licensir</span><span class="w"> </span><span class="mf">0.7</span><span class="o">.</span><span class="mi">0</span></code></pre><p>Now you can access this tool from any path on your local machine that has access to <code class="inline">mix</code>.</p><h2 id="usage" class="section-heading">
+  <a href="#usage" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">usage</p>
+  </a>
   Usage
 </h2>
 <p>Run <code class="inline">mix licenses</code> to get the list of packages and their licenses:</p><pre><code class="makeup shell" translate="no"><span class="gp unselectable">$ </span><span class="">mix licenses
@@ -142,44 +153,51 @@ mimerl,,MIT
 nimble_parsec,0.5.0,Apache 2.0
 ssl_verify_fun,,MIT
 unicode_util_compat,,&quot;Unsure (found: Apache 2.0, BSD)&quot;</code></pre><h3 id="flags" class="section-heading">
-  <a href="#flags" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  <a href="#flags" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">flags</p>
+  </a>
   Flags
 </h3>
 <ul><li><code class="inline">--top-level-only</code> - Only fetch license information from top level dependencies (e.g. packages that are directly listed in your application's <code class="inline">mix.exs</code>). Excludes transitive dependencies.</li></ul><h2 id="usage-as-a-library" class="section-heading">
-  <a href="#usage-as-a-library" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
+  <a href="#usage-as-a-library" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">usage-as-a-library</p>
+  </a>
   Usage as a library
 </h2>
-<p>You may call the function <code class="inline">Licensir.Scanner.scan()</code> from your Elixir application to get a list of license data per dependency.</p><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Licensir.Scanner</span><span class="o">.</span><span class="n">scan</span><span class="p" data-group-id="0291672450-1">(</span><span class="p" data-group-id="0291672450-2">[</span><span class="p" data-group-id="0291672450-2">]</span><span class="p" data-group-id="0291672450-1">)</span><span class="w">
-</span><span class="p" data-group-id="0291672450-3">[</span><span class="w">
-  </span><span class="p" data-group-id="0291672450-4">%</span><span class="nc" data-group-id="0291672450-4">Licensir.License</span><span class="p" data-group-id="0291672450-4">{</span><span class="w">
+<p>You may call the function <code class="inline">Licensir.Scanner.scan()</code> from your Elixir application to get a list of license data per dependency.</p><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Licensir.Scanner</span><span class="o">.</span><span class="n">scan</span><span class="p" data-group-id="8468690108-1">(</span><span class="p" data-group-id="8468690108-2">[</span><span class="p" data-group-id="8468690108-2">]</span><span class="p" data-group-id="8468690108-1">)</span><span class="w">
+</span><span class="p" data-group-id="8468690108-3">[</span><span class="w">
+  </span><span class="p" data-group-id="8468690108-4">%</span><span class="nc" data-group-id="8468690108-4">Licensir.License</span><span class="p" data-group-id="8468690108-4">{</span><span class="w">
     </span><span class="ss">app</span><span class="p">:</span><span class="w"> </span><span class="ss">:jason</span><span class="p">,</span><span class="w">
-    </span><span class="ss">dep</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0291672450-5">%</span><span class="nc" data-group-id="0291672450-5">Mix.Dep</span><span class="p" data-group-id="0291672450-5">{</span><span class="w">
+    </span><span class="ss">dep</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8468690108-5">%</span><span class="nc" data-group-id="8468690108-5">Mix.Dep</span><span class="p" data-group-id="8468690108-5">{</span><span class="w">
       </span><span class="ss">app</span><span class="p">:</span><span class="w"> </span><span class="ss">:jason</span><span class="p">,</span><span class="w">
       </span><span class="ss">deps</span><span class="p">:</span><span class="w"> </span><span class="n">...</span><span class="w">
-    </span><span class="p" data-group-id="0291672450-5">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="8468690108-5">}</span><span class="p">,</span><span class="w">
     </span><span class="ss">file</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Apache 2&quot;</span><span class="p">,</span><span class="w">
-    </span><span class="ss">hex_metadata</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0291672450-6">[</span><span class="s">&quot;Apache 2.0&quot;</span><span class="p" data-group-id="0291672450-6">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">hex_metadata</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8468690108-6">[</span><span class="s">&quot;Apache 2.0&quot;</span><span class="p" data-group-id="8468690108-6">]</span><span class="p">,</span><span class="w">
     </span><span class="ss">license</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Apache 2.0&quot;</span><span class="p">,</span><span class="w">
     </span><span class="ss">mix</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w">
     </span><span class="ss">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;jason&quot;</span><span class="p">,</span><span class="w">
     </span><span class="ss">version</span><span class="p">:</span><span class="w"> </span><span class="no">nil</span><span class="w">
-  </span><span class="p" data-group-id="0291672450-4">}</span><span class="p">,</span><span class="w">
-  </span><span class="p" data-group-id="0291672450-7">%</span><span class="nc" data-group-id="0291672450-7">Licensir.License</span><span class="p" data-group-id="0291672450-7">{</span><span class="n">...</span><span class="p" data-group-id="0291672450-7">}</span><span class="p">,</span><span class="w">
+  </span><span class="p" data-group-id="8468690108-4">}</span><span class="p">,</span><span class="w">
+  </span><span class="p" data-group-id="8468690108-7">%</span><span class="nc" data-group-id="8468690108-7">Licensir.License</span><span class="p" data-group-id="8468690108-7">{</span><span class="n">...</span><span class="p" data-group-id="8468690108-7">}</span><span class="p">,</span><span class="w">
   </span><span class="n">...</span><span class="w">
-</span><span class="p" data-group-id="0291672450-3">]</span></code></pre><h2 id="license" class="section-heading">
-  <a href="#license" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i></a>
-  License
+</span><span class="p" data-group-id="8468690108-3">]</span></code></pre><h2 id="copyright-and-license" class="section-heading">
+  <a href="#copyright-and-license" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">copyright-and-license</p>
+  </a>
+  Copyright and License
 </h2>
-<p>Copyright (c) 2017-2019, Unnawut Leepaisalsuwanna.</p><p>Licensir is released under the <a href="LICENSE">MIT License</a>.</p><p>This project contains 3rd party work as follow:</p><ul><li>ASCII table rendering: a <a href="./lib/table_rex">partial copy</a> of <a href="https://github.com/djm/table_rex">djm/table_rex</a>.</li><li>CSV rendering: a <a href="./lib/csv">partial copy</a> of <a href="https://github.com/beatrichartz/csv">beatrichartz/csv</a>.</li></ul>
+<p>Copyright (c) 2017, Unnawut Leepaisalsuwanna.</p><p>This library is released under the MIT License. See the <a href="./LICENSE.md">LICENSE.md</a> file
+for further details.</p><p>This project contains 3rd party work as follow:</p><ul><li>ASCII table rendering: a <a href="https://github.com/unnawut/licensir/tree/master/lib/table_rex">partial copy</a> of <a href="https://github.com/djm/table_rex">djm/table_rex</a>.</li><li>CSV rendering: a <a href="https://github.com/unnawut/licensir/tree/master/lib/csv">partial copy</a> of <a href="https://github.com/beatrichartz/csv">beatrichartz/csv</a>.</li></ul>
 <div class="bottom-actions">
   <div class="bottom-actions-item">
 
-      <a href="bonfire_invite_links.html" class="bottom-actions-button" rel="prev">
+      <a href="where.html" class="bottom-actions-button" rel="prev">
         <span class="subheader">
           ← Previous Page
         </span>
         <span class="title">
-Bonfire.Invite.Links
+Where
         </span>
       </a>
 
@@ -193,7 +211,7 @@ Bonfire.Invite.Links
 
         <p>
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.0) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.1) for the
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>
