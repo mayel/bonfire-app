@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.28.2">
+    <meta name="project" content="bonfire v0.1.0-cooperation-beta.153">
+
+    <title>Bonfire.UI.Social — bonfire v0.1.0-cooperation-beta.153</title>
+    <link rel="stylesheet" href="dist/elixir-77a6dc6b2ca946d9dd7b.css" />
+
+    <script src="dist/sidebar_items-5ddf539d22.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-3c12af0fd635c84435a4.js"></script>
+
+
+  </head>
+  <body data-type="extras">
+    <script>
+
+      try {
+        if (localStorage.getItem('night-mode') === 'true') {
+          document.body.classList.add('night-mode');
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+
+<section class="sidebar">
+  <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+    <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+  </button>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
+    </button>
+    <label class="search-label">
+      <p class="sr-only">Search</p>
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+
+      <a href="https://bonfirenetworks.org">
+        <img src="assets/logo.png" alt="bonfire" class="sidebar-projectImage">
+      </a>
+
+    <div class="sidebar-projectDetails">
+      <a href="https://bonfirenetworks.org" class="sidebar-projectName" translate="no">
+bonfire
+      </a>
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.1.0-cooperation-beta.153
+      </strong>
+    </div>
+    <ul class="sidebar-listNav">
+      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+        <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
+
+    </ul>
+  </div>
+
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>
+<button class="settings display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
+
+
+    <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/README.md#L1" title="View Source" class="view-source" rel="help">
+      <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+      <span class="sr-only">View Source</span>
+    </a>
+
+  <span>Bonfire.UI.Social</span>
+</h1>
+
+<p><img src="https://i.imgur.com/XoQvDCW.png" alt=""/></p><p><a href="http://bonfirenetworks.org/extensions/ui_social.html">Bonfire.UI.Social</a> is an extension that includes the main User Interfaces (both assembled pages and single components) required to have a fully working federated social network app.</p><p>This extension is meant to be used by other extensions like <a href="https://github.com/bonfire-networks/bonfire_social">Bonfire.Social</a> and <a href="https://github.com/bonfire-networks/bonfire_me">Bonfire.Me</a>, which both provide logic for the UI to work with, and define the routes and top-level views which in turn embed the components from this extension.</p><p>It also provides components used by other extensions including: <a href="https://github.com/bonfire-networks/bonfire_common">Bonfire.Common</a>, <a href="https://github.com/bonfire-networks/bonfire_search">Bonfire.Search</a>, <a href="https://github.com/bonfire-networks/bonfire_tag">Bonfire.Tag</a>, <a href="https://github.com/bonfire-networks/bonfire_boundaries">Bonfire.Boundaries</a>. </p><h3 id="stack" class="section-heading">
+  <a href="#stack" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">stack</p>
+  </a>
+  Stack
+</h3>
+<p>So far, Bonfire UI extensions are built with the PETALS stack (note that is not a requirement), which means:</p><ul><li><a href="https://www.phoenixframework.org/">Phoenix</a></li><li><a href="https://elixir-lang.org/">Elixir</a></li><li><a href="https://tailwindcss.com/">TailwindCSS</a></li><li><a href="https://alpinejs.dev/">Alpine.js</a></li><li><a href="https://github.com/phoenixframework/phoenix_live_view#readme">LiveView</a></li><li><a href="https://surface-ui.org/">Surface</a></li></ul><p>We're currently in the middle of a refactor to convert all components and templates from LiveView to Surface, which is a server-side rendering component library (built on top of Phoenix and LiveView) that inherits a lot of design patterns from popular JS framework like Vue.js and React, while being almost JavaScript-free compared to common SPAs.  </p><h3 id="scaffolding" class="section-heading">
+  <a href="#scaffolding" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">scaffolding</p>
+  </a>
+  Scaffolding
+</h3>
+<p>The relevant folders are:</p><ul><li><a href="https://github.com/bonfire-networks/bonfire_ui_social/tree/main/lib/web/components">Components</a>: Surface stateless and stateful components.</li><li><a href="https://github.com/bonfire-networks/bonfire_ui_social/tree/main/lib/web/layout">Layout</a>: Main app templates, they include guest, logged or specific view templates (eg. the setting layout)</li><li><a href="https://github.com/bonfire-networks/bonfire_ui_social/tree/main/lib/web/views">Views</a>: The main pages that are rendered when navigating to a specific route</li><li><a href="https://github.com/bonfire-networks/bonfire_ui_social/tree/main/test">Test</a>: All the unit tests for the specific module.</li></ul><h3 id="other-resources" class="section-heading">
+  <a href="#other-resources" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">other-resources</p>
+  </a>
+  Other resources
+</h3>
+<ul><li><a href="https://bonfirenetworks.org/posts/let_thousand_bonfires_bloom/">A blog post that introduces the concept of themeable bonfire apps</a></li></ul><h2 id="copyright-and-license" class="section-heading">
+  <a href="#copyright-and-license" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">copyright-and-license</p>
+  </a>
+  Copyright and License
+</h2>
+<p>Copyright (c) 2020 Bonfire, and CommonsPub Contributors</p><p>This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.</p><p>This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+Affero General Public License for more details.</p><p>You should have received a copy of the GNU Affero General Public
+License along with this program.  If not, see <a href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>.</p>
+<div class="bottom-actions">
+  <div class="bottom-actions-item">
+
+      <a href="extension-bonfire_data_assort.html" class="bottom-actions-button" rel="prev">
+        <span class="subheader">
+          ← Previous Page
+        </span>
+        <span class="title">
+Bonfire.Data.Assort
+        </span>
+      </a>
+
+  </div>
+  <div class="bottom-actions-item">
+
+      <a href="extension-bonfire_ui_valueflows.html" class="bottom-actions-button" rel="next">
+        <span class="subheader">
+          Next Page →
+        </span>
+        <span class="title">
+Bonfire.UI.ValueFlows
+        </span>
+      </a>
+
+  </div>
+</div>
+
+      <footer class="footer">
+
+        <p>
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.2) for the
+          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>
