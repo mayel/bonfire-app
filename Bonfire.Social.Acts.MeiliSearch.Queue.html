@@ -7,10 +7,10 @@
     <meta name="generator" content="ExDoc v0.28.2">
     <meta name="project" content="bonfire v0.1.0-cooperation-beta.155">
 
-    <title>Bonfire.Social.Acts.Posts.MeiliSearch — bonfire v0.1.0-cooperation-beta.155</title>
+    <title>Bonfire.Social.Acts.MeiliSearch.Queue — bonfire v0.1.0-cooperation-beta.155</title>
     <link rel="stylesheet" href="dist/elixir-77a6dc6b2ca946d9dd7b.css" />
 
-    <script src="dist/sidebar_items-4551e4b828.js"></script>
+    <script src="dist/sidebar_items-66463041a2.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -94,20 +94,19 @@ bonfire
 </button>
 
 
-    <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/acts/posts.meilisearch.ex#L1" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/acts/meilisearch.queue.ex#L1" title="View Source" class="view-source" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
-  <span translate="no">Bonfire.Social.Acts.Posts.MeiliSearch</span> 
+  <span translate="no">Bonfire.Social.Acts.MeiliSearch.Queue</span> 
   <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.155)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>An Act that translates a post or changeset into some jobs for the
-meilisearch index worker. Handles creation, update and delete</p><p>Act Options:</p><ul><li><code class="inline">on</code> - key in assigns to find the post, default: <code class="inline">:post</code></li><li><code class="inline">as</code> - key in assigns to assign indexable object, default: <code class="inline">:post_index</code></li></ul>
+<p>An act that enqueues publish/update/delete requests to meilisearch via an oban job queue.</p>
   </section>
 
 
@@ -127,7 +126,31 @@ meilisearch index worker. Handles creation, update and delete</p><p>Act Options:
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#run/2" translate="no">run(epic, act)</a>
+          <a href="#index/1" translate="no">index(epic)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#maybe_indexable_object/1" translate="no">maybe_indexable_object(object)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#to_indexable/2" translate="no">to_indexable(object_or_activity_or_changeset, options \\ [])</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#unindex/2" translate="no">unindex(epic, thing)</a>
 
         </div>
 
@@ -147,16 +170,84 @@ meilisearch index worker. Handles creation, update and delete</p><p>Act Options:
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="run/2">
+<section class="detail" id="index/1">
 
   <div class="detail-header">
-    <a href="#run/2" class="detail-link" title="Link to this function">
+    <a href="#index/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">run(epic, act)</h1>
+    <h1 class="signature" translate="no">index(epic)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/acts/posts.meilisearch.ex#L19" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/acts/meilisearch.queue.ex#L14" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="maybe_indexable_object/1">
+
+  <div class="detail-header">
+    <a href="#maybe_indexable_object/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">maybe_indexable_object(object)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/acts/meilisearch.queue.ex#L73" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="to_indexable/2">
+
+    <span id="to_indexable/1"></span>
+
+  <div class="detail-header">
+    <a href="#to_indexable/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">to_indexable(object_or_activity_or_changeset, options \\ [])</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/acts/meilisearch.queue.ex#L47" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="unindex/2">
+
+  <div class="detail-header">
+    <a href="#unindex/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">unindex(epic, thing)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/acts/meilisearch.queue.ex#L18" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
