@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.2">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.156">
+    <meta name="generator" content="ExDoc v0.28.3">
+    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.1">
 
-    <title>Bonfire.Social.Posts — bonfire v0.1.0-cooperation-beta.156</title>
-    <link rel="stylesheet" href="dist/elixir-77a6dc6b2ca946d9dd7b.css" />
+    <title>Bonfire.Social.Posts — bonfire v0.2.0-cooperation-alpha.1</title>
+    <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-98a7769866.js"></script>
+    <script src="dist/sidebar_items-8c7d398856.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-3c12af0fd635c84435a4.js"></script>
+    <script async src="dist/app-a088a6cc33ae3464193e.js"></script>
 
 
   </head>
@@ -22,8 +22,13 @@
     <script>
 
       try {
-        if (localStorage.getItem('night-mode') === 'true') {
-          document.body.classList.add('night-mode');
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
         }
       } catch (error) { }
     </script>
@@ -65,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.156
+        v0.2.0-cooperation-alpha.1
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,7 +105,7 @@ bonfire
     </a>
 
   <span translate="no">Bonfire.Social.Posts</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.156)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.1)</small>
 
 </h1>
 
@@ -196,7 +201,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#list_by/3" translate="no">list_by(by_user, opts_or_current_user \\ [], preloads \\ :all)</a>
+          <a href="#list_by/2" translate="no">list_by(by_user, opts \\ [])</a>
 
         </div>
 
@@ -206,7 +211,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#list_paginated/3" translate="no">list_paginated(filters, opts_or_current_user \\ [], preloads \\ :all)</a>
+          <a href="#list_paginated/2" translate="no">list_paginated(filters, opts \\ [])</a>
 
         </div>
 
@@ -240,7 +245,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#query/3" translate="no">query(filters \\ [], opts_or_current_user \\ nil, preloads \\ :all)</a>
+          <a href="#query/2" translate="no">query(filters \\ [], opts \\ nil)</a>
 
         </div>
 
@@ -248,7 +253,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#query_paginated/3" translate="no">query_paginated(filters, opts_or_current_user \\ [], preloads \\ :all)</a>
+          <a href="#query_paginated/2" translate="no">query_paginated(filters, opts \\ [])</a>
 
         </div>
 
@@ -258,7 +263,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#read/3" translate="no">read(post_id, opts_or_socket_or_current_user \\ [], preloads \\ :all)</a>
+          <a href="#read/2" translate="no">read(post_id, opts_or_socket_or_current_user \\ [])</a>
 
         </div>
 
@@ -287,7 +292,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">ap_publish_activity(binary, post)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L142" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L137" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -309,7 +314,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">ap_publish_activity_object(binary, post)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L148" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L143" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -333,7 +338,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">ap_receive_activity(creator, activity, object, circles \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L215" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L210" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -381,7 +386,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">context_module()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L22" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L23" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -403,7 +408,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">draft(creator, attrs)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L30" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L31" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -425,7 +430,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">federation_module()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L23" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L24" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -447,7 +452,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">filter(atom, user, query)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L128" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L123" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -471,7 +476,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">indexing_object_format(post, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L263" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L262" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -484,20 +489,18 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="list_by/3">
+<section class="detail" id="list_by/2">
 
     <span id="list_by/1"></span>
 
-    <span id="list_by/2"></span>
-
   <div class="detail-header">
-    <a href="#list_by/3" class="detail-link" title="Link to this function">
+    <a href="#list_by/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">list_by(by_user, opts_or_current_user \\ [], preloads \\ :all)</h1>
+    <h1 class="signature" translate="no">list_by(by_user, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L83" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L80" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -510,20 +513,18 @@ Functions
 <p>List posts created by the user and which are in their outbox, which are not replies</p>
   </section>
 </section>
-<section class="detail" id="list_paginated/3">
+<section class="detail" id="list_paginated/2">
 
     <span id="list_paginated/1"></span>
 
-    <span id="list_paginated/2"></span>
-
   <div class="detail-header">
-    <a href="#list_paginated/3" class="detail-link" title="Link to this function">
+    <a href="#list_paginated/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">list_paginated(filters, opts_or_current_user \\ [], preloads \\ :all)</h1>
+    <h1 class="signature" translate="no">list_paginated(filters, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L90" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L87" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -547,7 +548,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">maybe_index(post, options \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L281" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L280" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -571,7 +572,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">publish(options \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L37" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L38" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -593,7 +594,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">queries_module()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L21" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L22" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -606,22 +607,20 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="query/3">
+<section class="detail" id="query/2">
 
     <span id="query/0"></span>
 
     <span id="query/1"></span>
 
-    <span id="query/2"></span>
-
   <div class="detail-header">
-    <a href="#query/3" class="detail-link" title="Link to this function">
+    <a href="#query/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">query(filters \\ [], opts_or_current_user \\ nil, preloads \\ :all)</h1>
+    <h1 class="signature" translate="no">query(filters \\ [], opts \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L112" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L110" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -634,20 +633,18 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="query_paginated/3">
+<section class="detail" id="query_paginated/2">
 
     <span id="query_paginated/1"></span>
 
-    <span id="query_paginated/2"></span>
-
   <div class="detail-header">
-    <a href="#query_paginated/3" class="detail-link" title="Link to this function">
+    <a href="#query_paginated/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">query_paginated(filters, opts_or_current_user \\ [], preloads \\ :all)</h1>
+    <h1 class="signature" translate="no">query_paginated(filters, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L101" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L98" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -660,20 +657,18 @@ Functions
 <p>Query posts with pagination</p>
   </section>
 </section>
-<section class="detail" id="read/3">
+<section class="detail" id="read/2">
 
     <span id="read/1"></span>
 
-    <span id="read/2"></span>
-
   <div class="detail-header">
-    <a href="#read/3" class="detail-link" title="Link to this function">
+    <a href="#read/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">read(post_id, opts_or_socket_or_current_user \\ [], preloads \\ :all)</h1>
+    <h1 class="signature" translate="no">read(post_id, opts_or_socket_or_current_user \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L75" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/posts/posts.ex#L72" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -694,7 +689,7 @@ Functions
 
         <p>
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.2) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.3) for the
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>

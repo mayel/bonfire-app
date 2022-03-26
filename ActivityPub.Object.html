@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.2">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.156">
+    <meta name="generator" content="ExDoc v0.28.3">
+    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.1">
 
-    <title>ActivityPub.Object — bonfire v0.1.0-cooperation-beta.156</title>
-    <link rel="stylesheet" href="dist/elixir-77a6dc6b2ca946d9dd7b.css" />
+    <title>ActivityPub.Object — bonfire v0.2.0-cooperation-alpha.1</title>
+    <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-98a7769866.js"></script>
+    <script src="dist/sidebar_items-8c7d398856.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-3c12af0fd635c84435a4.js"></script>
+    <script async src="dist/app-a088a6cc33ae3464193e.js"></script>
 
 
   </head>
@@ -22,8 +22,13 @@
     <script>
 
       try {
-        if (localStorage.getItem('night-mode') === 'true') {
-          document.body.classList.add('night-mode');
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
         }
       } catch (error) { }
     </script>
@@ -65,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.156
+        v0.2.0-cooperation-alpha.1
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,7 +105,7 @@ bonfire
     </a>
 
   <span translate="no">ActivityPub.Object</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.156)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.1)</small>
 
 </h1>
 
@@ -209,6 +214,14 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#get_outbox_for_instance/0" translate="no">get_outbox_for_instance()</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#get_outbox_fox_actor/2" translate="no">get_outbox_fox_actor(actor, page)</a>
 
         </div>
@@ -302,7 +315,7 @@ Types
     </a>
     <h1 class="signature" translate="no">t()</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L12" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L13" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -312,10 +325,9 @@ Types
 
   <section class="docstring">
 
-      <h2>Specs</h2>
       <div class="specs">
 
-          <pre translate="no">t() :: %ActivityPub.Object{
+          <pre translate="no"><span class="attribute">@type</span> t() :: %ActivityPub.Object{
   __meta__: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
   data: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
   id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
@@ -354,7 +366,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">changeset(attrs)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L106" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L108" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -376,7 +388,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">changeset(object, attrs)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L111" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L113" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -398,7 +410,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">delete(object)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L167" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L179" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -420,7 +432,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_by_ap_id(ap_id)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L34" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L35" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -442,7 +454,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_by_id(id)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L26" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L27" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -464,7 +476,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_by_pointer_id(pointer_id)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L45" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L46" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -486,7 +498,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_cached_by_ap_id(ap_id)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L47" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L48" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -508,7 +520,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_cached_by_pointer_id(pointer_id)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L69" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L71" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -530,7 +542,29 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_outbox_for_actor(actor)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L174" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L186" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="get_outbox_for_instance/0">
+
+  <div class="detail-header">
+    <a href="#get_outbox_for_instance/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">get_outbox_for_instance()</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L205" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -552,7 +586,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_outbox_fox_actor(actor, page)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L182" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L194" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -574,7 +608,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">insert(attrs)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L100" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L102" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -596,7 +630,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">invalidate_cache(object)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L93" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L95" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -620,7 +654,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">make_tombstone(object, deleted \\ DateTime.utc_now())</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L150" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L162" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -644,7 +678,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">normalize(object, fetch_remote \\ true)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L131" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L143" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -666,7 +700,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">set_cache(object)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L83" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L85" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -688,7 +722,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">swap_object_with_tombstone(object)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L159" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L171" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -710,7 +744,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">update(object, attrs)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L117" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L119" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -732,7 +766,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">update_and_set_cache(changeset)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L123" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/object.ex#L135" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -753,7 +787,7 @@ Functions
 
         <p>
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.2) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.3) for the
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>

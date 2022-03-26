@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.2">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.156">
+    <meta name="generator" content="ExDoc v0.28.3">
+    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.1">
 
-    <title>Pointers.Changesets — bonfire v0.1.0-cooperation-beta.156</title>
-    <link rel="stylesheet" href="dist/elixir-77a6dc6b2ca946d9dd7b.css" />
+    <title>Pointers.Changesets — bonfire v0.2.0-cooperation-alpha.1</title>
+    <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-98a7769866.js"></script>
+    <script src="dist/sidebar_items-8c7d398856.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-3c12af0fd635c84435a4.js"></script>
+    <script async src="dist/app-a088a6cc33ae3464193e.js"></script>
 
 
   </head>
@@ -22,8 +22,13 @@
     <script>
 
       try {
-        if (localStorage.getItem('night-mode') === 'true') {
-          document.body.classList.add('night-mode');
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
         }
       } catch (error) { }
     </script>
@@ -65,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.156
+        v0.2.0-cooperation-alpha.1
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,7 +105,7 @@ bonfire
     </a>
 
   <span translate="no">Pointers.Changesets</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.156)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.1)</small>
 
 </h1>
 
@@ -122,17 +127,37 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#assoc_changeset/4" translate="no">assoc_changeset(changeset, key, params, opts \\ [])</a>
+          <a href="#build_assoc/3" translate="no">build_assoc(changeset, assoc_key, rel)</a>
 
         </div>
 
-          <div class="summary-synopsis"></div>
+          <div class="summary-synopsis"><p>Like Ecto.build_assoc/3, but can work with a Changeset</p></div>
 
       </div>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#auto/4" translate="no">auto(thing, params, options, defaults)</a>
+          <a href="#built?/1" translate="no">built?(arg1)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>True if the schema object's current state is <code class="inline">:built</code></p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#cast/3" translate="no">cast(changeset, params, cols)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Like <code class="inline">Ecto.Changeset.cast</code> but for Pointables, Virtuals and Mixins.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#cast_assoc/3" translate="no">cast_assoc(changeset, assoc_key, opts)</a>
 
         </div>
 
@@ -140,7 +165,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#auto/5" translate="no">auto(thing, params, options, defaults, config)</a>
+          <a href="#cast_belongs_to/4" translate="no">cast_belongs_to(changeset, assoc_key, assoc, opts)</a>
 
         </div>
 
@@ -148,7 +173,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#cast_assoc/4" translate="no">cast_assoc(cs, key, params, opts \\ [])</a>
+          <a href="#cast_has_many/4" translate="no">cast_has_many(changeset, assoc_key, assoc, opts)</a>
 
         </div>
 
@@ -156,7 +181,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#config_for/1" translate="no">config_for(module)</a>
+          <a href="#cast_has_one/4" translate="no">cast_has_one(changeset, assoc_key, assoc, opts)</a>
 
         </div>
 
@@ -172,17 +197,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#is_built?/1" translate="no">is_built?(arg1)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>True if the schema object's current state is <code class="inline">:built</code></p></div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#is_deleted?/1" translate="no">is_deleted?(arg1)</a>
+          <a href="#deleted?/1" translate="no">deleted?(arg1)</a>
 
         </div>
 
@@ -192,7 +207,15 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#is_loaded?/1" translate="no">is_loaded?(arg1)</a>
+          <a href="#insert_verb/1" translate="no">insert_verb(thing)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#loaded?/1" translate="no">loaded?(arg1)</a>
 
         </div>
 
@@ -210,49 +233,11 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#put_assoc/3" translate="no">put_assoc(changeset, key, mixin_changeset)</a>
+          <a href="#put_assoc/3" translate="no">put_assoc(changeset, assoc_key, rels)</a>
 
         </div>
 
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#replicate_map_change/4" translate="no">replicate_map_change(changeset, source_key, target_key, xform)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#replicate_map_valid_change/4" translate="no">replicate_map_valid_change(changeset, source_key, target_key, xform)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#rewrite_child_errors/1" translate="no">rewrite_child_errors(cs)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#rewrite_constraint_errors/1" translate="no">rewrite_constraint_errors(c)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#rewrite_errors/3" translate="no">rewrite_errors(cs, options, config)</a>
-
-        </div>
+          <div class="summary-synopsis"><p>Like <code class="inline">Ecto.Changeset.put_assoc</code> but for Pointables, Virtuals and Mixins.</p></div>
 
       </div>
 
@@ -268,19 +253,19 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#valid?/1" translate="no">valid?(cs)</a>
+          <a href="#update_data/2" translate="no">update_data(changeset, fun)</a>
 
         </div>
-
-          <div class="summary-synopsis"><p>true if the provided changeset or list of changesets is valid.</p></div>
 
       </div>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#verb/1" translate="no">verb(thing)</a>
+          <a href="#valid?/1" translate="no">valid?(cs)</a>
 
         </div>
+
+          <div class="summary-synopsis"><p>true if the provided changeset or list of changesets is valid.</p></div>
 
       </div>
 
@@ -298,18 +283,82 @@ bonfire
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="assoc_changeset/4">
-
-    <span id="assoc_changeset/3"></span>
+<section class="detail" id="build_assoc/3">
 
   <div class="detail-header">
-    <a href="#assoc_changeset/4" class="detail-link" title="Link to this function">
+    <a href="#build_assoc/3" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">assoc_changeset(changeset, key, params, opts \\ [])</h1>
+    <h1 class="signature" translate="no">build_assoc(changeset, assoc_key, rel)</h1>
 
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L157" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L126" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Like Ecto.build_assoc/3, but can work with a Changeset</p>
+  </section>
+</section>
+<section class="detail" id="built?/1">
+
+  <div class="detail-header">
+    <a href="#built?/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">built?(arg1)</h1>
+
+      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L11" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>True if the schema object's current state is <code class="inline">:built</code></p>
+  </section>
+</section>
+<section class="detail" id="cast/3">
+
+  <div class="detail-header">
+    <a href="#cast/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">cast(changeset, params, cols)</h1>
+
+      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L37" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Like <code class="inline">Ecto.Changeset.cast</code> but for Pointables, Virtuals and Mixins.</p><p>If a pointable or virtual, Generates an ID if one is not present.</p>
+  </section>
+</section>
+<section class="detail" id="cast_assoc/3">
+
+  <div class="detail-header">
+    <a href="#cast_assoc/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">cast_assoc(changeset, assoc_key, opts)</h1>
+
+      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L148" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -322,40 +371,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="auto/4">
+<section class="detail" id="cast_belongs_to/4">
 
   <div class="detail-header">
-    <a href="#auto/4" class="detail-link" title="Link to this macro">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this macro</span>
-    </a>
-    <h1 class="signature" translate="no">auto(thing, params, options, defaults)</h1>
-
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L24" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-      <span class="note">(macro)</span>
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="auto/5">
-
-  <div class="detail-header">
-    <a href="#auto/5" class="detail-link" title="Link to this function">
+    <a href="#cast_belongs_to/4" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">auto(thing, params, options, defaults, config)</h1>
+    <h1 class="signature" translate="no">cast_belongs_to(changeset, assoc_key, assoc, opts)</h1>
 
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L40" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L181" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -368,18 +393,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="cast_assoc/4">
-
-    <span id="cast_assoc/3"></span>
+<section class="detail" id="cast_has_many/4">
 
   <div class="detail-header">
-    <a href="#cast_assoc/4" class="detail-link" title="Link to this function">
+    <a href="#cast_has_many/4" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">cast_assoc(cs, key, params, opts \\ [])</h1>
+    <h1 class="signature" translate="no">cast_has_many(changeset, assoc_key, assoc, opts)</h1>
 
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L195" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L177" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -392,16 +415,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="config_for/1">
+<section class="detail" id="cast_has_one/4">
 
   <div class="detail-header">
-    <a href="#config_for/1" class="detail-link" title="Link to this function">
+    <a href="#cast_has_one/4" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">config_for(module)</h1>
+    <h1 class="signature" translate="no">cast_has_one(changeset, assoc_key, assoc, opts)</h1>
 
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L139" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L162" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -425,7 +448,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">config_for(module, key, default \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L145" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L326" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -438,36 +461,14 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="is_built?/1">
+<section class="detail" id="deleted?/1">
 
   <div class="detail-header">
-    <a href="#is_built?/1" class="detail-link" title="Link to this function">
+    <a href="#deleted?/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">is_built?(arg1)</h1>
-
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L11" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>True if the schema object's current state is <code class="inline">:built</code></p>
-  </section>
-</section>
-<section class="detail" id="is_deleted?/1">
-
-  <div class="detail-header">
-    <a href="#is_deleted?/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">is_deleted?(arg1)</h1>
+    <h1 class="signature" translate="no">deleted?(arg1)</h1>
 
       <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L19" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
@@ -482,14 +483,36 @@ Functions
 <p>True if the schema object's current state is <code class="inline">:deleted</code></p>
   </section>
 </section>
-<section class="detail" id="is_loaded?/1">
+<section class="detail" id="insert_verb/1">
 
   <div class="detail-header">
-    <a href="#is_loaded?/1" class="detail-link" title="Link to this function">
+    <a href="#insert_verb/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">is_loaded?(arg1)</h1>
+    <h1 class="signature" translate="no">insert_verb(thing)</h1>
+
+      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L26" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="loaded?/1">
+
+  <div class="detail-header">
+    <a href="#loaded?/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">loaded?(arg1)</h1>
 
       <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L15" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
@@ -513,7 +536,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">merge_child_errors(cs)</h1>
 
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L242" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L286" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -533,9 +556,9 @@ Functions
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">put_assoc(changeset, key, mixin_changeset)</h1>
+    <h1 class="signature" translate="no">put_assoc(changeset, assoc_key, rels)</h1>
 
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L187" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L69" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -545,117 +568,7 @@ Functions
 
   <section class="docstring">
 
-
-  </section>
-</section>
-<section class="detail" id="replicate_map_change/4">
-
-  <div class="detail-header">
-    <a href="#replicate_map_change/4" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">replicate_map_change(changeset, source_key, target_key, xform)</h1>
-
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L122" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="replicate_map_valid_change/4">
-
-  <div class="detail-header">
-    <a href="#replicate_map_valid_change/4" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">replicate_map_valid_change(changeset, source_key, target_key, xform)</h1>
-
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L130" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="rewrite_child_errors/1">
-
-  <div class="detail-header">
-    <a href="#rewrite_child_errors/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">rewrite_child_errors(cs)</h1>
-
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L226" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="rewrite_constraint_errors/1">
-
-  <div class="detail-header">
-    <a href="#rewrite_constraint_errors/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">rewrite_constraint_errors(c)</h1>
-
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L230" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="rewrite_errors/3">
-
-  <div class="detail-header">
-    <a href="#rewrite_errors/3" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">rewrite_errors(cs, options, config)</h1>
-
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L221" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
+<p>Like <code class="inline">Ecto.Changeset.put_assoc</code> but for Pointables, Virtuals and Mixins.</p><p>Copies across keys where possible.</p>
   </section>
 </section>
 <section class="detail" id="state/1">
@@ -680,6 +593,28 @@ Functions
 <p>Returns the schema object's current state.</p>
   </section>
 </section>
+<section class="detail" id="update_data/2">
+
+  <div class="detail-header">
+    <a href="#update_data/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">update_data(changeset, fun)</h1>
+
+      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L332" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
 <section class="detail" id="valid?/1">
 
   <div class="detail-header">
@@ -689,7 +624,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">valid?(cs)</h1>
 
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L152" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L23" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -702,28 +637,6 @@ Functions
 <p>true if the provided changeset or list of changesets is valid.</p>
   </section>
 </section>
-<section class="detail" id="verb/1">
-
-  <div class="detail-header">
-    <a href="#verb/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">verb(thing)</h1>
-
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/changesets.ex#L22" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
 
     </div>
   </section>
@@ -732,7 +645,7 @@ Functions
 
         <p>
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.2) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.3) for the
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>

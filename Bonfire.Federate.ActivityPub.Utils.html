@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.2">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.156">
+    <meta name="generator" content="ExDoc v0.28.3">
+    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.1">
 
-    <title>Bonfire.Federate.ActivityPub.Utils — bonfire v0.1.0-cooperation-beta.156</title>
-    <link rel="stylesheet" href="dist/elixir-77a6dc6b2ca946d9dd7b.css" />
+    <title>Bonfire.Federate.ActivityPub.Utils — bonfire v0.2.0-cooperation-alpha.1</title>
+    <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-98a7769866.js"></script>
+    <script src="dist/sidebar_items-8c7d398856.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-3c12af0fd635c84435a4.js"></script>
+    <script async src="dist/app-a088a6cc33ae3464193e.js"></script>
 
 
   </head>
@@ -22,8 +22,13 @@
     <script>
 
       try {
-        if (localStorage.getItem('night-mode') === 'true') {
-          document.body.classList.add('night-mode');
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
         }
       } catch (error) { }
     </script>
@@ -65,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.156
+        v0.2.0-cooperation-alpha.1
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,7 +105,7 @@ bonfire
     </a>
 
   <span translate="no">Bonfire.Federate.ActivityPub.Utils</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.156)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.1)</small>
 
 </h1>
 
@@ -131,14 +136,6 @@ bonfire
       <div class="summary-row">
         <div class="summary-signature">
           <a href="#character_to_actor/1" translate="no">character_to_actor(character)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#check_local/1" translate="no">check_local(context)</a>
 
         </div>
 
@@ -254,7 +251,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#get_character_by_ap_id/1" translate="no">get_character_by_ap_id(actor)</a>
+          <a href="#get_character_by_ap_id/1" translate="no">get_character_by_ap_id(ap_id)</a>
 
         </div>
 
@@ -262,7 +259,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#get_character_by_id/1" translate="no">get_character_by_id(id)</a>
+          <a href="#get_character_by_id/2" translate="no">get_character_by_id(id, opts \\ [skip_boundary_check: true])</a>
 
         </div>
 
@@ -270,7 +267,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#get_character_by_username/1" translate="no">get_character_by_username(username)</a>
+          <a href="#get_character_by_username/1" translate="no">get_character_by_username(character)</a>
 
         </div>
 
@@ -360,6 +357,14 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#get_or_fetch_and_create_by_uri/1" translate="no">get_or_fetch_and_create_by_uri(q)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#get_pointer_id_by_ap_id/1" translate="no">get_pointer_id_by_ap_id(ap_id)</a>
 
         </div>
@@ -368,7 +373,23 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#is_local?/1" translate="no">is_local?(thing)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#log/1" translate="no">log(l)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#maybe_attach_property_value/2" translate="no">maybe_attach_property_value(name, url)</a>
 
         </div>
 
@@ -400,7 +421,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#maybe_create_image_object_from_path/1" translate="no">maybe_create_image_object_from_path(url)</a>
+          <a href="#maybe_fix_image_object/1" translate="no">maybe_fix_image_object(url)</a>
 
         </div>
 
@@ -408,7 +429,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#maybe_fix_image_object/1" translate="no">maybe_fix_image_object(url)</a>
+          <a href="#maybe_format_image_object_from_path/1" translate="no">maybe_format_image_object_from_path(url)</a>
 
         </div>
 
@@ -453,7 +474,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">ap_base_url()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L19" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L21" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -475,29 +496,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">character_to_actor(character)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L293" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="check_local/1">
-
-  <div class="detail-header">
-    <a href="#check_local/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">check_local(context)</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L23" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L257" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -519,7 +518,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">create_author_object(map)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L449" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L417" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -541,7 +540,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">determine_recipients(actor, comment)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L340" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L308" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -563,7 +562,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">determine_recipients(actor, comment, parent)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L344" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L312" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -585,7 +584,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">determine_recipients(actor, comment, to, cc)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L360" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L328" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -609,7 +608,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">format_actor(user_etc, type \\ &quot;Person&quot;)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L301" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L265" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -631,7 +630,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">generate_actor_url(u)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L69" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L58" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -653,7 +652,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">generate_object_ap_id(url)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L105" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L81" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -675,7 +674,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_actor_canonical_url(obj)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L87" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L73" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -719,7 +718,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_author(author)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L463" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L431" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -741,7 +740,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_by_url_ap_id_or_username(url)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L199" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L146" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -763,7 +762,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_cached_actor_by_local_id!(ap_id)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L242" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L206" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -785,7 +784,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_character_by_ap_id!(ap_id)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L191" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L138" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -805,9 +804,9 @@ Functions
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">get_character_by_ap_id(actor)</h1>
+    <h1 class="signature" translate="no">get_character_by_ap_id(ap_id)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L163" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L112" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -820,16 +819,18 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="get_character_by_id/1">
+<section class="detail" id="get_character_by_id/2">
+
+    <span id="get_character_by_id/1"></span>
 
   <div class="detail-header">
-    <a href="#get_character_by_id/1" class="detail-link" title="Link to this function">
+    <a href="#get_character_by_id/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">get_character_by_id(id)</h1>
+    <h1 class="signature" translate="no">get_character_by_id(id, opts \\ [skip_boundary_check: true])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L146" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L98" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -849,9 +850,9 @@ Functions
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">get_character_by_username(username)</h1>
+    <h1 class="signature" translate="no">get_character_by_username(character)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L134" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L91" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -873,7 +874,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_context_ap_id(arg1)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L281" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L245" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -895,7 +896,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_creator_ap_id(arg1)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L263" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L227" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -917,7 +918,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_different_creator_ap_id(character)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L274" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L238" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -939,7 +940,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_in_reply_to(comment)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L381" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L349" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -961,7 +962,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_object(object)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L421" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L389" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -983,7 +984,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_object_ap_id!(object)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L414" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L382" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1005,7 +1006,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_object_ap_id(arg1)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L397" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L365" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1027,7 +1028,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_object_canonical_url(object)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L126" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L88" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1049,7 +1050,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_object_or_actor_by_ap_id!(ap_id)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L251" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L215" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1071,7 +1072,29 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_or_fetch_actor_by_ap_id!(ap_id)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L233" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L197" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="get_or_fetch_and_create_by_uri/1">
+
+  <div class="detail-header">
+    <a href="#get_or_fetch_and_create_by_uri/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">get_or_fetch_and_create_by_uri(q)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L163" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1093,7 +1116,29 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_pointer_id_by_ap_id(ap_id)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L434" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L402" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="is_local?/1">
+
+  <div class="detail-header">
+    <a href="#is_local?/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">is_local?(thing)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L25" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1115,7 +1160,29 @@ Functions
     </a>
     <h1 class="signature" translate="no">log(l)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L13" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L17" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="maybe_attach_property_value/2">
+
+  <div class="detail-header">
+    <a href="#maybe_attach_property_value/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">maybe_attach_property_value(name, url)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L472" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1137,7 +1204,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">maybe_create_icon_object(url, actor)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L499" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L486" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1159,7 +1226,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">maybe_create_image_object(url)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L481" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L449" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1181,29 +1248,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">maybe_create_image_object(url, actor)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L475" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="maybe_create_image_object_from_path/1">
-
-  <div class="detail-header">
-    <a href="#maybe_create_image_object_from_path/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">maybe_create_image_object_from_path(url)</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L490" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L443" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1225,7 +1270,29 @@ Functions
     </a>
     <h1 class="signature" translate="no">maybe_fix_image_object(url)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L471" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L439" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="maybe_format_image_object_from_path/1">
+
+  <div class="detail-header">
+    <a href="#maybe_format_image_object_from_path/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">maybe_format_image_object_from_path(url)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L458" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1247,7 +1314,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">public_uri()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L11" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L15" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1269,7 +1336,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">validate_url(str)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L224" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/utils.ex#L188" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1290,7 +1357,7 @@ Functions
 
         <p>
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.2) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.3) for the
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>

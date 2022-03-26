@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.2">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.156">
+    <meta name="generator" content="ExDoc v0.28.3">
+    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.1">
 
-    <title>AbsintheClient — bonfire v0.1.0-cooperation-beta.156</title>
-    <link rel="stylesheet" href="dist/elixir-77a6dc6b2ca946d9dd7b.css" />
+    <title>AbsintheClient — bonfire v0.2.0-cooperation-alpha.1</title>
+    <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-98a7769866.js"></script>
+    <script src="dist/sidebar_items-8c7d398856.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-3c12af0fd635c84435a4.js"></script>
+    <script async src="dist/app-a088a6cc33ae3464193e.js"></script>
 
 
   </head>
@@ -22,8 +22,13 @@
     <script>
 
       try {
-        if (localStorage.getItem('night-mode') === 'true') {
-          document.body.classList.add('night-mode');
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
         }
       } catch (error) { }
     </script>
@@ -65,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.156
+        v0.2.0-cooperation-alpha.1
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,7 +105,7 @@ bonfire
     </a>
 
   <span translate="no">AbsintheClient</span> <small>behaviour</small>
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.156)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.1)</small>
 
 </h1>
 
@@ -113,29 +118,29 @@ bonfire
   Example
 </h2>
 <p>First, <code class="inline">use AbsintheClient</code>, passing your <code class="inline">schema</code> and
-notifying Absinthe to operate in <code class="inline">internal</code> mode:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyAppWeb.UserController</span><span class="w"> </span><span class="k" data-group-id="1742046549-1">do</span><span class="w">
+notifying Absinthe to operate in <code class="inline">internal</code> mode:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyAppWeb.UserController</span><span class="w"> </span><span class="k" data-group-id="1308692876-1">do</span><span class="w">
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">MyAppWeb</span><span class="p">,</span><span class="w"> </span><span class="ss">:controller</span><span class="w">
-  </span><span class="kn">use</span><span class="w"> </span><span class="nc">AbsintheClient</span><span class="p">,</span><span class="w"> </span><span class="ss">schema</span><span class="p">:</span><span class="w"> </span><span class="nc">MyAppWeb.Schema</span><span class="p">,</span><span class="w"> </span><span class="ss">action</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1742046549-2">[</span><span class="ss">mode</span><span class="p">:</span><span class="w"> </span><span class="ss">:internal</span><span class="p" data-group-id="1742046549-2">]</span><span class="w">
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">AbsintheClient</span><span class="p">,</span><span class="w"> </span><span class="ss">schema</span><span class="p">:</span><span class="w"> </span><span class="nc">MyAppWeb.Schema</span><span class="p">,</span><span class="w"> </span><span class="ss">action</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1308692876-2">[</span><span class="ss">mode</span><span class="p">:</span><span class="w"> </span><span class="ss">:internal</span><span class="p" data-group-id="1308692876-2">]</span><span class="w">
 
   </span><span class="c1"># ... actions</span><span class="w">
 
-</span><span class="k" data-group-id="1742046549-1">end</span></code></pre><p>For each action you want Absinthe to process, provide a GraphQL document using
+</span><span class="k" data-group-id="1308692876-1">end</span></code></pre><p>For each action you want Absinthe to process, provide a GraphQL document using
 the <code class="inline">@graphql</code> module attribute (before the action):</p><pre><code class="makeup elixir" translate="no"><span class="na">@graphql</span><span class="w"> </span><span class="s">&quot;&quot;&quot;
   query ($filter: UserFilter) {
     users(filter: $filter, limit: 10)
   }
 &quot;&quot;&quot;</span><span class="w">
-</span><span class="kd">def</span><span class="w"> </span><span class="nf">index</span><span class="p" data-group-id="8928443711-1">(</span><span class="n">conn_or_socket</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8928443711-2">%{</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="n">data</span><span class="p" data-group-id="8928443711-2">}</span><span class="p" data-group-id="8928443711-1">)</span><span class="w"> </span><span class="k" data-group-id="8928443711-3">do</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">index</span><span class="p" data-group-id="3886873251-1">(</span><span class="n">conn_or_socket</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3886873251-2">%{</span><span class="ss">data</span><span class="p">:</span><span class="w"> </span><span class="n">data</span><span class="p" data-group-id="3886873251-2">}</span><span class="p" data-group-id="3886873251-1">)</span><span class="w"> </span><span class="k" data-group-id="3886873251-3">do</span><span class="w">
   </span><span class="n">render</span><span class="w"> </span><span class="n">conn_or_socket</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;index.html&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">data</span><span class="w">
-</span><span class="k" data-group-id="8928443711-3">end</span></code></pre><p>The params for the action will be intercepted by the
+</span><span class="k" data-group-id="3886873251-3">end</span></code></pre><p>The params for the action will be intercepted by the
 <code class="inline">AbsintheClient.Action</code> plug, and used as variables for
 the GraphQL document you've specified.</p><p>For instance, given a definition for a <code class="inline">:user_filter</code> input object
-type like this:</p><pre><code class="makeup elixir" translate="no"><span class="n">input_object</span><span class="w"> </span><span class="ss">:user_filter</span><span class="w"> </span><span class="k" data-group-id="0809941359-1">do</span><span class="w">
+type like this:</p><pre><code class="makeup elixir" translate="no"><span class="n">input_object</span><span class="w"> </span><span class="ss">:user_filter</span><span class="w"> </span><span class="k" data-group-id="0194379124-1">do</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:name_matches</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:age_above</span><span class="p">,</span><span class="w"> </span><span class="ss">:integer</span><span class="w">
   </span><span class="n">field</span><span class="w"> </span><span class="ss">:age_below</span><span class="p">,</span><span class="w"> </span><span class="ss">:integer</span><span class="w">
-</span><span class="k" data-group-id="0809941359-1">end</span></code></pre><p>And a query that looks like this (assuming you have the normal
-<a href="https://hexdocs.pm/plug/1.13.3/Plug.Parsers.html"><code class="inline">Plug.Parsers</code></a> configuration for param parsing):</p><pre><code class="makeup elixir" translate="no"><span class="sc">?f</span><span class="n">ilter</span><span class="p" data-group-id="5195865186-1">[</span><span class="n">name_matches</span><span class="p" data-group-id="5195865186-1">]</span><span class="o">=</span><span class="n">joe</span><span class="o">&amp;</span><span class="n">filter</span><span class="p" data-group-id="5195865186-2">[</span><span class="n">age_above</span><span class="p" data-group-id="5195865186-2">]</span><span class="o">=</span><span class="mi">42</span></code></pre><p>Then Absinthe will receive variable definitions of:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="0114369845-1">%{</span><span class="s">&quot;filter&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="0114369845-2">%{</span><span class="s">&quot;name_matches&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;joe&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;age_above&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="mi">42</span><span class="p" data-group-id="0114369845-2">}</span><span class="p" data-group-id="0114369845-1">}</span></code></pre><p>(For how the string <code class="inline">&quot;42&quot;</code> was converted into <code class="inline">42</code>, see <code class="inline">cast_param/3</code>).</p><p>The params on the <code class="inline">conn_or_socket</code> will then be replaced by the result of the
+</span><span class="k" data-group-id="0194379124-1">end</span></code></pre><p>And a query that looks like this (assuming you have the normal
+<a href="https://hexdocs.pm/plug/1.13.4/Plug.Parsers.html"><code class="inline">Plug.Parsers</code></a> configuration for param parsing):</p><pre><code class="makeup elixir" translate="no"><span class="sc">?f</span><span class="n">ilter</span><span class="p" data-group-id="6252289742-1">[</span><span class="n">name_matches</span><span class="p" data-group-id="6252289742-1">]</span><span class="o">=</span><span class="n">joe</span><span class="o">&amp;</span><span class="n">filter</span><span class="p" data-group-id="6252289742-2">[</span><span class="n">age_above</span><span class="p" data-group-id="6252289742-2">]</span><span class="o">=</span><span class="mi">42</span></code></pre><p>Then Absinthe will receive variable definitions of:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="9507351544-1">%{</span><span class="s">&quot;filter&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="9507351544-2">%{</span><span class="s">&quot;name_matches&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;joe&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;age_above&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="mi">42</span><span class="p" data-group-id="9507351544-2">}</span><span class="p" data-group-id="9507351544-1">}</span></code></pre><p>(For how the string <code class="inline">&quot;42&quot;</code> was converted into <code class="inline">42</code>, see <code class="inline">cast_param/3</code>).</p><p>The params on the <code class="inline">conn_or_socket</code> will then be replaced by the result of the
 execution by Absinthe. The action function can then match against
 that result to respond correctly to the user:</p><p>It's up to you to handle the three possible results:</p><ul><li>When there's <code class="inline">:data</code> but no <code class="inline">:errors</code>, everything went perfectly.</li><li>When there's <code class="inline">:errors</code> but no <code class="inline">:data</code>, a validation error occurred and the document could not be
 executed.</li><li>When there's <code class="inline">:data</code> and <code class="inline">:errors</code>, partial data is available but some fields reported errors
@@ -168,9 +173,9 @@ values can be &quot;leaf nodes&quot; in a GraphQL document... but to support
 unmodified struct values being returned (for example, Ecto schemas),
 if no selection set is provided for an object value (or list
 thereof), the entire value is returned.</p><p>The template can then use <code class="inline">users</code> as needed:</p><pre><code class="makeup elixir" translate="no"><span class="o">&lt;</span><span class="n">ul</span><span class="o">&gt;</span><span class="w">
-  </span><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="na">@users</span><span class="w"> </span><span class="k" data-group-id="3791297995-1">do</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
-    </span><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">link</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">full_name</span><span class="p">,</span><span class="w"> </span><span class="ss">to</span><span class="p">:</span><span class="w"> </span><span class="n">user_path</span><span class="p" data-group-id="3791297995-2">(</span><span class="na">@conn_or_socket</span><span class="p">,</span><span class="w"> </span><span class="ss">:show</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p" data-group-id="3791297995-2">)</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="o">&lt;</span><span class="o">/</span><span class="n">li</span><span class="o">&gt;</span><span class="w">
-  </span><span class="o">&lt;</span><span class="p">%</span><span class="w"> </span><span class="k" data-group-id="3791297995-1">end</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
+  </span><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">user</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="na">@users</span><span class="w"> </span><span class="k" data-group-id="9925176214-1">do</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
+    </span><span class="o">&lt;</span><span class="n">li</span><span class="o">&gt;</span><span class="o">&lt;</span><span class="p">%</span><span class="o">=</span><span class="w"> </span><span class="n">link</span><span class="w"> </span><span class="n">user</span><span class="o">.</span><span class="n">full_name</span><span class="p">,</span><span class="w"> </span><span class="ss">to</span><span class="p">:</span><span class="w"> </span><span class="n">user_path</span><span class="p" data-group-id="9925176214-2">(</span><span class="na">@conn_or_socket</span><span class="p">,</span><span class="w"> </span><span class="ss">:show</span><span class="p">,</span><span class="w"> </span><span class="n">user</span><span class="p" data-group-id="9925176214-2">)</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="o">&lt;</span><span class="o">/</span><span class="n">li</span><span class="o">&gt;</span><span class="w">
+  </span><span class="o">&lt;</span><span class="p">%</span><span class="w"> </span><span class="k" data-group-id="9925176214-1">end</span><span class="w"> </span><span class="p">%</span><span class="o">&gt;</span><span class="w">
 </span><span class="o">&lt;</span><span class="o">/</span><span class="n">ul</span><span class="o">&gt;</span></code></pre><p>This is useful for <a href="https://hexdocs.pm/phoenix_html/3.2.0/Phoenix.HTML.html"><code class="inline">Phoenix.HTML</code></a> helper functions that expect
 structs with specific fields (especially <code class="inline">form_for</code>).</p><p>One way to think of this change is that, for objects, no selection
 set is equivalent to a &quot;splat&quot; operator (except, of course, even
@@ -292,10 +297,9 @@ Callbacks
 
   <section class="docstring">
 
-      <h2>Specs</h2>
       <div class="specs">
 
-          <pre translate="no">absinthe_pipeline(schema :: <a href="https://hexdocs.pm/absinthe/1.7.0/Absinthe.Schema.html#t:t/0">Absinthe.Schema.t</a>(), <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) ::
+          <pre translate="no"><span class="attribute">@callback</span> absinthe_pipeline(schema :: <a href="https://hexdocs.pm/absinthe/1.7.0/Absinthe.Schema.html#t:t/0">Absinthe.Schema.t</a>(), <a href="https://hexdocs.pm/elixir/Keyword.html#t:t/0">Keyword.t</a>()) ::
   <a href="https://hexdocs.pm/absinthe/1.7.0/Absinthe.Pipeline.html#t:t/0">Absinthe.Pipeline.t</a>()</pre>
 
       </div>
@@ -327,10 +331,9 @@ to process documents.</p>
 
   <section class="docstring">
 
-      <h2>Specs</h2>
       <div class="specs">
 
-          <pre translate="no">cast_param(
+          <pre translate="no"><span class="attribute">@callback</span> cast_param(
   value :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>(),
   target_type :: Absinthe.Type.t(),
   schema :: <a href="https://hexdocs.pm/absinthe/1.7.0/Absinthe.Schema.html#t:t/0">Absinthe.Schema.t</a>()
@@ -418,7 +421,7 @@ Functions
 
         <p>
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.2) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.3) for the
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>

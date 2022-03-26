@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.2">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.156">
+    <meta name="generator" content="ExDoc v0.28.3">
+    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.1">
 
-    <title>Bonfire.Common.URIs — bonfire v0.1.0-cooperation-beta.156</title>
-    <link rel="stylesheet" href="dist/elixir-77a6dc6b2ca946d9dd7b.css" />
+    <title>Bonfire.Common.URIs — bonfire v0.2.0-cooperation-alpha.1</title>
+    <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-98a7769866.js"></script>
+    <script src="dist/sidebar_items-8c7d398856.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-3c12af0fd635c84435a4.js"></script>
+    <script async src="dist/app-a088a6cc33ae3464193e.js"></script>
 
 
   </head>
@@ -22,8 +22,13 @@
     <script>
 
       try {
-        if (localStorage.getItem('night-mode') === 'true') {
-          document.body.classList.add('night-mode');
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
         }
       } catch (error) { }
     </script>
@@ -65,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.156
+        v0.2.0-cooperation-alpha.1
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,7 +105,7 @@ bonfire
     </a>
 
   <span translate="no">Bonfire.Common.URIs</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.156)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.1)</small>
 
 </h1>
 
@@ -154,7 +159,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#go_query/1" translate="no">go_query(conn)</a>
+          <a href="#go_query/1" translate="no">go_query(url)</a>
 
         </div>
 
@@ -162,7 +167,15 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#go_where?/3" translate="no">go_where?(conn, params, default)</a>
+          <a href="#go_where?/3" translate="no">go_where?(conn, cs, default)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#instance_domain/1" translate="no">instance_domain(endpoint_or_conn \\ nil)</a>
 
         </div>
 
@@ -225,7 +238,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">base_url(conn \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L166" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L175" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -247,7 +260,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">canonical_url(object)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L100" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L104" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -269,7 +282,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">copy_go(arg1)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L194" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L218" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -291,7 +304,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">fallback(id, args)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L59" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L63" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -311,9 +324,9 @@ Functions
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">go_query(conn)</h1>
+    <h1 class="signature" translate="no">go_query(url)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L199" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L223" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -333,7 +346,31 @@ Functions
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">go_where?(conn, params, default)</h1>
+    <h1 class="signature" translate="no">go_where?(conn, cs, default)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L232" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="instance_domain/1">
+
+    <span id="instance_domain/0"></span>
+
+  <div class="detail-header">
+    <a href="#instance_domain/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">instance_domain(endpoint_or_conn \\ nil)</h1>
 
       <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L207" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
@@ -359,7 +396,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">path(view_module_or_path_name_or_object, args \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L8" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L9" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -383,7 +420,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">path_by_id(id, args, object \\ %{})</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L63" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L67" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -407,7 +444,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">url(view_module_or_path_name_or_object, args \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L96" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L100" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -429,7 +466,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">valid_go_path?(arg1)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L204" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L229" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -450,7 +487,7 @@ Functions
 
         <p>
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.2) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.3) for the
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>

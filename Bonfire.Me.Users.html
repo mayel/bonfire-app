@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.2">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.156">
+    <meta name="generator" content="ExDoc v0.28.3">
+    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.1">
 
-    <title>Bonfire.Me.Users — bonfire v0.1.0-cooperation-beta.156</title>
-    <link rel="stylesheet" href="dist/elixir-77a6dc6b2ca946d9dd7b.css" />
+    <title>Bonfire.Me.Users — bonfire v0.2.0-cooperation-alpha.1</title>
+    <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-98a7769866.js"></script>
+    <script src="dist/sidebar_items-8c7d398856.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-3c12af0fd635c84435a4.js"></script>
+    <script async src="dist/app-a088a6cc33ae3464193e.js"></script>
 
 
   </head>
@@ -22,8 +22,13 @@
     <script>
 
       try {
-        if (localStorage.getItem('night-mode') === 'true') {
-          document.body.classList.add('night-mode');
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
         }
       } catch (error) { }
     </script>
@@ -65,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.156
+        v0.2.0-cooperation-alpha.1
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,7 +105,7 @@ bonfire
     </a>
 
   <span translate="no">Bonfire.Me.Users</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.156)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.1)</small>
 
 </h1>
 
@@ -142,14 +147,6 @@ bonfire
     <h2>
       <a href="#functions">Functions</a>
     </h2>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#add_acl/2" translate="no">add_acl(user, preset)</a>
-
-        </div>
-
-      </div>
 
       <div class="summary-row">
         <div class="summary-signature">
@@ -255,6 +252,14 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#delete/1" translate="no">delete(users)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#federation_module/0" translate="no">federation_module()</a>
 
         </div>
@@ -353,6 +358,14 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#query/2" translate="no">query(list, opts \\ [])</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#revoke_admin/1" translate="no">revoke_admin(username)</a>
 
         </div>
@@ -436,10 +449,9 @@ Types
 
   <section class="docstring">
 
-      <h2>Specs</h2>
       <div class="specs">
 
-          <pre translate="no">changeset_extra() :: Bonfire.Data.Identity.Account.t() | :remote</pre>
+          <pre translate="no"><span class="attribute">@type</span> changeset_extra() :: Bonfire.Data.Identity.Account.t() | :remote</pre>
 
       </div>
 
@@ -465,10 +477,9 @@ Types
 
   <section class="docstring">
 
-      <h2>Specs</h2>
       <div class="specs">
 
-          <pre translate="no">changeset_name() :: :create</pre>
+          <pre translate="no"><span class="attribute">@type</span> changeset_name() :: :create</pre>
 
       </div>
 
@@ -488,28 +499,6 @@ Types
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="add_acl/2">
-
-  <div class="detail-header">
-    <a href="#add_acl/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">add_acl(user, preset)</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L212" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
 <section class="detail" id="ap_receive_activity/3">
 
   <div class="detail-header">
@@ -519,7 +508,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">ap_receive_activity(creator, activity, object)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L199" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L185" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -541,7 +530,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">by_account(account)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L41" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L44" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -563,7 +552,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">by_ap_id!(ap_id)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L193" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L179" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -585,7 +574,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">by_ap_id(ap_id)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L187" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L173" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -607,7 +596,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">by_id(id)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L35" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L37" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -629,7 +618,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">by_username!(username)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L40" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L43" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -651,7 +640,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">by_username(username)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L38" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L41" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -673,7 +662,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">by_username_and_account(username, account_id)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L56" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L59" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -697,7 +686,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">changeset(name, user \\ %User{}, params, extra)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L261" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L248" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -707,15 +696,14 @@ Functions
 
   <section class="docstring">
 
-      <h2>Specs</h2>
       <div class="specs">
 
-          <pre translate="no">changeset(
+          <pre translate="no"><span class="attribute">@spec</span> changeset(
   name :: <a href="#t:changeset_name/0">changeset_name</a>(),
   user :: Bonfire.Data.Identity.User.t(),
   params :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(),
   extra :: Bonfire.Data.Identity.Account.t() | :remote
-) :: <a href="https://hexdocs.pm/ecto/3.7.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+) :: <a href="https://hexdocs.pm/ecto/3.7.2/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
 
       </div>
 
@@ -755,7 +743,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">create(params_or_changeset, extra \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L87" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L90" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -777,7 +765,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">create_remote(params)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L205" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L191" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -788,6 +776,28 @@ Functions
   <section class="docstring">
 
 <p>Creates a remote user</p>
+  </section>
+</section>
+<section class="detail" id="delete/1">
+
+  <div class="detail-header">
+    <a href="#delete/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">delete(users)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L416" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 <section class="detail" id="federation_module/0">
@@ -843,7 +853,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">flatten(user)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L73" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L76" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -865,7 +875,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">format_actor(user)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L225" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L212" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -909,7 +919,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_only_in_account(account)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L153" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L139" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -931,7 +941,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">indexing_object_format(u)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L312" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L300" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -953,7 +963,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">is_admin?(user)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L79" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L82" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -975,7 +985,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">list()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L70" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L73" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -997,7 +1007,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">list_admins()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L71" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L74" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1019,7 +1029,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">make_admin(username)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L114" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L118" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1041,7 +1051,31 @@ Functions
     </a>
     <h1 class="signature" translate="no">maybe_index_user(object)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L323" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L311" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="query/2">
+
+    <span id="query/1"></span>
+
+  <div class="detail-header">
+    <a href="#query/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">query(list, opts \\ [])</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L35" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1063,7 +1097,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">revoke_admin(username)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L121" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L125" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1085,7 +1119,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">search(search)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L64" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L67" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1107,7 +1141,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">search_db(search)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L69" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L72" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1131,7 +1165,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">update(user, params, extra \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L164" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L150" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1153,7 +1187,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">update_local_actor(user, params)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L232" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L219" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1175,7 +1209,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">update_remote(user, params)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L221" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_me/blob/main/lib/me/users/users.ex#L208" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1196,7 +1230,7 @@ Functions
 
         <p>
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.2) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.3) for the
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>

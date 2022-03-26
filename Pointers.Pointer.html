@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.2">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.156">
+    <meta name="generator" content="ExDoc v0.28.3">
+    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.1">
 
-    <title>Pointers.Pointer — bonfire v0.1.0-cooperation-beta.156</title>
-    <link rel="stylesheet" href="dist/elixir-77a6dc6b2ca946d9dd7b.css" />
+    <title>Pointers.Pointer — bonfire v0.2.0-cooperation-alpha.1</title>
+    <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-98a7769866.js"></script>
+    <script src="dist/sidebar_items-8c7d398856.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-3c12af0fd635c84435a4.js"></script>
+    <script async src="dist/app-a088a6cc33ae3464193e.js"></script>
 
 
   </head>
@@ -22,8 +22,13 @@
     <script>
 
       try {
-        if (localStorage.getItem('night-mode') === 'true') {
-          document.body.classList.add('night-mode');
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
         }
       } catch (error) { }
     </script>
@@ -65,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.156
+        v0.2.0-cooperation-alpha.1
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,14 +105,16 @@ bonfire
     </a>
 
   <span translate="no">Pointers.Pointer</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.156)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.1)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>A Pointer is a kind of global foreign key that can point to any of
-the tables participating in the abstraction.</p>
+<p>A Pointer is any object that can be referenced by its id.</p><p>Pointer is a simple table consisting of three fields:</p><ul><li>id - the database-unique id for this pointer in ULID format.</li><li>table_id - a type tag, references <code class="inline">Table</code>.</li><li>deleted_at - timestamp of when the object was deleted, null by default.</li></ul><p>To reference <code class="inline">any</code> object, simply reference <code class="inline">Pointer</code>:</p><pre><code class="makeup elixir" translate="no"><span class="kn">alias</span><span class="w"> </span><span class="nc">Pointers.Pointer</span><span class="w">
+</span><span class="n">belongs_to</span><span class="w"> </span><span class="ss">:object</span><span class="p">,</span><span class="w"> </span><span class="nc">Pointer</span></code></pre><p>To define a new object type there are two options, you should choose one:</p><ul><li><code class="inline">Virtual</code> - an object type with a view over <code class="inline">Pointer</code> limited by type.</li><li><code class="inline">Pointable</code> - an object type with a table which is kept synchronised with <code class="inline">Pointer</code>.</li></ul><p>For most purposes, you should use a <code class="inline">Virtual</code>. Pointable exists mostly to support existing code.
+The major difference in practice is that you cannot add new fields to a virtual. Most of the time
+you will want to store such extra fields in one or more mixins anyway so they may be reused.</p><p>See <code class="inline">Mixin</code> for more information about mixins.</p>
   </section>
 
 
@@ -132,16 +139,6 @@ the tables participating in the abstraction.</p>
         </div>
 
           <div class="summary-synopsis"><p>Changeset for creating a Pointer</p></div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#repoint/2" translate="no">repoint(pointer, table)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>Changeset for updating which table a Pointer points to.</p></div>
 
       </div>
 
@@ -170,7 +167,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">create(id \\ Pointers.ULID.generate(), table)</h1>
 
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/pointer.ex#L24" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/pointer.ex#L47" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -183,28 +180,6 @@ Functions
 <p>Changeset for creating a Pointer</p>
   </section>
 </section>
-<section class="detail" id="repoint/2">
-
-  <div class="detail-header">
-    <a href="#repoint/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">repoint(pointer, table)</h1>
-
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/pointer.ex#L30" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Changeset for updating which table a Pointer points to.</p>
-  </section>
-</section>
 
     </div>
   </section>
@@ -213,7 +188,7 @@ Functions
 
         <p>
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.2) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.3) for the
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>

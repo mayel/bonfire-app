@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.2">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.156">
+    <meta name="generator" content="ExDoc v0.28.3">
+    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.1">
 
-    <title>Pointers.Mixin — bonfire v0.1.0-cooperation-beta.156</title>
-    <link rel="stylesheet" href="dist/elixir-77a6dc6b2ca946d9dd7b.css" />
+    <title>Pointers.Mixin — bonfire v0.2.0-cooperation-alpha.1</title>
+    <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-98a7769866.js"></script>
+    <script src="dist/sidebar_items-8c7d398856.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-3c12af0fd635c84435a4.js"></script>
+    <script async src="dist/app-a088a6cc33ae3464193e.js"></script>
 
 
   </head>
@@ -22,8 +22,13 @@
     <script>
 
       try {
-        if (localStorage.getItem('night-mode') === 'true') {
-          document.body.classList.add('night-mode');
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
         }
       } catch (error) { }
     </script>
@@ -65,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.156
+        v0.2.0-cooperation-alpha.1
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,13 +105,36 @@ bonfire
     </a>
 
   <span translate="no">Pointers.Mixin</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.156)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.1)</small>
 
 </h1>
 
 
   <section id="moduledoc">
+<p>If a Pointer represents an object, mixins represent data about the object. Mixins collate optional
+additional information about an object. Different types of object will typically make use of
+different mixins. You can see these as aspects of the data if you like.</p><p>A mixin table starts with an <code class="inline">id</code> column which references <code class="inline">Pointer</code> and forms the default primary
+key. It is up to the user to choose which other fields go in the table, and thus what the mixin is for.</p><p>Use of a mixin is typically through <code class="inline">has_one</code>:</p><pre><code class="makeup elixir" translate="no"><span class="n">has_one</span><span class="w"> </span><span class="ss">:my_mixin</span><span class="p">,</span><span class="w"> </span><span class="nc">MyMixin</span><span class="p">,</span><span class="w"> </span><span class="ss">foreign_key</span><span class="p">:</span><span class="w"> </span><span class="ss">:id</span><span class="p">,</span><span class="w"> </span><span class="ss">references</span><span class="p">:</span><span class="w"> </span><span class="ss">:id</span></code></pre><p>Sometimes, the user may wish to add fields to the primary key by using the <code class="inline">primary_key: true</code>
+option to <code class="inline">add</code> in their migrations. This is permitted and in such case we call the resulting
+mixin a <code class="inline">multimixin</code>. Use becomes <code class="inline">has_many</code>:</p><pre><code class="makeup elixir" translate="no"><span class="n">has_many</span><span class="w"> </span><span class="ss">:my_mixin</span><span class="p">,</span><span class="w"> </span><span class="nc">MyMixin</span><span class="p">,</span><span class="w"> </span><span class="ss">foreign_key</span><span class="p">:</span><span class="w"> </span><span class="ss">:id</span><span class="p">,</span><span class="w"> </span><span class="ss">references</span><span class="p">:</span><span class="w"> </span><span class="ss">:id</span></code></pre><p>Thus the choice of single or multi comes down to how many times you want to store that data for
+the object. A user's profile naturally lends itself to a regular <code class="inline">single</code> mixin, whereas an
+object's appearance in a feed would naturally lend itself to being a multimixin since the object
+may appear in many feeds.</p><h3 id="module-declaring-a-mixin-table-type" class="section-heading">
+  <a href="#module-declaring-a-mixin-table-type" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">declaring-a-mixin-table-type</p>
+  </a>
+  Declaring a mixin table type
+</h3>
+<pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">My.Mixin</span><span class="w"> </span><span class="k" data-group-id="3271989104-1">do</span><span class="w">
 
+  </span><span class="kn">use</span><span class="w"> </span><span class="nc">Pointers.Mixin</span><span class="p">,</span><span class="w">
+    </span><span class="ss">otp_app</span><span class="p">:</span><span class="w"> </span><span class="ss">:my_app</span><span class="p">,</span><span class="w">
+    </span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;postgres_table_name&quot;</span><span class="w">
+
+  </span><span class="n">mixin_schema</span><span class="w"> </span><span class="k" data-group-id="3271989104-2">do</span><span class="w">
+    </span><span class="n">field</span><span class="w"> </span><span class="ss">:is_awesome</span><span class="p">,</span><span class="w"> </span><span class="ss">:boolean</span><span class="w">
+  </span><span class="k" data-group-id="3271989104-2">end</span><span class="w">
+</span><span class="k" data-group-id="3271989104-1">end</span></code></pre>
   </section>
 
 
@@ -163,7 +191,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">mixin_schema(list)</h1>
 
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/mixin.ex#L34" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/mixin.ex#L73" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -187,7 +215,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">using(module, options)</h1>
 
-      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/mixin.ex#L13" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/pointers/blob/main/lib/mixin.ex#L52" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -208,7 +236,7 @@ Functions
 
         <p>
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.2) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.3) for the
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>

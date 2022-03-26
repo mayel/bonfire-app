@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.2">
-    <meta name="project" content="bonfire v0.1.0-cooperation-beta.156">
+    <meta name="generator" content="ExDoc v0.28.3">
+    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.1">
 
-    <title>Bonfire.Web.Cldr.Number.Ordinal — bonfire v0.1.0-cooperation-beta.156</title>
-    <link rel="stylesheet" href="dist/elixir-77a6dc6b2ca946d9dd7b.css" />
+    <title>Bonfire.Web.Cldr.Number.Ordinal — bonfire v0.2.0-cooperation-alpha.1</title>
+    <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-98a7769866.js"></script>
+    <script src="dist/sidebar_items-8c7d398856.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-3c12af0fd635c84435a4.js"></script>
+    <script async src="dist/app-a088a6cc33ae3464193e.js"></script>
 
 
   </head>
@@ -22,8 +22,13 @@
     <script>
 
       try {
-        if (localStorage.getItem('night-mode') === 'true') {
-          document.body.classList.add('night-mode');
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
         }
       } catch (error) { }
     </script>
@@ -65,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.1.0-cooperation-beta.156
+        v0.2.0-cooperation-alpha.1
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,7 +105,7 @@ bonfire
     </a>
 
   <span translate="no">Bonfire.Web.Cldr.Number.Ordinal</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.1.0-cooperation-beta.156)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.1)</small>
 
 </h1>
 
@@ -181,7 +186,7 @@ bonfire
         </div>
 
           <div class="summary-synopsis"><p>Pluralize a number using ordinal plural rules
-and a substition map.</p></div>
+and a substitution map.</p></div>
 
       </div>
 
@@ -240,16 +245,15 @@ Functions
 
   <section class="docstring">
 
-      <h2>Specs</h2>
       <div class="specs">
 
-          <pre translate="no">known_locale_names() :: [<a href="https://hexdocs.pm/ex_cldr/2.26.3/Cldr.Locale.html#t:locale_name/0">Cldr.Locale.locale_name</a>(), ...]</pre>
+          <pre translate="no"><span class="attribute">@spec</span> known_locale_names() :: [<a href="https://hexdocs.pm/ex_cldr/2.27.1/Cldr.Locale.html#t:locale_name/0">Cldr.Locale.locale_name</a>(), ...]</pre>
 
       </div>
 
 <p>The configured locales for which plural rules are defined.</p><p>Returns the intersection of <a href="./Bonfire.Web.Cldr.html#known_locale_names/0"><code class="inline">Bonfire.Web.Cldr.known_locale_names/0</code></a> and
-the locales for which Ordinal plural rules are defined.</p><p>There are many <a href="https://hexdocs.pm/ex_cldr/2.26.3/Cldr.html"><code class="inline">Cldr</code></a> locales which don't have their own plural
-rules so this list is the intersection of <a href="https://hexdocs.pm/ex_cldr/2.26.3/Cldr.html"><code class="inline">Cldr</code></a>'s configured
+the locales for which Ordinal plural rules are defined.</p><p>There are many <a href="https://hexdocs.pm/ex_cldr/2.27.1/Cldr.html"><code class="inline">Cldr</code></a> locales which don't have their own plural
+rules so this list is the intersection of <a href="https://hexdocs.pm/ex_cldr/2.27.1/Cldr.html"><code class="inline">Cldr</code></a>'s configured
 locales and those that have rules.</p>
   </section>
 </section>
@@ -274,14 +278,13 @@ locales and those that have rules.</p>
 
   <section class="docstring">
 
-      <h2>Specs</h2>
       <div class="specs">
 
-          <pre translate="no">plural_rule(
+          <pre translate="no"><span class="attribute">@spec</span> plural_rule(
   <a href="https://hexdocs.pm/cldr_utils/2.17.1/Cldr.Math.html#t:number_or_decimal/0">Cldr.Math.number_or_decimal</a>(),
-  <a href="https://hexdocs.pm/ex_cldr/2.26.3/Cldr.Locale.html#t:locale_name/0">Cldr.Locale.locale_name</a>() | <a href="https://hexdocs.pm/ex_cldr/2.26.3/Cldr.LanguageTag.html#t:t/0">Cldr.LanguageTag.t</a>(),
+  <a href="https://hexdocs.pm/ex_cldr/2.27.1/Cldr.Locale.html#t:locale_name/0">Cldr.Locale.locale_name</a>() | <a href="https://hexdocs.pm/ex_cldr/2.27.1/Cldr.LanguageTag.html#t:t/0">Cldr.LanguageTag.t</a>(),
   <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>()
-) :: <a href="https://hexdocs.pm/ex_cldr/2.26.3/Cldr.Number.PluralRule.html#t:plural_type/0">Cldr.Number.PluralRule.plural_type</a>()</pre>
+) :: <a href="https://hexdocs.pm/ex_cldr/2.27.1/Cldr.Number.PluralRule.html#t:plural_type/0">Cldr.Number.PluralRule.plural_type</a>()</pre>
 
       </div>
 
@@ -297,7 +300,7 @@ list or other content in a plural-sensitive way.</p><h2 id="plural_rule/3-argume
   </a>
   Arguments
 </h2>
-<ul><li><p><code class="inline">number</code> is any <code class="inline">integer</code>, <code class="inline">float</code> or <a href="https://hexdocs.pm/decimal/2.0.0/Decimal.html"><code class="inline">Decimal</code></a></p></li><li><p><code class="inline">locale</code> is any locale returned by <a href="https://hexdocs.pm/ex_cldr/2.26.3/Cldr.Locale.html#new!/2"><code class="inline">Cldr.Locale.new!/2</code></a> or any
+<ul><li><p><code class="inline">number</code> is any <code class="inline">integer</code>, <code class="inline">float</code> or <a href="https://hexdocs.pm/decimal/2.0.0/Decimal.html"><code class="inline">Decimal</code></a></p></li><li><p><code class="inline">locale</code> is any locale returned by <a href="https://hexdocs.pm/ex_cldr/2.27.1/Cldr.Locale.html#new!/2"><code class="inline">Cldr.Locale.new!/2</code></a> or any
 <code class="inline">locale_name</code> returned by <a href="./Bonfire.Web.Cldr.html#known_locale_names/0"><code class="inline">Bonfire.Web.Cldr.known_locale_names/0</code></a></p></li><li><p><code class="inline">rounding</code> is one of <code class="inline">[:down, :up, :ceiling, :floor, :half_even, :half_up, :half_down]</code>.  The
 default is <code class="inline">:half_even</code>.</p></li></ul><h2 id="plural_rule/3-examples" class="section-heading">
   <a href="#plural_rule/3-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
@@ -331,10 +334,9 @@ default is <code class="inline">:half_even</code>.</p></li></ul><h2 id="plural_r
 
   <section class="docstring">
 
-      <h2>Specs</h2>
       <div class="specs">
 
-          <pre translate="no">plural_rules() :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()</pre>
+          <pre translate="no"><span class="attribute">@spec</span> plural_rules() :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()</pre>
 
       </div>
 
@@ -360,10 +362,9 @@ default is <code class="inline">:half_even</code>.</p></li></ul><h2 id="plural_r
 
   <section class="docstring">
 
-      <h2>Specs</h2>
       <div class="specs">
 
-          <pre translate="no">plural_rules_for(<a href="https://hexdocs.pm/ex_cldr/2.26.3/Cldr.Locale.html#t:locale_name/0">Cldr.Locale.locale_name</a>() | <a href="https://hexdocs.pm/ex_cldr/2.26.3/Cldr.LanguageTag.html#t:t/0">Cldr.LanguageTag.t</a>()) :: [
+          <pre translate="no"><span class="attribute">@spec</span> plural_rules_for(<a href="https://hexdocs.pm/ex_cldr/2.27.1/Cldr.Locale.html#t:locale_name/0">Cldr.Locale.locale_name</a>() | <a href="https://hexdocs.pm/ex_cldr/2.27.1/Cldr.LanguageTag.html#t:t/0">Cldr.LanguageTag.t</a>()) :: [
   {<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">list</a>()},
   ...
 ]</pre>
@@ -399,19 +400,18 @@ default is <code class="inline">:half_even</code>.</p></li></ul><h2 id="plural_r
 
   <section class="docstring">
 
-      <h2>Specs</h2>
       <div class="specs">
 
-          <pre translate="no">pluralize(
+          <pre translate="no"><span class="attribute">@spec</span> pluralize(
   <a href="https://hexdocs.pm/cldr_utils/2.17.1/Cldr.Math.html#t:number_or_decimal/0">Cldr.Math.number_or_decimal</a>() | <a href="https://hexdocs.pm/elixir/Range.html#t:t/0">Range.t</a>(),
-  <a href="https://hexdocs.pm/ex_cldr/2.26.3/Cldr.Locale.html#t:locale_reference/0">Cldr.Locale.locale_reference</a>(),
+  <a href="https://hexdocs.pm/ex_cldr/2.27.1/Cldr.Locale.html#t:locale_reference/0">Cldr.Locale.locale_reference</a>(),
   %{}
 ) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()</pre>
 
       </div>
 
 <p>Pluralize a number using ordinal plural rules
-and a substition map.</p><h2 id="pluralize/3-arguments" class="section-heading">
+and a substitution map.</p><h2 id="pluralize/3-arguments" class="section-heading">
   <a href="#pluralize/3-arguments" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">arguments</p>
   </a>
@@ -429,31 +429,31 @@ The valid substitution keys are <code class="inline">:zero</code>, <code class="
   </a>
   Examples
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">:en</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1042737706-1">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p" data-group-id="1042737706-1">}</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">:en</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0775635379-1">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p" data-group-id="0775635379-1">}</span><span class="w">
 </span><span class="s">&quot;one&quot;</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">:en</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1042737706-2">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p" data-group-id="1042737706-2">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">:en</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0775635379-2">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p" data-group-id="0775635379-2">}</span><span class="w">
 </span><span class="no">nil</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">:en</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1042737706-3">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">two</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;two&quot;</span><span class="p" data-group-id="1042737706-3">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">:en</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0775635379-3">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">two</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;two&quot;</span><span class="p" data-group-id="0775635379-3">}</span><span class="w">
 </span><span class="s">&quot;two&quot;</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="ss">:en</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1042737706-4">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">two</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;two&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">other</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;other&quot;</span><span class="p" data-group-id="1042737706-4">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span><span class="w"> </span><span class="ss">:en</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0775635379-4">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">two</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;two&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">other</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;other&quot;</span><span class="p" data-group-id="0775635379-4">}</span><span class="w">
 </span><span class="s">&quot;two&quot;</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="nc">Decimal</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="1042737706-5">(</span><span class="mi">1</span><span class="p" data-group-id="1042737706-5">)</span><span class="p">,</span><span class="w"> </span><span class="ss">:en</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1042737706-6">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p" data-group-id="1042737706-6">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="nc">Decimal</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="0775635379-5">(</span><span class="mi">1</span><span class="p" data-group-id="0775635379-5">)</span><span class="p">,</span><span class="w"> </span><span class="ss">:en</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0775635379-6">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p" data-group-id="0775635379-6">}</span><span class="w">
 </span><span class="s">&quot;one&quot;</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="nc">Decimal</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="1042737706-7">(</span><span class="mi">2</span><span class="p" data-group-id="1042737706-7">)</span><span class="p">,</span><span class="w"> </span><span class="ss">:en</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1042737706-8">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p" data-group-id="1042737706-8">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="nc">Decimal</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="0775635379-7">(</span><span class="mi">2</span><span class="p" data-group-id="0775635379-7">)</span><span class="p">,</span><span class="w"> </span><span class="ss">:en</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0775635379-8">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p" data-group-id="0775635379-8">}</span><span class="w">
 </span><span class="no">nil</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="nc">Decimal</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="1042737706-9">(</span><span class="mi">2</span><span class="p" data-group-id="1042737706-9">)</span><span class="p">,</span><span class="w"> </span><span class="ss">:en</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1042737706-10">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">two</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;two&quot;</span><span class="p" data-group-id="1042737706-10">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="nc">Decimal</span><span class="o">.</span><span class="n">new</span><span class="p" data-group-id="0775635379-9">(</span><span class="mi">2</span><span class="p" data-group-id="0775635379-9">)</span><span class="p">,</span><span class="w"> </span><span class="ss">:en</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0775635379-10">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">two</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;two&quot;</span><span class="p" data-group-id="0775635379-10">}</span><span class="w">
 </span><span class="s">&quot;two&quot;</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="mi">1</span><span class="o">..</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ar&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1042737706-11">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">few</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;few&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">other</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;other&quot;</span><span class="p" data-group-id="1042737706-11">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="mi">1</span><span class="o">..</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;ar&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0775635379-11">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">few</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;few&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">other</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;other&quot;</span><span class="p" data-group-id="0775635379-11">}</span><span class="w">
 </span><span class="s">&quot;other&quot;</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="mi">1</span><span class="o">..</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1042737706-12">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">few</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;few&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">other</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;other&quot;</span><span class="p" data-group-id="1042737706-12">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Web.Cldr.Number.Ordinal</span><span class="o">.</span><span class="n">pluralize</span><span class="w"> </span><span class="mi">1</span><span class="o">..</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0775635379-12">%{</span><span class="ss">one</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;one&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">few</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;few&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">other</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;other&quot;</span><span class="p" data-group-id="0775635379-12">}</span><span class="w">
 </span><span class="s">&quot;other&quot;</span></code></pre>
   </section>
 </section>
@@ -465,7 +465,7 @@ The valid substitution keys are <code class="inline">:zero</code>, <code class="
 
         <p>
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.2) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.3) for the
           <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
         </p>
       </footer>
