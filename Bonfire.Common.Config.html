@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.3">
-    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.38">
+    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.39">
 
-    <title>Bonfire.Common.Config — bonfire v0.2.0-cooperation-alpha.38</title>
+    <title>Bonfire.Common.Config — bonfire v0.2.0-cooperation-alpha.39</title>
     <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-49ea16e2b4.js"></script>
+    <script src="dist/sidebar_items-cacc67c23e.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.2.0-cooperation-alpha.38
+        v0.2.0-cooperation-alpha.39
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -105,7 +105,7 @@ bonfire
     </a>
 
   <span translate="no">Bonfire.Common.Config</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.38)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.39)</small>
 
 </h1>
 
@@ -151,7 +151,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#get/3" translate="no">get(key, default \\ nil, otp_app \\ top_level_otp_app())</a>
+          <a href="#get/3" translate="no">get(key, default \\ nil, otp_app \\ nil)</a>
 
         </div>
 
@@ -181,7 +181,7 @@ bonfire
 
         </div>
 
-          <div class="summary-synopsis"><p>Get all config keys/values for a Bonfire extension or OTP app</p></div>
+          <div class="summary-synopsis"><p>Get <em>all</em> config keys/values for a specific Bonfire extension or OTP app</p></div>
 
       </div>
 
@@ -197,11 +197,29 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#keys_tree/1" translate="no">keys_tree(keys)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Constructs a key path for settings/config, which always starts with an app or extension name (which defaults to the main OTP app)</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#module_enabled?/1" translate="no">module_enabled?(module)</a>
 
         </div>
 
           <div class="summary-synopsis"><p>See <code class="inline">Extend.module_enabled?/1</code>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#put/1" translate="no">put(tree)</a>
+
+        </div>
 
       </div>
 
@@ -262,7 +280,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">compilation_error(error)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L13" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L14" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -288,7 +306,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">delete(key, otp_app \\ top_level_otp_app())</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L134" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L165" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -312,7 +330,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get!(key, otp_app \\ top_level_otp_app())</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L86" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L90" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -336,9 +354,9 @@ Functions
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">get(key, default \\ nil, otp_app \\ top_level_otp_app())</h1>
+    <h1 class="signature" translate="no">get(key, default \\ nil, otp_app \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L63" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L64" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -360,7 +378,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_ext!(module_or_otp_app)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L104" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L108" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -382,7 +400,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_ext!(module_or_otp_app, key)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L50" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L51" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -404,7 +422,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_ext(module_or_otp_app)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L99" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L103" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -414,7 +432,7 @@ Functions
 
   <section class="docstring">
 
-<p>Get all config keys/values for a Bonfire extension or OTP app</p>
+<p>Get <em>all</em> config keys/values for a specific Bonfire extension or OTP app</p>
   </section>
 </section>
 <section class="detail" id="get_ext/3">
@@ -428,7 +446,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get_ext(module_or_otp_app, key, default \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L37" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L38" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -441,6 +459,33 @@ Functions
 <p>Get config value for a Bonfire extension or OTP app config key</p>
   </section>
 </section>
+<section class="detail" id="keys_tree/1">
+
+  <div class="detail-header">
+    <a href="#keys_tree/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">keys_tree(keys)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L201" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Constructs a key path for settings/config, which always starts with an app or extension name (which defaults to the main OTP app)</p><p>iex&gt; keys_tree([:bonfire_me, Bonfire.Me.Users])
+  [:bonfire_me, Bonfire.Me.Users]</p><p>iex&gt; keys_tree(Bonfire.Me.Users)
+  [:bonfire_me, Bonfire.Me.Users]</p><p>iex&gt; keys_tree(:bonfire_me)
+  [:bonfire_me]</p><p>iex&gt; keys_tree(:random_atom)
+  [:bonfire, :random_atom]</p><p>iex&gt;keys_tree([:random_atom, :sub_key])
+  [:bonfire, :random_atom, :sub_key]</p>
+  </section>
+</section>
 <section class="detail" id="module_enabled?/1">
 
   <div class="detail-header">
@@ -450,7 +495,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">module_enabled?(module)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L19" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L20" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -461,6 +506,28 @@ Functions
   <section class="docstring">
 
 <p>See <code class="inline">Extend.module_enabled?/1</code>.</p>
+  </section>
+</section>
+<section class="detail" id="put/1">
+
+  <div class="detail-header">
+    <a href="#put/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">put(tree)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L143" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 <section class="detail" id="put/3">
@@ -474,7 +541,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">put(key, value, otp_app \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L116" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L120" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -496,7 +563,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">repo()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L152" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L226" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -518,7 +585,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">require_extension_config!(extension)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L24" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L25" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -540,7 +607,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">top_level_otp_app()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L5" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/config.ex#L6" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
