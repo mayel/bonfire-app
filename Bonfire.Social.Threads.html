@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.3">
-    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.51">
+    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.52">
 
-    <title>Bonfire.Social.Threads — bonfire v0.2.0-cooperation-alpha.51</title>
+    <title>Bonfire.Social.Threads — bonfire v0.2.0-cooperation-alpha.52</title>
     <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-6bff659e20.js"></script>
+    <script src="dist/sidebar_items-2f9200410b.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.2.0-cooperation-alpha.51
+        v0.2.0-cooperation-alpha.52
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -105,7 +105,7 @@ bonfire
     </a>
 
   <span translate="no">Bonfire.Social.Threads</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.51)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.52)</small>
 
 </h1>
 
@@ -162,6 +162,16 @@ If it's not a reply or the user is not permitted to reply to the thing, a new th
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#fetch_participants/2" translate="no">fetch_participants(thread_id, opts \\ [])</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>List participants in a thread (depending on user's boundaries)</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#filter/3" translate="no">filter(arg1, thread_id, query)</a>
 
         </div>
@@ -182,11 +192,11 @@ If it's not a reply or the user is not permitted to reply to the thing, a new th
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#list_participants/2" translate="no">list_participants(thread_id, opts \\ [])</a>
+          <a href="#list_participants/3" translate="no">list_participants(activity, thread_or_object_id \\ nil, opts \\ [])</a>
 
         </div>
 
-          <div class="summary-synopsis"><p>List participants in a thread (depending on user's boundaries)</p></div>
+          <div class="summary-synopsis"><p>List participants of an activity or thread (depending on user's boundaries)</p></div>
 
       </div>
 
@@ -265,7 +275,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">arrange_replies_tree(replies)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/threads.ex#L272" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/threads.ex#L295" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -347,6 +357,30 @@ If it's not a reply or the user is not permitted to reply to the thing, a new th
 
   </section>
 </section>
+<section class="detail" id="fetch_participants/2">
+
+    <span id="fetch_participants/1"></span>
+
+  <div class="detail-header">
+    <a href="#fetch_participants/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fetch_participants(thread_id, opts \\ [])</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/threads.ex#L194" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>List participants in a thread (depending on user's boundaries)</p>
+  </section>
+</section>
 <section class="detail" id="filter/3">
 
   <div class="detail-header">
@@ -356,7 +390,7 @@ If it's not a reply or the user is not permitted to reply to the thing, a new th
     </a>
     <h1 class="signature" translate="no">filter(arg1, thread_id, query)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/threads.ex#L180" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/threads.ex#L203" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -391,16 +425,18 @@ If it's not a reply or the user is not permitted to reply to the thing, a new th
 <p>Returns <code class="inline">{:ok, reply}</code> or <code class="inline">{:error, reason}</code>, where <code class="inline">reason</code> may be:</p><ul><li><code class="inline">:not_found</code> - we could not find the object you are replying to.</li><li><code class="inline">:not_permitted</code> - you do not have permission to reply to this.</li></ul>
   </section>
 </section>
-<section class="detail" id="list_participants/2">
+<section class="detail" id="list_participants/3">
 
     <span id="list_participants/1"></span>
 
+    <span id="list_participants/2"></span>
+
   <div class="detail-header">
-    <a href="#list_participants/2" class="detail-link" title="Link to this function">
+    <a href="#list_participants/3" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">list_participants(thread_id, opts \\ [])</h1>
+    <h1 class="signature" translate="no">list_participants(activity, thread_or_object_id \\ nil, opts \\ [])</h1>
 
       <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/threads.ex#L171" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
@@ -412,7 +448,7 @@ If it's not a reply or the user is not permitted to reply to the thing, a new th
 
   <section class="docstring">
 
-<p>List participants in a thread (depending on user's boundaries)</p>
+<p>List participants of an activity or thread (depending on user's boundaries)</p>
   </section>
 </section>
 <section class="detail" id="list_replies/2">
@@ -426,7 +462,7 @@ If it's not a reply or the user is not permitted to reply to the thing, a new th
     </a>
     <h1 class="signature" translate="no">list_replies(thread, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/threads.ex#L216" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/threads.ex#L239" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -448,7 +484,7 @@ If it's not a reply or the user is not permitted to reply to the thing, a new th
     </a>
     <h1 class="signature" translate="no">maybe_re_order_result(result, opts)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/threads.ex#L211" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/threads.ex#L234" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -470,7 +506,7 @@ If it's not a reply or the user is not permitted to reply to the thing, a new th
     </a>
     <h1 class="signature" translate="no">maybe_re_order_with_subquery(query, opts)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/threads.ex#L206" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/threads.ex#L229" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -514,7 +550,7 @@ If it's not a reply or the user is not permitted to reply to the thing, a new th
     </a>
     <h1 class="signature" translate="no">query(filter, opts)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/threads.ex#L236" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/threads.ex#L259" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
