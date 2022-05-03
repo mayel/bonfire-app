@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.3">
-    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.59">
+    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.60">
 
-    <title>Bonfire.Common.URIs — bonfire v0.2.0-cooperation-alpha.59</title>
+    <title>Bonfire.Common.URIs — bonfire v0.2.0-cooperation-alpha.60</title>
     <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
 
-    <script src="dist/sidebar_items-9020c8843c.js"></script>
+    <script src="dist/sidebar_items-6aa63e9324.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.2.0-cooperation-alpha.59
+        v0.2.0-cooperation-alpha.60
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -105,7 +105,7 @@ bonfire
     </a>
 
   <span translate="no">Bonfire.Common.URIs</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.59)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.60)</small>
 
 </h1>
 
@@ -147,6 +147,8 @@ bonfire
 
         </div>
 
+          <div class="summary-synopsis"><p>copies the <code class="inline">go</code> param into a query string, if any</p></div>
+
       </div>
 
       <div class="summary-row">
@@ -170,6 +172,9 @@ bonfire
           <a href="#go_query/1" translate="no">go_query(url)</a>
 
         </div>
+
+          <div class="summary-synopsis"><p>Generate a query string adding a <code class="inline">go</code> redirection path to the URI (for redirecting somewhere after auth flows).
+It is recommended to use <a href="#set_go_after/2"><code class="inline">set_go_after/2</code></a> where possible instead.</p></div>
 
       </div>
 
@@ -207,15 +212,17 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#url/2" translate="no">url(view_module_or_path_name_or_object, args \\ [])</a>
+          <a href="#set_go_after/2" translate="no">set_go_after(conn, path \\ nil)</a>
 
         </div>
+
+          <div class="summary-synopsis"><p>Save a <code class="inline">go</code> redirection path in the session (for redirecting somewhere after auth flows)</p></div>
 
       </div>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#valid_go_path?/1" translate="no">valid_go_path?(arg1)</a>
+          <a href="#url/2" translate="no">url(view_module_or_path_name_or_object, args \\ [])</a>
 
         </div>
 
@@ -290,7 +297,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">copy_go(arg1)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L239" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L255" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -300,7 +307,7 @@ Functions
 
   <section class="docstring">
 
-
+<p>copies the <code class="inline">go</code> param into a query string, if any</p>
   </section>
 </section>
 <section class="detail" id="fallback/1">
@@ -356,7 +363,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">go_query(url)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L244" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L251" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -366,7 +373,8 @@ Functions
 
   <section class="docstring">
 
-
+<p>Generate a query string adding a <code class="inline">go</code> redirection path to the URI (for redirecting somewhere after auth flows).
+It is recommended to use <a href="#set_go_after/2"><code class="inline">set_go_after/2</code></a> where possible instead.</p>
   </section>
 </section>
 <section class="detail" id="go_where?/3">
@@ -378,7 +386,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">go_where?(conn, cs, default)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L253" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L265" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -463,6 +471,30 @@ Functions
 
   </section>
 </section>
+<section class="detail" id="set_go_after/2">
+
+    <span id="set_go_after/1"></span>
+
+  <div class="detail-header">
+    <a href="#set_go_after/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">set_go_after(conn, path \\ nil)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L238" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Save a <code class="inline">go</code> redirection path in the session (for redirecting somewhere after auth flows)</p>
+  </section>
+</section>
 <section class="detail" id="url/2">
 
     <span id="url/1"></span>
@@ -475,28 +507,6 @@ Functions
     <h1 class="signature" translate="no">url(view_module_or_path_name_or_object, args \\ [])</h1>
 
       <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L121" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="valid_go_path?/1">
-
-  <div class="detail-header">
-    <a href="#valid_go_path?/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">valid_go_path?(arg1)</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/uris.ex#L250" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
