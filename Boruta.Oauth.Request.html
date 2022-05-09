@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.28.4">
+    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.74">
+
+    <title>Boruta.Oauth.Request — bonfire v0.2.0-cooperation-alpha.74</title>
+    <link rel="stylesheet" href="dist/elixir-b6f1ed5df9b1d42a7309.css" />
+
+    <script src="dist/sidebar_items-22a5414a37.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-bd1cb213813bf4825aa2.js"></script>
+
+
+  </head>
+  <body data-type="modules">
+    <script>
+
+      try {
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+
+<section class="sidebar">
+  <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+    <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+  </button>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
+    </button>
+    <label class="search-label">
+      <p class="sr-only">Search</p>
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+
+      <a href="https://bonfirenetworks.org">
+        <img src="assets/logo.png" alt="bonfire" class="sidebar-projectImage">
+      </a>
+
+    <div class="sidebar-projectDetails">
+      <a href="https://bonfirenetworks.org" class="sidebar-projectName" translate="no">
+bonfire
+      </a>
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.2.0-cooperation-alpha.74
+      </strong>
+    </div>
+    <ul class="sidebar-listNav">
+      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+        <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
+
+    </ul>
+  </div>
+
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <output role="status" id="toast"></output>
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>
+<button class="settings display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
+
+
+    <a href="https://github.com/bonfire-networks/boruta/blob/main/lib/boruta/oauth/request.ex#L1" title="View Source" class="view-source" rel="help">
+      <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+      <span class="sr-only">View Source</span>
+    </a>
+
+  <span translate="no">Boruta.Oauth.Request</span> 
+  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.74)</small>
+
+</h1>
+
+
+  <section id="moduledoc">
+<p>Build an oauth request struct from given input.</p><blockquote><p><strong>Note</strong>: Input must have the shape or be a <code class="inline">%Plug.Conn{}</code> request.</p></blockquote>
+  </section>
+
+
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+      Summary
+    </h1>
+
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#authorize_request/2" translate="no">authorize_request(conn, resource_owner)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Create request struct from an OAuth authorize request.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#introspect_request/1" translate="no">introspect_request(conn)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Create request struct from an OAuth introspect request.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#revoke_request/1" translate="no">revoke_request(conn)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Create request struct from an OAuth revoke request.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#token_request/1" translate="no">token_request(conn)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Create request struct from an OAuth token request.</p></div>
+
+      </div>
+
+  </div>
+
+  </section>
+
+
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+Functions
+    </h1>
+    <div class="functions-list">
+<section class="detail" id="authorize_request/2">
+
+  <div class="detail-header">
+    <a href="#authorize_request/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">authorize_request(conn, resource_owner)</h1>
+
+      <a href="https://github.com/bonfire-networks/boruta/blob/main/lib/boruta/oauth/request.ex#L74" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> authorize_request(
+  conn :: <a href="https://hexdocs.pm/plug/1.13.6/Plug.Conn.html#t:t/0">Plug.Conn.t</a>() | %{body_params: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()},
+  resource_owner :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">struct</a>()
+) ::
+  {:error,
+   %Boruta.Oauth.Error{
+     error: :invalid_request,
+     error_description: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+     format: nil,
+     redirect_uri: nil,
+     state: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+     status: :bad_request
+   }}
+  | {:ok,
+     oauth_request ::
+       %Boruta.Oauth.CodeRequest{
+         client_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+         code_challenge: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+         code_challenge_method: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+         grant_type: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+         nonce: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+         redirect_uri: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+         resource_owner: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+         response_type: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+         response_types: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+         scope: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+         state: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+       }
+       | %Boruta.Oauth.TokenRequest{
+           client_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           grant_type: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           nonce: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           prompt: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           redirect_uri: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           resource_owner: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           response_types: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           scope: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           state: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+         }}</pre>
+
+      </div>
+
+<p>Create request struct from an OAuth authorize request.</p><p>Note : resource owner must be provided as current_user assigns.</p><h2 id="authorize_request/2-examples" class="section-heading">
+  <a href="#authorize_request/2-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">examples</p>
+  </a>
+  Examples
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt;</span><span class="n">authorize_request</span><span class="p" data-group-id="7651399215-1">(</span><span class="w">
+  </span><span class="p" data-group-id="7651399215-2">%{</span><span class="w">
+    </span><span class="ss">query_params</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7651399215-3">%{</span><span class="w">
+      </span><span class="s">&quot;response_type&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;token&quot;</span><span class="p">,</span><span class="w">
+      </span><span class="s">&quot;client_id&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;client_id&quot;</span><span class="p">,</span><span class="w">
+      </span><span class="s">&quot;redirect_uri&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;redirect_uri&quot;</span><span class="w">
+    </span><span class="p" data-group-id="7651399215-3">}</span><span class="p">,</span><span class="w">
+  </span><span class="p" data-group-id="7651399215-2">}</span><span class="p">,</span><span class="w">
+  </span><span class="p" data-group-id="7651399215-4">%</span><span class="nc" data-group-id="7651399215-4">User</span><span class="p" data-group-id="7651399215-4">{</span><span class="n">...</span><span class="p" data-group-id="7651399215-4">}</span><span class="w">
+</span><span class="p" data-group-id="7651399215-1">)</span><span class="w">
+</span><span class="p" data-group-id="7651399215-5">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="7651399215-6">%</span><span class="nc" data-group-id="7651399215-6">TokenRequest</span><span class="p" data-group-id="7651399215-6">{</span><span class="n">...</span><span class="p" data-group-id="7651399215-6">}</span><span class="p" data-group-id="7651399215-5">}</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="introspect_request/1">
+
+  <div class="detail-header">
+    <a href="#introspect_request/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">introspect_request(conn)</h1>
+
+      <a href="https://github.com/bonfire-networks/boruta/blob/main/lib/boruta/oauth/request.ex#L102" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> introspect_request(
+  conn ::
+    <a href="https://hexdocs.pm/plug/1.13.6/Plug.Conn.html#t:t/0">Plug.Conn.t</a>() | %{optional(:req_headers) =&gt; <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">list</a>(), body_params: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()}
+) ::
+  {:error,
+   %Boruta.Oauth.Error{
+     error: :invalid_request,
+     error_description: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+     format: nil,
+     redirect_uri: nil,
+     state: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+     status: :bad_request
+   }}
+  | {:ok,
+     request :: %Boruta.Oauth.IntrospectRequest{
+       client_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+       client_secret: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+       token: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+     }}</pre>
+
+      </div>
+
+<p>Create request struct from an OAuth introspect request.</p><h2 id="introspect_request/1-examples" class="section-heading">
+  <a href="#introspect_request/1-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">examples</p>
+  </a>
+  Examples
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt;</span><span class="n">introspect_request</span><span class="p" data-group-id="0128193934-1">(</span><span class="p" data-group-id="0128193934-2">%{</span><span class="w">
+  </span><span class="ss">body_params</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0128193934-3">%{</span><span class="w">
+    </span><span class="s">&quot;token&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;token&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="s">&quot;client_id&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;client_id&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="s">&quot;client_secret&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;client_secret&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="p" data-group-id="0128193934-3">}</span><span class="w">
+</span><span class="p" data-group-id="0128193934-2">}</span><span class="p" data-group-id="0128193934-1">)</span><span class="w">
+</span><span class="p" data-group-id="0128193934-4">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0128193934-5">%</span><span class="nc" data-group-id="0128193934-5">IntrospectRequest</span><span class="p" data-group-id="0128193934-5">{</span><span class="n">...</span><span class="p" data-group-id="0128193934-5">}</span><span class="p" data-group-id="0128193934-4">}</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="revoke_request/1">
+
+  <div class="detail-header">
+    <a href="#revoke_request/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">revoke_request(conn)</h1>
+
+      <a href="https://github.com/bonfire-networks/boruta/blob/main/lib/boruta/oauth/request.ex#L130" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> revoke_request(
+  conn ::
+    <a href="https://hexdocs.pm/plug/1.13.6/Plug.Conn.html#t:t/0">Plug.Conn.t</a>() | %{optional(:req_headers) =&gt; <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">list</a>(), body_params: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()}
+) ::
+  {:error,
+   %Boruta.Oauth.Error{
+     error: :invalid_request,
+     error_description: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+     format: nil,
+     redirect_uri: nil,
+     state: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+     status: :bad_request
+   }}
+  | {:ok,
+     request :: %Boruta.Oauth.RevokeRequest{
+       client_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+       client_secret: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+       token: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+       token_type_hint: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+     }}</pre>
+
+      </div>
+
+<p>Create request struct from an OAuth revoke request.</p><h2 id="revoke_request/1-examples" class="section-heading">
+  <a href="#revoke_request/1-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">examples</p>
+  </a>
+  Examples
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt;</span><span class="n">revoke_request</span><span class="p" data-group-id="0567803696-1">(</span><span class="p" data-group-id="0567803696-2">%{</span><span class="w">
+  </span><span class="ss">body_params</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0567803696-3">%{</span><span class="w">
+    </span><span class="s">&quot;token&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;token&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="s">&quot;client_id&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;client_id&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="s">&quot;client_secret&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;client_secret&quot;</span><span class="p">,</span><span class="w">
+  </span><span class="p" data-group-id="0567803696-3">}</span><span class="w">
+</span><span class="p" data-group-id="0567803696-2">}</span><span class="p" data-group-id="0567803696-1">)</span><span class="w">
+</span><span class="p" data-group-id="0567803696-4">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0567803696-5">%</span><span class="nc" data-group-id="0567803696-5">RevokeRequest</span><span class="p" data-group-id="0567803696-5">{</span><span class="n">...</span><span class="p" data-group-id="0567803696-5">}</span><span class="p" data-group-id="0567803696-4">}</span></code></pre>
+  </section>
+</section>
+<section class="detail" id="token_request/1">
+
+  <div class="detail-header">
+    <a href="#token_request/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">token_request(conn)</h1>
+
+      <a href="https://github.com/bonfire-networks/boruta/blob/main/lib/boruta/oauth/request.ex#L40" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> token_request(
+  conn ::
+    <a href="https://hexdocs.pm/plug/1.13.6/Plug.Conn.html#t:t/0">Plug.Conn.t</a>() | %{optional(:req_headers) =&gt; <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">list</a>(), body_params: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()}
+) ::
+  {:error,
+   %Boruta.Oauth.Error{
+     error: :invalid_request,
+     error_description: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(),
+     format: nil,
+     redirect_uri: nil,
+     state: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+     status: :bad_request
+   }}
+  | {:ok,
+     oauth_request ::
+       %Boruta.Oauth.AuthorizationCodeRequest{
+         client_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+         code: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+         code_verifier: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+         grant_type: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+         redirect_uri: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+       }
+       | %Boruta.Oauth.ClientCredentialsRequest{
+           client_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           client_secret: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           grant_type: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           scope: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+         }
+       | %Boruta.Oauth.AuthorizationCodeRequest{
+           client_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           code: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           code_verifier: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           grant_type: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           redirect_uri: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+         }
+       | %Boruta.Oauth.TokenRequest{
+           client_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           grant_type: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           nonce: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           prompt: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           redirect_uri: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           resource_owner: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           response_types: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           scope: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           state: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+         }
+       | %Boruta.Oauth.PasswordRequest{
+           client_id: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           client_secret: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           grant_type: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           password: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           scope: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>(),
+           username: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+         }}</pre>
+
+      </div>
+
+<p>Create request struct from an OAuth token request.</p><h2 id="token_request/1-examples" class="section-heading">
+  <a href="#token_request/1-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">examples</p>
+  </a>
+  Examples
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt;</span><span class="n">token_request</span><span class="p" data-group-id="1024926544-1">(</span><span class="p" data-group-id="1024926544-2">%{</span><span class="w">
+  </span><span class="ss">body_params</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1024926544-3">%{</span><span class="w">
+    </span><span class="s">&quot;grant_type&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;client_credentials&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="s">&quot;client_id&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;client_id&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="s">&quot;client_secret&quot;</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="s">&quot;client_secret&quot;</span><span class="w">
+  </span><span class="p" data-group-id="1024926544-3">}</span><span class="w">
+</span><span class="p" data-group-id="1024926544-2">}</span><span class="p" data-group-id="1024926544-1">)</span><span class="w">
+</span><span class="p" data-group-id="1024926544-4">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1024926544-5">%</span><span class="nc" data-group-id="1024926544-5">ClientCredentialsRequest</span><span class="p" data-group-id="1024926544-5">{</span><span class="n">...</span><span class="p" data-group-id="1024926544-5">}</span><span class="p" data-group-id="1024926544-4">}</span></code></pre>
+  </section>
+</section>
+
+    </div>
+  </section>
+
+      <footer class="footer">
+
+        <p>
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>

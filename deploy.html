@@ -4,17 +4,17 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.3">
-    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.65">
+    <meta name="generator" content="ExDoc v0.28.4">
+    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.74">
 
-    <title>Deployment guide — bonfire v0.2.0-cooperation-alpha.65</title>
-    <link rel="stylesheet" href="dist/elixir-d5ff82e6b0f5651c0ac0.css" />
+    <title>Deployment guide — bonfire v0.2.0-cooperation-alpha.74</title>
+    <link rel="stylesheet" href="dist/elixir-b6f1ed5df9b1d42a7309.css" />
 
-    <script src="dist/sidebar_items-2a08221b56.js"></script>
+    <script src="dist/sidebar_items-22a5414a37.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/app-a088a6cc33ae3464193e.js"></script>
+    <script async src="dist/app-bd1cb213813bf4825aa2.js"></script>
 
 
   </head>
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.2.0-cooperation-alpha.65
+        v0.2.0-cooperation-alpha.74
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -89,6 +89,7 @@ bonfire
 </section>
 
 <section class="content">
+  <output role="status" id="toast"></output>
   <div class="content-outer">
     <div id="content" class="content-inner">
 
@@ -170,7 +171,7 @@ Usage: <code class="inline">bonfire COMMAND [ARGS]</code></p><p>The known comman
   </a>
   Option B - Manual installation (without Docker)
 </h3>
-<h4>Dependencies</h4><ul><li>Postgres (or Postgis) version 12 or newer</li><li>Build tools</li><li>Elixir version 1.11.0 with OTP 23 (or newer). If your distribution only has an old version available, check <a href="https://elixir-lang.org/install.html">Elixir's install page</a> or use a tool like <a href="https://github.com/asdf-vm/asdf">asdf</a> (run <code class="inline">asdf install</code> in this directory).</li></ul><h4>B-1. Building the release</h4><ul><li><p>Make sure you have erlang and elixir installed (check <code class="inline">Dockerfile</code> for what version we're currently using)</p></li><li><p>Run <code class="inline">mix deps.get --only prod</code> to install elixir dependencies.</p></li><li><p>Prepare assets with <code class="inline">make js.deps.get</code>, <code class="inline">make assets.release</code> and <a href="https://hexdocs.pm/phoenix/1.6.7/Mix.Tasks.Phx.Digest.html"><code class="inline">mix phx.digest</code></a></p></li><li><p>Run <a href="https://hexdocs.pm/mix/Mix.Tasks.Release.html"><code class="inline">mix release</code></a> to create an elixir release. This will create an executable in your <code class="inline">_build/prod/rel/bonfire</code> directory. We will be using the <code class="inline">bin/bonfire</code> executable from here on.</p></li></ul><h4>B-2. Running the release</h4><ul><li><p><code class="inline">cd _build/prod/rel/bonfire/</code></p></li><li><p>Create a database and run the migrations with <code class="inline">bin/bonfire eval 'EctoSparkles.ReleaseTasks.migrate()'</code>.</p></li><li><p>If you’re using RDS or some other locked down DB, you may need to run <code class="inline">CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;</code> on your database with elevated privileges.</p></li></ul><ul><li><p>You can check if your instance is configured correctly by running it with <code class="inline">bin/bonfire start</code></p></li><li><p>To run the instance as a daemon, use <code class="inline">bin/bonfire start daemon</code>.</p></li></ul><hr class="thin"/><h3 id="option-c-with-nix" class="section-heading">
+<h4>Dependencies</h4><ul><li>Postgres (or Postgis) version 12 or newer</li><li>Build tools</li><li>Elixir version 1.11.0 with OTP 23 (or newer). If your distribution only has an old version available, check <a href="https://elixir-lang.org/install.html">Elixir's install page</a> or use a tool like <a href="https://github.com/asdf-vm/asdf">asdf</a> (run <code class="inline">asdf install</code> in this directory).</li></ul><h4>B-1. Building the release</h4><ul><li><p>Make sure you have erlang and elixir installed (check <code class="inline">Dockerfile</code> for what version we're currently using)</p></li><li><p>Run <code class="inline">mix deps.get --only prod</code> to install elixir dependencies.</p></li><li><p>Prepare assets with <code class="inline">make js.deps.get</code>, <code class="inline">make assets.release</code> and <a href="https://hexdocs.pm/phoenix/1.6.8/Mix.Tasks.Phx.Digest.html"><code class="inline">mix phx.digest</code></a></p></li><li><p>Run <a href="https://hexdocs.pm/mix/Mix.Tasks.Release.html"><code class="inline">mix release</code></a> to create an elixir release. This will create an executable in your <code class="inline">_build/prod/rel/bonfire</code> directory. We will be using the <code class="inline">bin/bonfire</code> executable from here on.</p></li></ul><h4>B-2. Running the release</h4><ul><li><p><code class="inline">cd _build/prod/rel/bonfire/</code></p></li><li><p>Create a database and run the migrations with <code class="inline">bin/bonfire eval 'EctoSparkles.ReleaseTasks.migrate()'</code>.</p></li><li><p>If you’re using RDS or some other locked down DB, you may need to run <code class="inline">CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;</code> on your database with elevated privileges.</p></li></ul><ul><li><p>You can check if your instance is configured correctly by running it with <code class="inline">bin/bonfire start</code></p></li><li><p>To run the instance as a daemon, use <code class="inline">bin/bonfire start daemon</code>.</p></li></ul><hr class="thin"/><h3 id="option-c-with-nix" class="section-heading">
   <a href="#option-c-with-nix" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">option-c-with-nix</p>
   </a>
@@ -317,8 +318,10 @@ Bonfire Architecture
 
         <p>
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.3) for the
-          <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
         </p>
       </footer>
     </div>

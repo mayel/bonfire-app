@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.28.4">
+    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.74">
+
+    <title>Bonfire.UI.Common — bonfire v0.2.0-cooperation-alpha.74</title>
+    <link rel="stylesheet" href="dist/elixir-b6f1ed5df9b1d42a7309.css" />
+
+    <script src="dist/sidebar_items-22a5414a37.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-bd1cb213813bf4825aa2.js"></script>
+
+
+  </head>
+  <body data-type="modules">
+    <script>
+
+      try {
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+
+<section class="sidebar">
+  <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+    <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+  </button>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
+    </button>
+    <label class="search-label">
+      <p class="sr-only">Search</p>
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+
+      <a href="https://bonfirenetworks.org">
+        <img src="assets/logo.png" alt="bonfire" class="sidebar-projectImage">
+      </a>
+
+    <div class="sidebar-projectDetails">
+      <a href="https://bonfirenetworks.org" class="sidebar-projectName" translate="no">
+bonfire
+      </a>
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.2.0-cooperation-alpha.74
+      </strong>
+    </div>
+    <ul class="sidebar-listNav">
+      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+        <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
+
+    </ul>
+  </div>
+
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <output role="status" id="toast"></output>
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>
+<button class="settings display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
+
+
+    <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L1" title="View Source" class="view-source" rel="help">
+      <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+      <span class="sr-only">View Source</span>
+    </a>
+
+  <span translate="no">Bonfire.UI.Common</span> 
+  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.74)</small>
+
+</h1>
+
+
+  <section id="moduledoc">
+<p>A library of common utils and helpers used across Bonfire extensions</p>
+  </section>
+
+
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+      Summary
+    </h1>
+
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#assign_global/2" translate="no">assign_global(socket, assigns)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#assign_global/3" translate="no">assign_global(socket, assign, value)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#assigns_clean/1" translate="no">assigns_clean(assigns)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#assigns_merge/2" translate="no">assigns_merge(assigns, new)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#assigns_merge/3" translate="no">assigns_merge(socket, assigns, new)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#assigns_minimal/1" translate="no">assigns_minimal(assigns)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#assigns_subscribe/2" translate="no">assigns_subscribe(socket, assign_names)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#cast_public/2" translate="no">cast_public(socket, assigns_to_broadcast)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Warning: this will set assigns for any/all users who subscribe to them. You want to <a href="#cast_self/2"><code class="inline">cast_self/2</code></a> instead if dealing with user-specific actions or private data.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#cast_self/2" translate="no">cast_self(socket, assigns_to_broadcast)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#copy_go/1" translate="no">copy_go(arg1)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>copies the <code class="inline">go</code> param into a query string, if any</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#go_query/1" translate="no">go_query(url)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Generate a query string adding a <code class="inline">go</code> redirection path to the URI (for redirecting somewhere after auth flows).
+It is recommended to use <a href="#set_go_after/2"><code class="inline">set_go_after/2</code></a> where possible instead.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#go_where?/3" translate="no">go_where?(conn, cs, default)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#live_render_component/2" translate="no">live_render_component(conn, load_live_component)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Special LiveView helper function which allows loading LiveComponents in regular Phoenix views: <code class="inline">live_render_component(@conn, MyLiveComponent)</code></p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#live_render_with_conn/2" translate="no">live_render_with_conn(conn, live_view)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#pubsub_broadcast/2" translate="no">pubsub_broadcast(topics, payload)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Broadcast some data for realtime updates, for example to a feed or thread</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#pubsub_subscribe/2" translate="no">pubsub_subscribe(topics, socket)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Subscribe to something for realtime updates, like a feed or thread</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#redirect_to_previous_go/3" translate="no">redirect_to_previous_go(conn, params, default)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#rich/1" translate="no">rich(content)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#self_subscribe/2" translate="no">self_subscribe(socket, assign_names)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Subscribe to assigns targeted at the current account/user</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#set_go_after/2" translate="no">set_go_after(conn, path \\ nil)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Save a <code class="inline">go</code> redirection path in the session (for redirecting somewhere after auth flows)</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#undead/3" translate="no">undead(socket, fun, return_key \\ :noreply)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#undead_error/3" translate="no">undead_error(error, socket, return_key \\ :noreply)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#undead_mount/2" translate="no">undead_mount(socket, fun)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Run a function and expects tuple.
+If anything else is returned, like an error, a flash message is shown to the user.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#undead_params/2" translate="no">undead_params(socket, fun)</a>
+
+        </div>
+
+      </div>
+
+  </div>
+
+  </section>
+
+
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+Functions
+    </h1>
+    <div class="functions-list">
+<section class="detail" id="assign_global/2">
+
+  <div class="detail-header">
+    <a href="#assign_global/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">assign_global(socket, assigns)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L14" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="assign_global/3">
+
+  <div class="detail-header">
+    <a href="#assign_global/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">assign_global(socket, assign, value)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L27" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="assigns_clean/1">
+
+  <div class="detail-header">
+    <a href="#assigns_clean/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">assigns_clean(assigns)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L37" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="assigns_merge/2">
+
+  <div class="detail-header">
+    <a href="#assigns_merge/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">assigns_merge(assigns, new)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L76" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="assigns_merge/3">
+
+  <div class="detail-header">
+    <a href="#assigns_merge/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">assigns_merge(socket, assigns, new)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L75" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="assigns_minimal/1">
+
+  <div class="detail-header">
+    <a href="#assigns_minimal/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">assigns_minimal(assigns)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L58" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="assigns_subscribe/2">
+
+  <div class="detail-header">
+    <a href="#assigns_subscribe/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">assigns_subscribe(socket, assign_names)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L204" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="cast_public/2">
+
+  <div class="detail-header">
+    <a href="#cast_public/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">cast_public(socket, assigns_to_broadcast)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L241" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Warning: this will set assigns for any/all users who subscribe to them. You want to <a href="#cast_self/2"><code class="inline">cast_self/2</code></a> instead if dealing with user-specific actions or private data.</p>
+  </section>
+</section>
+<section class="detail" id="cast_self/2">
+
+  <div class="detail-header">
+    <a href="#cast_self/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">cast_self(socket, assigns_to_broadcast)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L229" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="copy_go/1">
+
+  <div class="detail-header">
+    <a href="#copy_go/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">copy_go(arg1)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L394" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>copies the <code class="inline">go</code> param into a query string, if any</p>
+  </section>
+</section>
+<section class="detail" id="go_query/1">
+
+  <div class="detail-header">
+    <a href="#go_query/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">go_query(url)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L390" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Generate a query string adding a <code class="inline">go</code> redirection path to the URI (for redirecting somewhere after auth flows).
+It is recommended to use <a href="#set_go_after/2"><code class="inline">set_go_after/2</code></a> where possible instead.</p>
+  </section>
+</section>
+<section class="detail" id="go_where?/3">
+
+  <div class="detail-header">
+    <a href="#go_where?/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">go_where?(conn, cs, default)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L404" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="live_render_component/2">
+
+  <div class="detail-header">
+    <a href="#live_render_component/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">live_render_component(conn, load_live_component)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L120" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Special LiveView helper function which allows loading LiveComponents in regular Phoenix views: <code class="inline">live_render_component(@conn, MyLiveComponent)</code></p>
+  </section>
+</section>
+<section class="detail" id="live_render_with_conn/2">
+
+  <div class="detail-header">
+    <a href="#live_render_with_conn/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">live_render_with_conn(conn, live_view)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L132" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="pubsub_broadcast/2">
+
+  <div class="detail-header">
+    <a href="#pubsub_broadcast/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">pubsub_broadcast(topics, payload)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L182" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Broadcast some data for realtime updates, for example to a feed or thread</p>
+  </section>
+</section>
+<section class="detail" id="pubsub_subscribe/2">
+
+  <div class="detail-header">
+    <a href="#pubsub_subscribe/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">pubsub_subscribe(topics, socket)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L146" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Subscribe to something for realtime updates, like a feed or thread</p>
+  </section>
+</section>
+<section class="detail" id="redirect_to_previous_go/3">
+
+  <div class="detail-header">
+    <a href="#redirect_to_previous_go/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">redirect_to_previous_go(conn, params, default)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L418" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="rich/1">
+
+  <div class="detail-header">
+    <a href="#rich/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">rich(content)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L86" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="self_subscribe/2">
+
+  <div class="detail-header">
+    <a href="#self_subscribe/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">self_subscribe(socket, assign_names)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L216" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Subscribe to assigns targeted at the current account/user</p>
+  </section>
+</section>
+<section class="detail" id="set_go_after/2">
+
+    <span id="set_go_after/1"></span>
+
+  <div class="detail-header">
+    <a href="#set_go_after/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">set_go_after(conn, path \\ nil)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L377" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Save a <code class="inline">go</code> redirection path in the session (for redirecting somewhere after auth flows)</p>
+  </section>
+</section>
+<section class="detail" id="undead/3">
+
+    <span id="undead/2"></span>
+
+  <div class="detail-header">
+    <a href="#undead/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">undead(socket, fun, return_key \\ :noreply)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L291" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="undead_error/3">
+
+    <span id="undead_error/2"></span>
+
+  <div class="detail-header">
+    <a href="#undead_error/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">undead_error(error, socket, return_key \\ :noreply)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L333" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="undead_mount/2">
+
+  <div class="detail-header">
+    <a href="#undead_mount/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">undead_mount(socket, fun)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L288" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Run a function and expects tuple.
+If anything else is returned, like an error, a flash message is shown to the user.</p>
+  </section>
+</section>
+<section class="detail" id="undead_params/2">
+
+  <div class="detail-header">
+    <a href="#undead_params/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">undead_params(socket, fun)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/ui_common.ex#L289" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
+
+      <footer class="footer">
+
+        <p>
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>
