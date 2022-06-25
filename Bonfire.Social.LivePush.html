@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.4">
-    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.82">
+    <meta name="project" content="bonfire v0.3.0-classic-beta.2">
 
-    <title>Bonfire.Social.LivePush — bonfire v0.2.0-cooperation-alpha.82</title>
+    <title>Bonfire.Social.LivePush — bonfire v0.3.0-classic-beta.2</title>
     <link rel="stylesheet" href="dist/elixir-b6f1ed5df9b1d42a7309.css" />
 
-    <script src="dist/sidebar_items-94c2b19378.js"></script>
+    <script src="dist/sidebar_items-1d1ffb8003.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.2.0-cooperation-alpha.82
+        v0.3.0-classic-beta.2
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,13 +100,13 @@ bonfire
 </button>
 
 
-    <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/live_push.ex#L1" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/live_push.ex#L1" title="View Source" class="view-source" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
   <span translate="no">Bonfire.Social.LivePush</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.82)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.3.0-classic-beta.2)</small>
 
 </h1>
 
@@ -144,9 +144,47 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#push_activity/2" translate="no">push_activity(feed_ids, object)</a>
+          <a href="#notify_of_message/4" translate="no">notify_of_message(subject, verb, object, users)</a>
 
         </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#notify_users/4" translate="no">notify_users(subject, verb, object, users)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Sends a notification about an activity to a list of users, excluding the author/subject</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#prepare_activity/2" translate="no">prepare_activity(activity, opts \\ [])</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#push_activity/3" translate="no">push_activity(feed_ids, activity, opts \\ [])</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Receives an activity with a nested object, or vice versa, uses PubSub to pushes to feeds and optionally notifications</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#push_activity_object/4" translate="no">push_activity_object(feed_ids, parent_object, object, opts)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Receives an activity <em>and</em> object, uses PubSub to pushes to feeds and optionally notifications, and returns an Activity.</p></div>
 
       </div>
 
@@ -173,7 +211,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">notify(activity, feed_ids)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/live_push.ex#L34" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/live_push.ex#L83" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -195,7 +233,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">notify(subject, verb, object, feed_ids)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/live_push.ex#L36" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/live_push.ex#L85" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -208,16 +246,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="push_activity/2">
+<section class="detail" id="notify_of_message/4">
 
   <div class="detail-header">
-    <a href="#push_activity/2" class="detail-link" title="Link to this function">
+    <a href="#notify_of_message/4" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">push_activity(feed_ids, object)</h1>
+    <h1 class="signature" translate="no">notify_of_message(subject, verb, object, users)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/live_push.ex#L6" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/live_push.ex#L62" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -228,6 +266,98 @@ Functions
   <section class="docstring">
 
 
+  </section>
+</section>
+<section class="detail" id="notify_users/4">
+
+  <div class="detail-header">
+    <a href="#notify_users/4" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">notify_users(subject, verb, object, users)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/live_push.ex#L54" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Sends a notification about an activity to a list of users, excluding the author/subject</p>
+  </section>
+</section>
+<section class="detail" id="prepare_activity/2">
+
+    <span id="prepare_activity/1"></span>
+
+  <div class="detail-header">
+    <a href="#prepare_activity/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">prepare_activity(activity, opts \\ [])</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/live_push.ex#L78" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="push_activity/3">
+
+    <span id="push_activity/2"></span>
+
+  <div class="detail-header">
+    <a href="#push_activity/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">push_activity(feed_ids, activity, opts \\ [])</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/live_push.ex#L10" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Receives an activity with a nested object, or vice versa, uses PubSub to pushes to feeds and optionally notifications</p>
+  </section>
+</section>
+<section class="detail" id="push_activity_object/4">
+
+  <div class="detail-header">
+    <a href="#push_activity_object/4" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">push_activity_object(feed_ids, parent_object, object, opts)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/live_push.ex#L42" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Receives an activity <em>and</em> object, uses PubSub to pushes to feeds and optionally notifications, and returns an Activity.</p>
   </section>
 </section>
 

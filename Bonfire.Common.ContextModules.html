@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.4">
-    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.82">
+    <meta name="project" content="bonfire v0.3.0-classic-beta.2">
 
-    <title>Bonfire.Common.ContextModules — bonfire v0.2.0-cooperation-alpha.82</title>
+    <title>Bonfire.Common.ContextModules — bonfire v0.3.0-classic-beta.2</title>
     <link rel="stylesheet" href="dist/elixir-b6f1ed5df9b1d42a7309.css" />
 
-    <script src="dist/sidebar_items-94c2b19378.js"></script>
+    <script src="dist/sidebar_items-1d1ffb8003.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.2.0-cooperation-alpha.82
+        v0.3.0-classic-beta.2
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -106,13 +106,13 @@ bonfire
     </a>
 
   <span translate="no">Bonfire.Common.ContextModules</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.82)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.3.0-classic-beta.2)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>A Global cache of known context modules to be queried by associated schema, or vice versa.</p><p>Use of the ContextModules Service requires:</p><ol><li>Exporting <code class="inline">context_module/0</code> in relevant modules (in schemas pointing to context modules and/or in context modules pointing to schemas), returning a Module atom</li><li>To populate <code class="inline">:pointers, :search_path</code> in config the list of OTP applications where context_modules are declared.</li><li>Start the <a href="./Bonfire.Common.ContextModules.html#content"><code class="inline">Bonfire.Common.ContextModules</code></a> application before querying.</li><li>OTP 21.2 or greater, though we recommend using the most recent
+<p>A Global cache of known context modules to be queried by associated schema, or vice versa.</p><p>Use of the ContextModules Service requires:</p><ol><li>Exporting <code class="inline">context_module/0</code> in relevant modules (in schemas pointing to context modules and/or in context modules pointing to schemas), returning a Module atom</li><li>To populate <code class="inline">:bonfire, :context_modules_search_path</code> in config the list of OTP applications where context_modules are declared.</li><li>Start the <a href="./Bonfire.Common.ContextModules.html#content"><code class="inline">Bonfire.Common.ContextModules</code></a> application before querying.</li><li>OTP 21.2 or greater, though we recommend using the most recent
 release available.</li></ol><p>While this module is a GenServer, it is only responsible for setup
 of the cache and then exits with :ignore having done so. It is not
 recommended to restart the service as this will lead to a stop the
@@ -245,6 +245,14 @@ local garbage collection.</p>
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#search_app_modules/1" translate="no">search_app_modules(search_path \\ search_path())</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#start_link/1" translate="no">start_link(_)</a>
 
         </div>
@@ -361,7 +369,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">context_function_error(error, args)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L123" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L118" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -383,7 +391,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">context_module!(query)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L106" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L101" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -405,7 +413,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">context_module(query)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L98" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L93" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -433,7 +441,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">context_modules(modules)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L110" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L105" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -509,7 +517,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">maybe_context_module(query)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L115" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L110" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -531,7 +539,31 @@ Functions
     </a>
     <h1 class="signature" translate="no">populate()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L137" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L132" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="search_app_modules/1">
+
+    <span id="search_app_modules/0"></span>
+
+  <div class="detail-header">
+    <a href="#search_app_modules/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">search_app_modules(search_path \\ search_path())</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L144" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>

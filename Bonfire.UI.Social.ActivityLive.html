@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.4">
-    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.82">
+    <meta name="project" content="bonfire v0.3.0-classic-beta.2">
 
-    <title>Bonfire.UI.Social.ActivityLive — bonfire v0.2.0-cooperation-alpha.82</title>
+    <title>Bonfire.UI.Social.ActivityLive — bonfire v0.3.0-classic-beta.2</title>
     <link rel="stylesheet" href="dist/elixir-b6f1ed5df9b1d42a7309.css" />
 
-    <script src="dist/sidebar_items-94c2b19378.js"></script>
+    <script src="dist/sidebar_items-1d1ffb8003.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.2.0-cooperation-alpha.82
+        v0.3.0-classic-beta.2
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,13 +100,13 @@ bonfire
 </button>
 
 
-    <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/web/components/feed_activity/activity_live.ex#L1" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L1" title="View Source" class="view-source" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
   <span translate="no">Bonfire.UI.Social.ActivityLive</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.82)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.3.0-classic-beta.2)</small>
 
 </h1>
 
@@ -118,7 +118,7 @@ bonfire
   </a>
   Properties
 </h2>
-<ul><li><p><strong>id</strong> <em>:string, required: true</em> - The id of the live component (required by LiveView for stateful components).</p></li><li><p><strong>current_account</strong> <em>:any</em></p></li><li><p><strong>current_user</strong> <em>:any</em></p></li><li><p><strong>activity</strong> <em>:map</em></p></li><li><p><strong>object</strong> <em>:any</em></p></li><li><p><strong>verb_default</strong> <em>:string</em></p></li><li><p><strong>viewing_main_object</strong> <em>:boolean, default: false</em></p></li><li><p><strong>activity_inception</strong> <em>:string</em></p></li><li><p><strong>showing_within</strong> <em>:any, default: :feed</em></p></li><li><p><strong>hide_reply</strong> <em>:boolean, default: false</em></p></li><li><p><strong>class</strong> <em>:string, required: false, default: &quot;&quot;</em></p></li><li><p><strong>thread_object</strong> <em>:any</em></p></li><li><p><strong>participants</strong> <em>:list</em></p></li></ul>
+<ul><li><p><strong>id</strong> <em>:string, required: true</em> - The id of the live component (required by LiveView for stateful components).</p></li><li><p><strong>current_account</strong> <em>:any</em></p></li><li><p><strong>current_user</strong> <em>:any</em></p></li><li><p><strong>activity</strong> <em>:map</em></p></li><li><p><strong>object</strong> <em>:any</em></p></li><li><p><strong>verb_default</strong> <em>:string</em></p></li><li><p><strong>feed_id</strong> <em>:any, default: nil</em></p></li><li><p><strong>viewing_main_object</strong> <em>:boolean, default: false</em></p></li><li><p><strong>activity_inception</strong> <em>:string</em></p></li><li><p><strong>showing_within</strong> <em>:any, default: :feed</em></p></li><li><p><strong>hide_reply</strong> <em>:boolean, default: false</em></p></li><li><p><strong>class</strong> <em>:string, required: false, default: &quot;&quot;</em></p></li><li><p><strong>thread_object</strong> <em>:any</em></p></li><li><p><strong>url</strong> <em>:string</em></p></li><li><p><strong>thread_url</strong> <em>:string</em></p></li><li><p><strong>thread_mode</strong> <em>:any</em></p></li><li><p><strong>participants</strong> <em>:list</em></p></li><li><p><strong>object_boundary</strong> <em>:any, default: nil</em></p></li><li><p><strong>check_object_boundary</strong> <em>:boolean, default: false</em></p></li></ul>
   </section>
 
 
@@ -154,7 +154,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#component_activity_maybe_creator/1" translate="no">component_activity_maybe_creator(creator)</a>
+          <a href="#component_activity_maybe_creator/2" translate="no">component_activity_maybe_creator(activity, arg2)</a>
 
         </div>
 
@@ -162,7 +162,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#component_activity_subject/3" translate="no">component_activity_subject(verb, activity, arg3)</a>
+          <a href="#component_activity_subject/3" translate="no">component_activity_subject(verb, activity, assigns)</a>
 
         </div>
 
@@ -179,6 +179,14 @@ bonfire
       <div class="summary-row">
         <div class="summary-signature">
           <a href="#component_maybe_attachments/2" translate="no">component_maybe_attachments(arg1, assigns)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#component_maybe_creator/1" translate="no">component_maybe_creator(creator)</a>
 
         </div>
 
@@ -230,7 +238,17 @@ bonfire
 
         </div>
 
-          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.9/Phoenix.LiveComponent.html#c:handle_event/3"><code class="inline">Phoenix.LiveComponent.handle_event/3</code></a>.</p></div>
+          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.10/Phoenix.LiveComponent.html#c:handle_event/3"><code class="inline">Phoenix.LiveComponent.handle_event/3</code></a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#handle_params/3" translate="no">handle_params(params, attrs, socket)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>See <a href="./Bonfire.UI.Common.LiveHandlers.html#handle_params/3"><code class="inline">Bonfire.UI.Common.LiveHandlers.handle_params/3</code></a>.</p></div>
 
       </div>
 
@@ -248,7 +266,25 @@ bonfire
 
         </div>
 
-          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.9/Phoenix.LiveComponent.html#c:mount/1"><code class="inline">Phoenix.LiveComponent.mount/1</code></a>.</p></div>
+          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.10/Phoenix.LiveComponent.html#c:mount/1"><code class="inline">Phoenix.LiveComponent.mount/1</code></a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#preload/1" translate="no">preload(list_of_assigns)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.10/Phoenix.LiveComponent.html#c:preload/1"><code class="inline">Phoenix.LiveComponent.preload/1</code></a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#prepare/1" translate="no">prepare(assigns)</a>
+
+        </div>
 
       </div>
 
@@ -258,7 +294,17 @@ bonfire
 
         </div>
 
-          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.9/Phoenix.LiveComponent.html#c:render/1"><code class="inline">Phoenix.LiveComponent.render/1</code></a>.</p></div>
+          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.10/Phoenix.LiveComponent.html#c:render/1"><code class="inline">Phoenix.LiveComponent.render/1</code></a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#update/2" translate="no">update(assigns, socket)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.10/Phoenix.LiveComponent.html#c:update/2"><code class="inline">Phoenix.LiveComponent.update/2</code></a>.</p></div>
 
       </div>
 
@@ -285,7 +331,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">actions_for_object_type(activity, type)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/web/components/feed_activity/activity_live.ex#L477" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L567" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -307,7 +353,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">component_actions(arg1, activity, arg3)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/web/components/feed_activity/activity_live.ex#L454" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L544" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -320,16 +366,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="component_activity_maybe_creator/1">
+<section class="detail" id="component_activity_maybe_creator/2">
 
   <div class="detail-header">
-    <a href="#component_activity_maybe_creator/1" class="detail-link" title="Link to this function">
+    <a href="#component_activity_maybe_creator/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">component_activity_maybe_creator(creator)</h1>
+    <h1 class="signature" translate="no">component_activity_maybe_creator(activity, arg2)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/web/components/feed_activity/activity_live.ex#L193" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L258" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -349,9 +395,9 @@ Functions
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">component_activity_subject(verb, activity, arg3)</h1>
+    <h1 class="signature" translate="no">component_activity_subject(verb, activity, assigns)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/web/components/feed_activity/activity_live.ex#L147" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L206" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -373,7 +419,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">component_for_object_type(type, object)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/web/components/feed_activity/activity_live.ex#L403" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L486" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -395,7 +441,29 @@ Functions
     </a>
     <h1 class="signature" translate="no">component_maybe_attachments(arg1, assigns)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/web/components/feed_activity/activity_live.ex#L447" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L537" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="component_maybe_creator/1">
+
+  <div class="detail-header">
+    <a href="#component_maybe_creator/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">component_maybe_creator(creator)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L268" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -417,7 +485,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">component_maybe_in_reply_to(verb, activity, assigns)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/web/components/feed_activity/activity_live.ex#L270" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L353" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -439,7 +507,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">component_object(_, arg2, object_type)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/web/components/feed_activity/activity_live.ex#L380" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L463" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -461,7 +529,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">component_show_event_actions(activity)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/web/components/feed_activity/activity_live.ex#L518" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L608" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -483,7 +551,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">component_show_process_actions(activity)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/web/components/feed_activity/activity_live.ex#L515" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L605" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -505,7 +573,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">component_show_standard_actions(activity)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/web/components/feed_activity/activity_live.ex#L508" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L598" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -527,7 +595,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">handle_event(action, attrs, socket)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/web/components/feed_activity/activity_live.ex#L554" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L646" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -537,7 +605,29 @@ Functions
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.9/Phoenix.LiveComponent.html#c:handle_event/3"><code class="inline">Phoenix.LiveComponent.handle_event/3</code></a>.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.10/Phoenix.LiveComponent.html#c:handle_event/3"><code class="inline">Phoenix.LiveComponent.handle_event/3</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="handle_params/3">
+
+  <div class="detail-header">
+    <a href="#handle_params/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">handle_params(params, attrs, socket)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L645" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>See <a href="./Bonfire.UI.Common.LiveHandlers.html#handle_params/3"><code class="inline">Bonfire.UI.Common.LiveHandlers.handle_params/3</code></a>.</p>
   </section>
 </section>
 <section class="detail" id="load_reply_to/1">
@@ -549,7 +639,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">load_reply_to(reply_to)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/web/components/feed_activity/activity_live.ex#L525" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L615" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -571,7 +661,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">mount(socket)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/web/components/feed_activity/activity_live.ex#L1" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L1" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -581,7 +671,51 @@ Functions
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.9/Phoenix.LiveComponent.html#c:mount/1"><code class="inline">Phoenix.LiveComponent.mount/1</code></a>.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.10/Phoenix.LiveComponent.html#c:mount/1"><code class="inline">Phoenix.LiveComponent.mount/1</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="preload/1">
+
+  <div class="detail-header">
+    <a href="#preload/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">preload(list_of_assigns)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L30" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.10/Phoenix.LiveComponent.html#c:preload/1"><code class="inline">Phoenix.LiveComponent.preload/1</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="prepare/1">
+
+  <div class="detail-header">
+    <a href="#prepare/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">prepare(assigns)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L46" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 <section class="detail" id="render/1">
@@ -593,7 +727,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">render(assigns)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/web/components/feed_activity/activity_live.ex#L1" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L1" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -603,7 +737,29 @@ Functions
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.9/Phoenix.LiveComponent.html#c:render/1"><code class="inline">Phoenix.LiveComponent.render/1</code></a>.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.10/Phoenix.LiveComponent.html#c:render/1"><code class="inline">Phoenix.LiveComponent.render/1</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="update/2">
+
+  <div class="detail-header">
+    <a href="#update/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">update(assigns, socket)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/components/activity/activity_live.ex#L1" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.10/Phoenix.LiveComponent.html#c:update/2"><code class="inline">Phoenix.LiveComponent.update/2</code></a>.</p>
   </section>
 </section>
 

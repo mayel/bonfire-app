@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.4">
-    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.82">
+    <meta name="project" content="bonfire v0.3.0-classic-beta.2">
 
-    <title>Bonfire.Social.Feeds.LiveHandler — bonfire v0.2.0-cooperation-alpha.82</title>
+    <title>Bonfire.Social.Feeds.LiveHandler — bonfire v0.3.0-classic-beta.2</title>
     <link rel="stylesheet" href="dist/elixir-b6f1ed5df9b1d42a7309.css" />
 
-    <script src="dist/sidebar_items-94c2b19378.js"></script>
+    <script src="dist/sidebar_items-1d1ffb8003.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.2.0-cooperation-alpha.82
+        v0.3.0-classic-beta.2
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,13 +100,13 @@ bonfire
 </button>
 
 
-    <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/live_handler.ex#L1" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/live_handlers/feeds_live_handler.ex#L1" title="View Source" class="view-source" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
   <span translate="no">Bonfire.Social.Feeds.LiveHandler</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.82)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.3.0-classic-beta.2)</small>
 
 </h1>
 
@@ -128,23 +128,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#assign_feed/2" translate="no">assign_feed(feed, socket)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#default_feed_assigns/1" translate="no">default_feed_assigns(socket_or_opts)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#fediverse_feed_assigns/1" translate="no">fediverse_feed_assigns(socket_or_opts)</a>
+          <a href="#feed_assigns_maybe_async/2" translate="no">feed_assigns_maybe_async(feed_name, socket)</a>
 
         </div>
 
@@ -176,7 +160,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#instance_feed_assigns/1" translate="no">instance_feed_assigns(socket_or_opts)</a>
+          <a href="#load_user_feed_assigns/3" translate="no">load_user_feed_assigns(selected_tab_and_user_id, params, socket)</a>
 
         </div>
 
@@ -184,7 +168,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#my_feed_assigns/2" translate="no">my_feed_assigns(current_user, socket_or_opts)</a>
+          <a href="#load_user_feed_assigns/4" translate="no">load_user_feed_assigns(tab, user, params, socket)</a>
 
         </div>
 
@@ -192,7 +176,63 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#send_updates/2" translate="no">send_updates(feed_ids, activity)</a>
+          <a href="#object_preloads/0" translate="no">object_preloads()</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#paginate_feed/2" translate="no">paginate_feed(attrs, socket)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#paginate_feed/3" translate="no">paginate_feed(feed_id, attrs, socket)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#paginate_fetch_assign_default/2" translate="no">paginate_fetch_assign_default(opts, socket)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#preload_objects/3" translate="no">preload_objects(feed, under, opts)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#preloads/2" translate="no">preloads(feed, socket \\ [])</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#send_feed_updates/3" translate="no">send_feed_updates(feed_ids, assigns, component \\ Bonfire.UI.Social.FeedLive)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#user_feed_assign_or_load_async/4" translate="no">user_feed_assign_or_load_async(tab, user, params, socket)</a>
 
         </div>
 
@@ -212,60 +252,16 @@ bonfire
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="assign_feed/2">
+<section class="detail" id="feed_assigns_maybe_async/2">
 
   <div class="detail-header">
-    <a href="#assign_feed/2" class="detail-link" title="Link to this function">
+    <a href="#feed_assigns_maybe_async/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">assign_feed(feed, socket)</h1>
+    <h1 class="signature" translate="no">feed_assigns_maybe_async(feed_name, socket)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/live_handler.ex#L99" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="default_feed_assigns/1">
-
-  <div class="detail-header">
-    <a href="#default_feed_assigns/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">default_feed_assigns(socket_or_opts)</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/live_handler.ex#L138" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="fediverse_feed_assigns/1">
-
-  <div class="detail-header">
-    <a href="#fediverse_feed_assigns/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">fediverse_feed_assigns(socket_or_opts)</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/live_handler.ex#L151" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/live_handlers/feeds_live_handler.ex#L260" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -287,7 +283,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">handle_event(binary, attrs, socket)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/live_handler.ex#L22" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/live_handlers/feeds_live_handler.ex#L17" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -309,7 +305,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">handle_info(arg, socket)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/live_handler.ex#L109" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/live_handlers/feeds_live_handler.ex#L148" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -331,7 +327,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">handle_params(attrs, _, socket)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/live_handler.ex#L5" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/live_handlers/feeds_live_handler.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -344,16 +340,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="instance_feed_assigns/1">
+<section class="detail" id="load_user_feed_assigns/3">
 
   <div class="detail-header">
-    <a href="#instance_feed_assigns/1" class="detail-link" title="Link to this function">
+    <a href="#load_user_feed_assigns/3" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">instance_feed_assigns(socket_or_opts)</h1>
+    <h1 class="signature" translate="no">load_user_feed_assigns(selected_tab_and_user_id, params, socket)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/live_handler.ex#L167" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/live_handlers/feeds_live_handler.ex#L500" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -366,16 +362,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="my_feed_assigns/2">
+<section class="detail" id="load_user_feed_assigns/4">
 
   <div class="detail-header">
-    <a href="#my_feed_assigns/2" class="detail-link" title="Link to this function">
+    <a href="#load_user_feed_assigns/4" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">my_feed_assigns(current_user, socket_or_opts)</h1>
+    <h1 class="signature" translate="no">load_user_feed_assigns(tab, user, params, socket)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/live_handler.ex#L183" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/live_handlers/feeds_live_handler.ex#L507" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -388,16 +384,174 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="send_updates/2">
+<section class="detail" id="object_preloads/0">
 
   <div class="detail-header">
-    <a href="#send_updates/2" class="detail-link" title="Link to this function">
+    <a href="#object_preloads/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">send_updates(feed_ids, activity)</h1>
+    <h1 class="signature" translate="no">object_preloads()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/live_handler.ex#L131" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/live_handlers/feeds_live_handler.ex#L453" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="paginate_feed/2">
+
+  <div class="detail-header">
+    <a href="#paginate_feed/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">paginate_feed(attrs, socket)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/live_handlers/feeds_live_handler.ex#L217" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="paginate_feed/3">
+
+  <div class="detail-header">
+    <a href="#paginate_feed/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">paginate_feed(feed_id, attrs, socket)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/live_handlers/feeds_live_handler.ex#L196" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="paginate_fetch_assign_default/2">
+
+  <div class="detail-header">
+    <a href="#paginate_fetch_assign_default/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">paginate_fetch_assign_default(opts, socket)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/live_handlers/feeds_live_handler.ex#L223" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="preload_objects/3">
+
+  <div class="detail-header">
+    <a href="#preload_objects/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">preload_objects(feed, under, opts)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/live_handlers/feeds_live_handler.ex#L448" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="preloads/2">
+
+    <span id="preloads/1"></span>
+
+  <div class="detail-header">
+    <a href="#preloads/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">preloads(feed, socket \\ [])</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/live_handlers/feeds_live_handler.ex#L408" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="send_feed_updates/3">
+
+    <span id="send_feed_updates/2"></span>
+
+  <div class="detail-header">
+    <a href="#send_feed_updates/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">send_feed_updates(feed_ids, assigns, component \\ Bonfire.UI.Social.FeedLive)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/live_handlers/feeds_live_handler.ex#L186" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="user_feed_assign_or_load_async/4">
+
+  <div class="detail-header">
+    <a href="#user_feed_assign_or_load_async/4" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">user_feed_assign_or_load_async(tab, user, params, socket)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_social/blob/main/lib/live_handlers/feeds_live_handler.ex#L465" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>

@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.4">
-    <meta name="project" content="bonfire v0.2.0-cooperation-alpha.82">
+    <meta name="project" content="bonfire v0.3.0-classic-beta.2">
 
-    <title>Bonfire.Social.FeedActivities — bonfire v0.2.0-cooperation-alpha.82</title>
+    <title>Bonfire.Social.FeedActivities — bonfire v0.3.0-classic-beta.2</title>
     <link rel="stylesheet" href="dist/elixir-b6f1ed5df9b1d42a7309.css" />
 
-    <script src="dist/sidebar_items-94c2b19378.js"></script>
+    <script src="dist/sidebar_items-1d1ffb8003.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.2.0-cooperation-alpha.82
+        v0.3.0-classic-beta.2
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,13 +100,13 @@ bonfire
 </button>
 
 
-    <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L1" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L1" title="View Source" class="view-source" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
   <span translate="no">Bonfire.Social.FeedActivities</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.2.0-cooperation-alpha.82)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.3.0-classic-beta.2)</small>
 
 </h1>
 
@@ -200,11 +200,29 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#get_feed_ids/1" translate="no">get_feed_ids(options)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Computes the feed ids for <code class="inline">get_feed_publishes/2</code>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#get_feed_publishes/1" translate="no">get_feed_publishes(options)</a>
 
         </div>
 
           <div class="summary-synopsis"><p>Creates the underlying data for <a href="#put_feed_publishes/2"><code class="inline">put_feed_publishes/2</code></a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#mark_all_seen/2" translate="no">mark_all_seen(feed_id, opts)</a>
+
+        </div>
 
       </div>
 
@@ -220,7 +238,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#my_feed/1" translate="no">my_feed(opts)</a>
+          <a href="#my_feed/2" translate="no">my_feed(opts, home_feed_ids \\ nil)</a>
 
         </div>
 
@@ -347,7 +365,15 @@ to object's notifications (if object is an actor)</p></div>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#user_feed/3" translate="no">user_feed(user, feed_name, opts \\ [])</a>
+          <a href="#unseen_count/2" translate="no">unseen_count(feed_id, opts)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#unseen_query/2" translate="no">unseen_query(feed_id, opts)</a>
 
         </div>
 
@@ -376,7 +402,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">cast(changeset, feed_ids)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L26" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L23" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -398,7 +424,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">cast(changeset, creator, opts)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L21" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L18" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -420,7 +446,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">context_module()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L19" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L16" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -444,7 +470,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">delete(objects, by_field \\ :id)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L463" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L522" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -468,7 +494,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">feed(feed, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L53" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L68" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -494,7 +520,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">feed_paginated(filters \\ [], opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L105" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L129" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -516,7 +542,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">feed_paginated(filters, opts, query)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L109" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L133" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -538,7 +564,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">feeds_for_activity(id)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L36" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L33" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -551,16 +577,16 @@ Functions
 <p>Gets a list of feed ids this activity was published to from the database.</p><p>Currently only used by the ActivityPub integration.</p>
   </section>
 </section>
-<section class="detail" id="get_feed_publishes/1">
+<section class="detail" id="get_feed_ids/1">
 
   <div class="detail-header">
-    <a href="#get_feed_publishes/1" class="detail-link" title="Link to this function">
+    <a href="#get_feed_ids/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">get_feed_publishes(options)</h1>
+    <h1 class="signature" translate="no">get_feed_ids(options)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L257" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L326" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -570,7 +596,51 @@ Functions
 
   <section class="docstring">
 
-<p>Creates the underlying data for <a href="#put_feed_publishes/2"><code class="inline">put_feed_publishes/2</code></a>.</p><p>Options:</p><ul><li><code class="inline">:inbox</code> - list of objects whose inbox we should attempt to insert into.</li><li><code class="inline">:outbox</code> - list of objects whose outbox we should attempt to insert into.</li><li><code class="inline">:notifications</code> - list of objects whose notifications we should attempt to insert into.</li><li><code class="inline">:feeds</code> - list of ids (or objects containing IDs of feeds to post to.</li></ul>
+<p>Computes the feed ids for <code class="inline">get_feed_publishes/2</code>.</p><p>Options:</p><ul><li><code class="inline">:inbox</code> - list of objects whose inbox we should attempt to insert into.</li><li><code class="inline">:outbox</code> - list of objects whose outbox we should attempt to insert into.</li><li><code class="inline">:notifications</code> - list of objects whose notifications we should attempt to insert into.</li><li><code class="inline">:feeds</code> - list of ids (or objects containing IDs of feeds to post to.</li></ul>
+  </section>
+</section>
+<section class="detail" id="get_feed_publishes/1">
+
+  <div class="detail-header">
+    <a href="#get_feed_publishes/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">get_feed_publishes(options)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L303" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Creates the underlying data for <a href="#put_feed_publishes/2"><code class="inline">put_feed_publishes/2</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="mark_all_seen/2">
+
+  <div class="detail-header">
+    <a href="#mark_all_seen/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">mark_all_seen(feed_id, opts)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L559" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 <section class="detail" id="maybe_notify_creator/3">
@@ -582,7 +652,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">maybe_notify_creator(subject, verb_or_activity, object)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L221" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L275" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -595,16 +665,18 @@ Functions
 <p>Takes or creates an activity and publishes to object creator's inbox</p>
   </section>
 </section>
-<section class="detail" id="my_feed/1">
+<section class="detail" id="my_feed/2">
+
+    <span id="my_feed/1"></span>
 
   <div class="detail-header">
-    <a href="#my_feed/1" class="detail-link" title="Link to this function">
+    <a href="#my_feed/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">my_feed(opts)</h1>
+    <h1 class="signature" translate="no">my_feed(opts, home_feed_ids \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L48" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L45" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -626,7 +698,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">notify_admins(subject, verb_or_activity, object)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L351" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L414" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -648,7 +720,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">notify_characters(subject, verb_or_activity, object, characters)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L333" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L396" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -671,7 +743,7 @@ to object's notifications (if object is an actor)</p>
     </a>
     <h1 class="signature" translate="no">notify_feeds(subject, verb_or_activity, object, feed_ids)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L357" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L420" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -693,7 +765,7 @@ to object's notifications (if object is an actor)</p>
     </a>
     <h1 class="signature" translate="no">notify_object(subject, verb_or_activity, object)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L344" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L407" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -717,7 +789,7 @@ to object's notifications (if object is an actor)</p>
     </a>
     <h1 class="signature" translate="no">publish(subject, verb_or_activity, object, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L197" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L249" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -739,7 +811,7 @@ to object's notifications (if object is an actor)</p>
     </a>
     <h1 class="signature" translate="no">put_feed_publishes(changeset, options)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L243" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L294" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -749,7 +821,7 @@ to object's notifications (if object is an actor)</p>
 
   <section class="docstring">
 
-<p>Arranges for an insert changeset to also publish to feeds related to some objects.</p><p>Options:</p><ul><li><code class="inline">:inbox</code> - list of objects whose inbox we should attempt to insert into</li><li><code class="inline">:outbox</code> - list of objects whose outbox we should attempt to insert into</li><li><code class="inline">:notifications</code> - list of objects whose notifications we should attempt to insert into</li></ul>
+<p>Arranges for an insert changeset to also publish to feeds related to some objects.</p><p>Options: see <a href="#get_feed_ids/1"><code class="inline">get_feed_ids/1</code></a></p>
   </section>
 </section>
 <section class="detail" id="queries_module/0">
@@ -761,7 +833,7 @@ to object's notifications (if object is an actor)</p>
     </a>
     <h1 class="signature" translate="no">queries_module()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L18" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L15" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -787,7 +859,7 @@ to object's notifications (if object is an actor)</p>
     </a>
     <h1 class="signature" translate="no">query(filters \\ [], opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L154" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L189" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -809,7 +881,7 @@ to object's notifications (if object is an actor)</p>
     </a>
     <h1 class="signature" translate="no">query(filters, opts, query)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L166" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L202" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -835,7 +907,7 @@ to object's notifications (if object is an actor)</p>
     </a>
     <h1 class="signature" translate="no">query_paginated(query_or_filters \\ [], opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L136" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L171" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -857,7 +929,7 @@ to object's notifications (if object is an actor)</p>
     </a>
     <h1 class="signature" translate="no">query_paginated(filters, opts, query)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L142" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L177" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -879,7 +951,7 @@ to object's notifications (if object is an actor)</p>
     </a>
     <h1 class="signature" translate="no">save_fediverse_incoming_activity(subject, verb, object)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L213" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L267" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -901,7 +973,7 @@ to object's notifications (if object is an actor)</p>
     </a>
     <h1 class="signature" translate="no">the_object(object)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L458" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L517" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -914,18 +986,38 @@ to object's notifications (if object is an actor)</p>
 
   </section>
 </section>
-<section class="detail" id="user_feed/3">
-
-    <span id="user_feed/2"></span>
+<section class="detail" id="unseen_count/2">
 
   <div class="detail-header">
-    <a href="#user_feed/3" class="detail-link" title="Link to this function">
+    <a href="#unseen_count/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">user_feed(user, feed_name, opts \\ [])</h1>
+    <h1 class="signature" translate="no">unseen_count(feed_id, opts)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/social/activities/feed_activities.ex#L92" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L553" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="unseen_query/2">
+
+  <div class="detail-header">
+    <a href="#unseen_query/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">unseen_query(feed_id, opts)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/feed_activities.ex#L540" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
