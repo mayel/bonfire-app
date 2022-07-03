@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.4">
-    <meta name="project" content="bonfire v0.3.0-classic-beta.7">
+    <meta name="project" content="bonfire v0.3.0-classic-beta.8">
 
-    <title>Bonfire.Common.Repo — bonfire v0.3.0-classic-beta.7</title>
+    <title>Bonfire.Common.Repo — bonfire v0.3.0-classic-beta.8</title>
     <link rel="stylesheet" href="dist/elixir-b6f1ed5df9b1d42a7309.css" />
 
-    <script src="dist/sidebar_items-55a4a72525.js"></script>
+    <script src="dist/sidebar_items-ee3533257e.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.3.0-classic-beta.7
+        v0.3.0-classic-beta.8
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -106,7 +106,7 @@ bonfire
     </a>
 
   <span translate="no">Bonfire.Common.Repo</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.3.0-classic-beta.7)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.3.0-classic-beta.8)</small>
 
 </h1>
 
@@ -409,6 +409,14 @@ depending on the adapter to obtain statistics for the given query.</p></div>
       <div class="summary-row">
         <div class="summary-signature">
           <a href="#insert_all_or_ignore/2" translate="no">insert_all_or_ignore(schema, data)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#insert_or_ignore/1" translate="no">insert_or_ignore(cs)</a>
 
         </div>
 
@@ -728,7 +736,7 @@ tuple. If an error tuple is returned, the transaction is aborted.</p></div>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#upsert/1" translate="no">upsert(cs)</a>
+          <a href="#upsert/3" translate="no">upsert(cs, attrs, conflict_target \\ [:id])</a>
 
         </div>
 
@@ -1011,7 +1019,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">delete_many(query)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L223" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L231" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1107,7 +1115,7 @@ depending on the adapter to obtain statistics for the given query.</p><p>See <a 
     </a>
     <h1 class="signature" translate="no">fetch(queryable, id)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L152" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L160" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1135,7 +1143,7 @@ depending on the adapter to obtain statistics for the given query.</p><p>See <a 
     </a>
     <h1 class="signature" translate="no">fetch_all(queryable, ids)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L167" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L175" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1157,7 +1165,7 @@ depending on the adapter to obtain statistics for the given query.</p><p>See <a 
     </a>
     <h1 class="signature" translate="no">fetch_by(queryable, term)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L160" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L168" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1181,7 +1189,7 @@ depending on the adapter to obtain statistics for the given query.</p><p>See <a 
     </a>
     <h1 class="signature" translate="no">find(q, changeset, field \\ :form)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L144" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L152" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1415,7 +1423,29 @@ depending on the adapter to obtain statistics for the given query.</p><p>See <a 
     </a>
     <h1 class="signature" translate="no">insert_all_or_ignore(schema, data)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L121" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L129" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="insert_or_ignore/1">
+
+  <div class="detail-header">
+    <a href="#insert_or_ignore/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">insert_or_ignore(cs)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L119" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1509,7 +1539,7 @@ depending on the adapter to obtain statistics for the given query.</p><p>See <a 
     </a>
     <h1 class="signature" translate="no">many(query, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L216" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L224" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1535,7 +1565,7 @@ depending on the adapter to obtain statistics for the given query.</p><p>See <a 
     </a>
     <h1 class="signature" translate="no">many_paginated(queryable, opts \\ [], repo_opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L197" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L205" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1559,7 +1589,7 @@ depending on the adapter to obtain statistics for the given query.</p><p>See <a 
     </a>
     <h1 class="signature" translate="no">maybe_preload(obj, preloads, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L283" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L291" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1922,7 +1952,7 @@ names from config (and only config, no overrides at present!)</p>
     </a>
     <h1 class="signature" translate="no">single(q)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L131" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L139" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -1948,7 +1978,7 @@ names from config (and only config, no overrides at present!)</p>
     </a>
     <h1 class="signature" translate="no">sql(raw_sql, data \\ [], opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L279" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L287" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -2064,7 +2094,7 @@ names from config (and only config, no overrides at present!)</p>
     </a>
     <h1 class="signature" translate="no">transact_many(queries)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L264" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L272" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -2203,14 +2233,16 @@ tuple. If an error tuple is returned, the transaction is aborted.</p>
 <p>Callback implementation for <a href="https://hexdocs.pm/ecto/3.8.4/Ecto.Repo.html#c:update_all/3"><code class="inline">Ecto.Repo.update_all/3</code></a>.</p>
   </section>
 </section>
-<section class="detail" id="upsert/1">
+<section class="detail" id="upsert/3">
+
+    <span id="upsert/2"></span>
 
   <div class="detail-header">
-    <a href="#upsert/1" class="detail-link" title="Link to this function">
+    <a href="#upsert/3" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">upsert(cs)</h1>
+    <h1 class="signature" translate="no">upsert(cs, attrs, conflict_target \\ [:id])</h1>
 
       <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L111" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
