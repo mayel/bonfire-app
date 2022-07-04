@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.28.4">
+    <meta name="project" content="bonfire v0.3.0-classic-beta.11">
+
+    <title>ExAws.Request.HttpClient — bonfire v0.3.0-classic-beta.11</title>
+    <link rel="stylesheet" href="dist/elixir-b6f1ed5df9b1d42a7309.css" />
+
+    <script src="dist/sidebar_items-f6f7f64e8b.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-bd1cb213813bf4825aa2.js"></script>
+
+
+  </head>
+  <body data-type="modules">
+    <script>
+
+      try {
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+
+<section class="sidebar">
+  <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+    <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+  </button>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
+    </button>
+    <label class="search-label">
+      <p class="sr-only">Search</p>
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+
+      <a href="https://bonfirenetworks.org">
+        <img src="assets/logo.png" alt="bonfire" class="sidebar-projectImage">
+      </a>
+
+    <div class="sidebar-projectDetails">
+      <a href="https://bonfirenetworks.org" class="sidebar-projectName" translate="no">
+bonfire
+      </a>
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.3.0-classic-beta.11
+      </strong>
+    </div>
+    <ul class="sidebar-listNav">
+      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+        <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
+
+    </ul>
+  </div>
+
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <output role="status" id="toast"></output>
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>
+<button class="settings display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
+
+
+    <a href="https://github.com/bonfire-networks/ex_aws/blob/main/lib/ex_aws/request/http_client.ex#L1" title="View Source" class="view-source" rel="help">
+      <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+      <span class="sr-only">View Source</span>
+    </a>
+
+  <span translate="no">ExAws.Request.HttpClient</span> <small>behaviour</small>
+  <small class="app-vsn" translate="no">(bonfire v0.3.0-classic-beta.11)</small>
+
+</h1>
+
+
+  <section id="moduledoc">
+<p>Specifies expected behaviour of an HTTP client.</p><p>ExAws allows you to use your HTTP client of choice, provided that
+it can be coerced into complying with this module's specification.</p><p>The default is <code class="inline">:hackney</code>.</p><h2 id="module-example" class="section-heading">
+  <a href="#module-example" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">example</p>
+  </a>
+  Example
+</h2>
+<p>Here for example is the code required to make HTTPotion comply with this spec.</p><p>In your config you would do:</p><pre><code class="makeup elixir" translate="no"><span class="n">config</span><span class="w"> </span><span class="ss">:ex_aws</span><span class="p">,</span><span class="w">
+  </span><span class="ss">http_client</span><span class="p">:</span><span class="w"> </span><span class="nc">ExAws.Request.HTTPotion</span><span class="w">
+
+</span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ExAws.Request.HTTPotion</span><span class="w"> </span><span class="k" data-group-id="2239512327-1">do</span><span class="w">
+  </span><span class="na">@behaviour</span><span class="w"> </span><span class="nc">ExAws.Request.HttpClient</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">request</span><span class="p" data-group-id="2239512327-2">(</span><span class="n">method</span><span class="p">,</span><span class="w"> </span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="n">headers</span><span class="p">,</span><span class="w"> </span><span class="n">http_opts</span><span class="p" data-group-id="2239512327-2">)</span><span class="w"> </span><span class="k" data-group-id="2239512327-3">do</span><span class="w">
+    </span><span class="p" data-group-id="2239512327-4">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="nc">HTTPotion</span><span class="o">.</span><span class="n">request</span><span class="p" data-group-id="2239512327-5">(</span><span class="n">method</span><span class="p">,</span><span class="w"> </span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="2239512327-6">[</span><span class="ss">body</span><span class="p">:</span><span class="w"> </span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="ss">headers</span><span class="p">:</span><span class="w"> </span><span class="n">headers</span><span class="p">,</span><span class="w"> </span><span class="ss">ibrowse</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2239512327-7">[</span><span class="ss">headers_as_is</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="p" data-group-id="2239512327-7">]</span><span class="p" data-group-id="2239512327-6">]</span><span class="p" data-group-id="2239512327-5">)</span><span class="p" data-group-id="2239512327-4">}</span><span class="w">
+  </span><span class="k" data-group-id="2239512327-3">end</span><span class="w">
+</span><span class="k" data-group-id="2239512327-1">end</span></code></pre><pre><code class="makeup elixir" translate="no"><span class="w">
+</span><span class="nc">When</span><span class="w"> </span><span class="n">conforming</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">selected</span><span class="w"> </span><span class="nc">HTTP</span><span class="w"> </span><span class="nc">Client</span><span class="w"> </span><span class="n">take</span><span class="w"> </span><span class="n">note</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">few</span><span class="w"> </span><span class="ss">things</span><span class="p">:</span><span class="w">
+
+  </span><span class="o">-</span><span class="w"> </span><span class="nc">The</span><span class="w"> </span><span class="n">module</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">doesn</span><span class="sc">&#39;t need to follow the same styling as this module it
+    is simply your own &#39;</span><span class="nc">HTTP</span><span class="w"> </span><span class="nc">Client</span><span class="err">&#39;</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span><span class="w"> </span><span class="err">`</span><span class="nc">MyApp.HttpClient</span><span class="err">`</span><span class="w">
+
+  </span><span class="o">-</span><span class="w"> </span><span class="nc">The</span><span class="w"> </span><span class="n">request</span><span class="w"> </span><span class="n">function</span><span class="w"> </span><span class="n">must</span><span class="w"> </span><span class="n">accept</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">methods</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">described</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w">
+    </span><span class="err">`</span><span class="n">c</span><span class="ss">:request</span><span class="o">/</span><span class="mi">5</span><span class="err">`</span><span class="w"> </span><span class="n">callback</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">however</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">these</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">optional</span><span class="p">,</span><span class="w">
+    </span><span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span><span class="w"> </span><span class="err">`</span><span class="n">http_opts</span><span class="w"> </span><span class="err">\</span><span class="w"> </span><span class="p" data-group-id="2696988321-1">[</span><span class="p" data-group-id="2696988321-1">]</span><span class="err">`</span><span class="w">
+
+  </span><span class="o">-</span><span class="w"> </span><span class="nc">Ensure</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">call</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">chosen</span><span class="w"> </span><span class="nc">HTTP</span><span class="w"> </span><span class="nc">Client</span><span class="w"> </span><span class="n">is</span><span class="w"> </span><span class="n">correct</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">return</span><span class="w"> </span><span class="n">is</span><span class="w">
+    </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">same</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="n">as</span><span class="w"> </span><span class="n">defined</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="err">`</span><span class="n">c</span><span class="ss">:request</span><span class="o">/</span><span class="mi">5</span><span class="err">`</span><span class="w"> </span><span class="n">callback</span><span class="w">
+
+</span><span class="c1">## Example</span><span class="w">
+
+    </span><span class="kd">def</span><span class="w"> </span><span class="nf">request</span><span class="p" data-group-id="2696988321-2">(</span><span class="n">method</span><span class="p">,</span><span class="w"> </span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="n">headers</span><span class="p">,</span><span class="w"> </span><span class="n">http_opts</span><span class="w"> </span><span class="err">\</span><span class="w"> </span><span class="p" data-group-id="2696988321-3">[</span><span class="p" data-group-id="2696988321-3">]</span><span class="p" data-group-id="2696988321-2">)</span><span class="w"> </span><span class="k" data-group-id="2696988321-4">do</span><span class="w">
+      </span><span class="nc">Mojito</span><span class="o">.</span><span class="n">request</span><span class="p" data-group-id="2696988321-5">(</span><span class="n">method</span><span class="p">,</span><span class="w"> </span><span class="n">url</span><span class="p">,</span><span class="w"> </span><span class="n">headers</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p">,</span><span class="w"> </span><span class="n">http_opts</span><span class="p" data-group-id="2696988321-5">)</span><span class="w">
+    </span><span class="k" data-group-id="2696988321-4">end</span></code></pre>
+  </section>
+
+
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+      Summary
+    </h1>
+
+  <div class="summary-types summary">
+    <h2>
+      <a href="#types">Types</a>
+    </h2>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#t:http_method/0" translate="no">http_method()</a>
+
+        </div>
+
+      </div>
+
+  </div>
+
+  <div class="summary-callbacks summary">
+    <h2>
+      <a href="#callbacks">Callbacks</a>
+    </h2>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#c:request/5" translate="no">request(
+  method,
+  url,
+  req_body,
+  headers,
+  http_opts
+)</a>
+
+        </div>
+
+      </div>
+
+  </div>
+
+  </section>
+
+
+  <section id="types" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#types">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+Types
+    </h1>
+    <div class="types-list">
+<section class="detail" id="t:http_method/0">
+
+  <div class="detail-header">
+    <a href="#t:http_method/0" class="detail-link" title="Link to this type">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this type</span>
+    </a>
+    <h1 class="signature" translate="no">http_method()</h1>
+
+      <a href="https://github.com/bonfire-networks/ex_aws/blob/main/lib/ex_aws/request/http_client.ex#L48" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@type</span> http_method() :: :get | :post | :put | :delete | :options | :head</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
+
+  <section id="callbacks" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#callbacks">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+Callbacks
+    </h1>
+    <div class="callbacks-list">
+<section class="detail" id="c:request/5">
+
+  <div class="detail-header">
+    <a href="#c:request/5" class="detail-link" title="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this callback</span>
+    </a>
+    <h1 class="signature" translate="no">request(
+  method,
+  url,
+  req_body,
+  headers,
+  http_opts
+)</h1>
+
+      <a href="https://github.com/bonfire-networks/ex_aws/blob/main/lib/ex_aws/request/http_client.ex#L55" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> request(
+  method :: <a href="#t:http_method/0">http_method</a>(),
+  url :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
+  req_body :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
+  headers :: [{<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>()}, ...],
+  http_opts :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()
+) ::
+  {:ok, %{status_code: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>(), headers: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}}
+  | {:ok, %{status_code: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">pos_integer</a>(), headers: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>(), body: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>()}}
+  | {:error, %{reason: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
+
+      <footer class="footer">
+
+        <p>
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>

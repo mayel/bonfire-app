@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.28.4">
+    <meta name="project" content="bonfire v0.3.0-classic-beta.11">
+
+    <title>ExAws.JSON.Codec — bonfire v0.3.0-classic-beta.11</title>
+    <link rel="stylesheet" href="dist/elixir-b6f1ed5df9b1d42a7309.css" />
+
+    <script src="dist/sidebar_items-f6f7f64e8b.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/app-bd1cb213813bf4825aa2.js"></script>
+
+
+  </head>
+  <body data-type="modules">
+    <script>
+
+      try {
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+
+<section class="sidebar">
+  <button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+    <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+  </button>
+
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
+    </button>
+    <label class="search-label">
+      <p class="sr-only">Search</p>
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+
+      <a href="https://bonfirenetworks.org">
+        <img src="assets/logo.png" alt="bonfire" class="sidebar-projectImage">
+      </a>
+
+    <div class="sidebar-projectDetails">
+      <a href="https://bonfirenetworks.org" class="sidebar-projectName" translate="no">
+bonfire
+      </a>
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.3.0-classic-beta.11
+      </strong>
+    </div>
+    <ul class="sidebar-listNav">
+      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+        <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
+
+    </ul>
+  </div>
+
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <output role="status" id="toast"></output>
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>
+<button class="settings display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
+
+
+    <a href="https://github.com/bonfire-networks/ex_aws/blob/main/lib/ex_aws/json/codec.ex#L1" title="View Source" class="view-source" rel="help">
+      <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+      <span class="sr-only">View Source</span>
+    </a>
+
+  <span translate="no">ExAws.JSON.Codec</span> <small>behaviour</small>
+  <small class="app-vsn" translate="no">(bonfire v0.3.0-classic-beta.11)</small>
+
+</h1>
+
+
+  <section id="moduledoc">
+<p>Defines the specification for a JSON codec.</p><p>ExAws supports the use of your favorite JSON codec provided it fulfills this specification.
+Poison fulfills this spec without modification, and is the default.</p><p>See the contents of <code class="inline">ExAws.JSON.JSX</code> for an example of an alternative implementation.</p><h2 id="module-example" class="section-heading">
+  <a href="#module-example" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">example</p>
+  </a>
+  Example
+</h2>
+<p>Here for example is the code required to make jsx comply with this spec.</p><p>In your config you would do:</p><pre><code class="makeup elixir" translate="no"><span class="n">config</span><span class="w"> </span><span class="ss">:ex_aws</span><span class="p">,</span><span class="w">
+  </span><span class="ss">json_codec</span><span class="p">:</span><span class="w"> </span><span class="nc">ExAws.JSON.JSX</span><span class="w">
+
+</span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ExAws.JSON.JSX</span><span class="w"> </span><span class="k" data-group-id="8328513381-1">do</span><span class="w">
+  </span><span class="na">@behaviour</span><span class="w"> </span><span class="nc">ExAws.JSON.Codec</span><span class="w">
+
+  </span><span class="na">@moduledoc</span><span class="w"> </span><span class="no">false</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">encode!</span><span class="p" data-group-id="8328513381-2">(</span><span class="p" data-group-id="8328513381-3">%{</span><span class="p" data-group-id="8328513381-3">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p" data-group-id="8328513381-2">)</span><span class="w"> </span><span class="k" data-group-id="8328513381-4">do</span><span class="w">
+    </span><span class="n">map</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">:jsx</span><span class="o">.</span><span class="n">encode</span><span class="w">
+  </span><span class="k" data-group-id="8328513381-4">end</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">encode</span><span class="p" data-group-id="8328513381-5">(</span><span class="n">map</span><span class="p" data-group-id="8328513381-5">)</span><span class="w"> </span><span class="k" data-group-id="8328513381-6">do</span><span class="w">
+    </span><span class="k">try</span><span class="w"> </span><span class="k" data-group-id="8328513381-7">do</span><span class="w">
+      </span><span class="p" data-group-id="8328513381-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">encode!</span><span class="p" data-group-id="8328513381-9">(</span><span class="n">map</span><span class="p" data-group-id="8328513381-9">)</span><span class="p" data-group-id="8328513381-8">}</span><span class="w">
+    </span><span class="k" data-group-id="8328513381-7">rescue</span><span class="w">
+      </span><span class="nc">ArgumentError</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="8328513381-10">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">:badarg</span><span class="p" data-group-id="8328513381-10">}</span><span class="w">
+    </span><span class="k" data-group-id="8328513381-7">end</span><span class="w">
+  </span><span class="k" data-group-id="8328513381-6">end</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">decode!</span><span class="p" data-group-id="8328513381-11">(</span><span class="n">string</span><span class="p" data-group-id="8328513381-11">)</span><span class="w"> </span><span class="k" data-group-id="8328513381-12">do</span><span class="w">
+    </span><span class="nc">:jsx</span><span class="o">.</span><span class="n">decode</span><span class="p" data-group-id="8328513381-13">(</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8328513381-14">[</span><span class="ss">:return_maps</span><span class="p" data-group-id="8328513381-14">]</span><span class="p" data-group-id="8328513381-13">)</span><span class="w">
+  </span><span class="k" data-group-id="8328513381-12">end</span><span class="w">
+
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">decode</span><span class="p" data-group-id="8328513381-15">(</span><span class="n">string</span><span class="p" data-group-id="8328513381-15">)</span><span class="w"> </span><span class="k" data-group-id="8328513381-16">do</span><span class="w">
+    </span><span class="k">try</span><span class="w"> </span><span class="k" data-group-id="8328513381-17">do</span><span class="w">
+      </span><span class="p" data-group-id="8328513381-18">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">decode!</span><span class="p" data-group-id="8328513381-19">(</span><span class="n">string</span><span class="p" data-group-id="8328513381-19">)</span><span class="p" data-group-id="8328513381-18">}</span><span class="w">
+    </span><span class="k" data-group-id="8328513381-17">rescue</span><span class="w">
+      </span><span class="nc">ArgumentError</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="8328513381-20">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">:badarg</span><span class="p" data-group-id="8328513381-20">}</span><span class="w">
+    </span><span class="k" data-group-id="8328513381-17">end</span><span class="w">
+  </span><span class="k" data-group-id="8328513381-16">end</span><span class="w">
+</span><span class="k" data-group-id="8328513381-1">end</span></code></pre>
+  </section>
+
+
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+      Summary
+    </h1>
+
+  <div class="summary-callbacks summary">
+    <h2>
+      <a href="#callbacks">Callbacks</a>
+    </h2>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#c:decode!/1" translate="no">decode!(t)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#c:decode/1" translate="no">decode(t)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#c:encode!/1" translate="no">encode!(map)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#c:encode/1" translate="no">encode(map)</a>
+
+        </div>
+
+      </div>
+
+  </div>
+
+  </section>
+
+
+  <section id="callbacks" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#callbacks">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+Callbacks
+    </h1>
+    <div class="callbacks-list">
+<section class="detail" id="c:decode!/1">
+
+  <div class="detail-header">
+    <a href="#c:decode!/1" class="detail-link" title="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this callback</span>
+    </a>
+    <h1 class="signature" translate="no">decode!(t)</h1>
+
+      <a href="https://github.com/bonfire-networks/ex_aws/blob/main/lib/ex_aws/json/codec.ex#L52" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> decode!(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: %{}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="c:decode/1">
+
+  <div class="detail-header">
+    <a href="#c:decode/1" class="detail-link" title="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this callback</span>
+    </a>
+    <h1 class="signature" translate="no">decode(t)</h1>
+
+      <a href="https://github.com/bonfire-networks/ex_aws/blob/main/lib/ex_aws/json/codec.ex#L53" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> decode(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()) :: {:ok, %{}} | {:error, %{}}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="c:encode!/1">
+
+  <div class="detail-header">
+    <a href="#c:encode!/1" class="detail-link" title="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this callback</span>
+    </a>
+    <h1 class="signature" translate="no">encode!(map)</h1>
+
+      <a href="https://github.com/bonfire-networks/ex_aws/blob/main/lib/ex_aws/json/codec.ex#L49" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> encode!(%{}) :: <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="c:encode/1">
+
+  <div class="detail-header">
+    <a href="#c:encode/1" class="detail-link" title="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this callback</span>
+    </a>
+    <h1 class="signature" translate="no">encode(map)</h1>
+
+      <a href="https://github.com/bonfire-networks/ex_aws/blob/main/lib/ex_aws/json/codec.ex#L50" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> encode(%{}) :: {:ok, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()}</pre>
+
+      </div>
+
+
+  </section>
+</section>
+
+    </div>
+  </section>
+
+      <footer class="footer">
+
+        <p>
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.4) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>
