@@ -5,9 +5,9 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.4">
-    <meta name="project" content="bonfire v0.3.1-classic-beta.6">
+    <meta name="project" content="bonfire v0.3.1-classic-beta.7">
 
-    <title>ExAws — bonfire v0.3.1-classic-beta.6</title>
+    <title>ExAws — bonfire v0.3.1-classic-beta.7</title>
     <link rel="stylesheet" href="dist/elixir-b6f1ed5df9b1d42a7309.css" />
 
     <script src="dist/sidebar_items-f1c28f9a3c.js"></script>
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.3.1-classic-beta.6
+        v0.3.1-classic-beta.7
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -106,7 +106,7 @@ bonfire
     </a>
 
   <span translate="no">ExAws</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.3.1-classic-beta.6)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.3.1-classic-beta.7)</small>
 
 </h1>
 
@@ -251,19 +251,19 @@ Defaults to <code class="inline">[:ex_aws, :request]</code>.</li><li><code class
 <p>If you have one of the service modules installed, you can just use those service
 modules like this:</p><pre><code class="makeup elixir" translate="no"><span class="nc">ExAws.S3</span><span class="o">.</span><span class="n">list_buckets</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">ExAws</span><span class="o">.</span><span class="n">request</span><span class="w">
 
-</span><span class="nc">ExAws.S3</span><span class="o">.</span><span class="n">list_buckets</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">ExAws</span><span class="o">.</span><span class="n">request</span><span class="p" data-group-id="7491967598-1">(</span><span class="ss">region</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;eu-west-1&quot;</span><span class="p" data-group-id="7491967598-1">)</span><span class="w">
+</span><span class="nc">ExAws.S3</span><span class="o">.</span><span class="n">list_buckets</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">ExAws</span><span class="o">.</span><span class="n">request</span><span class="p" data-group-id="0236285096-1">(</span><span class="ss">region</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;eu-west-1&quot;</span><span class="p" data-group-id="0236285096-1">)</span><span class="w">
 
-</span><span class="nc">ExAws.Dynamo</span><span class="o">.</span><span class="n">get_object</span><span class="p" data-group-id="7491967598-2">(</span><span class="s">&quot;users&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;foo@bar.com&quot;</span><span class="p" data-group-id="7491967598-2">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">ExAws</span><span class="o">.</span><span class="n">request</span></code></pre><p>Alternatively you can create operation structs manually for services
-that aren't supported:</p><pre><code class="makeup elixir" translate="no"><span class="n">op</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="8513279210-1">%</span><span class="nc" data-group-id="8513279210-1">ExAws.Operation.JSON</span><span class="p" data-group-id="8513279210-1">{</span><span class="w">
+</span><span class="nc">ExAws.Dynamo</span><span class="o">.</span><span class="n">get_object</span><span class="p" data-group-id="0236285096-2">(</span><span class="s">&quot;users&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;foo@bar.com&quot;</span><span class="p" data-group-id="0236285096-2">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">ExAws</span><span class="o">.</span><span class="n">request</span></code></pre><p>Alternatively you can create operation structs manually for services
+that aren't supported:</p><pre><code class="makeup elixir" translate="no"><span class="n">op</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p" data-group-id="5503648271-1">%</span><span class="nc" data-group-id="5503648271-1">ExAws.Operation.JSON</span><span class="p" data-group-id="5503648271-1">{</span><span class="w">
   </span><span class="ss">http_method</span><span class="p">:</span><span class="w"> </span><span class="ss">:post</span><span class="p">,</span><span class="w">
   </span><span class="ss">service</span><span class="p">:</span><span class="w"> </span><span class="ss">:dynamodb</span><span class="p">,</span><span class="w">
-  </span><span class="ss">headers</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8513279210-2">[</span><span class="w">
-    </span><span class="p" data-group-id="8513279210-3">{</span><span class="s">&quot;x-amz-target&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;DynamoDB_20120810.ListTables&quot;</span><span class="p" data-group-id="8513279210-3">}</span><span class="p">,</span><span class="w">
-    </span><span class="p" data-group-id="8513279210-4">{</span><span class="s">&quot;content-type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/x-amz-json-1.0&quot;</span><span class="p" data-group-id="8513279210-4">}</span><span class="w">
-  </span><span class="p" data-group-id="8513279210-2">]</span><span class="p">,</span><span class="w">
-</span><span class="p" data-group-id="8513279210-1">}</span><span class="w">
+  </span><span class="ss">headers</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5503648271-2">[</span><span class="w">
+    </span><span class="p" data-group-id="5503648271-3">{</span><span class="s">&quot;x-amz-target&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;DynamoDB_20120810.ListTables&quot;</span><span class="p" data-group-id="5503648271-3">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="5503648271-4">{</span><span class="s">&quot;content-type&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;application/x-amz-json-1.0&quot;</span><span class="p" data-group-id="5503648271-4">}</span><span class="w">
+  </span><span class="p" data-group-id="5503648271-2">]</span><span class="p">,</span><span class="w">
+</span><span class="p" data-group-id="5503648271-1">}</span><span class="w">
 
-</span><span class="nc">ExAws</span><span class="o">.</span><span class="n">request</span><span class="p" data-group-id="8513279210-5">(</span><span class="n">op</span><span class="p" data-group-id="8513279210-5">)</span></code></pre><h2 id="request/2-telemetry-events" class="section-heading">
+</span><span class="nc">ExAws</span><span class="o">.</span><span class="n">request</span><span class="p" data-group-id="5503648271-5">(</span><span class="n">op</span><span class="p" data-group-id="5503648271-5">)</span></code></pre><h2 id="request/2-telemetry-events" class="section-heading">
   <a href="#request/2-telemetry-events" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">telemetry-events</p>
   </a>
@@ -309,7 +309,7 @@ that aren't supported:</p><pre><code class="makeup elixir" translate="no"><span 
   </a>
   Examples
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="nc">ExAws.S3</span><span class="o">.</span><span class="n">list_objects</span><span class="p" data-group-id="4266395939-1">(</span><span class="s">&quot;my-bucket&quot;</span><span class="p" data-group-id="4266395939-1">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">ExAws</span><span class="o">.</span><span class="n">stream!</span></code></pre>
+<pre><code class="makeup elixir" translate="no"><span class="nc">ExAws.S3</span><span class="o">.</span><span class="n">list_objects</span><span class="p" data-group-id="8385057125-1">(</span><span class="s">&quot;my-bucket&quot;</span><span class="p" data-group-id="8385057125-1">)</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">ExAws</span><span class="o">.</span><span class="n">stream!</span></code></pre>
   </section>
 </section>
 
