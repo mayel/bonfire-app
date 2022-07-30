@@ -122,35 +122,35 @@ Poison fulfills this spec without modification, and is the default.</p><p>See th
 <p>Here for example is the code required to make jsx comply with this spec.</p><p>In your config you would do:</p><pre><code class="makeup elixir" translate="no"><span class="n">config</span><span class="w"> </span><span class="ss">:ex_aws</span><span class="p">,</span><span class="w">
   </span><span class="ss">json_codec</span><span class="p">:</span><span class="w"> </span><span class="nc">ExAws.JSON.JSX</span><span class="w">
 
-</span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ExAws.JSON.JSX</span><span class="w"> </span><span class="k" data-group-id="3646591568-1">do</span><span class="w">
+</span><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ExAws.JSON.JSX</span><span class="w"> </span><span class="k" data-group-id="8470429444-1">do</span><span class="w">
   </span><span class="na">@behaviour</span><span class="w"> </span><span class="nc">ExAws.JSON.Codec</span><span class="w">
 
   </span><span class="na">@moduledoc</span><span class="w"> </span><span class="no">false</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">encode!</span><span class="p" data-group-id="3646591568-2">(</span><span class="p" data-group-id="3646591568-3">%{</span><span class="p" data-group-id="3646591568-3">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p" data-group-id="3646591568-2">)</span><span class="w"> </span><span class="k" data-group-id="3646591568-4">do</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">encode!</span><span class="p" data-group-id="8470429444-2">(</span><span class="p" data-group-id="8470429444-3">%{</span><span class="p" data-group-id="8470429444-3">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">map</span><span class="p" data-group-id="8470429444-2">)</span><span class="w"> </span><span class="k" data-group-id="8470429444-4">do</span><span class="w">
     </span><span class="n">map</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="nc">:jsx</span><span class="o">.</span><span class="n">encode</span><span class="w">
-  </span><span class="k" data-group-id="3646591568-4">end</span><span class="w">
+  </span><span class="k" data-group-id="8470429444-4">end</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">encode</span><span class="p" data-group-id="3646591568-5">(</span><span class="n">map</span><span class="p" data-group-id="3646591568-5">)</span><span class="w"> </span><span class="k" data-group-id="3646591568-6">do</span><span class="w">
-    </span><span class="k">try</span><span class="w"> </span><span class="k" data-group-id="3646591568-7">do</span><span class="w">
-      </span><span class="p" data-group-id="3646591568-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">encode!</span><span class="p" data-group-id="3646591568-9">(</span><span class="n">map</span><span class="p" data-group-id="3646591568-9">)</span><span class="p" data-group-id="3646591568-8">}</span><span class="w">
-    </span><span class="k" data-group-id="3646591568-7">rescue</span><span class="w">
-      </span><span class="nc">ArgumentError</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="3646591568-10">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">:badarg</span><span class="p" data-group-id="3646591568-10">}</span><span class="w">
-    </span><span class="k" data-group-id="3646591568-7">end</span><span class="w">
-  </span><span class="k" data-group-id="3646591568-6">end</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">encode</span><span class="p" data-group-id="8470429444-5">(</span><span class="n">map</span><span class="p" data-group-id="8470429444-5">)</span><span class="w"> </span><span class="k" data-group-id="8470429444-6">do</span><span class="w">
+    </span><span class="k">try</span><span class="w"> </span><span class="k" data-group-id="8470429444-7">do</span><span class="w">
+      </span><span class="p" data-group-id="8470429444-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">encode!</span><span class="p" data-group-id="8470429444-9">(</span><span class="n">map</span><span class="p" data-group-id="8470429444-9">)</span><span class="p" data-group-id="8470429444-8">}</span><span class="w">
+    </span><span class="k" data-group-id="8470429444-7">rescue</span><span class="w">
+      </span><span class="nc">ArgumentError</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="8470429444-10">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">:badarg</span><span class="p" data-group-id="8470429444-10">}</span><span class="w">
+    </span><span class="k" data-group-id="8470429444-7">end</span><span class="w">
+  </span><span class="k" data-group-id="8470429444-6">end</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">decode!</span><span class="p" data-group-id="3646591568-11">(</span><span class="n">string</span><span class="p" data-group-id="3646591568-11">)</span><span class="w"> </span><span class="k" data-group-id="3646591568-12">do</span><span class="w">
-    </span><span class="nc">:jsx</span><span class="o">.</span><span class="n">decode</span><span class="p" data-group-id="3646591568-13">(</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3646591568-14">[</span><span class="ss">:return_maps</span><span class="p" data-group-id="3646591568-14">]</span><span class="p" data-group-id="3646591568-13">)</span><span class="w">
-  </span><span class="k" data-group-id="3646591568-12">end</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">decode!</span><span class="p" data-group-id="8470429444-11">(</span><span class="n">string</span><span class="p" data-group-id="8470429444-11">)</span><span class="w"> </span><span class="k" data-group-id="8470429444-12">do</span><span class="w">
+    </span><span class="nc">:jsx</span><span class="o">.</span><span class="n">decode</span><span class="p" data-group-id="8470429444-13">(</span><span class="n">string</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="8470429444-14">[</span><span class="ss">:return_maps</span><span class="p" data-group-id="8470429444-14">]</span><span class="p" data-group-id="8470429444-13">)</span><span class="w">
+  </span><span class="k" data-group-id="8470429444-12">end</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">decode</span><span class="p" data-group-id="3646591568-15">(</span><span class="n">string</span><span class="p" data-group-id="3646591568-15">)</span><span class="w"> </span><span class="k" data-group-id="3646591568-16">do</span><span class="w">
-    </span><span class="k">try</span><span class="w"> </span><span class="k" data-group-id="3646591568-17">do</span><span class="w">
-      </span><span class="p" data-group-id="3646591568-18">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">decode!</span><span class="p" data-group-id="3646591568-19">(</span><span class="n">string</span><span class="p" data-group-id="3646591568-19">)</span><span class="p" data-group-id="3646591568-18">}</span><span class="w">
-    </span><span class="k" data-group-id="3646591568-17">rescue</span><span class="w">
-      </span><span class="nc">ArgumentError</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="3646591568-20">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">:badarg</span><span class="p" data-group-id="3646591568-20">}</span><span class="w">
-    </span><span class="k" data-group-id="3646591568-17">end</span><span class="w">
-  </span><span class="k" data-group-id="3646591568-16">end</span><span class="w">
-</span><span class="k" data-group-id="3646591568-1">end</span></code></pre>
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">decode</span><span class="p" data-group-id="8470429444-15">(</span><span class="n">string</span><span class="p" data-group-id="8470429444-15">)</span><span class="w"> </span><span class="k" data-group-id="8470429444-16">do</span><span class="w">
+    </span><span class="k">try</span><span class="w"> </span><span class="k" data-group-id="8470429444-17">do</span><span class="w">
+      </span><span class="p" data-group-id="8470429444-18">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">decode!</span><span class="p" data-group-id="8470429444-19">(</span><span class="n">string</span><span class="p" data-group-id="8470429444-19">)</span><span class="p" data-group-id="8470429444-18">}</span><span class="w">
+    </span><span class="k" data-group-id="8470429444-17">rescue</span><span class="w">
+      </span><span class="nc">ArgumentError</span><span class="w"> </span><span class="o">-&gt;</span><span class="w"> </span><span class="p" data-group-id="8470429444-20">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="ss">:badarg</span><span class="p" data-group-id="8470429444-20">}</span><span class="w">
+    </span><span class="k" data-group-id="8470429444-17">end</span><span class="w">
+  </span><span class="k" data-group-id="8470429444-16">end</span><span class="w">
+</span><span class="k" data-group-id="8470429444-1">end</span></code></pre>
   </section>
 
 
