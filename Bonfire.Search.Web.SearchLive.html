@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.5">
-    <meta name="project" content="bonfire v0.3.5-classic-beta.4">
+    <meta name="project" content="bonfire v0.3.5-classic-beta.6">
 
-    <title>Bonfire.Search.Web.SearchLive — bonfire v0.3.5-classic-beta.4</title>
+    <title>Bonfire.Search.Web.SearchLive — bonfire v0.3.5-classic-beta.6</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-8531d9ff34.js"></script>
+    <script src="dist/sidebar_items-f504fb22bf.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.3.5-classic-beta.4
+        v0.3.5-classic-beta.6
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -106,7 +106,7 @@ bonfire
     </a>
 
   <span translate="no">Bonfire.Search.Web.SearchLive</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.3.5-classic-beta.4)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.3.5-classic-beta.6)</small>
 
 </h1>
 
@@ -118,9 +118,17 @@ bonfire
   </a>
   Properties
 </h2>
-<ul><li><strong>id</strong> <em>:string, required: true</em> - The id of the live view</li><li><strong>session</strong> <em>:map</em> - The request info necessary for the view, such as params, cookie session info, etc.
-The session is signed and stored on the client, then provided back to the server
-when the client connects, or reconnects to the stateful view.</li></ul>
+<ul><li><p><strong>id</strong> <em>:string, required: true</em> - Both the DOM ID and the ID to uniquely identify a LiveView. An <code class="inline">:id</code> is automatically generated
+when rendering root LiveViews but it is a required option when rendering a child LiveView.</p></li><li><p><strong>container</strong> <em>:tuple</em> - An optional tuple for the HTML tag and DOM attributes to be used for the LiveView container.
+For example: <code class="inline">{:li, style: &quot;color: blue;&quot;}</code>. By default it uses the module definition container.</p></li><li><p><strong>session</strong> <em>:map</em> - A map of binary keys with extra session data to be serialized and sent to the client.
+All session data currently in the connection is automatically available in LiveViews.
+You can use this option to provide extra data. Remember all session data is serialized
+and sent to the client, so you should always keep the data in the session to a minimum.
+For example, instead of storing a User struct, you should store the &quot;user_id&quot; and load
+the User when the LiveView mounts.</p></li><li><p><strong>sticky</strong> <em>:boolean</em> - An optional flag to maintain the LiveView across live redirects, even if it is nested
+within another LiveView. If you are rendering the sticky view within your live layout,
+make sure that the sticky view itself does not use the same layout. You can do so by
+returning <code class="inline">{:ok, socket, layout: false}</code> from mount.</p></li></ul>
   </section>
 
 
@@ -160,7 +168,7 @@ when the client connects, or reconnects to the stateful view.</li></ul>
 
         </div>
 
-          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.12/Phoenix.LiveView.html#c:handle_event/3"><code class="inline">Phoenix.LiveView.handle_event/3</code></a>.</p></div>
+          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.18.0/Phoenix.LiveView.html#c:handle_event/3"><code class="inline">Phoenix.LiveView.handle_event/3</code></a>.</p></div>
 
       </div>
 
@@ -170,7 +178,7 @@ when the client connects, or reconnects to the stateful view.</li></ul>
 
         </div>
 
-          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.12/Phoenix.LiveView.html#c:handle_params/3"><code class="inline">Phoenix.LiveView.handle_params/3</code></a>.</p></div>
+          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.18.0/Phoenix.LiveView.html#c:handle_params/3"><code class="inline">Phoenix.LiveView.handle_params/3</code></a>.</p></div>
 
       </div>
 
@@ -180,7 +188,7 @@ when the client connects, or reconnects to the stateful view.</li></ul>
 
         </div>
 
-          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.12/Phoenix.LiveView.html#c:mount/3"><code class="inline">Phoenix.LiveView.mount/3</code></a>.</p></div>
+          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.18.0/Phoenix.LiveView.html#c:mount/3"><code class="inline">Phoenix.LiveView.mount/3</code></a>.</p></div>
 
       </div>
 
@@ -190,7 +198,7 @@ when the client connects, or reconnects to the stateful view.</li></ul>
 
         </div>
 
-          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.12/Phoenix.LiveView.html#c:render/1"><code class="inline">Phoenix.LiveView.render/1</code></a>.</p></div>
+          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.18.0/Phoenix.LiveView.html#c:render/1"><code class="inline">Phoenix.LiveView.render/1</code></a>.</p></div>
 
       </div>
 
@@ -271,7 +279,7 @@ Functions
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.12/Phoenix.LiveView.html#c:handle_event/3"><code class="inline">Phoenix.LiveView.handle_event/3</code></a>.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.18.0/Phoenix.LiveView.html#c:handle_event/3"><code class="inline">Phoenix.LiveView.handle_event/3</code></a>.</p>
   </section>
 </section>
 <section class="detail" id="handle_params/3">
@@ -293,7 +301,7 @@ Functions
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.12/Phoenix.LiveView.html#c:handle_params/3"><code class="inline">Phoenix.LiveView.handle_params/3</code></a>.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.18.0/Phoenix.LiveView.html#c:handle_params/3"><code class="inline">Phoenix.LiveView.handle_params/3</code></a>.</p>
   </section>
 </section>
 <section class="detail" id="mount/3">
@@ -315,7 +323,7 @@ Functions
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.12/Phoenix.LiveView.html#c:mount/3"><code class="inline">Phoenix.LiveView.mount/3</code></a>.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.18.0/Phoenix.LiveView.html#c:mount/3"><code class="inline">Phoenix.LiveView.mount/3</code></a>.</p>
   </section>
 </section>
 <section class="detail" id="render/1">
@@ -337,7 +345,7 @@ Functions
 
   <section class="docstring">
 
-<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.17.12/Phoenix.LiveView.html#c:render/1"><code class="inline">Phoenix.LiveView.render/1</code></a>.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/phoenix_live_view/0.18.0/Phoenix.LiveView.html#c:render/1"><code class="inline">Phoenix.LiveView.render/1</code></a>.</p>
   </section>
 </section>
 
