@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.5">
-    <meta name="project" content="bonfire v0.3.5-classic-beta.8">
+    <meta name="project" content="bonfire v0.3.5-classic-beta.10">
 
-    <title>Deployment guide — bonfire v0.3.5-classic-beta.8</title>
+    <title>Deployment guide — bonfire v0.3.5-classic-beta.10</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-2cc529327a.js"></script>
+    <script src="dist/sidebar_items-e35b9bba3b.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.3.5-classic-beta.8
+        v0.3.5-classic-beta.10
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -176,7 +176,7 @@ Usage: <code class="inline">bonfire COMMAND [ARGS]</code></p><p>The known comman
   </a>
   Option C - Manual installation (without Docker)
 </h3>
-<h4>Dependencies</h4><ul><li>Postgres (or Postgis) version 12 or newer</li><li><a href="https://github.com/casey/just#packages">just</a></li><li>Elixir version 1.13 with OTP 24 (or newer). If your distribution only has an old version available, check <a href="https://elixir-lang.org/install.html">Elixir's install page</a> or use a tool like <a href="https://github.com/asdf-vm/asdf">asdf</a> (run <code class="inline">asdf install</code> in this directory).</li></ul><h4>C-1. Building the release</h4><ul><li><p>Make sure you have erlang and elixir installed (check <code class="inline">Dockerfile</code> for what version we're currently using)</p></li><li><p>Run <code class="inline">mix deps.get --only prod</code> to install elixir dependencies.</p></li><li><p>Prepare assets with <code class="inline">just js-deps-get</code>, <code class="inline">just assets-prepare</code> and <a href="https://hexdocs.pm/phoenix/1.6.12/Mix.Tasks.Phx.Digest.html"><code class="inline">mix phx.digest</code></a></p></li><li><p>Run <a href="https://hexdocs.pm/mix/Mix.Tasks.Release.html"><code class="inline">mix release</code></a> to create an elixir release. This will create an executable in your <code class="inline">_build/prod/rel/bonfire</code> directory. We will be using the <code class="inline">bin/bonfire</code> executable from here on.</p></li></ul><h4>C-2. Running the release</h4><ul><li><p><code class="inline">cd _build/prod/rel/bonfire/</code></p></li><li><p>Create a database and run the migrations with <code class="inline">bin/bonfire eval 'EctoSparkles.Migrator.migrate()'</code>.</p></li><li><p>If you’re using RDS or some other locked down DB, you may need to run <code class="inline">CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;</code> on your database with elevated privileges.</p></li></ul><ul><li><p>You can check if your instance is configured correctly by running it with <code class="inline">bin/bonfire start</code></p></li><li><p>To run the instance as a daemon, use <code class="inline">bin/bonfire start daemon</code>.</p></li></ul><hr class="thin"/><h3 id="option-d-with-nix" class="section-heading">
+<h4>Dependencies</h4><ul><li>Postgres (or Postgis) version 12 or newer</li><li><a href="https://github.com/casey/just#packages">just</a></li><li>Elixir version 1.13 with OTP 24 (or newer). If your distribution only has an old version available, check <a href="https://elixir-lang.org/install.html">Elixir's install page</a> or use a tool like <a href="https://github.com/asdf-vm/asdf">asdf</a> (run <code class="inline">asdf install</code> in this directory).</li></ul><h4>C-1. Building the release</h4><ul><li><p>Make sure you have erlang and elixir installed (check <code class="inline">Dockerfile</code> for what version we're currently using)</p></li><li><p>Run <code class="inline">mix deps.get --only prod</code> to install elixir dependencies.</p></li><li><p>Prepare assets with <code class="inline">just js-deps-get</code>, <code class="inline">just assets-prepare</code> and <a href="https://hexdocs.pm/phoenix/1.6.13/Mix.Tasks.Phx.Digest.html"><code class="inline">mix phx.digest</code></a></p></li><li><p>Run <a href="https://hexdocs.pm/mix/Mix.Tasks.Release.html"><code class="inline">mix release</code></a> to create an elixir release. This will create an executable in your <code class="inline">_build/prod/rel/bonfire</code> directory. We will be using the <code class="inline">bin/bonfire</code> executable from here on.</p></li></ul><h4>C-2. Running the release</h4><ul><li><p><code class="inline">cd _build/prod/rel/bonfire/</code></p></li><li><p>Create a database and run the migrations with <code class="inline">bin/bonfire eval 'EctoSparkles.Migrator.migrate()'</code>.</p></li><li><p>If you’re using RDS or some other locked down DB, you may need to run <code class="inline">CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;</code> on your database with elevated privileges.</p></li></ul><ul><li><p>You can check if your instance is configured correctly by running it with <code class="inline">bin/bonfire start</code></p></li><li><p>To run the instance as a daemon, use <code class="inline">bin/bonfire start daemon</code>.</p></li></ul><hr class="thin"/><h3 id="option-d-with-nix" class="section-heading">
   <a href="#option-d-with-nix" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">option-d-with-nix</p>
   </a>
@@ -187,7 +187,7 @@ Usage: <code class="inline">bonfire COMMAND [ARGS]</code></p><p>The known comman
   outputs = { self, nixpkgs, bonfire }: {
     overlay = final: prev: with final;{
       # a package named bonfire already exists on nixpkgs so we put it under a different name
-      elixirBonfire = bonfire.defaultPackage.x86_64-linux;
+      elixirBonfire = bonfire.packages.x86_64-linux.default;
     };
     nixosConfigurations.myHostName = nixpkgs.lib.nixosSystem {
       system = &quot;x86_64-linux&quot;;
@@ -201,7 +201,7 @@ Usage: <code class="inline">bonfire COMMAND [ARGS]</code></p><p>The known comman
       ];
     };
   };
-}</code></pre><p>Then your <code class="inline">myHostName.nix</code> would look like the following:</p><p>TODO: add caddy reverse proxy config</p><pre><code class="nix">{ config, lib, pkgs, ... }:
+}</code></pre><p>Then your <code class="inline">myHostName.nix</code> would look like the following:</p><pre><code class="nix">{ config, lib, pkgs, ... }:
 
 {
   services.bonfire = {
@@ -219,6 +219,18 @@ Usage: <code class="inline">bonfire COMMAND [ARGS]</code></p><p>The known comman
     environmentFile = &quot;/run/secrets/bonfireEnv&quot;;
     dbSocketDir = &quot;/var/run/postgresql&quot;;
   };
+	
+	# this is specifically for a reverse proxy, which is primarily used for SSL certs
+	services.ngnix = {
+		enable = true;
+		forceSSL = true;
+		enableACME = true;
+		virtualHosts.&quot;myHostName&quot;.locations.proxyPass = &quot;http://localhost:4000&quot;;
+	};
+	
+	# You will need to accept ACME's terms and conditions if you haven't elsewhere in your configuration
+	security.acme.defaults.email = &quot;you@myHostName.com&quot;;
+	security.acme.acceptTerms = true;
 
   # this is uniquely for database backup purposes
   # replace myBackupUserName with the user name that will do the backups
