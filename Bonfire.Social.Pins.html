@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.5">
-    <meta name="project" content="bonfire v0.3.5-classic-beta.14">
+    <meta name="project" content="bonfire v0.3.5-classic-beta.15">
 
-    <title>Bonfire.Social.Pins — bonfire v0.3.5-classic-beta.14</title>
+    <title>Bonfire.Social.Pins — bonfire v0.3.5-classic-beta.15</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-3886ab2ce9.js"></script>
+    <script src="dist/sidebar_items-16d4719977.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.3.5-classic-beta.14
+        v0.3.5-classic-beta.15
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -106,7 +106,7 @@ bonfire
     </a>
 
   <span translate="no">Bonfire.Social.Pins</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.3.5-classic-beta.14)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.3.5-classic-beta.15)</small>
 
 </h1>
 
@@ -194,6 +194,14 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#list_instance_pins/1" translate="no">list_instance_pins(opts)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#list_my/1" translate="no">list_my(opts)</a>
 
         </div>
@@ -214,7 +222,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#pin/2" translate="no">pin(pinner, object)</a>
+          <a href="#pin/3" translate="no">pin(pinner, object, scope \\ nil)</a>
 
         </div>
 
@@ -246,7 +254,15 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#unpin/2" translate="no">unpin(pinner, pinned)</a>
+          <a href="#rank_pin/3" translate="no">rank_pin(pin, scope, position)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#unpin/3" translate="no">unpin(user, object, scope \\ nil)</a>
 
         </div>
 
@@ -275,7 +291,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">ap_publish_activity(binary, pin)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L164" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L225" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -299,7 +315,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">by_pinned(object, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L41" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L50" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -323,7 +339,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">by_pinner(subject, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L38" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L47" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -345,7 +361,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">context_module()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L24" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L27" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -367,7 +383,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">federation_module()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L26" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L29" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -391,7 +407,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get!(subject, object, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L35" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L44" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -415,7 +431,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">get(subject, object, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L32" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L41" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -439,7 +455,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">list_by(by_user, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L143" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L204" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -452,6 +468,28 @@ Functions
 <p>List pins by a user</p>
   </section>
 </section>
+<section class="detail" id="list_instance_pins/1">
+
+  <div class="detail-header">
+    <a href="#list_instance_pins/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">list_instance_pins(opts)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L199" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
 <section class="detail" id="list_my/1">
 
   <div class="detail-header">
@@ -461,7 +499,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">list_my(opts)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L138" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L195" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -485,7 +523,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">list_of(object, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L150" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L211" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -498,16 +536,18 @@ Functions
 <p>List pinners of something(s)</p>
   </section>
 </section>
-<section class="detail" id="pin/2">
+<section class="detail" id="pin/3">
+
+    <span id="pin/2"></span>
 
   <div class="detail-header">
-    <a href="#pin/2" class="detail-link" title="Link to this function">
+    <a href="#pin/3" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">pin(pinner, object)</h1>
+    <h1 class="signature" translate="no">pin(pinner, object, scope \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L46" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L53" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -529,7 +569,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">pinned?(user, object)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L29" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L35" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -551,7 +591,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">queries_module()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L23" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L26" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -573,7 +613,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">query(filters, opts)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L122" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L179" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -586,16 +626,40 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="unpin/2">
+<section class="detail" id="rank_pin/3">
 
   <div class="detail-header">
-    <a href="#unpin/2" class="detail-link" title="Link to this function">
+    <a href="#rank_pin/3" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">unpin(pinner, pinned)</h1>
+    <h1 class="signature" translate="no">rank_pin(pin, scope, position)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L97" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L139" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="unpin/3">
+
+    <span id="unpin/2"></span>
+
+  <div class="detail-header">
+    <a href="#unpin/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">unpin(user, object, scope \\ nil)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/pins.ex#L114" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
