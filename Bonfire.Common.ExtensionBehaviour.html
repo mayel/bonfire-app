@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.5">
-    <meta name="project" content="bonfire v0.3.5-classic-beta.16">
+    <meta name="project" content="bonfire v0.3.5-classic-beta.18">
 
-    <title>Bonfire.Common.ContextModules — bonfire v0.3.5-classic-beta.16</title>
+    <title>Bonfire.Common.ExtensionBehaviour — bonfire v0.3.5-classic-beta.18</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-f7b9137dd7.js"></script>
+    <script src="dist/sidebar_items-13c7a84b35.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.3.5-classic-beta.16
+        v0.3.5-classic-beta.18
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,20 +100,19 @@ bonfire
 </button>
 
 
-    <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L2" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L2" title="View Source" class="view-source" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
-  <span translate="no">Bonfire.Common.ContextModules</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.3.5-classic-beta.16)</small>
+  <span translate="no">Bonfire.Common.ExtensionBehaviour</span> <small>behaviour</small>
+  <small class="app-vsn" translate="no">(bonfire v0.3.5-classic-beta.18)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>A Global cache of known context modules to be queried by associated schema, or vice versa.</p><p>Use of the ContextModules Service requires:</p><ol><li>Exporting <code class="inline">context_module/0</code> in relevant modules (in schemas pointing to context modules and/or in context modules pointing to schemas), returning a Module atom</li><li>To populate <code class="inline">:bonfire, :context_modules_search_path</code> in config the list of OTP applications where context_modules are declared.</li><li>Start the <a href="./Bonfire.Common.ContextModules.html#content"><code class="inline">Bonfire.Common.ContextModules</code></a> application before querying.</li><li>OTP 21.2 or greater, though we recommend using the most recent
-release available.</li></ol><p>While this module is a GenServer, it is only responsible for setup
+<p>A Global cache of known Behaviours in Bonfire</p><p>Use of the ExtensionBehaviour Service requires ddding <code class="inline">@behaviour Bonfire.Common.ExtensionBehaviour</code> in your behaviour modules. This modules when then index those behaviours <em>and</em> all the modules that implement those behaviours at startup.</p><p>While this module is a GenServer, it is only responsible for setup
 of the cache and then exits with :ignore having done so. It is not
 recommended to restart the service as this will lead to a stop the
 world garbage collection of all processes and the copying of the
@@ -131,18 +130,18 @@ local garbage collection.</p>
       Summary
     </h1>
 
-  <div class="summary-types summary">
+  <div class="summary-callbacks summary">
     <h2>
-      <a href="#types">Types</a>
+      <a href="#callbacks">Callbacks</a>
     </h2>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#t:query/0" translate="no">query()</a>
+          <a href="#c:modules/0" translate="no">modules()</a>
 
         </div>
 
-          <div class="summary-synopsis"><p>A query is either a context_module name atom or (Pointer) id binary</p></div>
+          <div class="summary-synopsis"><p>List modules that implement a behaviour</p></div>
 
       </div>
 
@@ -155,7 +154,31 @@ local garbage collection.</p>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#apply_error/2" translate="no">apply_error(error, args)</a>
+          <a href="#behaviour_app_modules/2" translate="no">behaviour_app_modules(behaviour, behaviours \\ nil)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#behaviour_modules/2" translate="no">behaviour_modules(behaviour, behaviours \\ nil)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#behaviours/0" translate="no">behaviours()</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#cached_behaviours/0" translate="no">cached_behaviours()</a>
 
         </div>
 
@@ -173,7 +196,7 @@ local garbage collection.</p>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#context_function_error/2" translate="no">context_function_error(error, args)</a>
+          <a href="#find_adopters_of_behaviours/1" translate="no">find_adopters_of_behaviours(behaviours \\ find_behaviours())</a>
 
         </div>
 
@@ -181,37 +204,7 @@ local garbage collection.</p>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#context_module!/1" translate="no">context_module!(query)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>Look up a context, throw :not_found if not found.</p></div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#context_module/1" translate="no">context_module(query)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>Get a context identified by schema</p></div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#context_modules/1" translate="no">context_modules(modules)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>Look up many contexts at once, throw :not_found if any of them are not found</p></div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#data/0" translate="no">data()</a>
+          <a href="#linked_modules/2" translate="no">linked_modules(modules, fun)</a>
 
         </div>
 
@@ -219,17 +212,7 @@ local garbage collection.</p>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#maybe_apply/4" translate="no">maybe_apply(object_schema_or_context, fun, args \\ [], fallback_fun \\ &amp;apply_error/2)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>Given an object or schema module name, run a function on the associated context module.</p></div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#maybe_context_module/1" translate="no">maybe_context_module(query)</a>
+          <a href="#module_behaviours/1" translate="no">module_behaviours(module)</a>
 
         </div>
 
@@ -245,19 +228,11 @@ local garbage collection.</p>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#search_app_modules/1" translate="no">search_app_modules(search_path \\ search_path())</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
           <a href="#start_link/1" translate="no">start_link(_)</a>
 
         </div>
 
-          <div class="summary-synopsis"><p>Populates the global cache with context_module data via introspection.</p></div>
+          <div class="summary-synopsis"><p>Populates the global cache with config_module data via introspection.</p></div>
 
       </div>
 
@@ -266,25 +241,25 @@ local garbage collection.</p>
   </section>
 
 
-  <section id="types" class="details-list">
+  <section id="callbacks" class="details-list">
     <h1 class="section-heading">
-      <a class="hover-link" href="#types">
+      <a class="hover-link" href="#callbacks">
         <i class="ri-link-m" aria-hidden="true"></i>
         <span class="sr-only">Link to this section</span>
       </a>
-Types
+Callbacks
     </h1>
-    <div class="types-list">
-<section class="detail" id="t:query/0">
+    <div class="callbacks-list">
+<section class="detail" id="c:modules/0">
 
   <div class="detail-header">
-    <a href="#t:query/0" class="detail-link" title="Link to this type">
+    <a href="#c:modules/0" class="detail-link" title="Link to this callback">
       <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this type</span>
+      <span class="sr-only">Link to this callback</span>
     </a>
-    <h1 class="signature" translate="no">query()</h1>
+    <h1 class="signature" translate="no">modules()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L81" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L21" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -296,11 +271,11 @@ Types
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@type</span> query() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()</pre>
+          <pre translate="no"><span class="attribute">@callback</span> modules() :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()</pre>
 
       </div>
 
-<p>A query is either a context_module name atom or (Pointer) id binary</p>
+<p>List modules that implement a behaviour</p>
   </section>
 </section>
 
@@ -316,16 +291,86 @@ Types
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="apply_error/2">
+<section class="detail" id="behaviour_app_modules/2">
+
+    <span id="behaviour_app_modules/1"></span>
 
   <div class="detail-header">
-    <a href="#apply_error/2" class="detail-link" title="Link to this function">
+    <a href="#behaviour_app_modules/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">apply_error(error, args)</h1>
+    <h1 class="signature" translate="no">behaviour_app_modules(behaviour, behaviours \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L68" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L136" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="behaviour_modules/2">
+
+    <span id="behaviour_modules/1"></span>
+
+  <div class="detail-header">
+    <a href="#behaviour_modules/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">behaviour_modules(behaviour, behaviours \\ nil)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L143" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="behaviours/0">
+
+  <div class="detail-header">
+    <a href="#behaviours/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">behaviours()</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L129" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="cached_behaviours/0">
+
+  <div class="detail-header">
+    <a href="#cached_behaviours/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">cached_behaviours()</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L127" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -347,7 +392,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">child_spec(init_arg)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L76" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L15" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -360,16 +405,18 @@ Functions
 <p>Returns a specification to start this module under a supervisor.</p><p>See <a href="https://hexdocs.pm/elixir/Supervisor.html"><code class="inline">Supervisor</code></a>.</p>
   </section>
 </section>
-<section class="detail" id="context_function_error/2">
+<section class="detail" id="find_adopters_of_behaviours/1">
+
+    <span id="find_adopters_of_behaviours/0"></span>
 
   <div class="detail-header">
-    <a href="#context_function_error/2" class="detail-link" title="Link to this function">
+    <a href="#find_adopters_of_behaviours/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">context_function_error(error, args)</h1>
+    <h1 class="signature" translate="no">find_adopters_of_behaviours(behaviours \\ find_behaviours())</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L123" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L29" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -382,94 +429,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="context_module!/1">
+<section class="detail" id="linked_modules/2">
 
   <div class="detail-header">
-    <a href="#context_module!/1" class="detail-link" title="Link to this function">
+    <a href="#linked_modules/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">context_module!(query)</h1>
+    <h1 class="signature" translate="no">linked_modules(modules, fun)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L105" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Look up a context, throw :not_found if not found.</p>
-  </section>
-</section>
-<section class="detail" id="context_module/1">
-
-  <div class="detail-header">
-    <a href="#context_module/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">context_module(query)</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L97" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> context_module(query :: <a href="#t:query/0">query</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()} | {:error, :not_found}</pre>
-
-      </div>
-
-<p>Get a context identified by schema</p>
-  </section>
-</section>
-<section class="detail" id="context_modules/1">
-
-  <div class="detail-header">
-    <a href="#context_modules/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">context_modules(modules)</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L109" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> context_modules([<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()]) :: [<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>()]</pre>
-
-      </div>
-
-<p>Look up many contexts at once, throw :not_found if any of them are not found</p>
-  </section>
-</section>
-<section class="detail" id="data/0">
-
-  <div class="detail-header">
-    <a href="#data/0" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">data()</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L87" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L153" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -482,42 +451,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="maybe_apply/4">
-
-    <span id="maybe_apply/2"></span>
-
-    <span id="maybe_apply/3"></span>
+<section class="detail" id="module_behaviours/1">
 
   <div class="detail-header">
-    <a href="#maybe_apply/4" class="detail-link" title="Link to this function">
+    <a href="#module_behaviours/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">maybe_apply(object_schema_or_context, fun, args \\ [], fallback_fun \\ &amp;apply_error/2)</h1>
+    <h1 class="signature" translate="no">module_behaviours(module)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L27" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Given an object or schema module name, run a function on the associated context module.</p>
-  </section>
-</section>
-<section class="detail" id="maybe_context_module/1">
-
-  <div class="detail-header">
-    <a href="#maybe_context_module/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">maybe_context_module(query)</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L114" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L117" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -539,31 +482,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">populate()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L140" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="search_app_modules/1">
-
-    <span id="search_app_modules/0"></span>
-
-  <div class="detail-header">
-    <a href="#search_app_modules/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">search_app_modules(search_path \\ search_path())</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L153" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L181" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -585,7 +504,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">start_link(_)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/context_modules.ex#L85" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L173" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -601,7 +520,7 @@ Functions
 
       </div>
 
-<p>Populates the global cache with context_module data via introspection.</p>
+<p>Populates the global cache with config_module data via introspection.</p>
   </section>
 </section>
 

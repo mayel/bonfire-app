@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.5">
-    <meta name="project" content="bonfire v0.3.5-classic-beta.16">
+    <meta name="project" content="bonfire v0.3.5-classic-beta.18">
 
-    <title>Bonfire.Federate.ActivityPub.APPublishWorker — bonfire v0.3.5-classic-beta.16</title>
+    <title>Bonfire.Classify.Web.DashboardHeroLive — bonfire v0.3.5-classic-beta.18</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-f7b9137dd7.js"></script>
+    <script src="dist/sidebar_items-13c7a84b35.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.3.5-classic-beta.16
+        v0.3.5-classic-beta.18
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,21 +100,25 @@ bonfire
 </button>
 
 
-    <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/adapter/publish_worker.ex#L2" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/bonfire-networks/bonfire_classify/blob/main/lib/web/components/dashboard_hero/dashboard_hero_live.ex#L1" title="View Source" class="view-source" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
-  <span translate="no">Bonfire.Federate.ActivityPub.APPublishWorker</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.3.5-classic-beta.16)</small>
+  <span translate="no">Bonfire.Classify.Web.DashboardHeroLive</span> 
+  <small class="app-vsn" translate="no">(bonfire v0.3.5-classic-beta.18)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>Module for publishing ActivityPub activities.</p><p>Intended entry point for this module is the <code class="inline">__MODULE__.enqueue/2</code> function
-provided by <a href="./ActivityPub.Workers.WorkerHelper.html"><code class="inline">ActivityPub.Workers.WorkerHelper</code></a> module.</p><p>Note that the <code class="inline">&quot;context_id&quot;</code> argument refers to the ID of the object being
-federated and not to the ID of the object context, if present.</p>
+<h2 id="module-properties" class="section-heading">
+  <a href="#module-properties" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">properties</p>
+  </a>
+  Properties
+</h2>
+<ul><li><strong>nav_items</strong> <em>:list, default: []</em></li><li><strong>page</strong> <em>:string, default: nil</em></li><li><strong>selected_tab</strong> <em>:string, default: nil</em></li></ul>
   </section>
 
 
@@ -134,17 +138,7 @@ federated and not to the ID of the object context, if present.</p>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#batch_enqueue/2" translate="no">batch_enqueue(verb, ids)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>Enqueues a number of jobs provided a verb and a list of string IDs.</p></div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#enqueue/3" translate="no">enqueue(op, params, worker_args \\ [])</a>
+          <a href="#display_url/1" translate="no">display_url(url)</a>
 
         </div>
 
@@ -152,9 +146,11 @@ federated and not to the ID of the object context, if present.</p>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#enqueueable/3" translate="no">enqueueable(op, params, worker_args \\ [])</a>
+          <a href="#render/1" translate="no">render(arg)</a>
 
         </div>
+
+          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/surface/0.9.1/Surface.Component.html#c:render/1"><code class="inline">Surface.Component.render/1</code></a>.</p></div>
 
       </div>
 
@@ -172,46 +168,16 @@ federated and not to the ID of the object context, if present.</p>
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="batch_enqueue/2">
+<section class="detail" id="display_url/1">
 
   <div class="detail-header">
-    <a href="#batch_enqueue/2" class="detail-link" title="Link to this function">
+    <a href="#display_url/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">batch_enqueue(verb, ids)</h1>
+    <h1 class="signature" translate="no">display_url(url)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/adapter/publish_worker.ex#L21" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> batch_enqueue(<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>(), [<a href="https://hexdocs.pm/elixir/String.html#t:t/0">String.t</a>()]) :: [<a href="https://hexdocs.pm/oban/2.13.4/Oban.Job.html#t:t/0">Oban.Job.t</a>()]</pre>
-
-      </div>
-
-<p>Enqueues a number of jobs provided a verb and a list of string IDs.</p>
-  </section>
-</section>
-<section class="detail" id="enqueue/3">
-
-    <span id="enqueue/2"></span>
-
-  <div class="detail-header">
-    <a href="#enqueue/3" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">enqueue(op, params, worker_args \\ [])</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/adapter/publish_worker.ex#L3" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_classify/blob/main/lib/web/components/dashboard_hero/dashboard_hero_live.ex#L10" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -224,18 +190,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="enqueueable/3">
-
-    <span id="enqueueable/2"></span>
+<section class="detail" id="render/1">
 
   <div class="detail-header">
-    <a href="#enqueueable/3" class="detail-link" title="Link to this function">
+    <a href="#render/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">enqueueable(op, params, worker_args \\ [])</h1>
+    <h1 class="signature" translate="no">render(arg)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/adapter/publish_worker.ex#L3" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_classify/blob/main/lib/web/components/dashboard_hero/dashboard_hero_live.ex#L1" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -245,7 +209,7 @@ Functions
 
   <section class="docstring">
 
-
+<p>Callback implementation for <a href="https://hexdocs.pm/surface/0.9.1/Surface.Component.html#c:render/1"><code class="inline">Surface.Component.render/1</code></a>.</p>
   </section>
 </section>
 

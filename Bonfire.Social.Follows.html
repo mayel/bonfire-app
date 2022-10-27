@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.5">
-    <meta name="project" content="bonfire v0.3.5-classic-beta.16">
+    <meta name="project" content="bonfire v0.3.5-classic-beta.18">
 
-    <title>Bonfire.Social.Follows — bonfire v0.3.5-classic-beta.16</title>
+    <title>Bonfire.Social.Follows — bonfire v0.3.5-classic-beta.18</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-f7b9137dd7.js"></script>
+    <script src="dist/sidebar_items-13c7a84b35.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.3.5-classic-beta.16
+        v0.3.5-classic-beta.18
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -106,7 +106,7 @@ bonfire
     </a>
 
   <span translate="no">Bonfire.Social.Follows</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.3.5-classic-beta.16)</small>
+  <small class="app-vsn" translate="no">(bonfire v0.3.5-classic-beta.18)</small>
 
 </h1>
 
@@ -132,7 +132,19 @@ bonfire
 
         </div>
 
-          <div class="summary-synopsis"><p>Accepts a follow request, poblishes to feeds and federates.</p></div>
+          <div class="summary-synopsis"><p>Accepts a follow request, publishes to feeds and federates.
+Parameter are a Request (or its ID) plus the subject as current_user</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#accept_from/2" translate="no">accept_from(subject, opts)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Accepts a follow request, publishes to feeds and federates.
+Parameters are the requester plus the subject as current_user</p></div>
 
       </div>
 
@@ -178,7 +190,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#ap_publish_activity/2" translate="no">ap_publish_activity(binary, follow)</a>
+          <a href="#ap_publish_activity/3" translate="no">ap_publish_activity(subject, arg2, follow)</a>
 
         </div>
 
@@ -187,14 +199,6 @@ bonfire
       <div class="summary-row">
         <div class="summary-signature">
           <a href="#ap_receive_activity/3" translate="no">ap_receive_activity(follower, activity, object)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#context_module/0" translate="no">context_module()</a>
 
         </div>
 
@@ -284,15 +288,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#maybe_publish_accept/2" translate="no">maybe_publish_accept(request, follow)</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#queries_module/0" translate="no">queries_module()</a>
+          <a href="#maybe_federate_accept/3" translate="no">maybe_federate_accept(subject, request, follow)</a>
 
         </div>
 
@@ -311,6 +307,16 @@ bonfire
           <a href="#requested?/2" translate="no">requested?(subject, object)</a>
 
         </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#schema_module/0" translate="no">schema_module()</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Callback implementation for <a href="./Bonfire.Common.ContextModule.html#c:schema_module/0"><code class="inline">Bonfire.Common.ContextModule.schema_module/0</code></a>.</p></div>
 
       </div>
 
@@ -345,7 +351,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">accept(request, opts)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L93" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L104" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -355,7 +361,31 @@ Functions
 
   <section class="docstring">
 
-<p>Accepts a follow request, poblishes to feeds and federates.</p>
+<p>Accepts a follow request, publishes to feeds and federates.
+Parameter are a Request (or its ID) plus the subject as current_user</p>
+  </section>
+</section>
+<section class="detail" id="accept_from/2">
+
+  <div class="detail-header">
+    <a href="#accept_from/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">accept_from(subject, opts)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L95" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Accepts a follow request, publishes to feeds and federates.
+Parameters are the requester plus the subject as current_user</p>
   </section>
 </section>
 <section class="detail" id="all_by_object/2">
@@ -369,7 +399,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">all_by_object(user, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L151" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L176" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -393,7 +423,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">all_by_subject(user, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L138" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L163" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -417,7 +447,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">all_followed_outboxes(user, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L164" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L189" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -441,7 +471,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">all_objects_by_subject(user, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L146" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L171" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -465,7 +495,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">all_subjects_by_object(user, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L159" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L184" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -478,16 +508,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="ap_publish_activity/2">
+<section class="detail" id="ap_publish_activity/3">
 
   <div class="detail-header">
-    <a href="#ap_publish_activity/2" class="detail-link" title="Link to this function">
+    <a href="#ap_publish_activity/3" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">ap_publish_activity(binary, follow)</h1>
+    <h1 class="signature" translate="no">ap_publish_activity(subject, arg2, follow)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L414" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L437" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -509,29 +539,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">ap_receive_activity(follower, activity, object)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L432" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="context_module/0">
-
-  <div class="detail-header">
-    <a href="#context_module/0" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">context_module()</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L27" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L461" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -553,7 +561,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">federation_module()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L29" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L30" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -577,7 +585,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">follow(user, object, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L52" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L53" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -600,7 +608,7 @@ a remote actor, will instead request to follow.</p>
     </a>
     <h1 class="signature" translate="no">following?(subject, object)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L40" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L41" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -624,7 +632,7 @@ a remote actor, will instead request to follow.</p>
     </a>
     <h1 class="signature" translate="no">get!(subject, object, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L134" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L159" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -648,7 +656,7 @@ a remote actor, will instead request to follow.</p>
     </a>
     <h1 class="signature" translate="no">get(subject, object, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L131" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L156" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -670,7 +678,7 @@ a remote actor, will instead request to follow.</p>
     </a>
     <h1 class="signature" translate="no">ignore(request, opts)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L127" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L152" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -694,7 +702,7 @@ a remote actor, will instead request to follow.</p>
     </a>
     <h1 class="signature" translate="no">list_followed(user, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L208" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L233" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -718,7 +726,7 @@ a remote actor, will instead request to follow.</p>
     </a>
     <h1 class="signature" translate="no">list_followers(user, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L226" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L251" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -742,7 +750,7 @@ a remote actor, will instead request to follow.</p>
     </a>
     <h1 class="signature" translate="no">list_my_followed(current_user, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L201" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L226" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -766,7 +774,7 @@ a remote actor, will instead request to follow.</p>
     </a>
     <h1 class="signature" translate="no">list_my_followers(current_user, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L219" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L244" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -779,38 +787,16 @@ a remote actor, will instead request to follow.</p>
 
   </section>
 </section>
-<section class="detail" id="maybe_publish_accept/2">
+<section class="detail" id="maybe_federate_accept/3">
 
   <div class="detail-header">
-    <a href="#maybe_publish_accept/2" class="detail-link" title="Link to this function">
+    <a href="#maybe_federate_accept/3" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">maybe_publish_accept(request, follow)</h1>
+    <h1 class="signature" translate="no">maybe_federate_accept(subject, request, follow)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L108" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="queries_module/0">
-
-  <div class="detail-header">
-    <a href="#queries_module/0" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">queries_module()</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L26" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L124" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -832,7 +818,7 @@ a remote actor, will instead request to follow.</p>
     </a>
     <h1 class="signature" translate="no">query(filters, opts)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L191" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L216" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -854,7 +840,7 @@ a remote actor, will instead request to follow.</p>
     </a>
     <h1 class="signature" translate="no">requested?(subject, object)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L43" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L44" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -867,6 +853,28 @@ a remote actor, will instead request to follow.</p>
 
   </section>
 </section>
+<section class="detail" id="schema_module/0">
+
+  <div class="detail-header">
+    <a href="#schema_module/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">schema_module()</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L28" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Callback implementation for <a href="./Bonfire.Common.ContextModule.html#c:schema_module/0"><code class="inline">Bonfire.Common.ContextModule.schema_module/0</code></a>.</p>
+  </section>
+</section>
 <section class="detail" id="unfollow/2">
 
   <div class="detail-header">
@@ -876,7 +884,7 @@ a remote actor, will instead request to follow.</p>
     </a>
     <h1 class="signature" translate="no">unfollow(user, object)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L378" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_social/blob/main/lib/follows.ex#L401" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>

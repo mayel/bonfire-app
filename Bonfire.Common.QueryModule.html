@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.5">
-    <meta name="project" content="bonfire v0.3.5-classic-beta.16">
+    <meta name="project" content="bonfire v0.3.5-classic-beta.18">
 
-    <title>Bonfire.Common.QueryModules — bonfire v0.3.5-classic-beta.16</title>
+    <title>Bonfire.Common.QueryModule — bonfire v0.3.5-classic-beta.18</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-f7b9137dd7.js"></script>
+    <script src="dist/sidebar_items-13c7a84b35.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.3.5-classic-beta.16
+        v0.3.5-classic-beta.18
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,19 +100,19 @@ bonfire
 </button>
 
 
-    <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/query_modules.ex#L1" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/query_module.ex#L1" title="View Source" class="view-source" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
-  <span translate="no">Bonfire.Common.QueryModules</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.3.5-classic-beta.16)</small>
+  <span translate="no">Bonfire.Common.QueryModule</span> <small>behaviour</small>
+  <small class="app-vsn" translate="no">(bonfire v0.3.5-classic-beta.18)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>Properly query some data using the appropriate module depending on its schema.</p><p>Back by a global cache of known query_modules to be queried by their schema, or vice versa.</p><p>Use of the QueryModules Service requires:</p><ol><li>Exporting <code class="inline">queries_module/0</code> in relevant modules (in schemas pointing to query modules and/or in query modules pointing to schemas), returning a Module atom</li><li>To populate <code class="inline">:pointers, :search_path</code> in config the list of OTP applications where query_modules are declared.</li><li>Start the <a href="./Bonfire.Common.QueryModules.html#content"><code class="inline">Bonfire.Common.QueryModules</code></a> application before querying.</li><li>OTP 21.2 or greater, though we recommend using the most recent
+<p>Properly query some data using the appropriate module depending on its schema.</p><p>Back by a global cache of known query_modules to be queried by their schema, or vice versa.</p><p>Use of the QueryModule Service requires:</p><ol><li>Exporting <code class="inline">query_module/0</code> in relevant modules (in schemas pointing to query modules and/or in query modules pointing to schemas), returning a Module atom</li><li>To populate <code class="inline">:pointers, :search_path</code> in config the list of OTP applications where query_modules are declared.</li><li>Start the <a href="./Bonfire.Common.QueryModule.html#content"><code class="inline">Bonfire.Common.QueryModule</code></a> application before querying.</li><li>OTP 21.2 or greater, though we recommend using the most recent
 release available.</li></ol><p>While this module is a GenServer, it is only responsible for setup
 of the cache and then exits with :ignore having done so. It is not
 recommended to restart the service as this will lead to a stop the
@@ -131,18 +131,38 @@ local garbage collection.</p>
       Summary
     </h1>
 
-  <div class="summary-types summary">
+  <div class="summary-callbacks summary">
     <h2>
-      <a href="#types">Types</a>
+      <a href="#callbacks">Callbacks</a>
     </h2>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#t:query/0" translate="no">query()</a>
+          <a href="#c:context_module/0" translate="no">context_module()</a>
 
         </div>
 
-          <div class="summary-synopsis"><p>A query is either a query_module name atom or (Pointer) id binary</p></div>
+          <div class="summary-synopsis"><p>Points to the related context module</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#c:query_module/0" translate="no">query_module()</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Declares a query module</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#c:schema_module/0" translate="no">schema_module()</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Points to the related schema module</p></div>
 
       </div>
 
@@ -155,6 +175,14 @@ local garbage collection.</p>
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#app_modules/0" translate="no">app_modules()</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#apply_error/2" translate="no">apply_error(error, args)</a>
 
         </div>
@@ -163,17 +191,15 @@ local garbage collection.</p>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#child_spec/1" translate="no">child_spec(init_arg)</a>
+          <a href="#linked_context_modules/0" translate="no">linked_context_modules()</a>
 
         </div>
-
-          <div class="summary-synopsis"><p>Returns a specification to start this module under a supervisor.</p></div>
 
       </div>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#data/0" translate="no">data()</a>
+          <a href="#linked_schema_modules/0" translate="no">linked_schema_modules()</a>
 
         </div>
 
@@ -197,9 +223,11 @@ local garbage collection.</p>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#populate/0" translate="no">populate()</a>
+          <a href="#modules/0" translate="no">modules()</a>
 
         </div>
+
+          <div class="summary-synopsis"><p>Callback implementation for <a href="./Bonfire.Common.ExtensionBehaviour.html#c:modules/0"><code class="inline">Bonfire.Common.ExtensionBehaviour.modules/0</code></a>.</p></div>
 
       </div>
 
@@ -241,40 +269,30 @@ local garbage collection.</p>
 
       </div>
 
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#start_link/1" translate="no">start_link(_)</a>
-
-        </div>
-
-          <div class="summary-synopsis"><p>Populates the global cache with query_module data via introspection.</p></div>
-
-      </div>
-
   </div>
 
   </section>
 
 
-  <section id="types" class="details-list">
+  <section id="callbacks" class="details-list">
     <h1 class="section-heading">
-      <a class="hover-link" href="#types">
+      <a class="hover-link" href="#callbacks">
         <i class="ri-link-m" aria-hidden="true"></i>
         <span class="sr-only">Link to this section</span>
       </a>
-Types
+Callbacks
     </h1>
-    <div class="types-list">
-<section class="detail" id="t:query/0">
+    <div class="callbacks-list">
+<section class="detail" id="c:context_module/0">
 
   <div class="detail-header">
-    <a href="#t:query/0" class="detail-link" title="Link to this type">
+    <a href="#c:context_module/0" class="detail-link" title="Link to this callback">
       <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this type</span>
+      <span class="sr-only">Link to this callback</span>
     </a>
-    <h1 class="signature" translate="no">query()</h1>
+    <h1 class="signature" translate="no">context_module()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/query_modules.ex#L95" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/query_module.ex#L32" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -286,11 +304,67 @@ Types
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@type</span> query() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()</pre>
+          <pre translate="no"><span class="attribute">@callback</span> context_module() :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()</pre>
 
       </div>
 
-<p>A query is either a query_module name atom or (Pointer) id binary</p>
+<p>Points to the related context module</p>
+  </section>
+</section>
+<section class="detail" id="c:query_module/0">
+
+  <div class="detail-header">
+    <a href="#c:query_module/0" class="detail-link" title="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this callback</span>
+    </a>
+    <h1 class="signature" translate="no">query_module()</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/query_module.ex#L26" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> query_module() :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()</pre>
+
+      </div>
+
+<p>Declares a query module</p>
+  </section>
+</section>
+<section class="detail" id="c:schema_module/0">
+
+  <div class="detail-header">
+    <a href="#c:schema_module/0" class="detail-link" title="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this callback</span>
+    </a>
+    <h1 class="signature" translate="no">schema_module()</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/query_module.ex#L29" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> schema_module() :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()</pre>
+
+      </div>
+
+<p>Points to the related schema module</p>
   </section>
 </section>
 
@@ -306,6 +380,28 @@ Types
 Functions
     </h1>
     <div class="functions-list">
+<section class="detail" id="app_modules/0">
+
+  <div class="detail-header">
+    <a href="#app_modules/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">app_modules()</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/query_module.ex#L142" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
 <section class="detail" id="apply_error/2">
 
   <div class="detail-header">
@@ -315,7 +411,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">apply_error(error, args)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/query_modules.ex#L84" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/query_module.ex#L93" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -328,16 +424,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="child_spec/1">
+<section class="detail" id="linked_context_modules/0">
 
   <div class="detail-header">
-    <a href="#child_spec/1" class="detail-link" title="Link to this function">
+    <a href="#linked_context_modules/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">child_spec(init_arg)</h1>
+    <h1 class="signature" translate="no">linked_context_modules()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/query_modules.ex#L90" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/query_module.ex#L155" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -347,19 +443,19 @@ Functions
 
   <section class="docstring">
 
-<p>Returns a specification to start this module under a supervisor.</p><p>See <a href="https://hexdocs.pm/elixir/Supervisor.html"><code class="inline">Supervisor</code></a>.</p>
+
   </section>
 </section>
-<section class="detail" id="data/0">
+<section class="detail" id="linked_schema_modules/0">
 
   <div class="detail-header">
-    <a href="#data/0" class="detail-link" title="Link to this function">
+    <a href="#linked_schema_modules/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">data()</h1>
+    <h1 class="signature" translate="no">linked_schema_modules()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/query_modules.ex#L101" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/query_module.ex#L151" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -385,7 +481,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">maybe_query(schema, filters \\ [], fallback_fun \\ &amp;apply_error/2)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/query_modules.ex#L25" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/query_module.ex#L34" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -407,7 +503,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">maybe_query_module(query)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/query_modules.ex#L128" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/query_module.ex#L123" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -420,16 +516,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="populate/0">
+<section class="detail" id="modules/0">
 
   <div class="detail-header">
-    <a href="#populate/0" class="detail-link" title="Link to this function">
+    <a href="#modules/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">populate()</h1>
+    <h1 class="signature" translate="no">modules()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/query_modules.ex#L155" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/query_module.ex#L147" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -439,7 +535,13 @@ Functions
 
   <section class="docstring">
 
+      <div class="specs">
 
+          <pre translate="no"><span class="attribute">@spec</span> modules() :: [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()]</pre>
+
+      </div>
+
+<p>Callback implementation for <a href="./Bonfire.Common.ExtensionBehaviour.html#c:modules/0"><code class="inline">Bonfire.Common.ExtensionBehaviour.modules/0</code></a>.</p>
   </section>
 </section>
 <section class="detail" id="query_function_error/3">
@@ -453,7 +555,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">query_function_error(error, args, level \\ :info)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/query_modules.ex#L138" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/query_module.ex#L133" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -475,7 +577,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">query_module!(query)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/query_modules.ex#L119" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/query_module.ex#L115" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -497,7 +599,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">query_module(query)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/query_modules.ex#L111" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/query_module.ex#L100" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -506,12 +608,6 @@ Functions
   </div>
 
   <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> query_module(query :: <a href="#t:query/0">query</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()} | {:error, :not_found}</pre>
-
-      </div>
 
 <p>Get a Queryable identified by name or id.</p>
   </section>
@@ -525,7 +621,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">query_modules(modules)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/query_modules.ex#L123" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/query_module.ex#L119" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -542,34 +638,6 @@ Functions
       </div>
 
 <p>Look up many ids at once, throw :not_found if any of them are not found</p>
-  </section>
-</section>
-<section class="detail" id="start_link/1">
-
-  <div class="detail-header">
-    <a href="#start_link/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">start_link(_)</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/query_modules.ex#L99" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> start_link(ignored :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()) :: <a href="https://hexdocs.pm/elixir/GenServer.html#t:on_start/0">GenServer.on_start</a>()</pre>
-
-      </div>
-
-<p>Populates the global cache with query_module data via introspection.</p>
   </section>
 </section>
 

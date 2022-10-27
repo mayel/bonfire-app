@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.5">
-    <meta name="project" content="bonfire v0.3.5-classic-beta.16">
+    <meta name="project" content="bonfire v0.3.5-classic-beta.18">
 
-    <title>Bonfire.Common.Modularity.DeclareExtensions — bonfire v0.3.5-classic-beta.16</title>
+    <title>Bonfire.Common.WidgetModule — bonfire v0.3.5-classic-beta.18</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-f7b9137dd7.js"></script>
+    <script src="dist/sidebar_items-13c7a84b35.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.3.5-classic-beta.16
+        v0.3.5-classic-beta.18
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -100,16 +100,20 @@ bonfire
 </button>
 
 
-    <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/declare_extensions.ex#L1" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/widget_module.ex#L2" title="View Source" class="view-source" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
-  <span translate="no">Bonfire.Common.Modularity.DeclareExtensions</span> 
-  <small class="app-vsn" translate="no">(bonfire v0.3.5-classic-beta.16)</small>
+  <span translate="no">Bonfire.Common.WidgetModule</span> <small>behaviour</small>
+  <small class="app-vsn" translate="no">(bonfire v0.3.5-classic-beta.18)</small>
 
 </h1>
 
+
+  <section id="moduledoc">
+<p>Widgets: components that can be added to the dashboard or sidebards</p>
+  </section>
 
 
   <section id="summary" class="details-list">
@@ -121,6 +125,23 @@ bonfire
       Summary
     </h1>
 
+  <div class="summary-callbacks summary">
+    <h2>
+      <a href="#callbacks">Callbacks</a>
+    </h2>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#c:declared_widget/0" translate="no">declared_widget()</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Declares a widget component</p></div>
+
+      </div>
+
+  </div>
+
   <div class="summary-functions summary">
     <h2>
       <a href="#functions">Functions</a>
@@ -128,7 +149,7 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#component_props/1" translate="no">component_props(module)</a>
+          <a href="#app_modules/0" translate="no">app_modules()</a>
 
         </div>
 
@@ -136,7 +157,27 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#component_type/1" translate="no">component_type(module)</a>
+          <a href="#modules/0" translate="no">modules()</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Callback implementation for <a href="./Bonfire.Common.ExtensionBehaviour.html#c:modules/0"><code class="inline">Bonfire.Common.ExtensionBehaviour.modules/0</code></a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#widget/1" translate="no">widget(module)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Get a widget identified by module</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#widget_function_error/2" translate="no">widget_function_error(error, args)</a>
 
         </div>
 
@@ -144,41 +185,21 @@ bonfire
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#declare_extension/2" translate="no">declare_extension(name, opts \\ [])</a>
+          <a href="#widgets/0" translate="no">widgets()</a>
 
         </div>
+
+          <div class="summary-synopsis"><p>Load all widgets at once</p></div>
 
       </div>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#declare_nav_component/2" translate="no">declare_nav_component(name, opts \\ [])</a>
+          <a href="#widgets/1" translate="no">widgets(extension)</a>
 
         </div>
 
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#declare_nav_link/2" translate="no">declare_nav_link(name, opts \\ [])</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#declare_widget/2" translate="no">declare_widget(name, opts \\ [])</a>
-
-        </div>
-
-      </div>
-
-      <div class="summary-row">
-        <div class="summary-signature">
-          <a href="#generate_link/3" translate="no">generate_link(name, module, opts)</a>
-
-        </div>
+          <div class="summary-synopsis"><p>Load widgets for an extension</p></div>
 
       </div>
 
@@ -186,6 +207,47 @@ bonfire
 
   </section>
 
+
+  <section id="callbacks" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#callbacks">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+Callbacks
+    </h1>
+    <div class="callbacks-list">
+<section class="detail" id="c:declared_widget/0">
+
+  <div class="detail-header">
+    <a href="#c:declared_widget/0" class="detail-link" title="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this callback</span>
+    </a>
+    <h1 class="signature" translate="no">declared_widget()</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/widget_module.ex#L10" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> declared_widget() :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()</pre>
+
+      </div>
+
+<p>Declares a widget component</p>
+  </section>
+</section>
+
+    </div>
+  </section>
 
   <section id="functions" class="details-list">
     <h1 class="section-heading">
@@ -196,16 +258,16 @@ bonfire
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="component_props/1">
+<section class="detail" id="app_modules/0">
 
   <div class="detail-header">
-    <a href="#component_props/1" class="detail-link" title="Link to this function">
+    <a href="#app_modules/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">component_props(module)</h1>
+    <h1 class="signature" translate="no">app_modules()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/declare_extensions.ex#L88" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/widget_module.ex#L36" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -218,16 +280,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="component_type/1">
+<section class="detail" id="modules/0">
 
   <div class="detail-header">
-    <a href="#component_type/1" class="detail-link" title="Link to this function">
+    <a href="#modules/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">component_type(module)</h1>
+    <h1 class="signature" translate="no">modules()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/declare_extensions.ex#L81" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/widget_module.ex#L41" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -237,123 +299,47 @@ Functions
 
   <section class="docstring">
 
+      <div class="specs">
 
+          <pre translate="no"><span class="attribute">@spec</span> modules() :: [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()]</pre>
+
+      </div>
+
+<p>Callback implementation for <a href="./Bonfire.Common.ExtensionBehaviour.html#c:modules/0"><code class="inline">Bonfire.Common.ExtensionBehaviour.modules/0</code></a>.</p>
   </section>
 </section>
-<section class="detail" id="declare_extension/2">
-
-    <span id="declare_extension/1"></span>
+<section class="detail" id="widget/1">
 
   <div class="detail-header">
-    <a href="#declare_extension/2" class="detail-link" title="Link to this macro">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this macro</span>
-    </a>
-    <h1 class="signature" translate="no">declare_extension(name, opts \\ [])</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/declare_extensions.ex#L4" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-      <span class="note">(macro)</span>
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="declare_nav_component/2">
-
-    <span id="declare_nav_component/1"></span>
-
-  <div class="detail-header">
-    <a href="#declare_nav_component/2" class="detail-link" title="Link to this macro">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this macro</span>
-    </a>
-    <h1 class="signature" translate="no">declare_nav_component(name, opts \\ [])</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/declare_extensions.ex#L33" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-      <span class="note">(macro)</span>
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="declare_nav_link/2">
-
-    <span id="declare_nav_link/1"></span>
-
-  <div class="detail-header">
-    <a href="#declare_nav_link/2" class="detail-link" title="Link to this macro">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this macro</span>
-    </a>
-    <h1 class="signature" translate="no">declare_nav_link(name, opts \\ [])</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/declare_extensions.ex#L48" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-      <span class="note">(macro)</span>
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="declare_widget/2">
-
-    <span id="declare_widget/1"></span>
-
-  <div class="detail-header">
-    <a href="#declare_widget/2" class="detail-link" title="Link to this macro">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this macro</span>
-    </a>
-    <h1 class="signature" translate="no">declare_widget(name, opts \\ [])</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/declare_extensions.ex#L18" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-      <span class="note">(macro)</span>
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="generate_link/3">
-
-  <div class="detail-header">
-    <a href="#generate_link/3" class="detail-link" title="Link to this function">
+    <a href="#widget/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">generate_link(name, module, opts)</h1>
+    <h1 class="signature" translate="no">widget(module)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/declare_extensions.ex#L72" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/widget_module.ex#L13" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Get a widget identified by module</p>
+  </section>
+</section>
+<section class="detail" id="widget_function_error/2">
+
+  <div class="detail-header">
+    <a href="#widget_function_error/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">widget_function_error(error, args)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/widget_module.ex#L27" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -364,6 +350,50 @@ Functions
   <section class="docstring">
 
 
+  </section>
+</section>
+<section class="detail" id="widgets/0">
+
+  <div class="detail-header">
+    <a href="#widgets/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">widgets()</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/widget_module.ex#L23" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Load all widgets at once</p>
+  </section>
+</section>
+<section class="detail" id="widgets/1">
+
+  <div class="detail-header">
+    <a href="#widgets/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">widgets(extension)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/widget_module.ex#L18" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Load widgets for an extension</p>
   </section>
 </section>
 
