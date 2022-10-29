@@ -10,7 +10,7 @@
     <title>ActivityPub — bonfire v0.3.5-classic-beta.18</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-6760f7af68.js"></script>
+    <script src="dist/sidebar_items-f2adcdc0b7.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -113,7 +113,7 @@ bonfire
 
   <section id="moduledoc">
 <p>ActivityPub API</p><p>In general, the functions in this module take object-like formatted struct as the input for actor parameters.
-Use the functions in the <a href="./ActivityPub.Actor.html"><code class="inline">ActivityPub.Actor</code></a> module (<a href="./ActivityPub.Actor.html#get_by_ap_id/1"><code class="inline">ActivityPub.Actor.get_by_ap_id/1</code></a> for example) to retrieve those.</p>
+Use the functions in the <a href="./ActivityPub.Actor.html"><code class="inline">ActivityPub.Actor</code></a> module (<a href="./ActivityPub.Actor.html#get_cached/1"><code class="inline">ActivityPub.Actor.get_cached/1</code></a> for example) to retrieve those.</p>
   </section>
 
 
@@ -143,7 +143,7 @@ Use the functions in the <a href="./ActivityPub.Actor.html"><code class="inline"
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#announce/6" translate="no">announce(actor, object, activity_id \\ nil, local \\ true, public \\ true, summary \\ nil)</a>
+          <a href="#announce/1" translate="no">announce(params)</a>
 
         </div>
 
@@ -151,7 +151,7 @@ Use the functions in the <a href="./ActivityPub.Actor.html"><code class="inline"
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#block/4" translate="no">block(blocker, blocked, activity_id \\ nil, local \\ true)</a>
+          <a href="#block/1" translate="no">block(params)</a>
 
         </div>
 
@@ -159,7 +159,7 @@ Use the functions in the <a href="./ActivityPub.Actor.html"><code class="inline"
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#create/2" translate="no">create(params, pointer \\ nil)</a>
+          <a href="#create/1" translate="no">create(params)</a>
 
         </div>
 
@@ -177,7 +177,7 @@ Use the functions in the <a href="./ActivityPub.Actor.html"><code class="inline"
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#flag/2" translate="no">flag(params, pointer \\ nil)</a>
+          <a href="#flag/1" translate="no">flag(params)</a>
 
         </div>
 
@@ -185,7 +185,7 @@ Use the functions in the <a href="./ActivityPub.Actor.html"><code class="inline"
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#follow/4" translate="no">follow(follower, followed, activity_id \\ nil, local \\ true)</a>
+          <a href="#follow/1" translate="no">follow(params)</a>
 
         </div>
 
@@ -195,9 +195,11 @@ Use the functions in the <a href="./ActivityPub.Actor.html"><code class="inline"
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#like/4" translate="no">like(actor, object, activity_id \\ nil, local \\ true)</a>
+          <a href="#like/1" translate="no">like(params)</a>
 
         </div>
+
+          <div class="summary-synopsis"><p>Record a Like</p></div>
 
       </div>
 
@@ -213,7 +215,7 @@ Use the functions in the <a href="./ActivityPub.Actor.html"><code class="inline"
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#unannounce/4" translate="no">unannounce(actor, object, activity_id \\ nil, local \\ true)</a>
+          <a href="#unannounce/1" translate="no">unannounce(params)</a>
 
         </div>
 
@@ -221,7 +223,7 @@ Use the functions in the <a href="./ActivityPub.Actor.html"><code class="inline"
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#unblock/4" translate="no">unblock(blocker, blocked, activity_id \\ nil, local \\ true)</a>
+          <a href="#unblock/1" translate="no">unblock(params)</a>
 
         </div>
 
@@ -229,7 +231,7 @@ Use the functions in the <a href="./ActivityPub.Actor.html"><code class="inline"
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#unfollow/4" translate="no">unfollow(follower, followed, activity_id \\ nil, local \\ true)</a>
+          <a href="#unfollow/1" translate="no">unfollow(params)</a>
 
         </div>
 
@@ -239,7 +241,7 @@ Use the functions in the <a href="./ActivityPub.Actor.html"><code class="inline"
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#unlike/4" translate="no">unlike(actor, object, activity_id \\ nil, local \\ true)</a>
+          <a href="#unlike/1" translate="no">unlike(params)</a>
 
         </div>
 
@@ -276,7 +278,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">accept(params)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L132" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L181" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -300,24 +302,60 @@ Functions
 <p>Generates and federates an Accept activity via the data passed through <code class="inline">params</code>.</p>
   </section>
 </section>
-<section class="detail" id="announce/6">
-
-    <span id="announce/2"></span>
-
-    <span id="announce/3"></span>
-
-    <span id="announce/4"></span>
-
-    <span id="announce/5"></span>
+<section class="detail" id="announce/1">
 
   <div class="detail-header">
-    <a href="#announce/6" class="detail-link" title="Link to this function">
+    <a href="#announce/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">announce(actor, object, activity_id \\ nil, local \\ true, public \\ true, summary \\ nil)</h1>
+    <h1 class="signature" translate="no">announce(params)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L278" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L277" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="block/1">
+
+  <div class="detail-header">
+    <a href="#block/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">block(params)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L352" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="create/1">
+
+  <div class="detail-header">
+    <a href="#create/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">create(params)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L97" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -329,79 +367,15 @@ Functions
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> announce(
-  <a href="./ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
-  <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(),
-  activity_id :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil,
-  local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>(),
-  public :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>(),
-  summary :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil
-) ::
-  {:ok, activity :: <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(), object :: <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()}
-  | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+          <pre translate="no"><span class="attribute">@spec</span> create(%{
+  :to =&gt; [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()],
+  :actor =&gt; <a href="./ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  :context =&gt; <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
+  :object =&gt; <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(),
+  optional(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) =&gt; <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()
+}) :: {:ok, <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
 
       </div>
-
-
-  </section>
-</section>
-<section class="detail" id="block/4">
-
-    <span id="block/2"></span>
-
-    <span id="block/3"></span>
-
-  <div class="detail-header">
-    <a href="#block/4" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">block(blocker, blocked, activity_id \\ nil, local \\ true)</h1>
-
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L358" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> block(
-  blocker :: <a href="./ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
-  blocked :: <a href="./ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
-  activity_id :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil,
-  local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()
-) :: {:ok, <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
-
-      </div>
-
-
-  </section>
-</section>
-<section class="detail" id="create/2">
-
-    <span id="create/1"></span>
-
-  <div class="detail-header">
-    <a href="#create/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">create(params, pointer \\ nil)</h1>
-
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L91" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
 
 <p>Generates and federates a Create activity via the data passed through <code class="inline">params</code>.</p>
   </section>
@@ -419,7 +393,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">delete(object, local \\ true, delete_actor \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L394" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L388" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -446,44 +420,16 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="flag/2">
-
-    <span id="flag/1"></span>
+<section class="detail" id="flag/1">
 
   <div class="detail-header">
-    <a href="#flag/2" class="detail-link" title="Link to this function">
+    <a href="#flag/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">flag(params, pointer \\ nil)</h1>
+    <h1 class="signature" translate="no">flag(params)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L451" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="follow/4">
-
-    <span id="follow/2"></span>
-
-    <span id="follow/3"></span>
-
-  <div class="detail-header">
-    <a href="#follow/4" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">follow(follower, followed, activity_id \\ nil, local \\ true)</h1>
-
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L182" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L445" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -495,32 +441,30 @@ Functions
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> follow(
-  follower :: <a href="./ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
-  follower :: <a href="./ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
-  activity_id :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil,
-  local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()
-) :: {:ok, <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+          <pre translate="no"><span class="attribute">@spec</span> flag(%{
+  :actor =&gt; <a href="./ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  :context =&gt; <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
+  :account =&gt; <a href="./ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
+  :statuses =&gt; [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()],
+  :content =&gt; <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>(),
+  optional(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) =&gt; <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()
+}) :: {:ok, <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
 
       </div>
 
-<p>Generates and federates a Follow activity.</p><p>Note: the follow should be reflected on the host database side only after receiving an <code class="inline">Accept</code> activity in response!</p>
+
   </section>
 </section>
-<section class="detail" id="like/4">
-
-    <span id="like/2"></span>
-
-    <span id="like/3"></span>
+<section class="detail" id="follow/1">
 
   <div class="detail-header">
-    <a href="#like/4" class="detail-link" title="Link to this function">
+    <a href="#follow/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">like(actor, object, activity_id \\ nil, local \\ true)</h1>
+    <h1 class="signature" translate="no">follow(params)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L224" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L136" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -530,20 +474,29 @@ Functions
 
   <section class="docstring">
 
-      <div class="specs">
+<p>Generates and federates a Follow activity.</p><p>Note: the follow should be reflected as a Follow on the host database side only after receiving an <code class="inline">Accept</code> activity in response (though you could register it as a Request if your app has that concept)</p>
+  </section>
+</section>
+<section class="detail" id="like/1">
 
-          <pre translate="no"><span class="attribute">@spec</span> like(
-  <a href="./ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
-  <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(),
-  activity_id :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil,
-  local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()
-) ::
-  {:ok, activity :: <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(), object :: <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()}
-  | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
+  <div class="detail-header">
+    <a href="#like/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">like(params)</h1>
 
-      </div>
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L226" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
 
 
+  </div>
+
+  <section class="docstring">
+
+<p>Record a Like</p>
   </section>
 </section>
 <section class="detail" id="reject/1">
@@ -555,7 +508,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">reject(params)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L154" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L200" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -575,20 +528,16 @@ Functions
 <p>Generates and federates a Reject activity via the data passed through <code class="inline">params</code>.</p>
   </section>
 </section>
-<section class="detail" id="unannounce/4">
-
-    <span id="unannounce/2"></span>
-
-    <span id="unannounce/3"></span>
+<section class="detail" id="unannounce/1">
 
   <div class="detail-header">
-    <a href="#unannounce/4" class="detail-link" title="Link to this function">
+    <a href="#unannounce/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">unannounce(actor, object, activity_id \\ nil, local \\ true)</h1>
+    <h1 class="signature" translate="no">unannounce(params)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L306" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L303" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -597,38 +546,20 @@ Functions
   </div>
 
   <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> unannounce(
-  <a href="./ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
-  <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(),
-  activity_id :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil,
-  local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()
-) ::
-  {:ok, unannounce_activity :: <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(),
-   object :: <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()}
-  | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
-
-      </div>
 
 
   </section>
 </section>
-<section class="detail" id="unblock/4">
-
-    <span id="unblock/2"></span>
-
-    <span id="unblock/3"></span>
+<section class="detail" id="unblock/1">
 
   <div class="detail-header">
-    <a href="#unblock/4" class="detail-link" title="Link to this function">
+    <a href="#unblock/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">unblock(blocker, blocked, activity_id \\ nil, local \\ true)</h1>
+    <h1 class="signature" translate="no">unblock(params)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L378" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L372" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -637,35 +568,20 @@ Functions
   </div>
 
   <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> unblock(
-  blocker :: <a href="./ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
-  blocked :: <a href="./ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
-  activity_id :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil,
-  local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()
-) :: {:ok, <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
-
-      </div>
 
 
   </section>
 </section>
-<section class="detail" id="unfollow/4">
-
-    <span id="unfollow/2"></span>
-
-    <span id="unfollow/3"></span>
+<section class="detail" id="unfollow/1">
 
   <div class="detail-header">
-    <a href="#unfollow/4" class="detail-link" title="Link to this function">
+    <a href="#unfollow/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">unfollow(follower, followed, activity_id \\ nil, local \\ true)</h1>
+    <h1 class="signature" translate="no">unfollow(params)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L200" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L155" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -674,33 +590,18 @@ Functions
   </div>
 
   <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> unfollow(
-  follower :: <a href="./ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
-  follower :: <a href="./ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
-  activity_id :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil,
-  local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()
-) :: {:ok, <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
-
-      </div>
 
 <p>Generates and federates an Unfollow activity.</p>
   </section>
 </section>
-<section class="detail" id="unlike/4">
-
-    <span id="unlike/2"></span>
-
-    <span id="unlike/3"></span>
+<section class="detail" id="unlike/1">
 
   <div class="detail-header">
-    <a href="#unlike/4" class="detail-link" title="Link to this function">
+    <a href="#unlike/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">unlike(actor, object, activity_id \\ nil, local \\ true)</h1>
+    <h1 class="signature" translate="no">unlike(params)</h1>
 
       <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L250" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
@@ -711,20 +612,6 @@ Functions
   </div>
 
   <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> unlike(
-  <a href="./ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
-  <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(),
-  activity_id :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | nil,
-  local :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">boolean</a>()
-) ::
-  {:ok, unlike_activity :: <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(),
-   like_activity :: <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>(), object :: <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()}
-  | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
-
-      </div>
 
 
   </section>
@@ -738,7 +625,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">update(params)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L334" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub/activity_pub.ex#L331" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -747,18 +634,6 @@ Functions
   </div>
 
   <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> update(%{
-  :to =&gt; [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()],
-  :cc =&gt; [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()],
-  :actor =&gt; <a href="./ActivityPub.Actor.html#t:t/0">ActivityPub.Actor.t</a>(),
-  :object =&gt; <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>(),
-  optional(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) =&gt; <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()
-}) :: {:ok, <a href="./ActivityPub.Object.html#t:t/0">ActivityPub.Object.t</a>()} | {:error, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()}</pre>
-
-      </div>
 
 
   </section>
