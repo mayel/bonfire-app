@@ -5,12 +5,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.5">
-    <meta name="project" content="bonfire_umbrella v0.3.6-classic-beta.7">
+    <meta name="project" content="bonfire_umbrella v0.4.0-classic-beta.2">
 
-    <title>Bonfire.Boundaries.Web.SetBoundariesLive — bonfire_umbrella v0.3.6-classic-beta.7</title>
+    <title>Bonfire.Boundaries.Web.SetBoundariesLive — bonfire_umbrella v0.4.0-classic-beta.2</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-608d73f18f.js"></script>
+    <script src="dist/sidebar_items-a9688b744c.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -70,7 +70,7 @@
 bonfire_umbrella
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.3.6-classic-beta.7
+        v0.4.0-classic-beta.2
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -78,6 +78,8 @@ bonfire_umbrella
 
         <li><a id="modules-list-link" href="#full-list">Modules</a></li>
 
+
+        <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
 
     </ul>
   </div>
@@ -104,7 +106,7 @@ bonfire_umbrella
     </a>
 
   <span translate="no">Bonfire.Boundaries.Web.SetBoundariesLive</span> 
-  <small class="app-vsn" translate="no">(bonfire_umbrella v0.3.6-classic-beta.7)</small>
+  <small class="app-vsn" translate="no">(bonfire_umbrella v0.4.0-classic-beta.2)</small>
 
 </h1>
 
@@ -116,7 +118,7 @@ bonfire_umbrella
   </a>
   Properties
 </h2>
-<ul><li><strong>current_account</strong> <em>:any, from_context: :current_account</em></li><li><strong>current_user</strong> <em>:any, from_context: :current_user</em></li><li><strong>socket</strong> <em>:any</em></li><li><strong>create_object_type</strong> <em>:any, default: nil</em></li><li><strong>to_boundaries</strong> <em>:list, default: []</em></li><li><strong>to_circles</strong> <em>:list, default: []</em></li><li><strong>showing_within</strong> <em>:any, default: nil</em></li><li><strong>show_select_recipients</strong> <em>:boolean, default: false</em></li><li><strong>open_boundaries</strong> <em>:boolean, default: false</em></li><li><strong>boundaries_modal_id</strong> <em>:string, default: :sidebar_composer</em></li></ul>
+<ul><li><strong>current_account</strong> <em>:any, from_context: :current_account</em></li><li><strong>current_user</strong> <em>:any, from_context: :current_user</em></li><li><strong>socket</strong> <em>:any</em></li><li><strong>create_object_type</strong> <em>:any, default: nil</em></li><li><strong>to_boundaries</strong> <em>:any, default: nil</em></li><li><strong>preset_boundary</strong> <em>:any, default: nil</em></li><li><strong>to_circles</strong> <em>:list, default: []</em></li><li><strong>showing_within</strong> <em>:any, default: nil</em></li><li><strong>show_select_recipients</strong> <em>:boolean, default: false</em></li><li><strong>open_boundaries</strong> <em>:boolean, default: false</em></li><li><strong>hide_breakdown</strong> <em>:boolean, default: false</em></li><li><strong>setting_boundaries</strong> <em>:boolean, default: false</em></li><li><strong>click_override</strong> <em>:boolean, default: false</em></li></ul>
   </section>
 
 
@@ -136,7 +138,47 @@ bonfire_umbrella
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#render/1" translate="no">render(arg)</a>
+          <a href="#boundaries_to_preset/1" translate="no">boundaries_to_preset(to_boundaries)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#handle_event/3" translate="no">handle_event(binary, attrs, socket)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#handle_info/2" translate="no">handle_info(change_msg, socket)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#presets/0" translate="no">presets()</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#reject_presets/1" translate="no">reject_presets(to_boundaries)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#render/1" translate="no">render(assigns)</a>
 
         </div>
 
@@ -146,7 +188,7 @@ bonfire_umbrella
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#sigil_p/2" translate="no">sigil_p(route, extra)</a>
+          <a href="#results_for_multiselect/1" translate="no">results_for_multiselect(results)</a>
 
         </div>
 
@@ -154,7 +196,15 @@ bonfire_umbrella
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#to_boundaries_ids/1" translate="no">to_boundaries_ids(to_boundaries)</a>
+          <a href="#set_clean_boundaries/3" translate="no">set_clean_boundaries(to_boundaries, acl_id, name)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#sigil_p/2" translate="no">sigil_p(route, extra)</a>
 
         </div>
 
@@ -174,6 +224,116 @@ bonfire_umbrella
 Functions
     </h1>
     <div class="functions-list">
+<section class="detail" id="boundaries_to_preset/1">
+
+  <div class="detail-header">
+    <a href="#boundaries_to_preset/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">boundaries_to_preset(to_boundaries)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_boundaries/blob/main/lib/web/components/set/set_boundaries_live.ex#L27" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="handle_event/3">
+
+  <div class="detail-header">
+    <a href="#handle_event/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">handle_event(binary, attrs, socket)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_boundaries/blob/main/lib/web/components/set/set_boundaries_live.ex#L88" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="handle_info/2">
+
+  <div class="detail-header">
+    <a href="#handle_info/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">handle_info(change_msg, socket)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_boundaries/blob/main/lib/web/components/set/set_boundaries_live.ex#L51" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="presets/0">
+
+  <div class="detail-header">
+    <a href="#presets/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">presets()</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_boundaries/blob/main/lib/web/components/set/set_boundaries_live.ex#L19" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="reject_presets/1">
+
+  <div class="detail-header">
+    <a href="#reject_presets/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">reject_presets(to_boundaries)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_boundaries/blob/main/lib/web/components/set/set_boundaries_live.ex#L21" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
 <section class="detail" id="render/1">
 
   <div class="detail-header">
@@ -181,7 +341,7 @@ Functions
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">render(arg)</h1>
+    <h1 class="signature" translate="no">render(assigns)</h1>
 
       <a href="https://github.com/bonfire-networks/bonfire_boundaries/blob/main/lib/web/components/set/set_boundaries_live.ex#L1" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
@@ -194,6 +354,50 @@ Functions
   <section class="docstring">
 
 <p>Callback implementation for <a href="https://hexdocs.pm/surface/0.9.1/Surface.Component.html#c:render/1"><code class="inline">Surface.Component.render/1</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="results_for_multiselect/1">
+
+  <div class="detail-header">
+    <a href="#results_for_multiselect/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">results_for_multiselect(results)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_boundaries/blob/main/lib/web/components/set/set_boundaries_live.ex#L63" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="set_clean_boundaries/3">
+
+  <div class="detail-header">
+    <a href="#set_clean_boundaries/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">set_clean_boundaries(to_boundaries, acl_id, name)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_boundaries/blob/main/lib/web/components/set/set_boundaries_live.ex#L41" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 <section class="detail" id="sigil_p/2">
@@ -212,28 +416,6 @@ Functions
 
 
       <span class="note">(macro)</span>
-
-  </div>
-
-  <section class="docstring">
-
-
-  </section>
-</section>
-<section class="detail" id="to_boundaries_ids/1">
-
-  <div class="detail-header">
-    <a href="#to_boundaries_ids/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">to_boundaries_ids(to_boundaries)</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_boundaries/blob/main/lib/web/components/set/set_boundaries_live.ex#L13" class="view-source" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
 
   </div>
 
