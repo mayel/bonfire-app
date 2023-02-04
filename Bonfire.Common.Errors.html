@@ -10,7 +10,7 @@
     <title>Bonfire.Common.Errors — bonfire_umbrella v0.4.0-classic-beta.7</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
-    <script src="dist/sidebar_items-c9cba00db9.js"></script>
+    <script src="dist/sidebar_items-e840a03286.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -128,7 +128,7 @@ bonfire_umbrella
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#debug_banner_with_trace/3" translate="no">debug_banner_with_trace(kind, exception, stacktrace)</a>
+          <a href="#debug_banner_with_trace/4" translate="no">debug_banner_with_trace(kind, exception, stacktrace, opts \\ [])</a>
 
         </div>
 
@@ -136,7 +136,7 @@ bonfire_umbrella
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#debug_exception/4" translate="no">debug_exception(msg, exception \\ nil, stacktrace \\ nil, kind \\ :error)</a>
+          <a href="#debug_exception/5" translate="no">debug_exception(msg, exception \\ nil, stacktrace \\ nil, kind \\ :error, opts \\ [])</a>
 
         </div>
 
@@ -153,6 +153,71 @@ bonfire_umbrella
       <div class="summary-row">
         <div class="summary-signature">
           <a href="#error_msg/1" translate="no">error_msg(errors)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#format_banner/4" translate="no">format_banner(kind, exception, stacktrace \\ [], opts \\ [])</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Normalizes and formats any throw/error/exit.
+The message is formatted and displayed in the same
+format as used by Elixir's CLI.
+The third argument is the stacktrace which is used to enrich
+a normalized error with more information. It is only used when
+the kind is an error.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#format_location/1" translate="no">format_location(opts)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#format_mfa/3" translate="no">format_mfa(module, fun, arity)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Receives a module, fun and arity and formats it
+as shown in stacktraces. The arity may also be a list
+of arguments.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#format_stacktrace/2" translate="no">format_stacktrace(trace \\ nil, opts)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Formats the stacktrace.
+A stacktrace must be given as an argument. If not, the stacktrace
+is retrieved from <a href="https://hexdocs.pm/elixir/Process.html#info/2"><code class="inline">Process.info/2</code></a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#format_stacktrace_entry/2" translate="no">format_stacktrace_entry(entry, opts \\ [])</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Receives a stacktrace entry and formats it into a string.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#last_stacktrace/0" translate="no">last_stacktrace()</a>
 
         </div>
 
@@ -178,6 +243,22 @@ bonfire_umbrella
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#mf_maybe_link_to_code/4" translate="no">mf_maybe_link_to_code(text \\ nil, mod, fun, opts)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#module_maybe_link_to_code/3" translate="no">module_maybe_link_to_code(text \\ nil, mod, opts)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#replace_error/2" translate="no">replace_error(other, value)</a>
 
         </div>
@@ -198,16 +279,18 @@ bonfire_umbrella
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="debug_banner_with_trace/3">
+<section class="detail" id="debug_banner_with_trace/4">
+
+    <span id="debug_banner_with_trace/3"></span>
 
   <div class="detail-header">
-    <a href="#debug_banner_with_trace/3" class="detail-link" title="Link to this function">
+    <a href="#debug_banner_with_trace/4" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">debug_banner_with_trace(kind, exception, stacktrace)</h1>
+    <h1 class="signature" translate="no">debug_banner_with_trace(kind, exception, stacktrace, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L104" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L127" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -220,7 +303,7 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="debug_exception/4">
+<section class="detail" id="debug_exception/5">
 
     <span id="debug_exception/1"></span>
 
@@ -228,14 +311,16 @@ Functions
 
     <span id="debug_exception/3"></span>
 
+    <span id="debug_exception/4"></span>
+
   <div class="detail-header">
-    <a href="#debug_exception/4" class="detail-link" title="Link to this function">
+    <a href="#debug_exception/5" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">debug_exception(msg, exception \\ nil, stacktrace \\ nil, kind \\ :error)</h1>
+    <h1 class="signature" translate="no">debug_exception(msg, exception \\ nil, stacktrace \\ nil, kind \\ :error, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L21" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L43" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -263,7 +348,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">debug_log(msg, exception \\ nil, stacktrace \\ nil, kind \\ :error)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L58" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L81" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -285,7 +370,169 @@ Functions
     </a>
     <h1 class="signature" translate="no">error_msg(errors)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L137" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L7" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="format_banner/4">
+
+    <span id="format_banner/2"></span>
+
+    <span id="format_banner/3"></span>
+
+  <div class="detail-header">
+    <a href="#format_banner/4" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">format_banner(kind, exception, stacktrace \\ [], opts \\ [])</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L188" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Normalizes and formats any throw/error/exit.
+The message is formatted and displayed in the same
+format as used by Elixir's CLI.
+The third argument is the stacktrace which is used to enrich
+a normalized error with more information. It is only used when
+the kind is an error.</p>
+  </section>
+</section>
+<section class="detail" id="format_location/1">
+
+  <div class="detail-header">
+    <a href="#format_location/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">format_location(opts)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L321" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="format_mfa/3">
+
+  <div class="detail-header">
+    <a href="#format_mfa/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">format_mfa(module, fun, arity)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L274" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Receives a module, fun and arity and formats it
+as shown in stacktraces. The arity may also be a list
+of arguments.</p><h2 id="format_mfa/3-examples" class="section-heading">
+  <a href="#format_mfa/3-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
+  <p class="sr-only">examples</p>
+  </a>
+  Examples
+</h2>
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Exception</span><span class="o">.</span><span class="n">format_mfa</span><span class="p" data-group-id="0939312993-1">(</span><span class="nc">Foo</span><span class="p">,</span><span class="w"> </span><span class="ss">:bar</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="0939312993-1">)</span><span class="w">
+</span><span class="p" data-group-id="0939312993-2">{</span><span class="nc">Foo</span><span class="p">,</span><span class="w"> </span><span class="ss">:bar</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Foo.bar/1&quot;</span><span class="p" data-group-id="0939312993-2">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Exception</span><span class="o">.</span><span class="n">format_mfa</span><span class="p" data-group-id="0939312993-3">(</span><span class="nc">Foo</span><span class="p">,</span><span class="w"> </span><span class="ss">:bar</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0939312993-4">[</span><span class="p" data-group-id="0939312993-4">]</span><span class="p" data-group-id="0939312993-3">)</span><span class="w">
+</span><span class="p" data-group-id="0939312993-5">{</span><span class="nc">Foo</span><span class="p">,</span><span class="w"> </span><span class="ss">:bar</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Foo.bar()&quot;</span><span class="p" data-group-id="0939312993-5">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Exception</span><span class="o">.</span><span class="n">format_mfa</span><span class="p" data-group-id="0939312993-6">(</span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="ss">:bar</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="0939312993-7">[</span><span class="p" data-group-id="0939312993-7">]</span><span class="p" data-group-id="0939312993-6">)</span><span class="w">
+</span><span class="p" data-group-id="0939312993-8">{</span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="ss">:bar</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;nil.bar()&quot;</span><span class="p" data-group-id="0939312993-8">}</span></code></pre><p>Anonymous functions are reported as -func/arity-anonfn-count-,
+where func is the name of the enclosing function. Convert to
+&quot;anonymous fn in func/arity&quot;</p>
+  </section>
+</section>
+<section class="detail" id="format_stacktrace/2">
+
+    <span id="format_stacktrace/1"></span>
+
+  <div class="detail-header">
+    <a href="#format_stacktrace/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">format_stacktrace(trace \\ nil, opts)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L215" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Formats the stacktrace.
+A stacktrace must be given as an argument. If not, the stacktrace
+is retrieved from <a href="https://hexdocs.pm/elixir/Process.html#info/2"><code class="inline">Process.info/2</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="format_stacktrace_entry/2">
+
+    <span id="format_stacktrace_entry/1"></span>
+
+  <div class="detail-header">
+    <a href="#format_stacktrace_entry/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">format_stacktrace_entry(entry, opts \\ [])</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L231" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Receives a stacktrace entry and formats it into a string.</p>
+  </section>
+</section>
+<section class="detail" id="last_stacktrace/0">
+
+  <div class="detail-header">
+    <a href="#last_stacktrace/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">last_stacktrace()</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L222" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -307,7 +554,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">map_error(other, fun)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L15" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L37" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -329,7 +576,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">maybe_ok_error(other, change_fn)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L9" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L31" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -348,6 +595,54 @@ Functions
 <p>Applies change_fn if the first parameter is an {:ok, val} tuple, else returns the value</p>
   </section>
 </section>
+<section class="detail" id="mf_maybe_link_to_code/4">
+
+    <span id="mf_maybe_link_to_code/3"></span>
+
+  <div class="detail-header">
+    <a href="#mf_maybe_link_to_code/4" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">mf_maybe_link_to_code(text \\ nil, mod, fun, opts)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L162" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="module_maybe_link_to_code/3">
+
+    <span id="module_maybe_link_to_code/2"></span>
+
+  <div class="detail-header">
+    <a href="#module_maybe_link_to_code/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">module_maybe_link_to_code(text \\ nil, mod, opts)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L172" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
 <section class="detail" id="replace_error/2">
 
   <div class="detail-header">
@@ -357,7 +652,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">replace_error(other, value)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L18" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/errors.ex#L40" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
