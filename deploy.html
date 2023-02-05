@@ -5,9 +5,9 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="ExDoc v0.28.5">
-    <meta name="project" content="bonfire_umbrella v0.4.0-classic-beta.37">
+    <meta name="project" content="bonfire_umbrella v0.4.0-classic-beta.38">
 
-    <title>Deployment guide — bonfire_umbrella v0.4.0-classic-beta.37</title>
+    <title>Deployment guide — bonfire_umbrella v0.4.0-classic-beta.38</title>
     <link rel="stylesheet" href="dist/elixir-64c5e2b63575bddb1c5b.css" />
 
     <script src="dist/sidebar_items-d87d434e12.js"></script>
@@ -70,7 +70,7 @@
 bonfire_umbrella
       </a>
       <strong class="sidebar-projectVersion" translate="no">
-        v0.4.0-classic-beta.37
+        v0.4.0-classic-beta.38
       </strong>
     </div>
     <ul class="sidebar-listNav">
@@ -309,14 +309,14 @@ Here are the detailed steps to deploy it.</p><ul><li>add it as an input to your 
   </a>
   Troubleshooting
 </h2>
-<p>Some common issues that may arise during deployment and our suggestions for resolving them.</p><h4>WebSocket connections not establishing behind a reverse proxy</h4><p>If you are running Bonfire behind your own reverse proxy (e.g. nginx), you might experience issues with WebSocket connections not establishing. WebSocket connections require specific configuration to work, in nginx the following configuration is necessary for websockets to work:</p><pre><code class="makeup elixir" translate="no"><span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="n">live</span><span class="o">/</span><span class="n">websocket</span><span class="w"> </span><span class="p" data-group-id="1131076063-1">{</span><span class="w">
+<p>Some common issues that may arise during deployment and our suggestions for resolving them.</p><h4>WebSocket connections not establishing behind a reverse proxy</h4><p>If you are running Bonfire behind your own reverse proxy (e.g. nginx), you might experience issues with WebSocket connections not establishing. WebSocket connections require specific configuration to work, in nginx the following configuration is necessary for websockets to work:</p><pre><code class="makeup elixir" translate="no"><span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="n">live</span><span class="o">/</span><span class="n">websocket</span><span class="w"> </span><span class="p" data-group-id="3358613429-1">{</span><span class="w">
     </span><span class="n">proxy_pass</span><span class="w"> </span><span class="n">http</span><span class="ss">://</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">4000</span><span class="p">;</span><span class="w">
     
     </span><span class="c1"># these configurations are necessary to proxy WebSocket requests</span><span class="w">
     </span><span class="n">proxy_http_version</span><span class="w"> </span><span class="mf">1.1</span><span class="p">;</span><span class="w">
     </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="nc">Upgrade</span><span class="w"> </span><span class="err">$</span><span class="n">http_upgrade</span><span class="p">;</span><span class="w">
     </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="nc">Connection</span><span class="w"> </span><span class="s">&quot;upgrade&quot;</span><span class="p">;</span><span class="w">
-</span><span class="p" data-group-id="1131076063-1">}</span></code></pre>
+</span><span class="p" data-group-id="3358613429-1">}</span></code></pre>
 <div class="bottom-actions">
   <div class="bottom-actions-item">
 
