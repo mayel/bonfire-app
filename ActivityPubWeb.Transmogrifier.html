@@ -12,7 +12,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-X7YVL3G2.js"></script>
-    <script src="dist/sidebar_items-3B47F33D.js"></script>
+    <script src="dist/sidebar_items-945EE16F.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -134,7 +134,7 @@ and handles incoming objects and activities</p>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#fix_actor/1" translate="no">fix_actor(object)</a>
+          <a href="#add_emoji_tags/1" translate="no">add_emoji_tags(object)</a>
 
         </div>
 
@@ -142,11 +142,136 @@ and handles incoming objects and activities</p>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#fix_object/1" translate="no">fix_object(object)</a>
+          <a href="#allowed_thread_distance?/1" translate="no">allowed_thread_distance?(distance)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Returns <code class="inline">true</code> if the distance to target object does not exceed max configured value.
+Serves to prevent fetching of very long threads, especially useful on smaller instances.
+Addresses memory leaks on recursive replies fetching.
+Applies to fetching of both ancestor (reply-to) and child (reply) objects.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#determine_explicit_mentions/1" translate="no">determine_explicit_mentions(object)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#fix_actor/1" translate="no">fix_actor(data)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#fix_addressing/1" translate="no">fix_addressing(object)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#fix_addressing_list/2" translate="no">fix_addressing_list(map, field)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#fix_attachments/1" translate="no">fix_attachments(object)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#fix_content_map/1" translate="no">fix_content_map(object)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#fix_context/1" translate="no">fix_context(object)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#fix_emoji/1" translate="no">fix_emoji(object)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#fix_explicit_addressing/2" translate="no">fix_explicit_addressing(object, follower_collection)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#fix_in_reply_to/2" translate="no">fix_in_reply_to(object, options \\ [])</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#fix_object/2" translate="no">fix_object(object, options \\ [])</a>
 
         </div>
 
           <div class="summary-synopsis"><p>Modifies an incoming AP object (mastodon format) to our internal format.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#fix_quote_url/2" translate="no">fix_quote_url(object, options \\ [])</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#fix_summary/1" translate="no">fix_summary(object)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#fix_tag/1" translate="no">fix_tag(object)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#fix_url/1" translate="no">fix_url(object)</a>
+
+        </div>
 
       </div>
 
@@ -162,7 +287,7 @@ and handles incoming objects and activities</p>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#handle_object/1" translate="no">handle_object(data)</a>
+          <a href="#maybe_handle_other/1" translate="no">maybe_handle_other(data)</a>
 
         </div>
 
@@ -188,6 +313,33 @@ and handles incoming objects and activities</p>
 
       </div>
 
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#replies/1" translate="no">replies(arg1)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#set_replies/1" translate="no">set_replies(object)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Serialized Mastodon-compatible <code class="inline">replies</code> collection containing <em>self-replies</em>.
+Based on Mastodon's ActivityPub::NoteSerializer#replies.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#take_emoji_tags/1" translate="no">take_emoji_tags(arg1)</a>
+
+        </div>
+
+      </div>
+
   </div>
 
   </section>
@@ -202,16 +354,16 @@ and handles incoming objects and activities</p>
 Functions
     </h1>
     <div class="functions-list">
-<section class="detail" id="fix_actor/1">
+<section class="detail" id="add_emoji_tags/1">
 
   <div class="detail-header">
-    <a href="#fix_actor/1" class="detail-link" title="Link to this function">
+    <a href="#add_emoji_tags/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">fix_actor(object)</h1>
+    <h1 class="signature" translate="no">add_emoji_tags(object)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L28" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L513" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -224,16 +376,271 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="fix_object/1">
+<section class="detail" id="allowed_thread_distance?/1">
 
   <div class="detail-header">
-    <a href="#fix_object/1" class="detail-link" title="Link to this function">
+    <a href="#allowed_thread_distance?/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">fix_object(object)</h1>
+    <h1 class="signature" translate="no">allowed_thread_distance?(distance)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L23" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L1074" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Returns <code class="inline">true</code> if the distance to target object does not exceed max configured value.
+Serves to prevent fetching of very long threads, especially useful on smaller instances.
+Addresses memory leaks on recursive replies fetching.
+Applies to fetching of both ancestor (reply-to) and child (reply) objects.</p>
+  </section>
+</section>
+<section class="detail" id="determine_explicit_mentions/1">
+
+  <div class="detail-header">
+    <a href="#determine_explicit_mentions/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">determine_explicit_mentions(object)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L206" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> determine_explicit_mentions(<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()) :: [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()]</pre>
+
+      </div>
+
+
+  </section>
+</section>
+<section class="detail" id="fix_actor/1">
+
+  <div class="detail-header">
+    <a href="#fix_actor/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fix_actor(data)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L237" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="fix_addressing/1">
+
+  <div class="detail-header">
+    <a href="#fix_addressing/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fix_addressing(object)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L221" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="fix_addressing_list/2">
+
+  <div class="detail-header">
+    <a href="#fix_addressing_list/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fix_addressing_list(map, field)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L167" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="fix_attachments/1">
+
+  <div class="detail-header">
+    <a href="#fix_attachments/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fix_attachments(object)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L345" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="fix_content_map/1">
+
+  <div class="detail-header">
+    <a href="#fix_content_map/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fix_content_map(object)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L475" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="fix_context/1">
+
+  <div class="detail-header">
+    <a href="#fix_context/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fix_context(object)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L337" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="fix_emoji/1">
+
+  <div class="detail-header">
+    <a href="#fix_emoji/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fix_emoji(object)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L431" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="fix_explicit_addressing/2">
+
+  <div class="detail-header">
+    <a href="#fix_explicit_addressing/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fix_explicit_addressing(object, follower_collection)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L183" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="fix_in_reply_to/2">
+
+    <span id="fix_in_reply_to/1"></span>
+
+  <div class="detail-header">
+    <a href="#fix_in_reply_to/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fix_in_reply_to(object, options \\ [])</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L248" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="fix_object/2">
+
+    <span id="fix_object/1"></span>
+
+  <div class="detail-header">
+    <a href="#fix_object/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fix_object(object, options \\ [])</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L136" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -246,6 +653,96 @@ Functions
 <p>Modifies an incoming AP object (mastodon format) to our internal format.</p>
   </section>
 </section>
+<section class="detail" id="fix_quote_url/2">
+
+    <span id="fix_quote_url/1"></span>
+
+  <div class="detail-header">
+    <a href="#fix_quote_url/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fix_quote_url(object, options \\ [])</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L274" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="fix_summary/1">
+
+  <div class="detail-header">
+    <a href="#fix_summary/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fix_summary(object)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L156" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="fix_tag/1">
+
+  <div class="detail-header">
+    <a href="#fix_tag/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fix_tag(object)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L453" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="fix_url/1">
+
+  <div class="detail-header">
+    <a href="#fix_url/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fix_url(object)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L412" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
 <section class="detail" id="handle_incoming/1">
 
   <div class="detail-header">
@@ -255,7 +752,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">handle_incoming(data)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L141" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L626" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -268,16 +765,16 @@ Functions
 <p>Handles incoming data, inserts it into the database and triggers side effects if the data is a supported activity type.</p>
   </section>
 </section>
-<section class="detail" id="handle_object/1">
+<section class="detail" id="maybe_handle_other/1">
 
   <div class="detail-header">
-    <a href="#handle_object/1" class="detail-link" title="Link to this function">
+    <a href="#maybe_handle_other/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">handle_object(data)</h1>
+    <h1 class="signature" translate="no">maybe_handle_other(data)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L541" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L1048" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -299,7 +796,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">prepare_object(object)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L105" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L79" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -321,7 +818,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">prepare_outgoing(data)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L39" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L27" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -332,6 +829,73 @@ Functions
   <section class="docstring">
 
 <p>Translates MN Entity to an AP compatible format</p>
+  </section>
+</section>
+<section class="detail" id="replies/1">
+
+  <div class="detail-header">
+    <a href="#replies/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">replies(arg1)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L613" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="set_replies/1">
+
+  <div class="detail-header">
+    <a href="#set_replies/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">set_replies(object)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L573" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Serialized Mastodon-compatible <code class="inline">replies</code> collection containing <em>self-replies</em>.
+Based on Mastodon's ActivityPub::NoteSerializer#replies.</p>
+  </section>
+</section>
+<section class="detail" id="take_emoji_tags/1">
+
+  <div class="detail-header">
+    <a href="#take_emoji_tags/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">take_emoji_tags(arg1)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/activity_pub_web/transmogrifier.ex#L502" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 
