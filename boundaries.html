@@ -109,62 +109,37 @@ bonfire_umbrella
   <span>Boundaries &amp; Access Control</span>
 </h1>
 
-<p>Boundaries is Bonfire's flexible framework for full
-per-user/per-object/per-action access control. It makes it easy to
-ensure that users may only see or do what they are supposed to.</p><h2 id="users-and-circles" class="section-heading">
+<p>Boundaries is Bonfire's flexible framework for full per-user/per-object/per-action access control. It makes it easy to ensure that users may only see or do what they are supposed to.</p><h2 id="users-and-circles" class="section-heading">
   <a href="#users-and-circles" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">users-and-circles</p>
   </a>
   Users and Circles
 </h2>
-<p>Ignoring any future bot support, boundaries ultimately apply to users.</p><p>Circles are a way of categorising users. Each user has their own set
-of circles that they can add to and categorise other users in as they
-please.</p><p>Circles allow a user to categorise work colleagues differently from
-friends, for example. They can choose to allow different interactions 
-from users in the two circles or limit which content each sees on a 
-per-item basis.</p><h2 id="verbs" class="section-heading">
+<p>Ignoring any future bot support, boundaries ultimately apply to users.</p><p>Circles are a way of categorising users. Each user has their own set of circles that they can add to and categorise other users in as they please.</p><p>Circles allow a user to categorise work colleagues differently from friends, for example. They can choose to allow different interactions from users in the two circles or limit which content each sees on a per-item basis.</p><h2 id="verbs" class="section-heading">
   <a href="#verbs" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">verbs</p>
   </a>
   Verbs
 </h2>
-<p>Verbs represent actions that the user could perform, such as reading a
-post or replying to a message.</p><p>Each verb has a unique ID, like the table IDs from <code class="inline">pointers</code>, which
-must be known to the system through configuration.</p><h2 id="permissions" class="section-heading">
+<p>Verbs represent actions that the user could perform, such as reading a post or replying to a message.</p><p>Each verb has a unique ID, like the table IDs from <code class="inline">pointers</code>, which must be known to the system through configuration.</p><h2 id="permissions" class="section-heading">
   <a href="#permissions" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">permissions</p>
   </a>
   Permissions
 </h2>
-<p>Permissions can take one of three values:</p><ul><li><code class="inline">true</code></li><li><code class="inline">false</code></li><li><code class="inline">nil</code> (or <code class="inline">null</code> to postgresql).</li></ul><p><code class="inline">true</code> and <code class="inline">false</code> are easy enough to understand as yes and no, but what is <code class="inline">nil</code>?</p><p><code class="inline">nil</code> represents <code class="inline">no answer</code> - in isolation, it is the same as <code class="inline">false</code>.</p><p>Because a user could be in more than one circle and each circle may
-have a different permission, we need a way of combining permissions to
-produce a final result permission. <code class="inline">nil</code> is treated differently here:</p><table><thead><tr><th style="text-align: left;">left</th><th style="text-align: left;">right</th><th style="text-align: left;">result</th></tr></thead><tbody><tr><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">nil</code></td></tr><tr><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">true</code></td></tr><tr><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">false</code></td></tr><tr><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">true</code></td></tr><tr><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">true</code></td></tr><tr><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">false</code></td></tr><tr><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">false</code></td></tr><tr><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">false</code></td></tr><tr><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">false</code></td></tr></tbody></table><p>To be considered granted, the result of combining the permissions must
-be <code class="inline">true</code> (<code class="inline">nil</code> is as good as <code class="inline">false</code> again here).</p><p><code class="inline">nil</code> can thus be seen as a sort of <code class="inline">weak false</code>, being easily
-overridden by a true, but also not by itself granting anything.</p><p>At first glance, this may seem a little odd, but it gives us a little
-additional flexibility which is useful for implementing features such
-as blocks (where <code class="inline">false</code> is really useful!). With a little practice,
-it feels quite natural to use.</p><h2 id="acls-and-grants" class="section-heading">
+<p>Permissions can take one of three values:</p><ul><li><code class="inline">true</code></li><li><code class="inline">false</code></li><li><code class="inline">nil</code> (or <code class="inline">null</code> to postgresql).</li></ul><p><code class="inline">true</code> and <code class="inline">false</code> are easy enough to understand as yes and no, but what is <code class="inline">nil</code>?</p><p><code class="inline">nil</code> represents <code class="inline">no answer</code> - in isolation, it is the same as <code class="inline">false</code>.</p><p>Because a user could be in more than one circle and each circle may have a different permission, we need a way of combining permissions to produce a final result permission. <code class="inline">nil</code> is treated differently here:</p><table><thead><tr><th style="text-align: left;">left</th><th style="text-align: left;">right</th><th style="text-align: left;">result</th></tr></thead><tbody><tr><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">nil</code></td></tr><tr><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">true</code></td></tr><tr><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">false</code></td></tr><tr><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">true</code></td></tr><tr><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">true</code></td></tr><tr><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">false</code></td></tr><tr><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">false</code></td></tr><tr><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">false</code></td></tr><tr><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">false</code></td></tr></tbody></table><p>To be considered granted, the result of combining the permissions must be <code class="inline">true</code> (<code class="inline">nil</code> is as good as <code class="inline">false</code> again here).</p><p><code class="inline">nil</code> can thus be seen as a sort of <code class="inline">weak false</code>, being easily overridden by a true, but also not by itself granting anything.</p><p>At first glance, this may seem a little odd, but it gives us a little additional flexibility which is useful for implementing features such as blocks (where <code class="inline">false</code> is really useful!). With a little practice, it feels quite natural to use.</p><h2 id="acls-and-grants" class="section-heading">
   <a href="#acls-and-grants" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">acls-and-grants</p>
   </a>
   ACLs and Grants
 </h2>
-<p>An ACL is &quot;just&quot; a collection of Grants.</p><p>Grants combine the ID of the ACL they exist in with a verb id, a user
-or circle id and a permission, thus providing a decision about whether
-a particular action is permitted for a particular user (or all users
-in a particular circle).</p><p>Conceptually, an ACL contains a grant for every user-or-circle/verb
-combination, but most of the permissions are <code class="inline">nil</code>. We do not record
-grants with <code class="inline">nil</code> permissions in the database, saving substantially
-on storage space and compute requirements.</p><h2 id="controlled-applying-boundaries-to-an-object" class="section-heading">
+<p>An <code class="inline">ACL</code> is &quot;just&quot; a collection of <code class="inline">Grant</code>s.</p><p>Grants combine the ID of the ACL they exist in with a verb id, a user or circle id and a permission, thus providing a decision about whether a particular action is permitted for a particular user (or all users in a particular circle).</p><p>Conceptually, an ACL contains a grant for every user-or-circle/verb combination, but most of the permissions are <code class="inline">nil</code>. We do not record grants with <code class="inline">nil</code> permissions in the database, saving substantially on storage space and compute requirements.</p><h2 id="controlled-applying-boundaries-to-an-object" class="section-heading">
   <a href="#controlled-applying-boundaries-to-an-object" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">controlled-applying-boundaries-to-an-object</p>
   </a>
-  <code class="inline">Controlled</code> - Applying boundaries to an object
+  Controlled - Applying boundaries to an object
 </h2>
-<p>An object is linked to one or more <code class="inline">ACL</code>s by the <code class="inline">Controlled</code>
-multimixin, which pairs an object ID with an ACL ID. Because it is a
-multimixin, a given object can have multiple ACLs applied. In the case
-of overlap, permissions are combined in the manner described earlier.</p>
+<p>An object is linked to one or more <code class="inline">ACL</code>s by the <code class="inline">Controlled</code> multimixin, which pairs an object ID with an ACL ID. Because it is a multimixin, a given object can have multiple ACLs applied. In the case of overlap, permissions are combined in the manner described earlier. </p>
 <div class="bottom-actions">
   <div class="bottom-actions-item">
 
