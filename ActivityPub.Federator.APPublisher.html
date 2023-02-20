@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="ExDoc v0.28.6">
+    <meta name="project" content="bonfire_umbrella v0.9.0-classic-beta.1">
+
+    <title>ActivityPub.Federator.APPublisher — bonfire_umbrella v0.9.0-classic-beta.1</title>
+    <link rel="stylesheet" href="dist/html-elixir-5CLCQQME.css" />
+
+    <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
+    <script src="dist/handlebars.templates-X7YVL3G2.js"></script>
+    <script src="dist/sidebar_items-E39A6297.js"></script>
+
+      <script src="docs_config.js"></script>
+
+    <script async src="dist/html-PLW5RNNI.js"></script>
+
+
+  </head>
+  <body data-type="modules" class="page-module">
+    <script>
+
+      try {
+        var settings = JSON.parse(localStorage.getItem('ex_doc:settings') || '{}');
+
+        if (settings.theme === 'dark' ||
+           ((settings.theme === 'system' || settings.theme == null) &&
+             window.matchMedia('(prefers-color-scheme: dark)').matches)
+           ) {
+          document.body.classList.add('dark')
+        }
+      } catch (error) { }
+    </script>
+
+<div class="main">
+
+<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+  <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
+</button>
+
+<section class="sidebar">
+  <form class="sidebar-search" action="search.html">
+    <button type="submit" class="search-button" aria-label="Submit Search">
+      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
+    </button>
+    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
+      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
+    </button>
+    <label class="search-label">
+      <p class="sr-only">Search</p>
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+    </label>
+  </form>
+
+  <div class="autocomplete">
+    <div class="autocomplete-results">
+    </div>
+  </div>
+
+  <div class="sidebar-header">
+
+      <a href="https://bonfirenetworks.org">
+        <img src="assets/logo.png" alt="bonfire_umbrella" class="sidebar-projectImage">
+      </a>
+
+    <div class="sidebar-projectDetails">
+      <a href="https://bonfirenetworks.org" class="sidebar-projectName" translate="no">
+bonfire_umbrella
+      </a>
+      <strong class="sidebar-projectVersion" translate="no">
+        v0.9.0-classic-beta.1
+      </strong>
+    </div>
+    <ul class="sidebar-listNav">
+      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+
+        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+
+
+        <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
+
+    </ul>
+  </div>
+
+  <div class="gradient"></div>
+  <ul id="full-list" class="sidebar-fullList"></ul>
+</section>
+
+<section class="content">
+  <output role="status" id="toast"></output>
+  <div class="content-outer">
+    <div id="content" class="content-inner">
+
+<h1>
+<button class="settings display-settings">
+  <i class="ri-settings-3-line"></i>
+  <span class="sr-only">Settings</span>
+</button>
+
+
+    <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/ap_publisher.ex#L3" title="View Source" class="view-source" rel="help">
+      <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+      <span class="sr-only">View Source</span>
+    </a>
+
+  <span translate="no">ActivityPub.Federator.APPublisher</span> 
+  <small class="app-vsn" translate="no">(bonfire_umbrella v0.9.0-classic-beta.1)</small>
+
+</h1>
+
+
+
+  <section id="summary" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#summary">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+      Summary
+    </h1>
+
+  <div class="summary-functions summary">
+    <h2>
+      <a href="#functions">Functions</a>
+    </h2>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#determine_inbox/2" translate="no">determine_inbox(arg1, user)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Determine a user inbox to use based on heuristics.  These heuristics
+are based on an approximation of the <code class="inline">sharedInbox</code> rules in the
+<a href="https://www.w3.org/TR/activitypub/#shared-inbox-delivery" title="">ActivityPub specification</a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#gather_webfinger_links/1" translate="no">gather_webfinger_links(actor)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Federator.Publisher.html#c:gather_webfinger_links/1"><code class="inline">ActivityPub.Federator.Publisher.gather_webfinger_links/1</code></a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#is_representable?/1" translate="no">is_representable?(activity)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Federator.Publisher.html#c:is_representable?/1"><code class="inline">ActivityPub.Federator.Publisher.is_representable?/1</code></a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#maybe_federate_to_search_index/2" translate="no">maybe_federate_to_search_index(recipients, activity)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>If you put the URL of the shared inbox of an ActivityPub instance in the following env variable, all public content will be pushed there via AP federation for search indexing purposes: PUSH_ALL_PUBLIC_CONTENT_TO_INSTANCE
+#TODO: move to adapter</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#publish/2" translate="no">publish(actor, activity)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Federator.Publisher.html#c:publish/2"><code class="inline">ActivityPub.Federator.Publisher.publish/2</code></a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#publish_one/1" translate="no">publish_one(params)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Publish a single message to a peer.  Takes a struct with the following
+parameters set</p></div>
+
+      </div>
+
+  </div>
+
+  </section>
+
+
+  <section id="functions" class="details-list">
+    <h1 class="section-heading">
+      <a class="hover-link" href="#functions">
+        <i class="ri-link-m" aria-hidden="true"></i>
+        <span class="sr-only">Link to this section</span>
+      </a>
+Functions
+    </h1>
+    <div class="functions-list">
+<section class="detail" id="determine_inbox/2">
+
+  <div class="detail-header">
+    <a href="#determine_inbox/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">determine_inbox(arg1, user)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/ap_publisher.ex#L170" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Determine a user inbox to use based on heuristics.  These heuristics
+are based on an approximation of the <code class="inline">sharedInbox</code> rules in the
+<a href="https://www.w3.org/TR/activitypub/#shared-inbox-delivery" title="">ActivityPub specification</a>.</p><p>Please do not edit this function (or its children) without reading
+the spec, as editing the code is likely to introduce some breakage
+without some familiarity.</p>
+  </section>
+</section>
+<section class="detail" id="gather_webfinger_links/1">
+
+  <div class="detail-header">
+    <a href="#gather_webfinger_links/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">gather_webfinger_links(actor)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/ap_publisher.ex#L203" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Callback implementation for <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Federator.Publisher.html#c:gather_webfinger_links/1"><code class="inline">ActivityPub.Federator.Publisher.gather_webfinger_links/1</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="is_representable?/1">
+
+  <div class="detail-header">
+    <a href="#is_representable?/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">is_representable?(activity)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/ap_publisher.ex#L14" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Callback implementation for <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Federator.Publisher.html#c:is_representable?/1"><code class="inline">ActivityPub.Federator.Publisher.is_representable?/1</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="maybe_federate_to_search_index/2">
+
+  <div class="detail-header">
+    <a href="#maybe_federate_to_search_index/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">maybe_federate_to_search_index(recipients, activity)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/ap_publisher.ex#L144" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>If you put the URL of the shared inbox of an ActivityPub instance in the following env variable, all public content will be pushed there via AP federation for search indexing purposes: PUSH_ALL_PUBLIC_CONTENT_TO_INSTANCE
+#TODO: move to adapter</p>
+  </section>
+</section>
+<section class="detail" id="publish/2">
+
+  <div class="detail-header">
+    <a href="#publish/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">publish(actor, activity)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/ap_publisher.ex#L16" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Callback implementation for <a href="https://hexdocs.pm/activity_pub/0.1.0/ActivityPub.Federator.Publisher.html#c:publish/2"><code class="inline">ActivityPub.Federator.Publisher.publish/2</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="publish_one/1">
+
+  <div class="detail-header">
+    <a href="#publish_one/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">publish_one(params)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/ap_publisher.ex#L53" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Publish a single message to a peer.  Takes a struct with the following
+parameters set:</p><ul><li><code class="inline">inbox</code>: the inbox to publish to</li><li><code class="inline">json</code>: the JSON message body representing the ActivityPub message</li><li><code class="inline">actor</code>: the actor which is signing the message</li><li><code class="inline">id</code>: the ActivityStreams URI of the message</li></ul>
+  </section>
+</section>
+
+    </div>
+  </section>
+
+      <footer class="footer">
+
+        <p>
+          Built using
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.6) for the
+
+            <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
+
+        </p>
+      </footer>
+    </div>
+  </div>
+</section>
+</div>
+
+
+  </body>
+</html>
