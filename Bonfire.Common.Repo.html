@@ -12,7 +12,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-X7YVL3G2.js"></script>
-    <script src="dist/sidebar_items-D6B870D1.js"></script>
+    <script src="dist/sidebar_items-4DD7556D.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -245,6 +245,8 @@ bonfire_umbrella
 
         </div>
 
+          <div class="summary-synopsis"><p>Execute a query to delete all matching records.</p></div>
+
       </div>
 
       <div class="summary-row">
@@ -285,15 +287,17 @@ depending on the adapter to obtain statistics for the given query.</p></div>
 
         </div>
 
-          <div class="summary-synopsis"><p>Like Repo.get, but returns an ok/error tuple</p></div>
+          <div class="summary-synopsis"><p>Execute a query for one result where the primary key matches the given id, and return either an {:ok, result} tuple or a {:error, :not_found} </p></div>
 
       </div>
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#fetch_all/2" translate="no">fetch_all(queryable, ids)</a>
+          <a href="#fetch_all/2" translate="no">fetch_all(queryable, id_or_ids)</a>
 
         </div>
+
+          <div class="summary-synopsis"><p>Execute a query for multiple results given one or multiple IDs.</p></div>
 
       </div>
 
@@ -303,7 +307,7 @@ depending on the adapter to obtain statistics for the given query.</p></div>
 
         </div>
 
-          <div class="summary-synopsis"><p>Like Repo.get_by, but returns an ok/error tuple</p></div>
+          <div class="summary-synopsis"><p>Execute a query for one result (using a keyword list to specify the key/value to query with), and return either an {:ok, result} tuple or a {:error, :not_found} </p></div>
 
       </div>
 
@@ -459,6 +463,8 @@ depending on the adapter to obtain statistics for the given query.</p></div>
 
         </div>
 
+          <div class="summary-synopsis"><p>Execute a query for multiple results and return the results.</p></div>
+
       </div>
 
       <div class="summary-row">
@@ -467,7 +473,8 @@ depending on the adapter to obtain statistics for the given query.</p></div>
 
         </div>
 
-          <div class="summary-synopsis"><p>Main implementation for pagination using Paginator (used by most extensions)</p></div>
+          <div class="summary-synopsis"><p>Execute a query for multiple results and return one page of results.
+This uses the main implementation for pagination, which is cursor-based and powered by the <a href="https://hexdocs.pm/paginator/1.0.4/Paginator.html"><code class="inline">Paginator</code></a> library.</p></div>
 
       </div>
 
@@ -476,6 +483,8 @@ depending on the adapter to obtain statistics for the given query.</p></div>
           <a href="#maybe_one/2" translate="no">maybe_one(q, fallback \\ nil)</a>
 
         </div>
+
+          <div class="summary-synopsis"><p>Execute a query for one result and return either an result or a fallback value (<code class="inline">nil</code> by default)</p></div>
 
       </div>
 
@@ -566,6 +575,8 @@ names from config (and only config, no overrides at present!)</p></div>
 
         </div>
 
+          <div class="summary-synopsis"><p>Like <a href="#put/1"><code class="inline">put/1</code></a> but for multiple <code class="inline">changesets</code></p></div>
+
       </div>
 
       <div class="summary-row">
@@ -644,7 +655,7 @@ names from config (and only config, no overrides at present!)</p></div>
 
         </div>
 
-          <div class="summary-synopsis"><p>Like Repo.one, but returns an ok/error tuple.</p></div>
+          <div class="summary-synopsis"><p>Execute a query for one result and return either an <code class="inline">{:ok, result}</code> or <code class="inline">{:error, :not_found}</code> tuple</p></div>
 
       </div>
 
@@ -760,6 +771,8 @@ tuple. If an error tuple is returned, the transaction is aborted.</p></div>
           <a href="#upsert/3" translate="no">upsert(cs, keys_or_attrs_to_update \\ nil, conflict_target \\ [:id])</a>
 
         </div>
+
+          <div class="summary-synopsis"><p>Inserts or updates data in the database with upsert semantics.</p></div>
 
       </div>
 
@@ -1058,7 +1071,7 @@ Functions
 
   <section class="docstring">
 
-
+<p>Execute a query to delete all matching records.</p>
   </section>
 </section>
 <section class="detail" id="disconnect_all/2">
@@ -1160,7 +1173,7 @@ depending on the adapter to obtain statistics for the given query.</p><p>See <a 
 
       </div>
 
-<p>Like Repo.get, but returns an ok/error tuple</p>
+<p>Execute a query for one result where the primary key matches the given id, and return either an {:ok, result} tuple or a {:error, :not_found} </p>
   </section>
 </section>
 <section class="detail" id="fetch_all/2">
@@ -1170,7 +1183,7 @@ depending on the adapter to obtain statistics for the given query.</p><p>See <a 
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">fetch_all(queryable, ids)</h1>
+    <h1 class="signature" translate="no">fetch_all(queryable, id_or_ids)</h1>
 
       <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo.ex#L5" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
@@ -1182,7 +1195,7 @@ depending on the adapter to obtain statistics for the given query.</p><p>See <a 
 
   <section class="docstring">
 
-
+<p>Execute a query for multiple results given one or multiple IDs.</p>
   </section>
 </section>
 <section class="detail" id="fetch_by/2">
@@ -1204,7 +1217,7 @@ depending on the adapter to obtain statistics for the given query.</p><p>See <a 
 
   <section class="docstring">
 
-<p>Like Repo.get_by, but returns an ok/error tuple</p>
+<p>Execute a query for one result (using a keyword list to specify the key/value to query with), and return either an {:ok, result} tuple or a {:error, :not_found} </p>
   </section>
 </section>
 <section class="detail" id="find/3">
@@ -1578,7 +1591,7 @@ depending on the adapter to obtain statistics for the given query.</p><p>See <a 
 
   <section class="docstring">
 
-
+<p>Execute a query for multiple results and return the results.</p>
   </section>
 </section>
 <section class="detail" id="many_paginated/3">
@@ -1604,7 +1617,8 @@ depending on the adapter to obtain statistics for the given query.</p><p>See <a 
 
   <section class="docstring">
 
-<p>Main implementation for pagination using Paginator (used by most extensions)</p>
+<p>Execute a query for multiple results and return one page of results.
+This uses the main implementation for pagination, which is cursor-based and powered by the <a href="https://hexdocs.pm/paginator/1.0.4/Paginator.html"><code class="inline">Paginator</code></a> library.</p>
   </section>
 </section>
 <section class="detail" id="maybe_one/2">
@@ -1628,7 +1642,7 @@ depending on the adapter to obtain statistics for the given query.</p><p>See <a 
 
   <section class="docstring">
 
-
+<p>Execute a query for one result and return either an result or a fallback value (<code class="inline">nil</code> by default)</p>
   </section>
 </section>
 <section class="detail" id="maybe_preload/3">
@@ -1837,7 +1851,7 @@ names from config (and only config, no overrides at present!)</p>
 
   <section class="docstring">
 
-
+<p>Like <a href="#put/1"><code class="inline">put/1</code></a> but for multiple <code class="inline">changesets</code></p>
   </section>
 </section>
 <section class="detail" id="query/3">
@@ -2039,7 +2053,7 @@ names from config (and only config, no overrides at present!)</p>
 
   <section class="docstring">
 
-<p>Like Repo.one, but returns an ok/error tuple.</p>
+<p>Execute a query for one result and return either an <code class="inline">{:ok, result}</code> or <code class="inline">{:error, :not_found}</code> tuple</p>
   </section>
 </section>
 <section class="detail" id="sql/3">
@@ -2333,7 +2347,7 @@ tuple. If an error tuple is returned, the transaction is aborted.</p>
 
   <section class="docstring">
 
-
+<p>Inserts or updates data in the database with upsert semantics.</p><ul><li><code class="inline">cs</code> - The changeset or schema to insert or update.</li><li><code class="inline">keys_or_attrs_to_update</code> - A list of keys or a map of attributes to update.</li><li><code class="inline">conflict_target</code> - The column(s) or constraint to check for conflicts, defaults to <code class="inline">[:id]</code>.</li></ul>
   </section>
 </section>
 <section class="detail" id="upsert_all/3">
