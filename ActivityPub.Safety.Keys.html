@@ -12,7 +12,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-X7YVL3G2.js"></script>
-    <script src="dist/sidebar_items-19AECEC9.js"></script>
+    <script src="dist/sidebar_items-9FCDFD0E.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -113,7 +113,7 @@ bonfire_umbrella
 
 
   <section id="moduledoc">
-<p>Generates RSA keys for HTTP message signatures</p>
+<p>Handles RSA keys and HTTP signatures</p>
   </section>
 
 
@@ -133,11 +133,37 @@ bonfire_umbrella
 
       <div class="summary-row">
         <div class="summary-signature">
+          <a href="#add_public_key/1" translate="no">add_public_key(actor)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#cast_uri/1" translate="no">cast_uri(object)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
           <a href="#ensure_keys_present/1" translate="no">ensure_keys_present(actor)</a>
 
         </div>
 
           <div class="summary-synopsis"><p>Checks if an actor struct has a non-nil keys field and generates a PEM if it doesn't.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#fetch_public_key/1" translate="no">fetch_public_key(conn)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/http_signatures/0.1.1/HTTPSignatures.Adapter.html#c:fetch_public_key/1"><code class="inline">HTTPSignatures.Adapter.fetch_public_key/1</code></a>.</p></div>
 
       </div>
 
@@ -151,7 +177,57 @@ bonfire_umbrella
 
       <div class="summary-row">
         <div class="summary-signature">
-          <a href="#keys_from_pem/1" translate="no">keys_from_pem(pem)</a>
+          <a href="#key_id_to_actor_id/1" translate="no">key_id_to_actor_id(key_id)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#keypair_from_pem/1" translate="no">keypair_from_pem(pem)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#maybe_add_sign_headers/3" translate="no">maybe_add_sign_headers(headers, id, date \\ nil)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#refetch_public_key/1" translate="no">refetch_public_key(conn)</a>
+
+        </div>
+
+          <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/http_signatures/0.1.1/HTTPSignatures.Adapter.html#c:refetch_public_key/1"><code class="inline">HTTPSignatures.Adapter.refetch_public_key/1</code></a>.</p></div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#sign/2" translate="no">sign(actor, headers)</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#signed_date/0" translate="no">signed_date()</a>
+
+        </div>
+
+      </div>
+
+      <div class="summary-row">
+        <div class="summary-signature">
+          <a href="#signed_date/1" translate="no">signed_date(date)</a>
 
         </div>
 
@@ -171,6 +247,50 @@ bonfire_umbrella
 Functions
     </h1>
     <div class="functions-list">
+<section class="detail" id="add_public_key/1">
+
+  <div class="detail-header">
+    <a href="#add_public_key/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">add_public_key(actor)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/safety/keys.ex#L18" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="cast_uri/1">
+
+  <div class="detail-header">
+    <a href="#cast_uri/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">cast_uri(object)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/safety/keys.ex#L117" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
 <section class="detail" id="ensure_keys_present/1">
 
   <div class="detail-header">
@@ -180,7 +300,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">ensure_keys_present(actor)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/safety/keys.ex#L40" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/safety/keys.ex#L48" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -193,6 +313,28 @@ Functions
 <p>Checks if an actor struct has a non-nil keys field and generates a PEM if it doesn't.</p>
   </section>
 </section>
+<section class="detail" id="fetch_public_key/1">
+
+  <div class="detail-header">
+    <a href="#fetch_public_key/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fetch_public_key(conn)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/safety/keys.ex#L127" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Callback implementation for <a href="https://hexdocs.pm/http_signatures/0.1.1/HTTPSignatures.Adapter.html#c:fetch_public_key/1"><code class="inline">HTTPSignatures.Adapter.fetch_public_key/1</code></a>.</p>
+  </section>
+</section>
 <section class="detail" id="generate_rsa_pem/0">
 
   <div class="detail-header">
@@ -202,7 +344,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">generate_rsa_pem()</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/safety/keys.ex#L56" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/safety/keys.ex#L65" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -215,16 +357,150 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="keys_from_pem/1">
+<section class="detail" id="key_id_to_actor_id/1">
 
   <div class="detail-header">
-    <a href="#keys_from_pem/1" class="detail-link" title="Link to this function">
+    <a href="#key_id_to_actor_id/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">keys_from_pem(pem)</h1>
+    <h1 class="signature" translate="no">key_id_to_actor_id(key_id)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/safety/keys.ex#L63" class="view-source" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/safety/keys.ex#L87" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="keypair_from_pem/1">
+
+  <div class="detail-header">
+    <a href="#keypair_from_pem/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">keypair_from_pem(pem)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/safety/keys.ex#L72" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="maybe_add_sign_headers/3">
+
+    <span id="maybe_add_sign_headers/2"></span>
+
+  <div class="detail-header">
+    <a href="#maybe_add_sign_headers/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">maybe_add_sign_headers(headers, id, date \\ nil)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/safety/keys.ex#L176" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="refetch_public_key/1">
+
+  <div class="detail-header">
+    <a href="#refetch_public_key/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">refetch_public_key(conn)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/safety/keys.ex#L140" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Callback implementation for <a href="https://hexdocs.pm/http_signatures/0.1.1/HTTPSignatures.Adapter.html#c:refetch_public_key/1"><code class="inline">HTTPSignatures.Adapter.refetch_public_key/1</code></a>.</p>
+  </section>
+</section>
+<section class="detail" id="sign/2">
+
+  <div class="detail-header">
+    <a href="#sign/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">sign(actor, headers)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/safety/keys.ex#L167" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="signed_date/0">
+
+  <div class="detail-header">
+    <a href="#signed_date/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">signed_date()</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/safety/keys.ex#L202" class="view-source" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="signed_date/1">
+
+  <div class="detail-header">
+    <a href="#signed_date/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">signed_date(date)</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/safety/keys.ex#L204" class="view-source" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
