@@ -4,19 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.6">
-    <meta name="project" content="bonfire_umbrella v0.9.0-classic-beta.15">
+    <meta name="generator" content="ExDoc v0.29.4">
+    <meta name="project" content="bonfire_umbrella v0.9.5-classic-beta.1">
 
-    <title>Deployment guide — bonfire_umbrella v0.9.0-classic-beta.15</title>
-    <link rel="stylesheet" href="dist/html-elixir-5CLCQQME.css" />
+    <title>Deployment guide — bonfire_umbrella v0.9.5-classic-beta.1</title>
+    <link rel="stylesheet" href="dist/html-elixir-HHVY3JYD.css" />
+
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-X7YVL3G2.js"></script>
-    <script src="dist/sidebar_items-8B1D013F.js"></script>
+    <script src="dist/handlebars.templates-XWGFFSCD.js"></script>
+    <script src="dist/sidebar_items-37E5EAF3.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/html-PLW5RNNI.js"></script>
+    <script async src="dist/html-JDI3AVDD.js"></script>
 
 
   </head>
@@ -51,7 +52,7 @@
     </button>
     <label class="search-label">
       <p class="sr-only">Search</p>
-      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
     </label>
   </form>
 
@@ -70,9 +71,9 @@
       <a href="https://bonfirenetworks.org" class="sidebar-projectName" translate="no">
 bonfire_umbrella
       </a>
-      <strong class="sidebar-projectVersion" translate="no">
-        v0.9.0-classic-beta.15
-      </strong>
+      <div class="sidebar-projectVersion" translate="no">
+        v0.9.5-classic-beta.1
+      </div>
     </div>
     <ul class="sidebar-listNav">
       <li><a id="extras-list-link" href="#full-list">Pages</a></li>
@@ -86,7 +87,7 @@ bonfire_umbrella
   </div>
 
   <div class="gradient"></div>
-  <ul id="full-list" class="sidebar-fullList"></ul>
+  <ul id="full-list"></ul>
 </section>
 
 <section class="content">
@@ -95,16 +96,17 @@ bonfire_umbrella
     <div id="content" class="content-inner">
 
 <h1>
-<button class="settings display-settings">
+<button class="icon-action display-settings">
   <i class="ri-settings-3-line"></i>
   <span class="sr-only">Settings</span>
 </button>
 
 
-    <a href="https://github.com/bonfire-networks/bonfire-app/blob/main/docs/DEPLOY.md#L1" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/bonfire-networks/bonfire-app/blob/main/docs/DEPLOY.md#L1" title="View Source" class="icon-action" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
+
 
   <span>Deployment guide</span>
 </h1>
@@ -147,7 +149,7 @@ bonfire_umbrella
 </h3>
 <ol><li><p>Install dependencies. 
 You may need to install <a href="https://github.com/casey/just#packages">just</a>, and other requirements such as Docker (check the exact list of requirements based on the option you choose in step 2.)</p></li><li><p>Clone this repository and change into the directory:</p></li></ol><pre><code class="makeup sh" translate="no"><span class="">git clone --depth 1 https://github.com/bonfire-networks/bonfire-app.git bonfire &amp;&amp; cd bonfire
-</span></code></pre><ol start="3"><li>Specify what flavour you want to run in production:</li></ol><p>The first thing to do is choose what flavour of Bonfire (eg. classic, community, or cooperation) you want to deploy, as each flavour uses different Docker images and set of configs. For example if you want to run the <code class="inline">classic</code> flavour:</p><ul><li><code class="inline">export MIX_ENV=prod FLAVOUR=classic</code> </li></ul><p>You may also want to put this in the appropriate place in your system so your choice of flavour is remembered for next time (eg. <code class="inline">~/.bashrc</code> or <code class="inline">~/.zshrc</code>)</p><h2 id="step-2-prepare-the-config" class="section-heading">
+</span></code></pre><ol start="3"><li>Specify what flavour you want to run in production:</li></ol><p>The first thing to do is choose what flavour of Bonfire (eg. classic, community, or cooperation) you want to deploy, as each flavour uses different Docker images and set of configs. For example if you want to run the <code class="inline">classic</code> flavour:</p><ul><li><code class="inline">export MIX_ENV=prod FLAVOUR=classic</code> </li></ul><p>You may also want to put this in the appropriate place in your system so your choice of flavour is remembered for next time (eg. <code class="inline">~/.bashrc</code> or <code class="inline">~/.zshrc</code>)</p><p>If you're not planning on using Docker, you'll also need:</p><ul><li><code class="inline">export WITH_DOCKER=no</code></li></ul><h2 id="step-2-prepare-the-config" class="section-heading">
   <a href="#step-2-prepare-the-config" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">step-2-prepare-the-config</p>
   </a>
@@ -159,7 +161,13 @@ You may need to install <a href="https://github.com/casey/just#packages">just</a
   </a>
   Config keys you should pay special attention to:
 </h3>
-<p>The app needs these environment variables to be configured in order to work.</p><ul><li><code class="inline">FLAVOUR</code> should reflect your chosen flavour</li><li><code class="inline">HOSTNAME</code> (your domain name, eg: <code class="inline">bonfire.example.com</code>)</li><li><code class="inline">PUBLIC_PORT</code> (usually 443)</li><li><code class="inline">MAIL_DOMAIN</code> and <code class="inline">MAIL_KEY</code> and related keys to configure transactional email, for example set <code class="inline">MAIL_BACKEND=mailgun</code> and sign up at <a href="https://www.mailgun.com/">Mailgun</a> and then configure the domain name and key (you may also need to set <code class="inline">MAIL_BASE_URI</code> if your domain is not setup in EU, as the default <code class="inline">MAIL_BASE_URI</code> is set as <code class="inline">https://api.eu.mailgun.net/v3</code>). SMTP is supported as well. </li><li><code class="inline">UPLOADS_S3_BUCKET</code> and the related API key and secret for uploads. WARNING: If you want to store uploads in an object storage rather than directly on your server (which you probably want, to not run out of space), you need to configure that up front, otherwise URLs will break if you change it later. See <code class="inline">config/runtime.exs</code> for extra variables to set if you're not using the default service and region (which is <a href="https://www.scaleway.com/en/object-storage/">Scaleway</a> Paris).</li></ul><h3 id="secret-keys-for-which-you-should-put-random-secrets" class="section-heading">
+<p>The app needs these environment variables to be configured in order to work.</p><ul><li><code class="inline">FLAVOUR</code> should reflect your chosen flavour</li><li><code class="inline">HOSTNAME</code> (your domain name, eg: <code class="inline">bonfire.example.com</code>)</li><li><code class="inline">PUBLIC_PORT</code> (usually 443)</li><li><code class="inline">MAIL_DOMAIN</code> and <code class="inline">MAIL_KEY</code> and related keys to configure transactional email, for example set <code class="inline">MAIL_BACKEND=mailgun</code> and sign up at <a href="https://www.mailgun.com/">Mailgun</a> and then configure the domain name and key (you may also need to set <code class="inline">MAIL_BASE_URI</code> if your domain is not setup in EU, as the default <code class="inline">MAIL_BASE_URI</code> is set as <code class="inline">https://api.eu.mailgun.net/v3</code>). </li><li>SMTP is supported as well, through the following env vars <pre><code class="makeup elixir" translate="no"><span class="nc">MAIL_SERVER</span><span class="w"> </span><span class="p" data-group-id="0915430844-1">(</span><span class="n">smtp</span><span class="w"> </span><span class="n">domain</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">mail</span><span class="w"> </span><span class="n">server</span><span class="p" data-group-id="0915430844-1">)</span><span class="w">
+</span><span class="nc">MAIL_DOMAIN</span><span class="w"> </span><span class="p" data-group-id="0915430844-2">(</span><span class="n">the</span><span class="w"> </span><span class="n">bit</span><span class="w"> </span><span class="k">after</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="err">@</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">email</span><span class="p" data-group-id="0915430844-2">)</span><span class="w">
+</span><span class="nc">MAIL_USER</span><span class="w">
+</span><span class="nc">MAIL_PASSWORD</span><span class="w">
+</span><span class="nc">MAIL_FROM</span><span class="w">
+</span><span class="nc">MAIL_PORT</span><span class="w"> </span><span class="p" data-group-id="0915430844-3">(</span><span class="n">optional</span><span class="p" data-group-id="0915430844-3">)</span><span class="w">
+</span><span class="nc">MAIL_SSL</span><span class="w"> </span><span class="p" data-group-id="0915430844-4">(</span><span class="n">optional</span><span class="p" data-group-id="0915430844-4">)</span></code></pre></li><li><code class="inline">UPLOADS_S3_BUCKET</code> and the related API key and secret for uploads. WARNING: If you want to store uploads in an object storage rather than directly on your server (which you probably want, to not run out of space), you need to configure that up front, otherwise URLs will break if you change it later. See <code class="inline">config/runtime.exs</code> for extra variables to set if you're not using the default service and region (which is <a href="https://www.scaleway.com/en/object-storage/">Scaleway</a> Paris).</li></ul><h3 id="secret-keys-for-which-you-should-put-random-secrets" class="section-heading">
   <a href="#secret-keys-for-which-you-should-put-random-secrets" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">secret-keys-for-which-you-should-put-random-secrets</p>
   </a>
@@ -207,7 +215,7 @@ Usage: <code class="inline">bonfire COMMAND [ARGS]</code></p><p>The known comman
   </a>
   Option C - Manual installation (without Docker)
 </h3>
-<h4>Dependencies</h4><ul><li>Postgres (or Postgis) version 12 or newer</li><li><a href="https://github.com/casey/just#packages">just</a></li><li>Elixir version 1.13 with OTP 24 (or newer). If your distribution only has an old version available, check <a href="https://elixir-lang.org/install.html">Elixir's install page</a> or use a tool like <a href="https://github.com/asdf-vm/asdf">asdf</a> (run <code class="inline">asdf install</code> in this directory).</li></ul><h4>C-1. Building the release</h4><ul><li><p>Make sure you have erlang and elixir installed (check <code class="inline">Dockerfile</code> for what version we're currently using)</p></li><li><p><code class="inline">export WITH_DOCKER=no</code> and <code class="inline">just flavour [classic or your choice of flavour]</code></p></li><li><p>Run <code class="inline">just mix &quot;deps.get --only prod&quot;</code> and <code class="inline">just js-deps-get</code> to install elixir dependencies.</p></li><li><p>Run <code class="inline">just rel-build</code> to create an elixir release. This will create an executable in your <code class="inline">_build/prod/rel/bonfire</code> directory. We will be using the <code class="inline">bin/bonfire</code> executable from here on.</p></li></ul><h4>C-2. Running the release</h4><ul><li><p><code class="inline">cd _build/prod/rel/bonfire/</code></p></li><li><p>Create a database and run the migrations with <code class="inline">bin/bonfire eval 'EctoSparkles.Migrator.migrate()'</code>.</p></li><li><p>If you’re using RDS or some other locked down DB, you may need to run <code class="inline">CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;</code> on your database with elevated privileges.</p></li></ul><ul><li><p>You can check if your instance is configured correctly by running it with <code class="inline">bin/bonfire start</code></p></li><li><p>To run the instance as a daemon, use <code class="inline">bin/bonfire start daemon</code>.</p></li></ul><hr class="thin"/><h3 id="option-d-with-nix" class="section-heading">
+<h4>Dependencies</h4><ul><li>Postgres (or Postgis) version 12 or newer</li><li><a href="https://github.com/casey/just#packages">just</a></li><li>Elixir version 1.13 with OTP 24 (or newer). If your distribution only has an old version available, check <a href="https://elixir-lang.org/install.html">Elixir's install page</a> or use a tool like <a href="https://github.com/asdf-vm/asdf">asdf</a> (run <code class="inline">asdf install</code> in this directory).</li></ul><h4>C-1. Building the release</h4><ul><li><p>Make sure you have erlang and elixir installed (check <code class="inline">Dockerfile</code> for what version we're currently using)</p></li><li><p><code class="inline">export WITH_DOCKER=no</code> OR add <code class="inline">WITH_DOCKER=no</code> to the end of <code class="inline">.env</code> and source it with <code class="inline">source .env</code></p></li><li><p>Run <code class="inline">just rel-build</code> to create an elixir release. This will create an executable in your <code class="inline">_build/prod/rel/bonfire</code> directory. Note that you will need <code class="inline">just</code> to pass in the <code class="inline">.env</code> file to the executable, like so: <code class="inline">just cmd _build/prod/rel/bonfire/bin/bonfire &lt;bonfire command&gt;</code>. Alternatively, this file can be sourced by <code class="inline">source .env</code> instead. We will be using the <code class="inline">bin/bonfire</code> executable as called from <code class="inline">just</code> from here on. </p></li></ul><h4>C-2. Running the release</h4><ul><li><p>Create a database, and a user, fill out the <code class="inline">.env</code> with your credentials and secrets</p></li><li><p>You will need to use <code class="inline">just</code> in order to pass the <code class="inline">.env</code> file to the executable. This can be accomplished by running <code class="inline">just cmd _build/prod/rel/bonfire/bin/bonfire &lt;bonfire command&gt;</code>. Just works from the root directory of the <code class="inline">justfile</code>, not your current directory.</p></li><li><p>The migrations should automatically run on first boot, but if you run into troubles the migration command is: <code class="inline">bin/bonfire eval 'EctoSparkles.Migrator.migrate()'</code>. </p></li><li><p>If you’re using RDS or some other locked down DB, you may need to run <code class="inline">CREATE EXTENSION IF NOT EXISTS citext WITH SCHEMA public;</code> on your database with elevated privileges.</p></li><li><p>You can check if your instance is configured correctly by running it with <code class="inline">bin/bonfire start</code></p></li><li><p>To run the instance as a daemon, use <code class="inline">bin/bonfire start daemon</code>.</p></li></ul><hr class="thin"/><h3 id="option-d-with-nix" class="section-heading">
   <a href="#option-d-with-nix" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">option-d-with-nix</p>
   </a>
@@ -334,20 +342,20 @@ Here are the detailed steps to deploy it.</p><ul><li>add it as an input to your 
   </a>
   Step 4 - Run
 </h2>
-<p>By default, the backend listens on port 4000 (TCP), so you can access it on <a href="http://localhost:4000/">http://localhost:4000/</a> (if you are on the same machine). In case of an error it will restart automatically.</p><p>Once you've signed up, you will automatically be an instance admin if you were the first to register.</p><blockquote><p>NOTE: If you are running in a restricted environment such as Amazon RDS, you will need to execute some sql against the database before migrations can run: <code class="inline">CREATE EXTENSION IF NOT EXISTS citext;</code></p></blockquote><h4>Step 5 - Adding HTTPS</h4><p>The common and convenient way for adding HTTPS is by using a reverse proxy like Nginx or Caddyserver (the latter of which is bundled as part of the docker compose setup).</p><p>Caddyserver and other servers can handle generating and setting up HTTPS certificates automatically, but if you need TLS/SSL certificates for nginx, you can look get some for free with <a href="https://letsencrypt.org/">letsencrypt</a>. The simplest way to obtain and install a certificate is to use <a href="https://certbot.eff.org">Certbot.</a>. Depending on your specific setup, certbot may be able to get a certificate and configure your web server automatically.</p><h2 id="troubleshooting" class="section-heading">
+<p>By default, the backend listens on port 4000 (TCP), so you can access it on <a href="http://localhost:4000/">http://localhost:4000/</a> (if you are on the same machine). In case of an error it will restart automatically.</p><p>Once you've signed up, you will automatically be an instance admin if you were the first to register.</p><blockquote><p>NOTE: If you are running in a restricted environment such as Amazon RDS, you will need to execute some sql against the database before migrations can run: <code class="inline">CREATE EXTENSION IF NOT EXISTS citext;</code></p></blockquote><h4>Step 5 - Adding HTTPS</h4><p>The common and convenient way for adding HTTPS is by using a reverse proxy like Nginx or Caddyserver (the latter of which is bundled as part of the docker compose setup).</p><p>Caddyserver and other servers can handle generating and setting up HTTPS certificates automatically, but if you need TLS/SSL certificates for nginx, you can look get some for free with <a href="https://letsencrypt.org/">letsencrypt</a>. The simplest way to obtain and install a certificate is to use <a href="https://certbot.eff.org">Certbot.</a>. Depending on your specific setup, certbot may be able to get a certificate and configure your web server automatically.</p><p>If you've built from source, you should point the nginx root directory to be <code class="inline">_build/prod/rel/bonfire/lib/bonfire-0.1.0-*/priv/static</code></p><h2 id="troubleshooting" class="section-heading">
   <a href="#troubleshooting" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">troubleshooting</p>
   </a>
   Troubleshooting
 </h2>
-<p>Some common issues that may arise during deployment and our suggestions for resolving them.</p><h4>WebSocket connections not establishing behind a reverse proxy</h4><p>If you are running Bonfire behind your own reverse proxy (e.g. nginx), you might experience issues with WebSocket connections not establishing. WebSocket connections require specific configuration to work, in nginx the following configuration is necessary for websockets to work:</p><pre><code class="makeup elixir" translate="no"><span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="n">live</span><span class="o">/</span><span class="n">websocket</span><span class="w"> </span><span class="p" data-group-id="1966404798-1">{</span><span class="w">
+<p>Some common issues that may arise during deployment and our suggestions for resolving them.</p><h4>WebSocket connections not establishing behind a reverse proxy</h4><p>If you are running Bonfire behind your own reverse proxy (e.g. nginx), you might experience issues with WebSocket connections not establishing. WebSocket connections require specific configuration to work, in nginx the following configuration is necessary for websockets to work:</p><pre><code class="makeup elixir" translate="no"><span class="n">location</span><span class="w"> </span><span class="o">/</span><span class="n">live</span><span class="o">/</span><span class="n">websocket</span><span class="w"> </span><span class="p" data-group-id="8795520295-1">{</span><span class="w">
     </span><span class="n">proxy_pass</span><span class="w"> </span><span class="n">http</span><span class="ss">://</span><span class="mf">127.0</span><span class="o">.</span><span class="mf">0.1</span><span class="p">:</span><span class="mi">4000</span><span class="p">;</span><span class="w">
     
     </span><span class="c1"># these configurations are necessary to proxy WebSocket requests</span><span class="w">
     </span><span class="n">proxy_http_version</span><span class="w"> </span><span class="mf">1.1</span><span class="p">;</span><span class="w">
     </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="nc">Upgrade</span><span class="w"> </span><span class="err">$</span><span class="n">http_upgrade</span><span class="p">;</span><span class="w">
     </span><span class="n">proxy_set_header</span><span class="w"> </span><span class="nc">Connection</span><span class="w"> </span><span class="s">&quot;upgrade&quot;</span><span class="p">;</span><span class="w">
-</span><span class="p" data-group-id="1966404798-1">}</span></code></pre>
+</span><span class="p" data-group-id="8795520295-1">}</span></code></pre>
 <div class="bottom-actions">
   <div class="bottom-actions-item">
 
@@ -375,10 +383,23 @@ Bonfire Architecture
   </div>
 </div>
       <footer class="footer">
-
         <p>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
+              Search HexDocs
+            </button>
+
+              <a href="bonfire_umbrella.epub" title="ePub version">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.6) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.29.4) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 

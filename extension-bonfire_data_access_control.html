@@ -4,19 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.28.6">
-    <meta name="project" content="bonfire_umbrella v0.9.0-classic-beta.15">
+    <meta name="generator" content="ExDoc v0.29.4">
+    <meta name="project" content="bonfire_umbrella v0.9.5-classic-beta.1">
 
-    <title>Bonfire.Data.AccessControl — bonfire_umbrella v0.9.0-classic-beta.15</title>
-    <link rel="stylesheet" href="dist/html-elixir-5CLCQQME.css" />
+    <title>Bonfire.Data.AccessControl — bonfire_umbrella v0.9.5-classic-beta.1</title>
+    <link rel="stylesheet" href="dist/html-elixir-HHVY3JYD.css" />
+
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-X7YVL3G2.js"></script>
-    <script src="dist/sidebar_items-8B1D013F.js"></script>
+    <script src="dist/handlebars.templates-XWGFFSCD.js"></script>
+    <script src="dist/sidebar_items-37E5EAF3.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/html-PLW5RNNI.js"></script>
+    <script async src="dist/html-JDI3AVDD.js"></script>
 
 
   </head>
@@ -51,7 +52,7 @@
     </button>
     <label class="search-label">
       <p class="sr-only">Search</p>
-      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" />
+      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
     </label>
   </form>
 
@@ -70,9 +71,9 @@
       <a href="https://bonfirenetworks.org" class="sidebar-projectName" translate="no">
 bonfire_umbrella
       </a>
-      <strong class="sidebar-projectVersion" translate="no">
-        v0.9.0-classic-beta.15
-      </strong>
+      <div class="sidebar-projectVersion" translate="no">
+        v0.9.5-classic-beta.1
+      </div>
     </div>
     <ul class="sidebar-listNav">
       <li><a id="extras-list-link" href="#full-list">Pages</a></li>
@@ -86,7 +87,7 @@ bonfire_umbrella
   </div>
 
   <div class="gradient"></div>
-  <ul id="full-list" class="sidebar-fullList"></ul>
+  <ul id="full-list"></ul>
 </section>
 
 <section class="content">
@@ -95,16 +96,17 @@ bonfire_umbrella
     <div id="content" class="content-inner">
 
 <h1>
-<button class="settings display-settings">
+<button class="icon-action display-settings">
   <i class="ri-settings-3-line"></i>
   <span class="sr-only">Settings</span>
 </button>
 
 
-    <a href="https://github.com/bonfire-networks/bonfire_data_access_control/blob/main/README.md#L1" title="View Source" class="view-source" rel="help">
+    <a href="https://github.com/bonfire-networks/bonfire_data_access_control/blob/main/README.md#L1" title="View Source" class="icon-action" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
+
 
   <span>Bonfire.Data.AccessControl</span>
 </h1>
@@ -114,11 +116,11 @@ It's not so different from role-based access control (RBAC), but we do
 a few things differently and there are quite a lot of pieces to get
 your head around. We'll start gently.</p><p>Bonfire has a <code class="inline">Verb</code> table containing strings like &quot;comment&quot; and
 &quot;delete&quot; that represent actions a user might wish to perform. They are
-a basic part of the bonfire vocabulary within the codebase.</p><p>A <code class="inline">Permission</code> is a decision about whether the action may be performed
+a basic part of the bonfire vocabulary within the codebase.</p><p>A permission is a decision about whether the action may be performed
 it not. There are 3 decisions we support:</p><ul><li><code class="inline">true</code> (permitted)</li><li><code class="inline">false</code> (explicitly not permitted, never permit)</li><li><code class="inline">null</code>/<code class="inline">nil</code> (not explicitly permitted)</li></ul><p>It may seem odd to have the <code class="inline">null</code> here. We will come back to this
-after we've introduced a few more pieces of the puzzle.</p><p>A <code class="inline">Boundary</code> is simply an unordered list or group of <code class="inline">Permission</code>s. Each
-<code class="inline">Permission</code> may only occur once. Any <code class="inline">Permission</code>s that are not specified
-are assumed to be <code class="inline">null</code>. This loosely corresponds to a <code class="inline">role</code> in RBAC.</p><p>A <code class="inline">Grant</code> links a <code class="inline">subject</code> (user or circle) to a <code class="inline">Boundary</code>. It
+after we've introduced a few more pieces of the puzzle.</p><p>A boundary is simply an unordered list or group of permissions. Each
+permission may only occur once. Any permissions that are not specified
+are assumed to be <code class="inline">null</code>. This loosely corresponds to a <code class="inline">role</code> in RBAC.</p><p>A <code class="inline">Grant</code> links a <code class="inline">subject</code> (user or circle) to a boundary. It
 determines what permissions are considered for a given subject.</p><p>A <code class="inline">Acl</code> is simply an unordered list or group of <code class="inline">Grant</code>s. Subjects may
 appear more than once in a list (with different boundaries) and the
 permissions will be merged according to the following truth table:</p><table><thead><tr><th style="text-align: left;">input</th><th style="text-align: left;">input</th><th style="text-align: left;">output</th></tr></thead><tbody><tr><td style="text-align: left;">false</td><td style="text-align: left;">false</td><td style="text-align: left;">false</td></tr><tr><td style="text-align: left;">false</td><td style="text-align: left;">true</td><td style="text-align: left;">false</td></tr><tr><td style="text-align: left;">false</td><td style="text-align: left;">null</td><td style="text-align: left;">false</td></tr><tr><td style="text-align: left;">true</td><td style="text-align: left;">false</td><td style="text-align: left;">false</td></tr><tr><td style="text-align: left;">true</td><td style="text-align: left;">true</td><td style="text-align: left;">true</td></tr><tr><td style="text-align: left;">true</td><td style="text-align: left;">null</td><td style="text-align: left;">true</td></tr><tr><td style="text-align: left;">null</td><td style="text-align: left;">false</td><td style="text-align: left;">false</td></tr><tr><td style="text-align: left;">null</td><td style="text-align: left;">true</td><td style="text-align: left;">true</td></tr><tr><td style="text-align: left;">null</td><td style="text-align: left;">null</td><td style="text-align: left;">null</td></tr></tbody></table><p>Or in words: take the highest value where <code class="inline">false &gt; true &gt; null</code>.</p><p>At the end of this combination process, the user is only permitted if
@@ -126,7 +128,7 @@ the result is true. You can see this as requiring an affirmative
 answer to permit something, while always allowing you a bigger <code class="inline">no</code> to
 deny when things are combined. Null values are additionally not
 required to be present in the database, saving us resources. That is
-to say we default to null if there is no relevant record.</p><p>Finally, an object is linked to one or more <code class="inline">ACL</code>s by the <code class="inline">Controlled</code> multimixin, which pairs an object ID with an ACL ID. Because it is a multimixin, a given object can have multiple ACLs applied. In the case of overlap, permissions are combined in the manner described earlier. </p><h2 id="copyright-and-license" class="section-heading">
+to say we default to null if there is no relevant record.</p><p>Finally, an object is linked to one or more <code class="inline">Acl</code>s by the <code class="inline">Controlled</code> multimixin, which pairs an object ID with an ACL ID. Because it is a multimixin, a given object can have multiple ACLs applied. In the case of overlap, permissions are combined in the manner described earlier. </p><h2 id="copyright-and-license" class="section-heading">
   <a href="#copyright-and-license" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
   <p class="sr-only">copyright-and-license</p>
   </a>
@@ -162,10 +164,23 @@ Bonfire.Data.ActivityPub
   </div>
 </div>
       <footer class="footer">
-
         <p>
+
+          <span class="line">
+            <button class="a-main footer-button display-quick-switch" title="Search HexDocs packages">
+              Search HexDocs
+            </button>
+
+              <a href="bonfire_umbrella.epub" title="ePub version">
+                Download ePub version
+              </a>
+
+          </span>
+        </p>
+
+        <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.28.6) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.29.4) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
