@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.29.4">
+    <meta name="generator" content="ExDoc v0.30.3">
     <meta name="project" content="bonfire_umbrella v0.9.5-classic-beta.11">
 
     <title>Development guide — bonfire_umbrella v0.9.5-classic-beta.11</title>
-    <link rel="stylesheet" href="dist/html-elixir-HHVY3JYD.css" />
+    <link rel="stylesheet" href="dist/html-elixir-P5GXSCHE.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-XWGFFSCD.js"></script>
-    <script src="dist/sidebar_items-7223EE43.js"></script>
+    <script src="dist/handlebars.templates-NBND3S2D.js"></script>
+    <script src="dist/sidebar_items-E7176C07.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/html-JDI3AVDD.js"></script>
+    <script async src="dist/html-CGDDOCMI.js"></script>
 
 
   </head>
@@ -112,66 +112,66 @@ bonfire_umbrella
 </h1>
 
 <p><em>These instructions are for hacking on Bonfire. If you wish to deploy in production, please refer to our deployment guide instead.</em></p><p>Hello, potential contributor! :-)</p><p>This is a work in progress guide to getting up and running as a developer. Please ask questions in the issue tracker if something is not clear and we'll try to improve it.</p><p>Happy hacking!</p><h2 id="status-beta-have-fun-and-provide-feedback" class="section-heading">
-  <a href="#status-beta-have-fun-and-provide-feedback" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">status-beta-have-fun-and-provide-feedback</p>
+  <a href="#status-beta-have-fun-and-provide-feedback">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Status: beta - have fun and provide feedback 🙏
   </a>
-  Status: beta - have fun and provide feedback 🙏
 </h2>
 <p>Bonfire is currently beta software. While it's fun to play with it, we would not recommend running any production instances (meaning not using it for your primary fediverse identity) yet because it's not quite ready for that today. </p><h2 id="download" class="section-heading">
-  <a href="#download" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">download</p>
+  <a href="#download">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Download
   </a>
-  Download
 </h2>
 <p>Either way, you need to first clone this repository and change into the directory and then do some configuration:</p><pre><code class="makeup sh" translate="no"><span class="gp unselectable">$ </span><span class="">git clone https://github.com/bonfire-networks/bonfire-app bonfire
 </span><span class="gp unselectable">$ </span><span class="">cd bonfire
 </span></code></pre><h2 id="configure" class="section-heading">
-  <a href="#configure" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">configure</p>
+  <a href="#configure">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Configure
   </a>
-  Configure
 </h2>
 <h3 id="pick-a-flavour" class="section-heading">
-  <a href="#pick-a-flavour" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">pick-a-flavour</p>
+  <a href="#pick-a-flavour">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Pick a flavour
   </a>
-  Pick a flavour
 </h3>
 <p>Bonfire is a flexible platform that powers a variety of social networks. The first thing you have to choose is which app (or &quot;flavour&quot;) you want to hack on:</p><ul><li><code class="inline">classic</code> (&quot;Bonfire Social&quot;, a basic social network that interoperates with the fediverse)</li><li><code class="inline">community</code> (for groups and communities)</li><li><code class="inline">cooperation</code> (for building cooperative economic networks)</li></ul><p>Note that at the current time, the core team are focusing most of their efforts on the classic flavour and this is where we recommend you start.</p><p>You first need to install <a href="https://github.com/casey/just#packages">just</a> which is a handy tool (a <code class="inline">make</code> alternative) to run commands defined in <code class="inline">./justfile</code>.</p><p>So for example if you want to run the <code class="inline">classic</code> flavour, with a fully-docker-managed setup (see the other options available below), run:</p><ul><li><code class="inline">export FLAVOUR=classic WITH_DOCKER=total</code> </li></ul><p>You may also want to put this in the appropriate place in your system so your choice of flavour is remembered for next time (eg. <code class="inline">~/.bashrc</code> or <code class="inline">~/.zshrc</code>)</p><ul><li>Then run <code class="inline">just config</code> to initialise some config.</li></ul><h3 id="configure-1" class="section-heading">
-  <a href="#configure-1" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">configure-1</p>
+  <a href="#configure-1">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Configure
   </a>
-  Configure
 </h3>
 <ul><li>Then edit the config (especially the secrets) for the current flavour in <code class="inline">./.env</code></li></ul><h3 id="option-a-the-entry-way-fully-managed-via-docker-compose-recommended-when-you-re-first-exploring" class="section-heading">
-  <a href="#option-a-the-entry-way-fully-managed-via-docker-compose-recommended-when-you-re-first-exploring" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">option-a-the-entry-way-fully-managed-via-docker-compose-recommended-when-you-re-first-exploring</p>
+  <a href="#option-a-the-entry-way-fully-managed-via-docker-compose-recommended-when-you-re-first-exploring">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Option A - the entry way (fully managed via docker-compose, recommended when you're first exploring)
   </a>
-  Option A - the entry way (fully managed via docker-compose, recommended when you're first exploring)
 </h3>
 <ul><li><p>Dependencies:</p><ul><li>Recent versions of Docker &amp; <a href="https://docs.docker.com/compose/install/">docker-compose</a></li></ul></li><li><p>Make sure you've set the environment variable to indicate your choice: <code class="inline">export WITH_DOCKER=total</code></p></li><li><p>Make sure you've edited your .env file (see above) before getting started and proceed to Hello world!</p></li></ul><h3 id="option-b-the-easy-way-with-bare-metal-elixir-and-docker-managed-tooling-database-search-index-recommended-for-active-development" class="section-heading">
-  <a href="#option-b-the-easy-way-with-bare-metal-elixir-and-docker-managed-tooling-database-search-index-recommended-for-active-development" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">option-b-the-easy-way-with-bare-metal-elixir-and-docker-managed-tooling-database-search-index-recommended-for-active-development</p>
+  <a href="#option-b-the-easy-way-with-bare-metal-elixir-and-docker-managed-tooling-database-search-index-recommended-for-active-development">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Option B - the easy way (with bare-metal elixir, and docker-managed tooling, database &amp; search index, recommended for active development)
   </a>
-  Option B - the easy way (with bare-metal elixir, and docker-managed tooling, database &amp; search index, recommended for active development)
 </h3>
 <ul><li><p>Dependencies:</p><ul><li>Recent versions of <a href="https://elixir-lang.org/install.html">Elixir</a> (1.13+) and OTP/erlang (24+)</li><li><a href="https://yarnpkg.com">yarn</a></li><li>Recent versions of Docker &amp; <a href="https://docs.docker.com/compose/install/">docker-compose</a></li></ul></li><li><p>Make sure you've set the env to indicate your choice: <code class="inline">export WITH_DOCKER=easy</code></p></li><li><p>Make sure you've edited your .env file (see above) before getting started and proceed to Hello world!</p></li></ul><h3 id="option-c-the-partial-way-with-bare-metal-elixir-and-tooling-and-docker-managed-database-search-index" class="section-heading">
-  <a href="#option-c-the-partial-way-with-bare-metal-elixir-and-tooling-and-docker-managed-database-search-index" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">option-c-the-partial-way-with-bare-metal-elixir-and-tooling-and-docker-managed-database-search-index</p>
+  <a href="#option-c-the-partial-way-with-bare-metal-elixir-and-tooling-and-docker-managed-database-search-index">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Option C - the partial way (with bare-metal elixir and tooling, and docker-managed database &amp; search index)
   </a>
-  Option C - the partial way (with bare-metal elixir and tooling, and docker-managed database &amp; search index)
 </h3>
 <ul><li><p>Dependencies:</p><ul><li>Recent versions of <a href="https://elixir-lang.org/install.html">Elixir</a> (1.13+) and OTP/erlang (24+)</li><li>Recent versions of <a href="https://www.rust-lang.org/tools/install">Rust</a> and Cargo</li><li><a href="https://yarnpkg.com">yarn</a></li><li>Recent versions of Docker &amp; <a href="https://docs.docker.com/compose/install/">docker-compose</a></li></ul></li><li><p>Make sure you've set the environment variable to indicate your choice: <code class="inline">export WITH_DOCKER=partial</code></p></li><li><p>Make sure you've edited your .env file (see above) before getting started and proceed to Hello world!</p></li></ul><h3 id="option-d-the-bare-metal-if-you-don-t-use-docker" class="section-heading">
-  <a href="#option-d-the-bare-metal-if-you-don-t-use-docker" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">option-d-the-bare-metal-if-you-don-t-use-docker</p>
+  <a href="#option-d-the-bare-metal-if-you-don-t-use-docker">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Option D - the bare metal (if you don't use docker)
   </a>
-  Option D - the bare metal (if you don't use docker)
 </h3>
 <ul><li><p>Dependencies:</p><ul><li>Recent versions of <a href="https://elixir-lang.org/install.html">Elixir</a> (1.13+) and OTP/erlang (24+)</li><li>Recent versions of <a href="https://www.rust-lang.org/tools/install">Rust</a> and Cargo</li><li><a href="https://yarnpkg.com">yarn</a></li><li>Postgres 12+ (or rather <a href="https://postgis.net/install/">Postgis</a> if using the bonfire_geolocate extension)</li><li><a href="https://docs.meilisearch.com/learn/getting_started/installation.html">Meili Search</a> (optional)</li></ul></li><li><p>You will need to set the relevant environment variables in the .env file (see above) to match your local install of Postgres.</p></li><li><p>If you want search capabilities, you'll also need to setup a Meili server and set the relevant env variables as well.</p></li><li><p>Make sure you've set the environment variable to indicate your choice: <code class="inline">export WITH_DOCKER=no</code> and proceed to Hello world!</p></li></ul><h3 id="option-e-the-nix-one-dev-environment-with-nix" class="section-heading">
-  <a href="#option-e-the-nix-one-dev-environment-with-nix" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">option-e-the-nix-one-dev-environment-with-nix</p>
+  <a href="#option-e-the-nix-one-dev-environment-with-nix">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Option E - the nix one (dev environment with Nix)
   </a>
-  Option E - the nix one (dev environment with Nix)
 </h3>
 <p>Dependencies:</p><ul><li><p>Run a recent version of Nix or NixOS: <a href="https://nixos.org/download.html">https://nixos.org/download.html</a></p></li><li><p>Enable Flakes: <a href="https://nixos.wiki/wiki/Flakes#Installing_flakes">https://nixos.wiki/wiki/Flakes#Installing_flakes</a></p></li><li><p>Install <a href="https://direnv.net/">direnv</a> through nix if you don't have the tool already: <code class="inline">nix profile install nixpkgs#direnv</code> and add it to your shell: <a href="https://direnv.net/docs/hook.html">https://direnv.net/docs/hook.html</a></p></li><li><p>Clone the bonfire-app repo if you haven't already and allow direnv to use environment variables:</p><pre><code class="makeup elixir" translate="no"><span class="w">  </span><span class="n">git</span><span class="w"> </span><span class="n">clone</span><span class="w"> </span><span class="n">https</span><span class="ss">://</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">bonfire</span><span class="o">-</span><span class="n">networks</span><span class="o">/</span><span class="n">bonfire</span><span class="o">-</span><span class="n">app</span><span class="w">
   </span><span class="n">cd</span><span class="w"> </span><span class="err">`</span><span class="n">bonfire</span><span class="o">-</span><span class="n">app</span><span class="err">`</span><span class="w">
@@ -179,16 +179,16 @@ bonfire_umbrella
 </span><span class="n">just</span><span class="w"> </span><span class="n">nix</span><span class="o">-</span><span class="n">db</span><span class="w"> </span><span class="n">stop</span><span class="w">
 </span><span class="c1"># start postgres server running locally</span><span class="w">
 </span><span class="n">just</span><span class="w"> </span><span class="n">nix</span><span class="o">-</span><span class="n">db</span><span class="w"> </span><span class="n">start</span></code></pre><h2 id="hello-world" class="section-heading">
-  <a href="#hello-world" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">hello-world</p>
+  <a href="#hello-world">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Hello world!
   </a>
-  Hello world!
 </h2>
 <ul><li>From a fresh checkout of this repository, this command will fetch the app's dependencies and setup the database (the same commands apply for all three options above):</li></ul><pre><code class="makeup elixir" translate="no"><span class="n">just</span><span class="w"> </span><span class="n">setup</span></code></pre><ul><li>You should then be able to run the app with:</li></ul><pre><code class="makeup elixir" translate="no"><span class="n">just</span><span class="w"> </span><span class="n">dev</span></code></pre><ul><li>See the <code class="inline">just</code> commands below for more things you may want to do.</li></ul><h2 id="onboarding" class="section-heading">
-  <a href="#onboarding" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">onboarding</p>
+  <a href="#onboarding">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Onboarding
   </a>
-  Onboarding
 </h2>
 <p>By default, the back-end listens on port 4000 (TCP), so you can access it on <a href="http://localhost:4000/">http://localhost:4000/</a></p><p>Your first step will be to create an account to log in with. The
 easiest way to do this is with our mix task:</p><pre><code class="makeup shell" translate="no"><span class="gp unselectable">$ </span><span class="">just mix bonfire.account.new
@@ -196,72 +196,72 @@ easiest way to do this is with our mix task:</p><pre><code class="makeup shell" 
 </span><span class="">Enter a password:
 </span></code></pre><p>Your password must be at least 10 characters long and the output could be more helpful if you don't do that. This task seems to work most reliably if you open a second terminal window with the devserver running. We're not sure why.</p><p>You should then be able to log in and create a user through the web interface.</p><p>If you would like to become an administrator, there is a mix task for that too:</p><pre><code class="makeup shell" translate="no"><span class="">just mix bonfire.user.admin.promote your_username 
 </span></code></pre><h2 id="the-bonfire-environment" class="section-heading">
-  <a href="#the-bonfire-environment" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">the-bonfire-environment</p>
+  <a href="#the-bonfire-environment">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    The Bonfire Environment
   </a>
-  The Bonfire Environment
 </h2>
 <p>We like to think of bonfire as a comfortable way of developing software - there are a lot of
 conveniences built in once you know how they all work. The gotcha is that while you don't know them, it can be a bit overwhelming. Don't worry, we've got your back.</p><ul><li><a href="architecture.html">Architecture</a> - an overview of the stack and code structure.</li></ul><ul><li><a href="bonfire-flavoured-elixir.html">Bonfire-flavoured Elixir</a> - an introduction to the way we write Elixir.</li><li><a href="database.html">Bonfire's Database: an Introduction</a> - an overview of how our database is designed.</li><li><a href="boundaries.html">Boundaries</a> - an introduction to our access control system.</li></ul><p>Note: these are still at the early draft stage, we expect to gradually improve documentation over time.</p><h2 id="documentation" class="section-heading">
-  <a href="#documentation" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">documentation</p>
+  <a href="#documentation">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Documentation
   </a>
-  Documentation
 </h2>
 <p>The code is somewhat documented inline. You can generate HTML docs (using <code class="inline">Exdoc</code>) by running <code class="inline">just docs</code>.</p><h2 id="additional-information" class="section-heading">
-  <a href="#additional-information" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">additional-information</p>
+  <a href="#additional-information">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Additional information
   </a>
-  Additional information
 </h2>
 <ul><li><p>messctl is a little utility for programmatically updating the .deps files from which the final elixir dependencies list is compiled by the mess script. The only use of it is in the dep-* tasks of the Makefile. It is used by some of the project developers and the build does not rely on it.</p></li><li><p><code class="inline">./extensions/</code> is used to hack on local copies of Bonfire extensions. You can clone an extension from its git repo and use the local version during development, eg: <code class="inline">just dep-clone-local bonfire_me https://github.com/bonfire-networks/bonfire_me</code></p></li><li><p><code class="inline">./forks/</code> is used to hack on local copies of any other dependencies.</p></li><li><p>You can migrate the DB when the app is running (also runs automatically on startup): <code class="inline">EctoSparkles.Migrator.migrate</code></p></li><li><p>You can generate a dependency graph using <code class="inline">just xref-graph</code> which will generate a DOT file at <code class="inline">docs/</code> (if Graphviz is installed it will also generate an SVG visualisation using <code class="inline">dot</code>).</p></li></ul><h3 id="usage-under-windows-wsl-msys-or-cygwin" class="section-heading">
-  <a href="#usage-under-windows-wsl-msys-or-cygwin" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">usage-under-windows-wsl-msys-or-cygwin</p>
+  <a href="#usage-under-windows-wsl-msys-or-cygwin">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Usage under Windows (WSL, MSYS or CYGWIN)
   </a>
-  Usage under Windows (WSL, MSYS or CYGWIN)
 </h3>
 <p>By default, the <code class="inline">justfile</code> requires symlinks, which can be enabled with the help of <a href="https://stackoverflow.com/a/59761201">this link</a>.</p><p>See the <a href="https://github.com/bonfire-networks/bonfire-app/pull/111">pull request adding WSL support</a> for details about usage without symlinks.</p><h2 id="just-commands" class="section-heading">
-  <a href="#just-commands" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">just-commands</p>
+  <a href="#just-commands">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    <code class="inline">just</code> commands
   </a>
-  <code class="inline">just</code> commands
 </h2>
 <p>Run <code class="inline">just</code> followed by any of these commands when appropriate rather than directly using the equivalent commands like <code class="inline">mix</code>, <code class="inline">docker</code>, <code class="inline">docker-compose</code>, etc. For example, <code class="inline">just setup</code> will get you started, and <code class="inline">just dev</code> will run the app.</p><p>You can first set an env variable to control which mode these commands will assume you're using. Here are your options:</p><ul><li><code class="inline">WITH_DOCKER=total</code> : use docker for everything (default)</li><li><code class="inline">WITH_DOCKER=partial</code> : use docker for services like the DB</li><li><code class="inline">WITH_DOCKER=easy</code> : use docker for services like the DB &amp; compiled utilities like messctl</li><li><code class="inline">WITH_DOCKER=no</code> : please no</li></ul><p>Run <code class="inline">just help</code> to see the list of possible commands and what they do.</p><h2 id="troubleshooting" class="section-heading">
-  <a href="#troubleshooting" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">troubleshooting</p>
+  <a href="#troubleshooting">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Troubleshooting
   </a>
-  Troubleshooting
 </h2>
 <h3 id="eacces-permissions-error" class="section-heading">
-  <a href="#eacces-permissions-error" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">eacces-permissions-error</p>
+  <a href="#eacces-permissions-error">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    EACCES Permissions Error
   </a>
-  EACCES Permissions Error
 </h3>
 <p>If you get a permissions error when following any of the steps, run the following command and it should be fixed:</p><pre><code class="makeup shell" translate="no"><span class="">cd bonfire &amp;&amp; sudo chown -R yourusername:yourusername .
 </span></code></pre><p>Note that the command should be modified so your shell is pointing to wherever you have bonfire installed. If you are already in the bonfire directory then you only need to worry about running the <code class="inline">chown</code> portion of the command.</p><h3 id="unable-to-access-postgres-database" class="section-heading">
-  <a href="#unable-to-access-postgres-database" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">unable-to-access-postgres-database</p>
+  <a href="#unable-to-access-postgres-database">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Unable to access Postgres database
   </a>
-  Unable to access Postgres database
 </h3>
 <p>If you are getting any <code class="inline">:nxdomain</code> errors, check if you have any firewalls that may be blocking the port on your system.</p><p>For example, if you are running UFW (a lot of Linux distros do), run the following command to allow access to port 4000:</p><pre><code class="makeup shell" translate="no"><span class="">sudo ufw allow 4000
 </span></code></pre><h3 id="mix-package-fetch-failed" class="section-heading">
-  <a href="#mix-package-fetch-failed" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">mix-package-fetch-failed</p>
+  <a href="#mix-package-fetch-failed">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    (Mix) Package fetch failed
   </a>
-  (Mix) Package fetch failed
 </h3>
 <p>Example:</p><pre><code class="makeup elixir" translate="no"><span class="gt">** (Mix) Package fetch failed and no cached copy available (https://repo.hex.pm/tarballs/distillery-2.0.12.tar)</span></code></pre><p>In this case, distillery (as an example of a dependency) made a new release and retired the old release from hex. The new version (<code class="inline">2.0.14</code>) is quite close to the version we were depending on (<code class="inline">2.0.12</code>), so we chose to upgrade:</p><pre><code class="makeup shell" translate="no"><span class="">mix deps.update distillery
 </span></code></pre><p>This respects the version bounds in <code class="inline">mix.exs</code> (<code class="inline">~&gt; 2.0</code>), so increment that if required.</p><h3 id="dbconnection-connectionerror-tcp-recv-closed" class="section-heading">
-  <a href="#dbconnection-connectionerror-tcp-recv-closed" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">dbconnection-connectionerror-tcp-recv-closed</p>
+  <a href="#dbconnection-connectionerror-tcp-recv-closed">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    <code class="inline">(DBConnection.ConnectionError) tcp recv: closed</code>
   </a>
-  <code class="inline">(DBConnection.ConnectionError) tcp recv: closed</code>
 </h3>
 <p>Example:</p><pre><code class="makeup elixir" translate="no"><span class="gt">** (DBConnection.ConnectionError) tcp recv: closed (the connection was closed by the pool, possibly due to a timeout or because the pool has been terminated)</span></code></pre><p>In this case, the seeds were unable to complete because a query took too long to execute on your machine. You can configure the timeout to be larger in the <code class="inline">dev</code> environment:</p><ol><li>Open <code class="inline">config/dev.exs</code> in your editor.</li><li>Find the database configuration (search for <a href="https://hexdocs.pm/bonfire_common/0.1.0/Bonfire.Common.Repo.html"><code class="inline">Bonfire.Common.Repo</code></a>).</li><li>Add <code class="inline">timeout: 60_000</code> to the list of options:</li></ol><pre><code class="makeup elixir" translate="no"><span class="n">config</span><span class="w"> </span><span class="ss">:bonfire</span><span class="p">,</span><span class="w"> </span><span class="nc">Bonfire.Common.Repo</span><span class="p">,</span><span class="w">
   </span><span class="ss">timeout</span><span class="p">:</span><span class="w"> </span><span class="mi">60_000</span><span class="p">,</span><span class="w">
-  </span><span class="p" data-group-id="3258182751-1">[</span><span class="n">...</span><span class="p" data-group-id="3258182751-1">]</span></code></pre>
+  </span><span class="p" data-group-id="7666531189-1">[</span><span class="n">...</span><span class="p" data-group-id="7666531189-1">]</span></code></pre>
 <div class="bottom-actions">
   <div class="bottom-actions-item">
 
@@ -305,7 +305,7 @@ Deployment guide
 
         <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.29.4) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.3) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 

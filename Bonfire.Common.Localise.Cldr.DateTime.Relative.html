@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.29.4">
+    <meta name="generator" content="ExDoc v0.30.3">
     <meta name="project" content="bonfire_umbrella v0.9.5-classic-beta.11">
 
     <title>Bonfire.Common.Localise.Cldr.DateTime.Relative — bonfire_umbrella v0.9.5-classic-beta.11</title>
-    <link rel="stylesheet" href="dist/html-elixir-HHVY3JYD.css" />
+    <link rel="stylesheet" href="dist/html-elixir-P5GXSCHE.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-XWGFFSCD.js"></script>
-    <script src="dist/sidebar_items-7223EE43.js"></script>
+    <script src="dist/handlebars.templates-NBND3S2D.js"></script>
+    <script src="dist/sidebar_items-E7176C07.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/html-JDI3AVDD.js"></script>
+    <script async src="dist/html-CGDDOCMI.js"></script>
 
 
   </head>
@@ -118,9 +118,8 @@ bonfire_umbrella
     <h1 class="section-heading">
       <a class="hover-link" href="#summary">
         <i class="ri-link-m" aria-hidden="true"></i>
-        <span class="sr-only">Link to this section</span>
+        Summary
       </a>
-      Summary
     </h1>
 <div class="summary-functions summary">
   <h2>
@@ -158,9 +157,8 @@ number, Date or Datetime or raises an exception on error.</p></div>
     <h1 class="section-heading">
       <a class="hover-link" href="#functions">
         <i class="ri-link-m" aria-hidden="true"></i>
-        <span class="sr-only">Link to this section</span>
-      </a>
 Functions
+      </a>
     </h1>
     <div class="functions-list">
 <section class="detail" id="to_string/2">
@@ -194,10 +192,10 @@ Functions
 <p>Returns a <code class="inline">{:ok, string}</code> representing a relative time (ago, in) for a given
 number, Date or Datetime.  Returns <code class="inline">{:error, reason}</code> when errors are detected.</p><ul><li><p><code class="inline">relative</code> is a number or Date/Datetime representing the time distance from <code class="inline">now</code> or from
 options[:relative_to]</p></li><li><p><code class="inline">options</code> is a <a href="https://hexdocs.pm/elixir/Keyword.html"><code class="inline">Keyword</code></a> list of options which are:</p></li></ul><h2 id="to_string/2-options" class="section-heading">
-  <a href="#to_string/2-options" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">options</p>
+  <a href="#to_string/2-options">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Options
   </a>
-  Options
 </h2>
 <ul><li><p><code class="inline">:locale</code> is the locale in which the binary is formatted.
 The default is <a href="https://hexdocs.pm/ex_cldr/2.37.2/Cldr.html#get_locale/0"><code class="inline">Cldr.get_locale/0</code></a></p></li><li><p><code class="inline">:style</code> is the style of the binary.  Style may be <code class="inline">:default</code>, <code class="inline">:narrow</code> or <code class="inline">:short</code></p></li><li><p><code class="inline">:unit</code> is the time unit for the formatting.  The allowable units are <code class="inline">:second</code>, <code class="inline">:minute</code>,
@@ -205,74 +203,74 @@ The default is <a href="https://hexdocs.pm/ex_cldr/2.37.2/Cldr.html#get_locale/0
 <code class="inline">:sun</code>, <code class="inline">:quarter</code></p></li><li><p><code class="inline">:relative_to</code> is the baseline Date or Datetime from which the difference from <code class="inline">relative</code> is
 calculated when <code class="inline">relative</code> is a Date or a DateTime. The default for a Date is <code class="inline">Date.utc_today</code>,
 for a DateTime it is <code class="inline">DateTime.utc_now</code></p></li></ul><h3 id="to_string/2-notes" class="section-heading">
-  <a href="#to_string/2-notes" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">notes</p>
+  <a href="#to_string/2-notes">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Notes
   </a>
-  Notes
 </h3>
 <p>When <code class="inline">options[:unit]</code> is not specified, <code class="inline">MyApp.Cldr.DateTime.Relative.to_string/2</code>
 attempts to identify the appropriate unit based upon the magnitude of <code class="inline">relative</code>.
 For example, given a parameter of less than <code class="inline">60</code>, then <a href="#to_string/2"><code class="inline">to_string/2</code></a> will
 assume <code class="inline">:seconds</code> as the unit.  See <code class="inline">unit_from_relative_time/1</code>.</p><h2 id="to_string/2-examples" class="section-heading">
-  <a href="#to_string/2-examples" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">examples</p>
+  <a href="#to_string/2-examples">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Examples
   </a>
-  Examples
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="6295259118-1">(</span><span class="o">-</span><span class="mi">1</span><span class="p" data-group-id="6295259118-1">)</span><span class="w">
-</span><span class="p" data-group-id="6295259118-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1 second ago&quot;</span><span class="p" data-group-id="6295259118-2">}</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4104609759-1">(</span><span class="o">-</span><span class="mi">1</span><span class="p" data-group-id="4104609759-1">)</span><span class="w">
+</span><span class="p" data-group-id="4104609759-2">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1 second ago&quot;</span><span class="p" data-group-id="4104609759-2">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="6295259118-3">(</span><span class="mi">1</span><span class="p" data-group-id="6295259118-3">)</span><span class="w">
-</span><span class="p" data-group-id="6295259118-4">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;in 1 second&quot;</span><span class="p" data-group-id="6295259118-4">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4104609759-3">(</span><span class="mi">1</span><span class="p" data-group-id="4104609759-3">)</span><span class="w">
+</span><span class="p" data-group-id="4104609759-4">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;in 1 second&quot;</span><span class="p" data-group-id="4104609759-4">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="6295259118-5">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:day</span><span class="p" data-group-id="6295259118-5">)</span><span class="w">
-</span><span class="p" data-group-id="6295259118-6">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;tomorrow&quot;</span><span class="p" data-group-id="6295259118-6">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4104609759-5">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:day</span><span class="p" data-group-id="4104609759-5">)</span><span class="w">
+</span><span class="p" data-group-id="4104609759-6">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;tomorrow&quot;</span><span class="p" data-group-id="4104609759-6">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="6295259118-7">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:day</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fr&quot;</span><span class="p" data-group-id="6295259118-7">)</span><span class="w">
-</span><span class="p" data-group-id="6295259118-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;demain&quot;</span><span class="p" data-group-id="6295259118-8">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4104609759-7">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:day</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fr&quot;</span><span class="p" data-group-id="4104609759-7">)</span><span class="w">
+</span><span class="p" data-group-id="4104609759-8">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;demain&quot;</span><span class="p" data-group-id="4104609759-8">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="6295259118-9">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:day</span><span class="p">,</span><span class="w"> </span><span class="ss">style</span><span class="p">:</span><span class="w"> </span><span class="ss">:narrow</span><span class="p" data-group-id="6295259118-9">)</span><span class="w">
-</span><span class="p" data-group-id="6295259118-10">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;tomorrow&quot;</span><span class="p" data-group-id="6295259118-10">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4104609759-9">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:day</span><span class="p">,</span><span class="w"> </span><span class="ss">style</span><span class="p">:</span><span class="w"> </span><span class="ss">:narrow</span><span class="p" data-group-id="4104609759-9">)</span><span class="w">
+</span><span class="p" data-group-id="4104609759-10">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;tomorrow&quot;</span><span class="p" data-group-id="4104609759-10">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="6295259118-11">(</span><span class="mi">1234</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:year</span><span class="p" data-group-id="6295259118-11">)</span><span class="w">
-</span><span class="p" data-group-id="6295259118-12">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;in 1,234 years&quot;</span><span class="p" data-group-id="6295259118-12">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4104609759-11">(</span><span class="mi">1234</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:year</span><span class="p" data-group-id="4104609759-11">)</span><span class="w">
+</span><span class="p" data-group-id="4104609759-12">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;in 1,234 years&quot;</span><span class="p" data-group-id="4104609759-12">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="6295259118-13">(</span><span class="mi">1234</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:year</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fr&quot;</span><span class="p" data-group-id="6295259118-13">)</span><span class="w">
-</span><span class="p" data-group-id="6295259118-14">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dans 1 234 ans&quot;</span><span class="p" data-group-id="6295259118-14">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4104609759-13">(</span><span class="mi">1234</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:year</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fr&quot;</span><span class="p" data-group-id="4104609759-13">)</span><span class="w">
+</span><span class="p" data-group-id="4104609759-14">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dans 1 234 ans&quot;</span><span class="p" data-group-id="4104609759-14">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="6295259118-15">(</span><span class="mi">31</span><span class="p" data-group-id="6295259118-15">)</span><span class="w">
-</span><span class="p" data-group-id="6295259118-16">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;in 31 seconds&quot;</span><span class="p" data-group-id="6295259118-16">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4104609759-15">(</span><span class="mi">31</span><span class="p" data-group-id="4104609759-15">)</span><span class="w">
+</span><span class="p" data-group-id="4104609759-16">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;in 31 seconds&quot;</span><span class="p" data-group-id="4104609759-16">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="6295259118-17">(</span><span class="ld">~D[2017-04-29]</span><span class="p">,</span><span class="w"> </span><span class="ss">relative_to</span><span class="p">:</span><span class="w"> </span><span class="ld">~D[2017-04-26]</span><span class="p" data-group-id="6295259118-17">)</span><span class="w">
-</span><span class="p" data-group-id="6295259118-18">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;in 3 days&quot;</span><span class="p" data-group-id="6295259118-18">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4104609759-17">(</span><span class="ld">~D[2017-04-29]</span><span class="p">,</span><span class="w"> </span><span class="ss">relative_to</span><span class="p">:</span><span class="w"> </span><span class="ld">~D[2017-04-26]</span><span class="p" data-group-id="4104609759-17">)</span><span class="w">
+</span><span class="p" data-group-id="4104609759-18">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;in 3 days&quot;</span><span class="p" data-group-id="4104609759-18">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="6295259118-19">(</span><span class="mi">310</span><span class="p">,</span><span class="w"> </span><span class="ss">style</span><span class="p">:</span><span class="w"> </span><span class="ss">:short</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fr&quot;</span><span class="p" data-group-id="6295259118-19">)</span><span class="w">
-</span><span class="p" data-group-id="6295259118-20">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dans 5 min&quot;</span><span class="p" data-group-id="6295259118-20">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4104609759-19">(</span><span class="mi">310</span><span class="p">,</span><span class="w"> </span><span class="ss">style</span><span class="p">:</span><span class="w"> </span><span class="ss">:short</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fr&quot;</span><span class="p" data-group-id="4104609759-19">)</span><span class="w">
+</span><span class="p" data-group-id="4104609759-20">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;dans 5 min&quot;</span><span class="p" data-group-id="4104609759-20">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="6295259118-21">(</span><span class="mi">310</span><span class="p">,</span><span class="w"> </span><span class="ss">style</span><span class="p">:</span><span class="w"> </span><span class="ss">:narrow</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fr&quot;</span><span class="p" data-group-id="6295259118-21">)</span><span class="w">
-</span><span class="p" data-group-id="6295259118-22">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;+5 min&quot;</span><span class="p" data-group-id="6295259118-22">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4104609759-21">(</span><span class="mi">310</span><span class="p">,</span><span class="w"> </span><span class="ss">style</span><span class="p">:</span><span class="w"> </span><span class="ss">:narrow</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fr&quot;</span><span class="p" data-group-id="4104609759-21">)</span><span class="w">
+</span><span class="p" data-group-id="4104609759-22">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;+5 min&quot;</span><span class="p" data-group-id="4104609759-22">}</span><span class="w">
 
 </span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:wed</span><span class="p">,</span><span class="w"> </span><span class="ss">style</span><span class="p">:</span><span class="w"> </span><span class="ss">:short</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="w">
-</span><span class="p" data-group-id="6295259118-23">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;in 2 Wed.&quot;</span><span class="p" data-group-id="6295259118-23">}</span><span class="w">
+</span><span class="p" data-group-id="4104609759-23">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;in 2 Wed.&quot;</span><span class="p" data-group-id="4104609759-23">}</span><span class="w">
 
 </span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:wed</span><span class="p">,</span><span class="w"> </span><span class="ss">style</span><span class="p">:</span><span class="w"> </span><span class="ss">:short</span><span class="w">
-</span><span class="p" data-group-id="6295259118-24">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;next Wed.&quot;</span><span class="p" data-group-id="6295259118-24">}</span><span class="w">
+</span><span class="p" data-group-id="4104609759-24">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;next Wed.&quot;</span><span class="p" data-group-id="4104609759-24">}</span><span class="w">
 
 </span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:wed</span><span class="p">,</span><span class="w"> </span><span class="ss">style</span><span class="p">:</span><span class="w"> </span><span class="ss">:short</span><span class="w">
-</span><span class="p" data-group-id="6295259118-25">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;last Wed.&quot;</span><span class="p" data-group-id="6295259118-25">}</span><span class="w">
+</span><span class="p" data-group-id="4104609759-25">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;last Wed.&quot;</span><span class="p" data-group-id="4104609759-25">}</span><span class="w">
 
 </span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:wed</span><span class="w">
-</span><span class="p" data-group-id="6295259118-26">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;last Wednesday&quot;</span><span class="p" data-group-id="6295259118-26">}</span><span class="w">
+</span><span class="p" data-group-id="4104609759-26">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;last Wednesday&quot;</span><span class="p" data-group-id="4104609759-26">}</span><span class="w">
 
 </span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:quarter</span><span class="w">
-</span><span class="p" data-group-id="6295259118-27">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;last quarter&quot;</span><span class="p" data-group-id="6295259118-27">}</span><span class="w">
+</span><span class="p" data-group-id="4104609759-27">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;last quarter&quot;</span><span class="p" data-group-id="4104609759-27">}</span><span class="w">
 
 </span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:mon</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fr&quot;</span><span class="w">
-</span><span class="p" data-group-id="6295259118-28">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lundi dernier&quot;</span><span class="p" data-group-id="6295259118-28">}</span><span class="w">
+</span><span class="p" data-group-id="4104609759-28">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;lundi dernier&quot;</span><span class="p" data-group-id="4104609759-28">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="6295259118-29">(</span><span class="ld">~D[2017-04-29]</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:ziggeraut</span><span class="p" data-group-id="6295259118-29">)</span><span class="w">
-</span><span class="p" data-group-id="6295259118-30">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="6295259118-31">{</span><span class="nc">Cldr.UnknownTimeUnit</span><span class="p">,</span><span class="w">
- </span><span class="s">&quot;Unknown time unit :ziggeraut.  Valid time units are [:day, :hour, :minute, :month, :second, :week, :year, :mon, :tue, :wed, :thu, :fri, :sat, :sun, :quarter]&quot;</span><span class="p" data-group-id="6295259118-31">}</span><span class="p" data-group-id="6295259118-30">}</span></code></pre>
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.DateTime.Relative</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4104609759-29">(</span><span class="ld">~D[2017-04-29]</span><span class="p">,</span><span class="w"> </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="ss">:ziggeraut</span><span class="p" data-group-id="4104609759-29">)</span><span class="w">
+</span><span class="p" data-group-id="4104609759-30">{</span><span class="ss">:error</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4104609759-31">{</span><span class="nc">Cldr.UnknownTimeUnit</span><span class="p">,</span><span class="w">
+ </span><span class="s">&quot;Unknown time unit :ziggeraut.  Valid time units are [:day, :hour, :minute, :month, :second, :week, :year, :mon, :tue, :wed, :thu, :fri, :sat, :sun, :quarter]&quot;</span><span class="p" data-group-id="4104609759-31">}</span><span class="p" data-group-id="4104609759-30">}</span></code></pre>
   </section>
 </section>
 <section class="detail" id="to_string!/2">
@@ -304,17 +302,17 @@ assume <code class="inline">:seconds</code> as the unit.  See <code class="inlin
 
 <p>Returns a <code class="inline">{:ok, string}</code> representing a relative time (ago, in) for a given
 number, Date or Datetime or raises an exception on error.</p><h2 id="to_string!/2-arguments" class="section-heading">
-  <a href="#to_string!/2-arguments" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">arguments</p>
+  <a href="#to_string!/2-arguments">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Arguments
   </a>
-  Arguments
 </h2>
 <ul><li><p><code class="inline">relative</code> is a number or Date/Datetime representing the time distance from <code class="inline">now</code> or from
 options[:relative_to].</p></li><li><p><code class="inline">options</code> is a <a href="https://hexdocs.pm/elixir/Keyword.html"><code class="inline">Keyword</code></a> list of options.</p></li></ul><h2 id="to_string!/2-options" class="section-heading">
-  <a href="#to_string!/2-options" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">options</p>
+  <a href="#to_string!/2-options">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Options
   </a>
-  Options
 </h2>
 <ul><li><p><code class="inline">:locale</code> is the locale in which the binary is formatted.
 The default is <a href="https://hexdocs.pm/ex_cldr/2.37.2/Cldr.html#get_locale/0"><code class="inline">Cldr.get_locale/0</code></a></p></li><li><p><code class="inline">:style</code> is the format of the binary.  Style may be <code class="inline">:default</code>, <code class="inline">:narrow</code> or <code class="inline">:short</code>.
@@ -346,7 +344,7 @@ for a DateTime it is <code class="inline">DateTime.utc_now</code></p></li></ul><
 
         <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.29.4) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.3) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 

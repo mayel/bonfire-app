@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.29.4">
+    <meta name="generator" content="ExDoc v0.30.3">
     <meta name="project" content="bonfire_umbrella v0.9.5-classic-beta.11">
 
     <title>Boundaries & Access Control — bonfire_umbrella v0.9.5-classic-beta.11</title>
-    <link rel="stylesheet" href="dist/html-elixir-HHVY3JYD.css" />
+    <link rel="stylesheet" href="dist/html-elixir-P5GXSCHE.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-XWGFFSCD.js"></script>
-    <script src="dist/sidebar_items-7223EE43.js"></script>
+    <script src="dist/handlebars.templates-NBND3S2D.js"></script>
+    <script src="dist/sidebar_items-E7176C07.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/html-JDI3AVDD.js"></script>
+    <script async src="dist/html-CGDDOCMI.js"></script>
 
 
   </head>
@@ -112,34 +112,34 @@ bonfire_umbrella
 </h1>
 
 <p>Boundaries is Bonfire's flexible framework for full per-user/per-object/per-action access control. It makes it easy to ensure that users may only see or do what they are supposed to.</p><h2 id="users-and-circles" class="section-heading">
-  <a href="#users-and-circles" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">users-and-circles</p>
+  <a href="#users-and-circles">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Users and Circles
   </a>
-  Users and Circles
 </h2>
 <p>Ignoring any future bot support, boundaries ultimately apply to users.</p><p>Circles are a way of categorising users. Each user has their own set of circles that they can add to and categorise other users in as they please.</p><p>Circles allow a user to categorise work colleagues differently from friends, for example. They can choose to allow different interactions from users in the two circles or limit which content each sees on a per-item basis.</p><h2 id="verbs" class="section-heading">
-  <a href="#verbs" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">verbs</p>
+  <a href="#verbs">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Verbs
   </a>
-  Verbs
 </h2>
 <p>Verbs represent actions that the user could perform, such as reading a post or replying to a message.</p><p>Each verb has a unique ID, like the table IDs from <code class="inline">pointers</code>, which must be known to the system through configuration.</p><h2 id="permissions" class="section-heading">
-  <a href="#permissions" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">permissions</p>
+  <a href="#permissions">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Permissions
   </a>
-  Permissions
 </h2>
 <p>Permissions can take one of three values:</p><ul><li><code class="inline">true</code></li><li><code class="inline">false</code></li><li><code class="inline">nil</code> (or <code class="inline">null</code> to postgresql).</li></ul><p><code class="inline">true</code> and <code class="inline">false</code> are easy enough to understand as yes and no, but what is <code class="inline">nil</code>?</p><p><code class="inline">nil</code> represents <code class="inline">no answer</code> - in isolation, it is the same as <code class="inline">false</code>.</p><p>Because a user could be in more than one circle and each circle may have a different permission, we need a way of combining permissions to produce a final result permission. <code class="inline">nil</code> is treated differently here:</p><table><thead><tr><th style="text-align: left;">left</th><th style="text-align: left;">right</th><th style="text-align: left;">result</th></tr></thead><tbody><tr><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">nil</code></td></tr><tr><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">true</code></td></tr><tr><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">false</code></td></tr><tr><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">true</code></td></tr><tr><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">true</code></td></tr><tr><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">false</code></td></tr><tr><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">false</code></td></tr><tr><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">true</code></td><td style="text-align: left;"><code class="inline">false</code></td></tr><tr><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">false</code></td><td style="text-align: left;"><code class="inline">false</code></td></tr></tbody></table><p>To be considered granted, the result of combining the permissions must be <code class="inline">true</code> (<code class="inline">nil</code> is as good as <code class="inline">false</code> again here).</p><p><code class="inline">nil</code> can thus be seen as a sort of <code class="inline">weak false</code>, being easily overridden by a true, but also not by itself granting anything.</p><p>At first glance, this may seem a little odd, but it gives us a little additional flexibility which is useful for implementing features such as blocks (where <code class="inline">false</code> is really useful!). With a little practice, it feels quite natural to use.</p><h2 id="acls-and-grants" class="section-heading">
-  <a href="#acls-and-grants" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">acls-and-grants</p>
+  <a href="#acls-and-grants">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    ACLs and Grants
   </a>
-  ACLs and Grants
 </h2>
 <p>An <code class="inline">ACL</code> is &quot;just&quot; a collection of <code class="inline">Grant</code>s.</p><p>Grants combine the ID of the ACL they exist in with a verb id, a user or circle id and a permission, thus providing a decision about whether a particular action is permitted for a particular user (or all users in a particular circle).</p><p>Conceptually, an ACL contains a grant for every user-or-circle/verb combination, but most of the permissions are <code class="inline">nil</code>. We do not record grants with <code class="inline">nil</code> permissions in the database, saving substantially on storage space and compute requirements.</p><h2 id="controlled-applying-boundaries-to-an-object" class="section-heading">
-  <a href="#controlled-applying-boundaries-to-an-object" class="hover-link"><i class="ri-link-m" aria-hidden="true"></i>
-  <p class="sr-only">controlled-applying-boundaries-to-an-object</p>
+  <a href="#controlled-applying-boundaries-to-an-object">
+    <i class="ri-link-m" aria-hidden="true"></i>
+    Controlled - Applying boundaries to an object
   </a>
-  Controlled - Applying boundaries to an object
 </h2>
 <p>An object is linked to one or more <code class="inline">ACL</code>s by the <code class="inline">Controlled</code> multimixin, which pairs an object ID with an ACL ID. Because it is a multimixin, a given object can have multiple ACLs applied. In the case of overlap, permissions are combined in the manner described earlier. </p><p>See also <a href="https://doc.bonfirenetworks.org/extension-bonfire_data_access_control.html">https://doc.bonfirenetworks.org/extension-bonfire_data_access_control.html</a> for more docs (TODO: merge/deduplicate)</p>
 <div class="bottom-actions">
@@ -185,7 +185,7 @@ GraphQL API
 
         <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.29.4) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.3) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
