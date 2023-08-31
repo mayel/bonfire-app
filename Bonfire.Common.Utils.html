@@ -13,7 +13,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-NBND3S2D.js"></script>
-    <script src="dist/sidebar_items-5359A699.js"></script>
+    <script src="dist/sidebar_items-46F3B659.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -140,11 +140,19 @@ bonfire_umbrella
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#async_task/1" translate="no">async_task(fun)</a>
+        <a href="#apply_task/3" translate="no">apply_task(function \\ :async, fun, opts \\ [])</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Runs a function asynchronously in a Task. Like <a href="https://hexdocs.pm/elixir/Task.html#async/1"><code class="inline">Task.async/1</code></a> but with support for multi-tenancy in the child process</p></div>
+        <div class="summary-synopsis"><p>Runs a function asynchronously in a Task. Simply a shorthand for calling functions in <a href="https://hexdocs.pm/elixir/Task.html"><code class="inline">Task</code></a> and <a href="https://hexdocs.pm/elixir/Task.Supervisor.html"><code class="inline">Task.Supervisor</code></a> but with support for multi-tenancy in the spawned process. </p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#apply_task_supervised/3" translate="no">apply_task_supervised(function \\ :async, fun, opts \\ [])</a>
+
+      </div>
 
     </div>
 
@@ -399,16 +407,20 @@ Functions
 
   </section>
 </section>
-<section class="detail" id="async_task/1">
+<section class="detail" id="apply_task/3">
+
+    <span id="apply_task/1"></span>
+
+    <span id="apply_task/2"></span>
 
   <div class="detail-header">
-    <a href="#async_task/1" class="detail-link" title="Link to this function">
+    <a href="#apply_task/3" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">async_task(fun)</h1>
+    <h1 class="signature" translate="no">apply_task(function \\ :async, fun, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/utils.ex#L662" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/utils.ex#L676" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -418,7 +430,33 @@ Functions
 
   <section class="docstring">
 
-<p>Runs a function asynchronously in a Task. Like <a href="https://hexdocs.pm/elixir/Task.html#async/1"><code class="inline">Task.async/1</code></a> but with support for multi-tenancy in the child process</p>
+<p>Runs a function asynchronously in a Task. Simply a shorthand for calling functions in <a href="https://hexdocs.pm/elixir/Task.html"><code class="inline">Task</code></a> and <a href="https://hexdocs.pm/elixir/Task.Supervisor.html"><code class="inline">Task.Supervisor</code></a> but with support for multi-tenancy in the spawned process. </p><ul><li><p><a href="https://hexdocs.pm/elixir/Task.html#async/1"><code class="inline">Task.async/1</code></a> the caller creates a new process links and monitors it. Once the task action finishes, a message is sent to the caller with the result. <a href="https://hexdocs.pm/elixir/Task.html#await/2"><code class="inline">Task.await/2</code></a> is used to read the message sent by the task. When using <code class="inline">async</code>, you <em>must</em> <code class="inline">await</code> a reply as they are always sent. </p></li><li><p><a href="https://hexdocs.pm/elixir/Task.html#start_link/1"><code class="inline">Task.start_link/1</code></a> is suggested instead if you are not expecting a reply. It starts a statically supervised task as part of a supervision tree, linked to the calling process (meaning it will be stopped when the caller stops). </p></li><li><p><a href="https://hexdocs.pm/elixir/Task.html#start/1"><code class="inline">Task.start/1</code></a> can be used for fire-and-forget tasks, like side-effects, when you have no interest on its results nor if it completes successfully (because if the server is shut down it won't be restarted).</p></li></ul><p>For more serious tasks, consider using <a href="https://hexdocs.pm/oban/2.15.2/Oban.html"><code class="inline">Oban</code></a> or <a href="#apply_task_supervised/3"><code class="inline">apply_task_supervised/3</code></a> for supervised tasks when possible:</p><ul><li><p><a href="https://hexdocs.pm/elixir/Task.Supervisor.html#start_child/2"><code class="inline">Task.Supervisor.start_child/2</code></a> allows you to start a fire-and-forget task when you don't care about its results or if it completes successfully or not.</p></li><li><p><a href="https://hexdocs.pm/elixir/Task.Supervisor.html#async/2"><code class="inline">Task.Supervisor.async/2</code></a> + <a href="https://hexdocs.pm/elixir/Task.html#await/2"><code class="inline">Task.await/2</code></a> allows you to execute tasks concurrently and retrieve its result. If the task fails, the caller will also fail.</p></li></ul>
+  </section>
+</section>
+<section class="detail" id="apply_task_supervised/3">
+
+    <span id="apply_task_supervised/1"></span>
+
+    <span id="apply_task_supervised/2"></span>
+
+  <div class="detail-header">
+    <a href="#apply_task_supervised/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">apply_task_supervised(function \\ :async, fun, opts \\ [])</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/utils.ex#L689" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 <section class="detail" id="current_account/2">
@@ -768,7 +806,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">empty?(v)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/utils.ex#L673" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/utils.ex#L694" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -790,7 +828,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">maybe(val, change_fn)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/utils.ex#L678" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/utils.ex#L699" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -864,7 +902,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">ok_unwrap(val, fallback \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/utils.ex#L687" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/utils.ex#L708" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -886,7 +924,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">round_nearest(num)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/utils.ex#L698" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/utils.ex#L719" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -908,7 +946,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">round_nearest(num, target)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/utils.ex#L722" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/utils.ex#L743" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
