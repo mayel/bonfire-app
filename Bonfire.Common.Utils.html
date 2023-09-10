@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.30.3">
+    <meta name="generator" content="ExDoc v0.30.6">
     <meta name="project" content="bonfire_umbrella v0.9.6-classic-beta.12">
 
     <title>Bonfire.Common.Utils — bonfire_umbrella v0.9.6-classic-beta.12</title>
-    <link rel="stylesheet" href="dist/html-elixir-P5GXSCHE.css" />
+    <link rel="stylesheet" href="dist/html-elixir-M3TQBNKO.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-NBND3S2D.js"></script>
-    <script src="dist/sidebar_items-9181CEF0.js"></script>
+    <script src="dist/handlebars.templates-KDPBTEPL.js"></script>
+    <script src="dist/sidebar_items-486EA597.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/html-CGDDOCMI.js"></script>
+    <script async src="dist/html-CP2A7WXZ.js"></script>
 
 
   </head>
@@ -86,7 +86,6 @@ bonfire_umbrella
     </ul>
   </div>
 
-  <div class="gradient"></div>
   <ul id="full-list"></ul>
 </section>
 
@@ -430,7 +429,7 @@ Functions
 
   <section class="docstring">
 
-<p>Runs a function asynchronously in a Task. Simply a shorthand for calling functions in <a href="https://hexdocs.pm/elixir/Task.html"><code class="inline">Task</code></a> and <a href="https://hexdocs.pm/elixir/Task.Supervisor.html"><code class="inline">Task.Supervisor</code></a> but with support for multi-tenancy in the spawned process. </p><ul><li><p><a href="https://hexdocs.pm/elixir/Task.html#async/1"><code class="inline">Task.async/1</code></a> the caller creates a new process links and monitors it. Once the task action finishes, a message is sent to the caller with the result. <a href="https://hexdocs.pm/elixir/Task.html#await/2"><code class="inline">Task.await/2</code></a> is used to read the message sent by the task. When using <code class="inline">async</code>, you <em>must</em> <code class="inline">await</code> a reply as they are always sent. </p></li><li><p><a href="https://hexdocs.pm/elixir/Task.html#start_link/1"><code class="inline">Task.start_link/1</code></a> is suggested instead if you are not expecting a reply. It starts a statically supervised task as part of a supervision tree, linked to the calling process (meaning it will be stopped when the caller stops). </p></li><li><p><a href="https://hexdocs.pm/elixir/Task.html#start/1"><code class="inline">Task.start/1</code></a> can be used for fire-and-forget tasks, like side-effects, when you have no interest on its results nor if it completes successfully (because if the server is shut down it won't be restarted).</p></li></ul><p>For more serious tasks, consider using <a href="https://hexdocs.pm/oban/2.15.2/Oban.html"><code class="inline">Oban</code></a> or <a href="#apply_task_supervised/3"><code class="inline">apply_task_supervised/3</code></a> for supervised tasks when possible:</p><ul><li><p><a href="https://hexdocs.pm/elixir/Task.Supervisor.html#start_child/2"><code class="inline">Task.Supervisor.start_child/2</code></a> allows you to start a fire-and-forget task when you don't care about its results or if it completes successfully or not.</p></li><li><p><a href="https://hexdocs.pm/elixir/Task.Supervisor.html#async/2"><code class="inline">Task.Supervisor.async/2</code></a> + <a href="https://hexdocs.pm/elixir/Task.html#await/2"><code class="inline">Task.await/2</code></a> allows you to execute tasks concurrently and retrieve its result. If the task fails, the caller will also fail.</p></li></ul>
+<p>Runs a function asynchronously in a Task. Simply a shorthand for calling functions in <a href="https://hexdocs.pm/elixir/Task.html"><code class="inline">Task</code></a> and <a href="https://hexdocs.pm/elixir/Task.Supervisor.html"><code class="inline">Task.Supervisor</code></a> but with support for multi-tenancy in the spawned process. </p><ul><li><p><a href="https://hexdocs.pm/elixir/Task.html#async/1"><code class="inline">Task.async/1</code></a> the caller creates a new process links and monitors it. Once the task action finishes, a message is sent to the caller with the result. <a href="https://hexdocs.pm/elixir/Task.html#await/2"><code class="inline">Task.await/2</code></a> is used to read the message sent by the task. When using <code class="inline">async</code>, you <em>must</em> <code class="inline">await</code> a reply as they are always sent. </p></li><li><p><a href="https://hexdocs.pm/elixir/Task.html#start_link/1"><code class="inline">Task.start_link/1</code></a> is suggested instead if you are not expecting a reply. It starts a statically supervised task as part of a supervision tree, linked to the calling process (meaning it will be stopped when the caller stops). </p></li><li><p><a href="https://hexdocs.pm/elixir/Task.html#start/1"><code class="inline">Task.start/1</code></a> can be used for fire-and-forget tasks, like side-effects, when you have no interest on its results nor if it completes successfully (because if the server is shut down it won't be restarted).</p></li></ul><p>For more serious tasks, consider using <a href="https://hexdocs.pm/oban/2.15.4/Oban.html"><code class="inline">Oban</code></a> or <a href="#apply_task_supervised/3"><code class="inline">apply_task_supervised/3</code></a> for supervised tasks when possible:</p><ul><li><p><a href="https://hexdocs.pm/elixir/Task.Supervisor.html#start_child/2"><code class="inline">Task.Supervisor.start_child/2</code></a> allows you to start a fire-and-forget task when you don't care about its results or if it completes successfully or not.</p></li><li><p><a href="https://hexdocs.pm/elixir/Task.Supervisor.html#async/2"><code class="inline">Task.Supervisor.async/2</code></a> + <a href="https://hexdocs.pm/elixir/Task.html#await/2"><code class="inline">Task.await/2</code></a> allows you to execute tasks concurrently and retrieve its result. If the task fails, the caller will also fail.</p></li></ul>
   </section>
 </section>
 <section class="detail" id="apply_task_supervised/3">
@@ -1024,7 +1023,7 @@ Functions
 
         <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.3) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.6) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
