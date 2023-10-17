@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.30.6">
-    <meta name="project" content="bonfire_umbrella v0.9.6-classic-beta.12">
+    <meta name="generator" content="ExDoc v0.30.8">
+    <meta name="project" content="bonfire_umbrella v0.9.6-cooperation-beta.26">
 
-    <title>ActivityPub.Federator.Fetcher — bonfire_umbrella v0.9.6-classic-beta.12</title>
-    <link rel="stylesheet" href="dist/html-elixir-M3TQBNKO.css" />
+    <title>ActivityPub.Federator.Fetcher — bonfire_umbrella v0.9.6-cooperation-beta.26</title>
+    <link rel="stylesheet" href="dist/html-elixir-XFYN5IVA.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-KDPBTEPL.js"></script>
-    <script src="dist/sidebar_items-1D2A101B.js"></script>
+    <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
+    <script src="dist/sidebar_items-BF8AC0A5.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/html-CP2A7WXZ.js"></script>
+    <script async src="dist/html-J2ASZTQE.js"></script>
 
 
   </head>
@@ -38,22 +38,22 @@
 
 <div class="main">
 
-<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
   <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
 </button>
 
-<section class="sidebar">
+<nav id="sidebar" class="sidebar">
   <form class="sidebar-search" action="search.html">
+    <label class="search-label">
+      <span class="sr-only">Search documentation of bonfire_umbrella</span>
+      <input name="q" type="text" class="search-input" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+    </label>
     <button type="submit" class="search-button" aria-label="Submit Search">
       <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
     </button>
-    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
-      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
+    <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+      <i class="ri-close-line ri-lg" title="Cancel search"></i>
     </button>
-    <label class="search-label">
-      <p class="sr-only">Search</p>
-      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
-    </label>
   </form>
 
   <div class="autocomplete">
@@ -72,24 +72,48 @@
 bonfire_umbrella
       </a>
       <div class="sidebar-projectVersion" translate="no">
-        v0.9.6-classic-beta.12
+        v0.9.6-cooperation-beta.26
       </div>
     </div>
-    <ul class="sidebar-listNav">
-      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+    <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
+      <li>
+        <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel" aria-selected="true" tabindex="0">
+Pages
+        </button>
+      </li>
 
-        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+        <li>
+          <button id="modules-list-tab-button" role="tab" data-type="modules" aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
+            Modules
+          </button>
+        </li>
 
 
-        <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
+        <li>
+          <button id="tasks-list-tab-button" role="tab" data-type="tasks" aria-controls="tasks-tab-panel" aria-selected="false" tabindex="-1">
+            <span translate="no">Mix</span> Tasks
+          </button>
+        </li>
 
     </ul>
   </div>
 
-  <ul id="full-list"></ul>
-</section>
+  <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
+    <ul id="extras-full-list" class="full-list"></ul>
+  </div>
 
-<section class="content">
+    <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button" hidden>
+      <ul id="modules-full-list" class="full-list"></ul>
+    </div>
+
+
+    <div id="tasks-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="tasks-list-tab-button" hidden>
+      <ul id="tasks-full-list" class="full-list"></ul>
+    </div>
+
+</nav>
+
+<main class="content">
   <output role="status" id="toast"></output>
   <div class="content-outer">
     <div id="content" class="content-inner">
@@ -107,7 +131,7 @@ bonfire_umbrella
     </a>
 
   <span translate="no">ActivityPub.Federator.Fetcher</span> 
-  <small class="app-vsn" translate="no">(bonfire_umbrella v0.9.6-classic-beta.12)</small>
+  <small class="app-vsn" translate="no">(bonfire_umbrella v0.9.6-cooperation-beta.26)</small>
 
 </h1>
 
@@ -121,8 +145,8 @@ bonfire_umbrella
     <h1 class="section-heading">
       <a class="hover-link" href="#summary">
         <i class="ri-link-m" aria-hidden="true"></i>
-        Summary
       </a>
+      <span class="text">Summary</span>
     </h1>
 <div class="summary-functions summary">
   <h2>
@@ -178,11 +202,27 @@ Applies to fetching of both ancestor (reply-to) and child (reply) objects.</p></
 
     <div class="summary-row">
       <div class="summary-signature">
+        <a href="#fetch_outbox/2" translate="no">fetch_outbox(actor, opts \\ [fetch_collection: :async])</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
         <a href="#fetch_remote_object_from_id/2" translate="no">fetch_remote_object_from_id(id, options \\ [])</a>
 
       </div>
 
         <div class="summary-synopsis"><p>Fetches an AS2 object from remote AP ID.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#fetch_replies/2" translate="no">fetch_replies(actor, opts \\ [fetch_collection: :async])</a>
+
+      </div>
 
     </div>
 
@@ -208,7 +248,7 @@ Applies to fetching of both ancestor (reply-to) and child (reply) objects.</p></
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#maybe_fetch_async/2" translate="no">maybe_fetch_async(entries, opts \\ [])</a>
+        <a href="#maybe_fetch/2" translate="no">maybe_fetch(entries, opts \\ [])</a>
 
       </div>
 
@@ -223,8 +263,8 @@ Applies to fetching of both ancestor (reply-to) and child (reply) objects.</p></
     <h1 class="section-heading">
       <a class="hover-link" href="#functions">
         <i class="ri-link-m" aria-hidden="true"></i>
-Functions
       </a>
+      <span class="text">Functions</span>
     </h1>
     <div class="functions-list">
 <section class="detail" id="allowed_recursion?/2">
@@ -238,7 +278,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">allowed_recursion?(distance, max_recursion \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/fetcher.ex#L443" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/fetcher.ex#L522" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -265,7 +305,7 @@ Applies to fetching of both ancestor (reply-to) and child (reply) objects.</p>
     </a>
     <h1 class="signature" translate="no">fetch_collection(ap_id, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/fetcher.ex#L286" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/fetcher.ex#L347" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -289,7 +329,7 @@ Applies to fetching of both ancestor (reply-to) and child (reply) objects.</p>
     </a>
     <h1 class="signature" translate="no">fetch_fresh_object_from_id(id, opts \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/fetcher.ex#L94" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/fetcher.ex#L115" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -350,6 +390,30 @@ Applies to fetching of both ancestor (reply-to) and child (reply) objects.</p>
 
   </section>
 </section>
+<section class="detail" id="fetch_outbox/2">
+
+    <span id="fetch_outbox/1"></span>
+
+  <div class="detail-header">
+    <a href="#fetch_outbox/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fetch_outbox(actor, opts \\ [fetch_collection: :async])</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/fetcher.ex#L230" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
 <section class="detail" id="fetch_remote_object_from_id/2">
 
     <span id="fetch_remote_object_from_id/1"></span>
@@ -361,7 +425,7 @@ Applies to fetching of both ancestor (reply-to) and child (reply) objects.</p>
     </a>
     <h1 class="signature" translate="no">fetch_remote_object_from_id(id, options \\ [])</h1>
 
-      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/fetcher.ex#L212" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/fetcher.ex#L273" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -372,6 +436,30 @@ Applies to fetching of both ancestor (reply-to) and child (reply) objects.</p>
   <section class="docstring">
 
 <p>Fetches an AS2 object from remote AP ID.</p>
+  </section>
+</section>
+<section class="detail" id="fetch_replies/2">
+
+    <span id="fetch_replies/1"></span>
+
+  <div class="detail-header">
+    <a href="#fetch_replies/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">fetch_replies(actor, opts \\ [fetch_collection: :async])</h1>
+
+      <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/fetcher.ex#L251" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 <section class="detail" id="get_cached_object_or_fetch_ap_id/2">
@@ -422,16 +510,16 @@ Applies to fetching of both ancestor (reply-to) and child (reply) objects.</p>
 <p>Checks if an object exists in the AP database and prepares it if not (local objects only).</p>
   </section>
 </section>
-<section class="detail" id="maybe_fetch_async/2">
+<section class="detail" id="maybe_fetch/2">
 
-    <span id="maybe_fetch_async/1"></span>
+    <span id="maybe_fetch/1"></span>
 
   <div class="detail-header">
-    <a href="#maybe_fetch_async/2" class="detail-link" title="Link to this function">
+    <a href="#maybe_fetch/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">maybe_fetch_async(entries, opts \\ [])</h1>
+    <h1 class="signature" translate="no">maybe_fetch(entries, opts \\ [])</h1>
 
       <a href="https://github.com/bonfire-networks/activity_pub/blob/main/lib/federator/fetcher.ex#L70" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
@@ -467,7 +555,7 @@ Applies to fetching of both ancestor (reply-to) and child (reply) objects.</p>
 
         <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.6) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.8) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
@@ -475,7 +563,7 @@ Applies to fetching of both ancestor (reply-to) and child (reply) objects.</p>
       </footer>
     </div>
   </div>
-</section>
+</main>
 </div>
 
 

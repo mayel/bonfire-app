@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.30.6">
-    <meta name="project" content="bonfire_umbrella v0.9.6-classic-beta.12">
+    <meta name="generator" content="ExDoc v0.30.8">
+    <meta name="project" content="bonfire_umbrella v0.9.6-cooperation-beta.26">
 
-    <title>Bonfire.Common.Localise.Cldr.List — bonfire_umbrella v0.9.6-classic-beta.12</title>
-    <link rel="stylesheet" href="dist/html-elixir-M3TQBNKO.css" />
+    <title>Bonfire.Common.Localise.Cldr.List — bonfire_umbrella v0.9.6-cooperation-beta.26</title>
+    <link rel="stylesheet" href="dist/html-elixir-XFYN5IVA.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-KDPBTEPL.js"></script>
-    <script src="dist/sidebar_items-1D2A101B.js"></script>
+    <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
+    <script src="dist/sidebar_items-BF8AC0A5.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/html-CP2A7WXZ.js"></script>
+    <script async src="dist/html-J2ASZTQE.js"></script>
 
 
   </head>
@@ -38,22 +38,22 @@
 
 <div class="main">
 
-<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
   <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
 </button>
 
-<section class="sidebar">
+<nav id="sidebar" class="sidebar">
   <form class="sidebar-search" action="search.html">
+    <label class="search-label">
+      <span class="sr-only">Search documentation of bonfire_umbrella</span>
+      <input name="q" type="text" class="search-input" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+    </label>
     <button type="submit" class="search-button" aria-label="Submit Search">
       <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
     </button>
-    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
-      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
+    <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+      <i class="ri-close-line ri-lg" title="Cancel search"></i>
     </button>
-    <label class="search-label">
-      <p class="sr-only">Search</p>
-      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
-    </label>
   </form>
 
   <div class="autocomplete">
@@ -72,24 +72,48 @@
 bonfire_umbrella
       </a>
       <div class="sidebar-projectVersion" translate="no">
-        v0.9.6-classic-beta.12
+        v0.9.6-cooperation-beta.26
       </div>
     </div>
-    <ul class="sidebar-listNav">
-      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+    <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
+      <li>
+        <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel" aria-selected="true" tabindex="0">
+Pages
+        </button>
+      </li>
 
-        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+        <li>
+          <button id="modules-list-tab-button" role="tab" data-type="modules" aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
+            Modules
+          </button>
+        </li>
 
 
-        <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
+        <li>
+          <button id="tasks-list-tab-button" role="tab" data-type="tasks" aria-controls="tasks-tab-panel" aria-selected="false" tabindex="-1">
+            <span translate="no">Mix</span> Tasks
+          </button>
+        </li>
 
     </ul>
   </div>
 
-  <ul id="full-list"></ul>
-</section>
+  <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
+    <ul id="extras-full-list" class="full-list"></ul>
+  </div>
 
-<section class="content">
+    <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button" hidden>
+      <ul id="modules-full-list" class="full-list"></ul>
+    </div>
+
+
+    <div id="tasks-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="tasks-list-tab-button" hidden>
+      <ul id="tasks-full-list" class="full-list"></ul>
+    </div>
+
+</nav>
+
+<main class="content">
   <output role="status" id="toast"></output>
   <div class="content-outer">
     <div id="content" class="content-inner">
@@ -107,15 +131,15 @@ bonfire_umbrella
     </a>
 
   <span translate="no">Bonfire.Common.Localise.Cldr.List</span> 
-  <small class="app-vsn" translate="no">(bonfire_umbrella v0.9.6-classic-beta.12)</small>
+  <small class="app-vsn" translate="no">(bonfire_umbrella v0.9.6-cooperation-beta.26)</small>
 
 </h1>
 
 
   <section id="moduledoc">
 <p>Cldr backend module that formats lists.</p><p>If we have a list of days like <code class="inline">[&quot;Monday&quot;, &quot;Tuesday&quot;, &quot;Wednesday&quot;]</code>
-then we can format that list for a given locale by:</p><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="6244124591-1">(</span><span class="p" data-group-id="6244124591-2">[</span><span class="s">&quot;Monday&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Tuesday&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Wednesday&quot;</span><span class="p" data-group-id="6244124591-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p" data-group-id="6244124591-1">)</span><span class="w">
-</span><span class="p" data-group-id="6244124591-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Monday, Tuesday, and Wednesday&quot;</span><span class="p" data-group-id="6244124591-3">}</span></code></pre>
+then we can format that list for a given locale by:</p><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="8757778871-1">(</span><span class="p" data-group-id="8757778871-2">[</span><span class="s">&quot;Monday&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Tuesday&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Wednesday&quot;</span><span class="p" data-group-id="8757778871-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p" data-group-id="8757778871-1">)</span><span class="w">
+</span><span class="p" data-group-id="8757778871-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Monday, Tuesday, and Wednesday&quot;</span><span class="p" data-group-id="8757778871-3">}</span></code></pre>
   </section>
 
 
@@ -123,8 +147,8 @@ then we can format that list for a given locale by:</p><pre><code class="makeup 
     <h1 class="section-heading">
       <a class="hover-link" href="#summary">
         <i class="ri-link-m" aria-hidden="true"></i>
-        Summary
       </a>
+      <span class="text">Summary</span>
     </h1>
 <div class="summary-functions summary">
   <h2>
@@ -211,8 +235,8 @@ an error.</p></div>
     <h1 class="section-heading">
       <a class="hover-link" href="#functions">
         <i class="ri-link-m" aria-hidden="true"></i>
-Functions
       </a>
+      <span class="text">Functions</span>
     </h1>
     <div class="functions-list">
 <section class="detail" id="intersperse/2">
@@ -244,44 +268,44 @@ Functions
       </div>
 
 <p>Intersperces a list elements into a list format according to the list
-pattern rules for a locale.</p><p>This function can be helpful when creating a list from <a href="https://hexdocs.pm/phoenix/1.7.7/Phoenix.html"><code class="inline">Phoenix</code></a>
+pattern rules for a locale.</p><p>This function can be helpful when creating a list from <a href="https://hexdocs.pm/phoenix/1.7.9/Phoenix.html"><code class="inline">Phoenix</code></a>
 safe strings which are of the format <code class="inline">{:safe, &quot;some string&quot;}</code></p><h2 id="intersperse/2-arguments" class="section-heading">
-  <a href="#intersperse/2-arguments">
+  <a href="#intersperse/2-arguments" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Arguments
   </a>
+  <span class="text">Arguments</span>
 </h2>
 <ul><li><p><code class="inline">list</code> is any list of of terms that can be passed through <a href="https://hexdocs.pm/elixir/Kernel.html#to_string/1"><code class="inline">Kernel.to_string/1</code></a></p></li><li><p><code class="inline">options</code> is a keyword list</p></li></ul><h2 id="intersperse/2-options" class="section-heading">
-  <a href="#intersperse/2-options">
+  <a href="#intersperse/2-options" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Options
   </a>
+  <span class="text">Options</span>
 </h2>
 <ul><li><p><code class="inline">:locale</code> is any configured locale. See . The default
 is <a href="https://hexdocs.pm/bonfire_common/0.1.0/Bonfire.Common.Localise.Cldr.html#known_locale_names/0"><code class="inline">Bonfire.Common.Localise.Cldr.known_locale_names/0</code></a>.</p></li><li><p><code class="inline">:format</code> is one of those returned by
 <a href="https://hexdocs.pm/ex_cldr_lists/2.10.1/Cldr.List.html#known_list_formats/0"><code class="inline">Cldr.List.known_list_formats/0</code></a>. The default is <code class="inline">format: :standard</code></p></li></ul><h2 id="intersperse/2-examples" class="section-heading">
-  <a href="#intersperse/2-examples">
+  <a href="#intersperse/2-examples" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Examples
   </a>
+  <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">intersperse</span><span class="p" data-group-id="5391962771-1">(</span><span class="p" data-group-id="5391962771-2">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="5391962771-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p" data-group-id="5391962771-1">)</span><span class="w">
-</span><span class="p" data-group-id="5391962771-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5391962771-4">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, and &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="5391962771-4">]</span><span class="p" data-group-id="5391962771-3">}</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">intersperse</span><span class="p" data-group-id="3797639220-1">(</span><span class="p" data-group-id="3797639220-2">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="3797639220-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p" data-group-id="3797639220-1">)</span><span class="w">
+</span><span class="p" data-group-id="3797639220-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3797639220-4">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, and &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="3797639220-4">]</span><span class="p" data-group-id="3797639220-3">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">intersperse</span><span class="p" data-group-id="5391962771-5">(</span><span class="p" data-group-id="5391962771-6">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="5391962771-6">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">format</span><span class="p">:</span><span class="w"> </span><span class="ss">:unit_narrow</span><span class="p" data-group-id="5391962771-5">)</span><span class="w">
-</span><span class="p" data-group-id="5391962771-7">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5391962771-8">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="5391962771-8">]</span><span class="p" data-group-id="5391962771-7">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">intersperse</span><span class="p" data-group-id="3797639220-5">(</span><span class="p" data-group-id="3797639220-6">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="3797639220-6">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">format</span><span class="p">:</span><span class="w"> </span><span class="ss">:unit_narrow</span><span class="p" data-group-id="3797639220-5">)</span><span class="w">
+</span><span class="p" data-group-id="3797639220-7">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3797639220-8">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="3797639220-8">]</span><span class="p" data-group-id="3797639220-7">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">intersperse</span><span class="p" data-group-id="5391962771-9">(</span><span class="p" data-group-id="5391962771-10">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="5391962771-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fr&quot;</span><span class="p" data-group-id="5391962771-9">)</span><span class="w">
-</span><span class="p" data-group-id="5391962771-11">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5391962771-12">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; et &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="5391962771-12">]</span><span class="p" data-group-id="5391962771-11">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">intersperse</span><span class="p" data-group-id="3797639220-9">(</span><span class="p" data-group-id="3797639220-10">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="3797639220-10">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fr&quot;</span><span class="p" data-group-id="3797639220-9">)</span><span class="w">
+</span><span class="p" data-group-id="3797639220-11">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3797639220-12">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; et &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="3797639220-12">]</span><span class="p" data-group-id="3797639220-11">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">intersperse</span><span class="p" data-group-id="5391962771-13">(</span><span class="p" data-group-id="5391962771-14">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p" data-group-id="5391962771-14">]</span><span class="p" data-group-id="5391962771-13">)</span><span class="w">
-</span><span class="p" data-group-id="5391962771-15">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5391962771-16">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, and &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p" data-group-id="5391962771-16">]</span><span class="p" data-group-id="5391962771-15">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">intersperse</span><span class="p" data-group-id="3797639220-13">(</span><span class="p" data-group-id="3797639220-14">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p" data-group-id="3797639220-14">]</span><span class="p" data-group-id="3797639220-13">)</span><span class="w">
+</span><span class="p" data-group-id="3797639220-15">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3797639220-16">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, and &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p" data-group-id="3797639220-16">]</span><span class="p" data-group-id="3797639220-15">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">intersperse</span><span class="p" data-group-id="5391962771-17">(</span><span class="p" data-group-id="5391962771-18">[</span><span class="s">&quot;a&quot;</span><span class="p" data-group-id="5391962771-18">]</span><span class="p" data-group-id="5391962771-17">)</span><span class="w">
-</span><span class="p" data-group-id="5391962771-19">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5391962771-20">[</span><span class="s">&quot;a&quot;</span><span class="p" data-group-id="5391962771-20">]</span><span class="p" data-group-id="5391962771-19">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">intersperse</span><span class="p" data-group-id="3797639220-17">(</span><span class="p" data-group-id="3797639220-18">[</span><span class="s">&quot;a&quot;</span><span class="p" data-group-id="3797639220-18">]</span><span class="p" data-group-id="3797639220-17">)</span><span class="w">
+</span><span class="p" data-group-id="3797639220-19">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3797639220-20">[</span><span class="s">&quot;a&quot;</span><span class="p" data-group-id="3797639220-20">]</span><span class="p" data-group-id="3797639220-19">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">intersperse</span><span class="p" data-group-id="5391962771-21">(</span><span class="p" data-group-id="5391962771-22">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p" data-group-id="5391962771-22">]</span><span class="p" data-group-id="5391962771-21">)</span><span class="w">
-</span><span class="p" data-group-id="5391962771-23">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="5391962771-24">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; and &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="5391962771-24">]</span><span class="p" data-group-id="5391962771-23">}</span></code></pre>
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">intersperse</span><span class="p" data-group-id="3797639220-21">(</span><span class="p" data-group-id="3797639220-22">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p" data-group-id="3797639220-22">]</span><span class="p" data-group-id="3797639220-21">)</span><span class="w">
+</span><span class="p" data-group-id="3797639220-23">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="3797639220-24">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; and &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p" data-group-id="3797639220-24">]</span><span class="p" data-group-id="3797639220-23">}</span></code></pre>
   </section>
 </section>
 <section class="detail" id="intersperse/3">
@@ -335,16 +359,16 @@ is <a href="https://hexdocs.pm/bonfire_common/0.1.0/Bonfire.Common.Localise.Cldr
 
 <p>Formats a list using <a href="#intersperse/2"><code class="inline">intersperse/2</code></a> but raises if there is
 an error.</p><h2 id="intersperse!/2-examples" class="section-heading">
-  <a href="#intersperse!/2-examples">
+  <a href="#intersperse!/2-examples" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Examples
   </a>
+  <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">intersperse!</span><span class="p" data-group-id="3646364474-1">(</span><span class="p" data-group-id="3646364474-2">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="3646364474-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p" data-group-id="3646364474-1">)</span><span class="w">
-</span><span class="p" data-group-id="3646364474-3">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, and &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="3646364474-3">]</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">intersperse!</span><span class="p" data-group-id="4157828916-1">(</span><span class="p" data-group-id="4157828916-2">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="4157828916-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p" data-group-id="4157828916-1">)</span><span class="w">
+</span><span class="p" data-group-id="4157828916-3">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, and &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="4157828916-3">]</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">intersperse!</span><span class="p" data-group-id="3646364474-4">(</span><span class="p" data-group-id="3646364474-5">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="3646364474-5">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">format</span><span class="p">:</span><span class="w"> </span><span class="ss">:unit_narrow</span><span class="p" data-group-id="3646364474-4">)</span><span class="w">
-</span><span class="p" data-group-id="3646364474-6">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="3646364474-6">]</span></code></pre>
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">intersperse!</span><span class="p" data-group-id="4157828916-4">(</span><span class="p" data-group-id="4157828916-5">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="4157828916-5">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">format</span><span class="p">:</span><span class="w"> </span><span class="ss">:unit_narrow</span><span class="p" data-group-id="4157828916-4">)</span><span class="w">
+</span><span class="p" data-group-id="4157828916-6">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="4157828916-6">]</span></code></pre>
   </section>
 </section>
 <section class="detail" id="list_formats_for/1">
@@ -368,20 +392,20 @@ an error.</p><h2 id="intersperse!/2-examples" class="section-heading">
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> list_formats_for(<a href="https://hexdocs.pm/ex_cldr/2.37.2/Cldr.Locale.html#t:locale_name/0">Cldr.Locale.locale_name</a>()) :: [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()]</pre>
+          <pre translate="no"><span class="attribute">@spec</span> list_formats_for(<a href="https://hexdocs.pm/ex_cldr/2.37.4/Cldr.Locale.html#t:locale_name/0">Cldr.Locale.locale_name</a>()) :: [<a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()]</pre>
 
       </div>
 
 <p>Returns the styles of list patterns available for a locale.</p><p>Returns a list of <code class="inline">atom</code>s of of the list formats that are
 available in CLDR for a locale.</p><h2 id="list_formats_for/1-example" class="section-heading">
-  <a href="#list_formats_for/1-example">
+  <a href="#list_formats_for/1-example" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Example
   </a>
+  <span class="text">Example</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">list_formats_for</span><span class="p" data-group-id="6938912825-1">(</span><span class="ss">:en</span><span class="p" data-group-id="6938912825-1">)</span><span class="w">
-</span><span class="p" data-group-id="6938912825-2">[</span><span class="ss">:or</span><span class="p">,</span><span class="w"> </span><span class="ss">:or_narrow</span><span class="p">,</span><span class="w"> </span><span class="ss">:or_short</span><span class="p">,</span><span class="w"> </span><span class="ss">:standard</span><span class="p">,</span><span class="w"> </span><span class="ss">:standard_narrow</span><span class="p">,</span><span class="w"> </span><span class="ss">:standard_short</span><span class="p">,</span><span class="w">
- </span><span class="ss">:unit</span><span class="p">,</span><span class="w"> </span><span class="ss">:unit_narrow</span><span class="p">,</span><span class="w"> </span><span class="ss">:unit_short</span><span class="p" data-group-id="6938912825-2">]</span></code></pre>
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">list_formats_for</span><span class="p" data-group-id="5077479370-1">(</span><span class="ss">:en</span><span class="p" data-group-id="5077479370-1">)</span><span class="w">
+</span><span class="p" data-group-id="5077479370-2">[</span><span class="ss">:or</span><span class="p">,</span><span class="w"> </span><span class="ss">:or_narrow</span><span class="p">,</span><span class="w"> </span><span class="ss">:or_short</span><span class="p">,</span><span class="w"> </span><span class="ss">:standard</span><span class="p">,</span><span class="w"> </span><span class="ss">:standard_narrow</span><span class="p">,</span><span class="w"> </span><span class="ss">:standard_short</span><span class="p">,</span><span class="w">
+ </span><span class="ss">:unit</span><span class="p">,</span><span class="w"> </span><span class="ss">:unit_narrow</span><span class="p">,</span><span class="w"> </span><span class="ss">:unit_short</span><span class="p" data-group-id="5077479370-2">]</span></code></pre>
   </section>
 </section>
 <section class="detail" id="list_patterns_for/1">
@@ -405,74 +429,74 @@ available in CLDR for a locale.</p><h2 id="list_formats_for/1-example" class="se
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@spec</span> list_patterns_for(<a href="https://hexdocs.pm/ex_cldr/2.37.2/Cldr.Locale.html#t:locale_name/0">Cldr.Locale.locale_name</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()</pre>
+          <pre translate="no"><span class="attribute">@spec</span> list_patterns_for(<a href="https://hexdocs.pm/ex_cldr/2.37.4/Cldr.Locale.html#t:locale_name/0">Cldr.Locale.locale_name</a>()) :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">map</a>()</pre>
 
       </div>
 
 <p>Returns the list patterns for a locale.</p><p>List patterns provide rules for combining multiple
 items into a language format appropriate for a locale.</p><h2 id="list_patterns_for/1-example" class="section-heading">
-  <a href="#list_patterns_for/1-example">
+  <a href="#list_patterns_for/1-example" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Example
   </a>
+  <span class="text">Example</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">list_patterns_for</span><span class="p" data-group-id="5077663959-1">(</span><span class="ss">:en</span><span class="p" data-group-id="5077663959-1">)</span><span class="w">
-</span><span class="p" data-group-id="5077663959-2">%{</span><span class="w">
-  </span><span class="ss">or</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-3">%{</span><span class="w">
-    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="5077663959-4">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; or &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-4">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-5">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, or &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-5">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-6">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-6">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-7">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-7">]</span><span class="w">
-  </span><span class="p" data-group-id="5077663959-3">}</span><span class="p">,</span><span class="w">
-  </span><span class="ss">or_narrow</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-8">%{</span><span class="w">
-    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="5077663959-9">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; or &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-9">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-10">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, or &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-10">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-11">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-11">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-12">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-12">]</span><span class="w">
-  </span><span class="p" data-group-id="5077663959-8">}</span><span class="p">,</span><span class="w">
-  </span><span class="ss">or_short</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-13">%{</span><span class="w">
-    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="5077663959-14">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; or &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-14">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-15">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, or &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-15">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-16">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-16">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-17">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-17">]</span><span class="w">
-  </span><span class="p" data-group-id="5077663959-13">}</span><span class="p">,</span><span class="w">
-  </span><span class="ss">standard</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-18">%{</span><span class="w">
-    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="5077663959-19">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; and &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-19">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-20">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, and &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-20">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-21">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-21">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-22">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-22">]</span><span class="w">
-  </span><span class="p" data-group-id="5077663959-18">}</span><span class="p">,</span><span class="w">
-  </span><span class="ss">standard_narrow</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-23">%{</span><span class="w">
-    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="5077663959-24">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-24">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-25">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-25">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-26">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-26">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-27">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-27">]</span><span class="w">
-  </span><span class="p" data-group-id="5077663959-23">}</span><span class="p">,</span><span class="w">
-  </span><span class="ss">standard_short</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-28">%{</span><span class="w">
-    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="5077663959-29">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &amp; &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-29">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-30">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &amp; &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-30">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-31">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-31">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-32">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-32">]</span><span class="w">
-  </span><span class="p" data-group-id="5077663959-28">}</span><span class="p">,</span><span class="w">
-  </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-33">%{</span><span class="w">
-    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="5077663959-34">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-34">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-35">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-35">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-36">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-36">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-37">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-37">]</span><span class="w">
-  </span><span class="p" data-group-id="5077663959-33">}</span><span class="p">,</span><span class="w">
-  </span><span class="ss">unit_narrow</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-38">%{</span><span class="w">
-    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="5077663959-39">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-39">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-40">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-40">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-41">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-41">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-42">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-42">]</span><span class="w">
-  </span><span class="p" data-group-id="5077663959-38">}</span><span class="p">,</span><span class="w">
-  </span><span class="ss">unit_short</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-43">%{</span><span class="w">
-    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="5077663959-44">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-44">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-45">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-45">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-46">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-46">]</span><span class="p">,</span><span class="w">
-    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="5077663959-47">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="5077663959-47">]</span><span class="w">
-  </span><span class="p" data-group-id="5077663959-43">}</span><span class="w">
-</span><span class="p" data-group-id="5077663959-2">}</span></code></pre>
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">list_patterns_for</span><span class="p" data-group-id="3276357135-1">(</span><span class="ss">:en</span><span class="p" data-group-id="3276357135-1">)</span><span class="w">
+</span><span class="p" data-group-id="3276357135-2">%{</span><span class="w">
+  </span><span class="ss">or</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-3">%{</span><span class="w">
+    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="3276357135-4">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; or &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-4">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-5">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, or &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-5">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-6">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-6">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-7">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-7">]</span><span class="w">
+  </span><span class="p" data-group-id="3276357135-3">}</span><span class="p">,</span><span class="w">
+  </span><span class="ss">or_narrow</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-8">%{</span><span class="w">
+    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="3276357135-9">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; or &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-9">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-10">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, or &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-10">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-11">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-11">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-12">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-12">]</span><span class="w">
+  </span><span class="p" data-group-id="3276357135-8">}</span><span class="p">,</span><span class="w">
+  </span><span class="ss">or_short</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-13">%{</span><span class="w">
+    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="3276357135-14">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; or &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-14">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-15">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, or &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-15">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-16">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-16">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-17">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-17">]</span><span class="w">
+  </span><span class="p" data-group-id="3276357135-13">}</span><span class="p">,</span><span class="w">
+  </span><span class="ss">standard</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-18">%{</span><span class="w">
+    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="3276357135-19">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; and &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-19">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-20">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, and &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-20">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-21">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-21">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-22">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-22">]</span><span class="w">
+  </span><span class="p" data-group-id="3276357135-18">}</span><span class="p">,</span><span class="w">
+  </span><span class="ss">standard_narrow</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-23">%{</span><span class="w">
+    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="3276357135-24">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-24">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-25">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-25">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-26">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-26">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-27">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-27">]</span><span class="w">
+  </span><span class="p" data-group-id="3276357135-23">}</span><span class="p">,</span><span class="w">
+  </span><span class="ss">standard_short</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-28">%{</span><span class="w">
+    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="3276357135-29">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &amp; &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-29">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-30">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &amp; &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-30">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-31">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-31">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-32">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-32">]</span><span class="w">
+  </span><span class="p" data-group-id="3276357135-28">}</span><span class="p">,</span><span class="w">
+  </span><span class="ss">unit</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-33">%{</span><span class="w">
+    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="3276357135-34">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-34">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-35">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-35">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-36">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-36">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-37">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-37">]</span><span class="w">
+  </span><span class="p" data-group-id="3276357135-33">}</span><span class="p">,</span><span class="w">
+  </span><span class="ss">unit_narrow</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-38">%{</span><span class="w">
+    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="3276357135-39">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-39">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-40">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-40">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-41">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-41">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-42">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot; &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-42">]</span><span class="w">
+  </span><span class="p" data-group-id="3276357135-38">}</span><span class="p">,</span><span class="w">
+  </span><span class="ss">unit_short</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-43">%{</span><span class="w">
+    </span><span class="mi">2</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p" data-group-id="3276357135-44">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-44">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">end</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-45">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-45">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">middle</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-46">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-46">]</span><span class="p">,</span><span class="w">
+    </span><span class="ss">start</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="3276357135-47">[</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;, &quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="3276357135-47">]</span><span class="w">
+  </span><span class="p" data-group-id="3276357135-43">}</span><span class="w">
+</span><span class="p" data-group-id="3276357135-2">}</span></code></pre>
   </section>
 </section>
 <section class="detail" id="to_string/2">
@@ -504,42 +528,42 @@ items into a language format appropriate for a locale.</p><h2 id="list_patterns_
       </div>
 
 <p>Formats a list into a string according to the list pattern rules for a locale.</p><h2 id="to_string/2-arguments" class="section-heading">
-  <a href="#to_string/2-arguments">
+  <a href="#to_string/2-arguments" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Arguments
   </a>
+  <span class="text">Arguments</span>
 </h2>
 <ul><li><p><code class="inline">list</code> is any list of of terms that can be passed through <a href="https://hexdocs.pm/elixir/Kernel.html#to_string/1"><code class="inline">Kernel.to_string/1</code></a></p></li><li><p><code class="inline">options</code> is a keyword list</p></li></ul><h2 id="to_string/2-options" class="section-heading">
-  <a href="#to_string/2-options">
+  <a href="#to_string/2-options" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Options
   </a>
+  <span class="text">Options</span>
 </h2>
 <ul><li><p><code class="inline">:locale</code> is any configured locale. See . The default
 is <a href="https://hexdocs.pm/bonfire_common/0.1.0/Bonfire.Common.Localise.Cldr.html#known_locale_names/0"><code class="inline">Bonfire.Common.Localise.Cldr.known_locale_names/0</code></a>.</p></li><li><p><code class="inline">:format</code> is one of those returned by
 <a href="https://hexdocs.pm/ex_cldr_lists/2.10.1/Cldr.List.html#known_list_formats/0"><code class="inline">Cldr.List.known_list_formats/0</code></a>. The default is <code class="inline">format: :standard</code></p></li></ul><h2 id="to_string/2-examples" class="section-heading">
-  <a href="#to_string/2-examples">
+  <a href="#to_string/2-examples" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Examples
   </a>
+  <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4219267362-1">(</span><span class="p" data-group-id="4219267362-2">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="4219267362-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p" data-group-id="4219267362-1">)</span><span class="w">
-</span><span class="p" data-group-id="4219267362-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a, b, and c&quot;</span><span class="p" data-group-id="4219267362-3">}</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="2176210008-1">(</span><span class="p" data-group-id="2176210008-2">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="2176210008-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p" data-group-id="2176210008-1">)</span><span class="w">
+</span><span class="p" data-group-id="2176210008-3">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a, b, and c&quot;</span><span class="p" data-group-id="2176210008-3">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4219267362-4">(</span><span class="p" data-group-id="4219267362-5">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="4219267362-5">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">format</span><span class="p">:</span><span class="w"> </span><span class="ss">:unit_narrow</span><span class="p" data-group-id="4219267362-4">)</span><span class="w">
-</span><span class="p" data-group-id="4219267362-6">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a b c&quot;</span><span class="p" data-group-id="4219267362-6">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="2176210008-4">(</span><span class="p" data-group-id="2176210008-5">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="2176210008-5">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">format</span><span class="p">:</span><span class="w"> </span><span class="ss">:unit_narrow</span><span class="p" data-group-id="2176210008-4">)</span><span class="w">
+</span><span class="p" data-group-id="2176210008-6">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a b c&quot;</span><span class="p" data-group-id="2176210008-6">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4219267362-7">(</span><span class="p" data-group-id="4219267362-8">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="4219267362-8">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fr&quot;</span><span class="p" data-group-id="4219267362-7">)</span><span class="w">
-</span><span class="p" data-group-id="4219267362-9">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a, b et c&quot;</span><span class="p" data-group-id="4219267362-9">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="2176210008-7">(</span><span class="p" data-group-id="2176210008-8">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="2176210008-8">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fr&quot;</span><span class="p" data-group-id="2176210008-7">)</span><span class="w">
+</span><span class="p" data-group-id="2176210008-9">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a, b et c&quot;</span><span class="p" data-group-id="2176210008-9">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4219267362-10">(</span><span class="p" data-group-id="4219267362-11">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p" data-group-id="4219267362-11">]</span><span class="p" data-group-id="4219267362-10">)</span><span class="w">
-</span><span class="p" data-group-id="4219267362-12">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1, 2, 3, 4, 5, and 6&quot;</span><span class="p" data-group-id="4219267362-12">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="2176210008-10">(</span><span class="p" data-group-id="2176210008-11">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p" data-group-id="2176210008-11">]</span><span class="p" data-group-id="2176210008-10">)</span><span class="w">
+</span><span class="p" data-group-id="2176210008-12">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1, 2, 3, 4, 5, and 6&quot;</span><span class="p" data-group-id="2176210008-12">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4219267362-13">(</span><span class="p" data-group-id="4219267362-14">[</span><span class="s">&quot;a&quot;</span><span class="p" data-group-id="4219267362-14">]</span><span class="p" data-group-id="4219267362-13">)</span><span class="w">
-</span><span class="p" data-group-id="4219267362-15">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a&quot;</span><span class="p" data-group-id="4219267362-15">}</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="2176210008-13">(</span><span class="p" data-group-id="2176210008-14">[</span><span class="s">&quot;a&quot;</span><span class="p" data-group-id="2176210008-14">]</span><span class="p" data-group-id="2176210008-13">)</span><span class="w">
+</span><span class="p" data-group-id="2176210008-15">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;a&quot;</span><span class="p" data-group-id="2176210008-15">}</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="4219267362-16">(</span><span class="p" data-group-id="4219267362-17">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p" data-group-id="4219267362-17">]</span><span class="p" data-group-id="4219267362-16">)</span><span class="w">
-</span><span class="p" data-group-id="4219267362-18">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1 and 2&quot;</span><span class="p" data-group-id="4219267362-18">}</span></code></pre>
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string</span><span class="p" data-group-id="2176210008-16">(</span><span class="p" data-group-id="2176210008-17">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p" data-group-id="2176210008-17">]</span><span class="p" data-group-id="2176210008-16">)</span><span class="w">
+</span><span class="p" data-group-id="2176210008-18">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;1 and 2&quot;</span><span class="p" data-group-id="2176210008-18">}</span></code></pre>
   </section>
 </section>
 <section class="detail" id="to_string!/2">
@@ -571,15 +595,15 @@ is <a href="https://hexdocs.pm/bonfire_common/0.1.0/Bonfire.Common.Localise.Cldr
 
 <p>Formats a list using <a href="#to_string/2"><code class="inline">to_string/2</code></a> but raises if there is
 an error.</p><h2 id="to_string!/2-examples" class="section-heading">
-  <a href="#to_string!/2-examples">
+  <a href="#to_string!/2-examples" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Examples
   </a>
+  <span class="text">Examples</span>
 </h2>
-<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string!</span><span class="p" data-group-id="4025393366-1">(</span><span class="p" data-group-id="4025393366-2">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="4025393366-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p" data-group-id="4025393366-1">)</span><span class="w">
+<pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string!</span><span class="p" data-group-id="3545618899-1">(</span><span class="p" data-group-id="3545618899-2">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="3545618899-2">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p" data-group-id="3545618899-1">)</span><span class="w">
 </span><span class="s">&quot;a, b, and c&quot;</span><span class="w">
 
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string!</span><span class="p" data-group-id="4025393366-3">(</span><span class="p" data-group-id="4025393366-4">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="4025393366-4">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">format</span><span class="p">:</span><span class="w"> </span><span class="ss">:unit_narrow</span><span class="p" data-group-id="4025393366-3">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Common.Localise.Cldr.List</span><span class="o">.</span><span class="n">to_string!</span><span class="p" data-group-id="3545618899-3">(</span><span class="p" data-group-id="3545618899-4">[</span><span class="s">&quot;a&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;b&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;c&quot;</span><span class="p" data-group-id="3545618899-4">]</span><span class="p">,</span><span class="w"> </span><span class="ss">locale</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;en&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">format</span><span class="p">:</span><span class="w"> </span><span class="ss">:unit_narrow</span><span class="p" data-group-id="3545618899-3">)</span><span class="w">
 </span><span class="s">&quot;a b c&quot;</span></code></pre>
   </section>
 </section>
@@ -604,7 +628,7 @@ an error.</p><h2 id="to_string!/2-examples" class="section-heading">
 
         <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.6) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.8) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
@@ -612,7 +636,7 @@ an error.</p><h2 id="to_string!/2-examples" class="section-heading">
       </footer>
     </div>
   </div>
-</section>
+</main>
 </div>
 
 

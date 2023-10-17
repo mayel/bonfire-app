@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.30.6">
-    <meta name="project" content="bonfire_umbrella v0.9.6-classic-beta.12">
+    <meta name="generator" content="ExDoc v0.30.8">
+    <meta name="project" content="bonfire_umbrella v0.9.6-cooperation-beta.26">
 
-    <title>Zest — bonfire_umbrella v0.9.6-classic-beta.12</title>
-    <link rel="stylesheet" href="dist/html-elixir-M3TQBNKO.css" />
+    <title>Zest — bonfire_umbrella v0.9.6-cooperation-beta.26</title>
+    <link rel="stylesheet" href="dist/html-elixir-XFYN5IVA.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-KDPBTEPL.js"></script>
-    <script src="dist/sidebar_items-1D2A101B.js"></script>
+    <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
+    <script src="dist/sidebar_items-BF8AC0A5.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/html-CP2A7WXZ.js"></script>
+    <script async src="dist/html-J2ASZTQE.js"></script>
 
 
   </head>
@@ -38,22 +38,22 @@
 
 <div class="main">
 
-<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
   <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
 </button>
 
-<section class="sidebar">
+<nav id="sidebar" class="sidebar">
   <form class="sidebar-search" action="search.html">
+    <label class="search-label">
+      <span class="sr-only">Search documentation of bonfire_umbrella</span>
+      <input name="q" type="text" class="search-input" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+    </label>
     <button type="submit" class="search-button" aria-label="Submit Search">
       <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
     </button>
-    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
-      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
+    <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+      <i class="ri-close-line ri-lg" title="Cancel search"></i>
     </button>
-    <label class="search-label">
-      <p class="sr-only">Search</p>
-      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
-    </label>
   </form>
 
   <div class="autocomplete">
@@ -72,24 +72,48 @@
 bonfire_umbrella
       </a>
       <div class="sidebar-projectVersion" translate="no">
-        v0.9.6-classic-beta.12
+        v0.9.6-cooperation-beta.26
       </div>
     </div>
-    <ul class="sidebar-listNav">
-      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+    <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
+      <li>
+        <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel" aria-selected="true" tabindex="0">
+Pages
+        </button>
+      </li>
 
-        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+        <li>
+          <button id="modules-list-tab-button" role="tab" data-type="modules" aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
+            Modules
+          </button>
+        </li>
 
 
-        <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
+        <li>
+          <button id="tasks-list-tab-button" role="tab" data-type="tasks" aria-controls="tasks-tab-panel" aria-selected="false" tabindex="-1">
+            <span translate="no">Mix</span> Tasks
+          </button>
+        </li>
 
     </ul>
   </div>
 
-  <ul id="full-list"></ul>
-</section>
+  <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
+    <ul id="extras-full-list" class="full-list"></ul>
+  </div>
 
-<section class="content">
+    <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button" hidden>
+      <ul id="modules-full-list" class="full-list"></ul>
+    </div>
+
+
+    <div id="tasks-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="tasks-list-tab-button" hidden>
+      <ul id="tasks-full-list" class="full-list"></ul>
+    </div>
+
+</nav>
+
+<main class="content">
   <output role="status" id="toast"></output>
   <div class="content-outer">
     <div id="content" class="content-inner">
@@ -111,55 +135,55 @@ bonfire_umbrella
 </h1>
 
 <p>A fresh approach to testing.</p><h2 id="usage" class="section-heading">
-  <a href="#usage">
+  <a href="#usage" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Usage
   </a>
+  <span class="text">Usage</span>
 </h2>
-<p>Installation:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="8156988385-1">{</span><span class="ss">:zest</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;~&gt; 0.1.2&quot;</span><span class="p" data-group-id="8156988385-1">}</span></code></pre><p>Example (taken from our test suite):</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyTest</span><span class="w"> </span><span class="k" data-group-id="4989653464-1">do</span><span class="w">
+<p>Installation:</p><pre><code class="makeup elixir" translate="no"><span class="p" data-group-id="6306062816-1">{</span><span class="ss">:zest</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;~&gt; 0.1.2&quot;</span><span class="p" data-group-id="6306062816-1">}</span></code></pre><p>Example (taken from our test suite):</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">MyTest</span><span class="w"> </span><span class="k" data-group-id="7274720750-1">do</span><span class="w">
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">ExUnit.Case</span><span class="w">
   </span><span class="kn">import</span><span class="w"> </span><span class="nc">Zest</span><span class="w">
   
-  </span><span class="n">test</span><span class="w"> </span><span class="s">&quot;scope fails spectacularly&quot;</span><span class="w"> </span><span class="k" data-group-id="4989653464-2">do</span><span class="w">
-    </span><span class="n">scope</span><span class="w"> </span><span class="p" data-group-id="4989653464-3">[</span><span class="ss">this</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4989653464-4">%{</span><span class="ss">is</span><span class="p">:</span><span class="w"> </span><span class="ss">:a</span><span class="p" data-group-id="4989653464-4">}</span><span class="p">,</span><span class="w"> </span><span class="ss">test</span><span class="p">:</span><span class="w"> </span><span class="ss">:case</span><span class="p" data-group-id="4989653464-3">]</span><span class="w"> </span><span class="k" data-group-id="4989653464-5">do</span><span class="w">
-      </span><span class="n">scope</span><span class="w"> </span><span class="p" data-group-id="4989653464-6">[</span><span class="ss">error</span><span class="p">:</span><span class="w"> </span><span class="ss">:this_should_not_show</span><span class="p" data-group-id="4989653464-6">]</span><span class="w"> </span><span class="k" data-group-id="4989653464-7">do</span><span class="w">
-      </span><span class="k" data-group-id="4989653464-7">end</span><span class="w">
-      </span><span class="n">scope</span><span class="w"> </span><span class="p" data-group-id="4989653464-8">[</span><span class="ss">the</span><span class="p">:</span><span class="w"> </span><span class="ss">:order</span><span class="p">,</span><span class="w"> </span><span class="ss">must</span><span class="p">:</span><span class="w"> </span><span class="ss">:be_correct</span><span class="p" data-group-id="4989653464-8">]</span><span class="w"> </span><span class="k" data-group-id="4989653464-9">do</span><span class="w">
-        </span><span class="n">scope</span><span class="w"> </span><span class="p" data-group-id="4989653464-10">[</span><span class="ss">to</span><span class="p">:</span><span class="w"> </span><span class="ss">:pass</span><span class="p" data-group-id="4989653464-10">]</span><span class="p">,</span><span class="w"> </span><span class="n">assert</span><span class="p" data-group-id="4989653464-11">(</span><span class="no">true</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="no">false</span><span class="p" data-group-id="4989653464-11">)</span><span class="w">
-      </span><span class="k" data-group-id="4989653464-9">end</span><span class="w">
-    </span><span class="k" data-group-id="4989653464-5">end</span><span class="w">
-  </span><span class="k" data-group-id="4989653464-2">end</span><span class="w">
+  </span><span class="n">test</span><span class="w"> </span><span class="s">&quot;scope fails spectacularly&quot;</span><span class="w"> </span><span class="k" data-group-id="7274720750-2">do</span><span class="w">
+    </span><span class="n">scope</span><span class="w"> </span><span class="p" data-group-id="7274720750-3">[</span><span class="ss">this</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7274720750-4">%{</span><span class="ss">is</span><span class="p">:</span><span class="w"> </span><span class="ss">:a</span><span class="p" data-group-id="7274720750-4">}</span><span class="p">,</span><span class="w"> </span><span class="ss">test</span><span class="p">:</span><span class="w"> </span><span class="ss">:case</span><span class="p" data-group-id="7274720750-3">]</span><span class="w"> </span><span class="k" data-group-id="7274720750-5">do</span><span class="w">
+      </span><span class="n">scope</span><span class="w"> </span><span class="p" data-group-id="7274720750-6">[</span><span class="ss">error</span><span class="p">:</span><span class="w"> </span><span class="ss">:this_should_not_show</span><span class="p" data-group-id="7274720750-6">]</span><span class="w"> </span><span class="k" data-group-id="7274720750-7">do</span><span class="w">
+      </span><span class="k" data-group-id="7274720750-7">end</span><span class="w">
+      </span><span class="n">scope</span><span class="w"> </span><span class="p" data-group-id="7274720750-8">[</span><span class="ss">the</span><span class="p">:</span><span class="w"> </span><span class="ss">:order</span><span class="p">,</span><span class="w"> </span><span class="ss">must</span><span class="p">:</span><span class="w"> </span><span class="ss">:be_correct</span><span class="p" data-group-id="7274720750-8">]</span><span class="w"> </span><span class="k" data-group-id="7274720750-9">do</span><span class="w">
+        </span><span class="n">scope</span><span class="w"> </span><span class="p" data-group-id="7274720750-10">[</span><span class="ss">to</span><span class="p">:</span><span class="w"> </span><span class="ss">:pass</span><span class="p" data-group-id="7274720750-10">]</span><span class="p">,</span><span class="w"> </span><span class="n">assert</span><span class="p" data-group-id="7274720750-11">(</span><span class="no">true</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="no">false</span><span class="p" data-group-id="7274720750-11">)</span><span class="w">
+      </span><span class="k" data-group-id="7274720750-9">end</span><span class="w">
+    </span><span class="k" data-group-id="7274720750-5">end</span><span class="w">
+  </span><span class="k" data-group-id="7274720750-2">end</span><span class="w">
 
-</span><span class="k" data-group-id="4989653464-1">end</span></code></pre><p>Output:</p><pre><code class="makeup elixir" translate="no"><span class="nc">Zest</span><span class="w"> </span><span class="ss">Context</span><span class="p">:</span><span class="w">
-</span><span class="o">*</span><span class="w"> </span><span class="ss">this</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8418368292-1">%{</span><span class="ss">is</span><span class="p">:</span><span class="w"> </span><span class="ss">:a</span><span class="p" data-group-id="8418368292-1">}</span><span class="w">
+</span><span class="k" data-group-id="7274720750-1">end</span></code></pre><p>Output:</p><pre><code class="makeup elixir" translate="no"><span class="nc">Zest</span><span class="w"> </span><span class="ss">Context</span><span class="p">:</span><span class="w">
+</span><span class="o">*</span><span class="w"> </span><span class="ss">this</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0952630008-1">%{</span><span class="ss">is</span><span class="p">:</span><span class="w"> </span><span class="ss">:a</span><span class="p" data-group-id="0952630008-1">}</span><span class="w">
 </span><span class="o">*</span><span class="w"> </span><span class="ss">test</span><span class="p">:</span><span class="w"> </span><span class="ss">:case</span><span class="w">
 </span><span class="o">*</span><span class="w"> </span><span class="ss">the</span><span class="p">:</span><span class="w"> </span><span class="ss">:order</span><span class="w">
 </span><span class="o">*</span><span class="w"> </span><span class="ss">must</span><span class="p">:</span><span class="w"> </span><span class="ss">:be_correct</span><span class="w">
 </span><span class="o">*</span><span class="w"> </span><span class="ss">to</span><span class="p">:</span><span class="w"> </span><span class="ss">:pass</span><span class="w">
 
 
-  </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="n">scope</span><span class="w"> </span><span class="n">fails</span><span class="w"> </span><span class="n">spectacularly</span><span class="w"> </span><span class="p" data-group-id="8418368292-2">(</span><span class="nc">ZestTest</span><span class="p" data-group-id="8418368292-2">)</span><span class="w">
+  </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="n">test</span><span class="w"> </span><span class="n">scope</span><span class="w"> </span><span class="n">fails</span><span class="w"> </span><span class="n">spectacularly</span><span class="w"> </span><span class="p" data-group-id="0952630008-2">(</span><span class="nc">ZestTest</span><span class="p" data-group-id="0952630008-2">)</span><span class="w">
      </span><span class="n">test</span><span class="o">/</span><span class="n">zest_test</span><span class="o">.</span><span class="n">exs</span><span class="p">:</span><span class="mi">7</span><span class="w">
      </span><span class="nc">Assertion</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">failed</span><span class="w">
      </span><span class="ss">code</span><span class="p">:</span><span class="w">  </span><span class="n">assert</span><span class="w"> </span><span class="no">true</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="no">false</span><span class="w">
      </span><span class="ss">left</span><span class="p">:</span><span class="w">  </span><span class="no">true</span><span class="w">
      </span><span class="ss">right</span><span class="p">:</span><span class="w"> </span><span class="no">false</span><span class="w">
      </span><span class="ss">stacktrace</span><span class="p">:</span><span class="w">
-       </span><span class="p" data-group-id="8418368292-3">(</span><span class="n">zest</span><span class="w"> </span><span class="mf">0.1</span><span class="o">.</span><span class="mi">0</span><span class="p" data-group-id="8418368292-3">)</span><span class="w"> </span><span class="n">lib</span><span class="o">/</span><span class="n">zest</span><span class="o">.</span><span class="n">ex</span><span class="p">:</span><span class="mi">52</span><span class="p">:</span><span class="w"> </span><span class="nc">Zest</span><span class="o">.</span><span class="n">in_scope</span><span class="o">/</span><span class="mi">2</span><span class="w">
-       </span><span class="p" data-group-id="8418368292-4">(</span><span class="n">zest</span><span class="w"> </span><span class="mf">0.1</span><span class="o">.</span><span class="mi">0</span><span class="p" data-group-id="8418368292-4">)</span><span class="w"> </span><span class="n">lib</span><span class="o">/</span><span class="n">zest</span><span class="o">.</span><span class="n">ex</span><span class="p">:</span><span class="mi">47</span><span class="p">:</span><span class="w"> </span><span class="n">anonymous</span><span class="w"> </span><span class="k" data-group-id="8418368292-5">fn</span><span class="o">/</span><span class="mi">1</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">Zest</span><span class="o">.</span><span class="n">in_scope</span><span class="o">/</span><span class="mi">2</span><span class="w">
-       </span><span class="p" data-group-id="8418368292-6">(</span><span class="n">zest</span><span class="w"> </span><span class="mf">0.1</span><span class="o">.</span><span class="mi">0</span><span class="p" data-group-id="8418368292-6">)</span><span class="w"> </span><span class="n">lib</span><span class="o">/</span><span class="n">zest</span><span class="o">.</span><span class="n">ex</span><span class="p">:</span><span class="mi">113</span><span class="p">:</span><span class="w"> </span><span class="nc">Zest</span><span class="o">.</span><span class="n">intercept</span><span class="o">/</span><span class="mi">2</span><span class="w">
-       </span><span class="n">test</span><span class="o">/</span><span class="n">zest_test</span><span class="o">.</span><span class="n">exs</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8418368292-7">(</span><span class="n">test</span><span class="p" data-group-id="8418368292-7">)</span></code></pre><h2 id="contributing" class="section-heading">
-  <a href="#contributing">
+       </span><span class="p" data-group-id="0952630008-3">(</span><span class="n">zest</span><span class="w"> </span><span class="mf">0.1</span><span class="o">.</span><span class="mi">0</span><span class="p" data-group-id="0952630008-3">)</span><span class="w"> </span><span class="n">lib</span><span class="o">/</span><span class="n">zest</span><span class="o">.</span><span class="n">ex</span><span class="p">:</span><span class="mi">52</span><span class="p">:</span><span class="w"> </span><span class="nc">Zest</span><span class="o">.</span><span class="n">in_scope</span><span class="o">/</span><span class="mi">2</span><span class="w">
+       </span><span class="p" data-group-id="0952630008-4">(</span><span class="n">zest</span><span class="w"> </span><span class="mf">0.1</span><span class="o">.</span><span class="mi">0</span><span class="p" data-group-id="0952630008-4">)</span><span class="w"> </span><span class="n">lib</span><span class="o">/</span><span class="n">zest</span><span class="o">.</span><span class="n">ex</span><span class="p">:</span><span class="mi">47</span><span class="p">:</span><span class="w"> </span><span class="n">anonymous</span><span class="w"> </span><span class="k" data-group-id="0952630008-5">fn</span><span class="o">/</span><span class="mi">1</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="nc">Zest</span><span class="o">.</span><span class="n">in_scope</span><span class="o">/</span><span class="mi">2</span><span class="w">
+       </span><span class="p" data-group-id="0952630008-6">(</span><span class="n">zest</span><span class="w"> </span><span class="mf">0.1</span><span class="o">.</span><span class="mi">0</span><span class="p" data-group-id="0952630008-6">)</span><span class="w"> </span><span class="n">lib</span><span class="o">/</span><span class="n">zest</span><span class="o">.</span><span class="n">ex</span><span class="p">:</span><span class="mi">113</span><span class="p">:</span><span class="w"> </span><span class="nc">Zest</span><span class="o">.</span><span class="n">intercept</span><span class="o">/</span><span class="mi">2</span><span class="w">
+       </span><span class="n">test</span><span class="o">/</span><span class="n">zest_test</span><span class="o">.</span><span class="n">exs</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="0952630008-7">(</span><span class="n">test</span><span class="p" data-group-id="0952630008-7">)</span></code></pre><h2 id="contributing" class="section-heading">
+  <a href="#contributing" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Contributing
   </a>
+  <span class="text">Contributing</span>
 </h2>
 <p>Contributions are welcome, even just doc fixes or suggestions.</p><p>This project has adopted a <a href="CONDUCT.md">Code of Conduct</a> based on the
 Contributor Covenant. Please be nice when interacting with the community.</p><h2 id="copyright-and-license" class="section-heading">
-  <a href="#copyright-and-license">
+  <a href="#copyright-and-license" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Copyright and License
   </a>
+  <span class="text">Copyright and License</span>
 </h2>
 <p>Copyright (c) 2020 James Laver</p><p>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
 you may not use this file except in compliance with the License.
@@ -171,12 +195,12 @@ limitations under the License.</p>
 <div class="bottom-actions">
   <div class="bottom-actions-item">
 
-      <a href="extension-bonfire_gatherings.html" class="bottom-actions-button" rel="prev">
+      <a href="extension-bonfire_editor_milkdown.html" class="bottom-actions-button" rel="prev">
         <span class="subheader">
           ← Previous Page
         </span>
         <span class="title">
-Bonfire.Gatherings
+Bonfire.Editor.Milkdown
         </span>
       </a>
 
@@ -211,7 +235,7 @@ Grumble
 
         <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.6) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.8) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
@@ -219,7 +243,7 @@ Grumble
       </footer>
     </div>
   </div>
-</section>
+</main>
 </div>
 
 

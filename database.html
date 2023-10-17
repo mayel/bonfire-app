@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.30.6">
-    <meta name="project" content="bonfire_umbrella v0.9.6-classic-beta.12">
+    <meta name="generator" content="ExDoc v0.30.8">
+    <meta name="project" content="bonfire_umbrella v0.9.6-cooperation-beta.26">
 
-    <title>Bonfire's Database - an intro — bonfire_umbrella v0.9.6-classic-beta.12</title>
-    <link rel="stylesheet" href="dist/html-elixir-M3TQBNKO.css" />
+    <title>Bonfire's Database - an intro — bonfire_umbrella v0.9.6-cooperation-beta.26</title>
+    <link rel="stylesheet" href="dist/html-elixir-XFYN5IVA.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-KDPBTEPL.js"></script>
-    <script src="dist/sidebar_items-1D2A101B.js"></script>
+    <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
+    <script src="dist/sidebar_items-BF8AC0A5.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/html-CP2A7WXZ.js"></script>
+    <script async src="dist/html-J2ASZTQE.js"></script>
 
 
   </head>
@@ -38,22 +38,22 @@
 
 <div class="main">
 
-<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
   <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
 </button>
 
-<section class="sidebar">
+<nav id="sidebar" class="sidebar">
   <form class="sidebar-search" action="search.html">
+    <label class="search-label">
+      <span class="sr-only">Search documentation of bonfire_umbrella</span>
+      <input name="q" type="text" class="search-input" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+    </label>
     <button type="submit" class="search-button" aria-label="Submit Search">
       <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
     </button>
-    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
-      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
+    <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+      <i class="ri-close-line ri-lg" title="Cancel search"></i>
     </button>
-    <label class="search-label">
-      <p class="sr-only">Search</p>
-      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
-    </label>
   </form>
 
   <div class="autocomplete">
@@ -72,24 +72,48 @@
 bonfire_umbrella
       </a>
       <div class="sidebar-projectVersion" translate="no">
-        v0.9.6-classic-beta.12
+        v0.9.6-cooperation-beta.26
       </div>
     </div>
-    <ul class="sidebar-listNav">
-      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+    <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
+      <li>
+        <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel" aria-selected="true" tabindex="0">
+Pages
+        </button>
+      </li>
 
-        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+        <li>
+          <button id="modules-list-tab-button" role="tab" data-type="modules" aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
+            Modules
+          </button>
+        </li>
 
 
-        <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
+        <li>
+          <button id="tasks-list-tab-button" role="tab" data-type="tasks" aria-controls="tasks-tab-panel" aria-selected="false" tabindex="-1">
+            <span translate="no">Mix</span> Tasks
+          </button>
+        </li>
 
     </ul>
   </div>
 
-  <ul id="full-list"></ul>
-</section>
+  <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
+    <ul id="extras-full-list" class="full-list"></ul>
+  </div>
 
-<section class="content">
+    <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button" hidden>
+      <ul id="modules-full-list" class="full-list"></ul>
+    </div>
+
+
+    <div id="tasks-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="tasks-list-tab-button" hidden>
+      <ul id="tasks-full-list" class="full-list"></ul>
+    </div>
+
+</nav>
+
+<main class="content">
   <output role="status" id="toast"></output>
   <div class="content-outer">
     <div id="content" class="content-inner">
@@ -111,44 +135,44 @@ bonfire_umbrella
 </h1>
 
 <p>Bonfire uses the excellent PostgreSQL database for most data storage. PostgreSQL allows us to make a wide range of queries and to make them relatively fast while upholding data integrity guarantees.</p><p>Postgres is a relational schema-led database - it expects you to pre-define tables and the fields in each table (represented in tabular form, i.e. as a collection of tables with each table consisting of a set of rows and columns). Fields can contain data or a reference to a row in another table. </p><p>This usually means that a field containing a reference has to be pre-defined with a foreign key pointing to a specific field (typically a primary key, like an ID column) <em>in a specific table</em>. </p><p>A simple example would be a blogging app, which might have a <code class="inline">post</code> table with <code class="inline">author</code> field that references the <code class="inline">user</code> table.</p><p>A social network, by contrast, is actually a graph of objects. Objects need to be able to refer to other objects by their ID without knowing their type. </p><p>A simple example would be likes, you might have a <code class="inline">likes</code> table with <code class="inline">liked_object</code> field that references the <code class="inline">post</code> table. But you don't just have posts that can be liked, but also videos, images, polls, etc, each with their own table?</p><p>We needed the flexibility to have a foreign key that can reference any referenceable object. We call our system <a href="https://hexdocs.pm/pointers/0.6.0/Pointers.html"><code class="inline">Pointers</code></a>.</p><p>This guide is a brief introduction to Pointers. It assumes some foundational knowledge:</p><ul><li><p>Basic understanding of how relational databases like Postgresql work, in particular:</p><ul><li>Tables being made up of fields.</li><li>What a primary key is and why it's useful.</li><li>Foreign keys and relationships between tables (1 to 1, 1 to Many, Many to 1, Many to Many).</li><li>Views as virtual tables backed by a SQL query.</li></ul></li><li><p>Basic understanding of Elixir (enough to follow the examples).</p></li><li><p>Basic working knowledge of the <a href="https://hexdocs.pm/ecto/Ecto.html">Ecto</a> database library (schema and migration definitions)</p></li></ul><h2 id="identifying-objects-the-ulid-type" class="section-heading">
-  <a href="#identifying-objects-the-ulid-type">
+  <a href="#identifying-objects-the-ulid-type" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Identifying objects - the ULID type
   </a>
+  <span class="text">Identifying objects - the ULID type</span>
 </h2>
 <p>All referenceable objects in the system have a unique ID (primary key) whose type is the <a href="https://github.com/ulid/spec"><code class="inline">ULID</code></a>. It's a lot like a <code class="inline">UUID</code> in that you can generate unique ones independently of the database. It's also a little different, being made up of two parts:</p><ul><li>The current timestamp, to millisecond precision.</li><li>Strong random padding for uniqueness.</li></ul><p>This means that it naturally sorts by time to the millisecond (close enough for us), giving us a performance advantage on queries ordered by a separate creation datetime field (by contrast, UUIDv4 is randomly distributed).</p><p>If you've only worked with integer primary keys before, you are probably used to letting the database dispense an ID for you. With <code class="inline">ULID</code> (or <code class="inline">UUID</code>), IDs can be known <em>before</em> they are stored, greatly easing the process of storing a graph of data and allowing us to do more of the preparation work outside of a transaction for increased performance.</p><p>In PostgreSQL, we actually store <code class="inline">ULID</code>s as <code class="inline">UUID</code> columns, thanks to both being the same size (and the lack of a <code class="inline">ULID</code> column type shipping with postgresql). You mostly will not notice this because it's handled for you, but there are a few places it can come up:</p><ul><li>Ecto debug and error output may show either binary values or UUID-formatted values.</li><li>Hand-written SQL may need to convert table IDs to the <code class="inline">UUID</code> format before use.</li></ul><h2 id="it-s-just-a-table" class="section-heading">
-  <a href="#it-s-just-a-table">
+  <a href="#it-s-just-a-table" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    It's just a table
   </a>
+  <span class="text">It's just a table</span>
 </h2>
 <p>The <code class="inline">pointers</code> system is mostly based around a single table represented by the <a href="https://hexdocs.pm/pointers/0.6.0/Pointers.Pointer.html"><code class="inline">Pointers.Pointer</code></a> schema with the following fields:</p><ul><li><code class="inline">id</code> (ULID) - the database-wide unique id for the object, primary key.</li><li><code class="inline">table_id</code> (ULID) - identifies the type of the object, references <a href="https://hexdocs.pm/pointers/0.6.0/Pointers.Table.html"><code class="inline">Pointers.Table</code></a>.</li><li><code class="inline">deleted_at</code> (timestamp, default: <code class="inline">null</code>) - when the object was deleted.</li></ul><p>Every object that is stored in the system will have a record in this table. It may also have records in other tables (handy for storing more than 3 fields about the object!).</p><p>Don't worry about <a href="https://hexdocs.pm/pointers/0.6.0/Pointers.Table.html"><code class="inline">Pointers.Table</code></a> for now, just know that every object type will have a record there so <code class="inline">Pointers.Pointer.table_id</code> can reference it.</p><h2 id="mixins-storing-data-about-objects" class="section-heading">
-  <a href="#mixins-storing-data-about-objects">
+  <a href="#mixins-storing-data-about-objects" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Mixins - storing data about objects
   </a>
+  <span class="text">Mixins - storing data about objects</span>
 </h2>
 <p>Mixins are tables which contain extra information on behalf of objects. Each object can choose to
-record or not record information for each mixin. Sample mixins include:</p><ul><li>user profile (containing a name, location and summary)</li><li>post content (containing the title, summary, and/or html body of a post or message)</li><li>created (containing the id of the object creator)</li></ul><p>In this way, they are reusable across different object types. One mixin may (or may not) be used by any number of objects. This is mostly driven by the type of the object we are storing, but can also be driven by user input.</p><p>Mixins are just tables too! The only requirement is they have a <code class="inline">ULID</code> primary key which references <a href="https://hexdocs.pm/pointers/0.6.0/Pointers.Pointer.html"><code class="inline">Pointers.Pointer</code></a>. The developer of the mixin is free to put whatever other fields they want in the table, so long as they have that primary-key-as-reference (which will be automatically added for you by the <code class="inline">mixin_schema</code> macro). </p><p>Here is a sample mixin definition for a user profile:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.Profile</span><span class="w"> </span><span class="k" data-group-id="6131525585-1">do</span><span class="w">
+record or not record information for each mixin. Sample mixins include:</p><ul><li>user profile (containing a name, location and summary)</li><li>post content (containing the title, summary, and/or html body of a post or message)</li><li>created (containing the id of the object creator)</li></ul><p>In this way, they are reusable across different object types. One mixin may (or may not) be used by any number of objects. This is mostly driven by the type of the object we are storing, but can also be driven by user input.</p><p>Mixins are just tables too! The only requirement is they have a <code class="inline">ULID</code> primary key which references <a href="https://hexdocs.pm/pointers/0.6.0/Pointers.Pointer.html"><code class="inline">Pointers.Pointer</code></a>. The developer of the mixin is free to put whatever other fields they want in the table, so long as they have that primary-key-as-reference (which will be automatically added for you by the <code class="inline">mixin_schema</code> macro). </p><p>Here is a sample mixin definition for a user profile:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.Profile</span><span class="w"> </span><span class="k" data-group-id="6796931141-1">do</span><span class="w">
 
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Pointers.Mixin</span><span class="p">,</span><span class="w">
     </span><span class="ss">otp_app</span><span class="p">:</span><span class="w"> </span><span class="ss">:bonfire_data_social</span><span class="p">,</span><span class="w">
     </span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;bonfire_data_social_profile&quot;</span><span class="w">
 
-  </span><span class="n">mixin_schema</span><span class="w"> </span><span class="k" data-group-id="6131525585-2">do</span><span class="w">
+  </span><span class="n">mixin_schema</span><span class="w"> </span><span class="k" data-group-id="6796931141-2">do</span><span class="w">
     </span><span class="n">field</span><span class="w"> </span><span class="ss">:name</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
     </span><span class="n">field</span><span class="w"> </span><span class="ss">:summary</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
     </span><span class="n">field</span><span class="w"> </span><span class="ss">:website</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
     </span><span class="n">field</span><span class="w"> </span><span class="ss">:location</span><span class="p">,</span><span class="w"> </span><span class="ss">:string</span><span class="w">
-  </span><span class="k" data-group-id="6131525585-2">end</span><span class="w">
-</span><span class="k" data-group-id="6131525585-1">end</span></code></pre><p>Aside from <code class="inline">use</code>ing <a href="https://hexdocs.pm/pointers/0.6.0/Pointers.Mixin.html"><code class="inline">Pointers.Mixin</code></a> instead of <a href="https://hexdocs.pm/ecto/3.10.3/Ecto.Schema.html"><code class="inline">Ecto.Schema</code></a> and calling <code class="inline">mixin_schema</code> instead of
+  </span><span class="k" data-group-id="6796931141-2">end</span><span class="w">
+</span><span class="k" data-group-id="6796931141-1">end</span></code></pre><p>Aside from <code class="inline">use</code>ing <a href="https://hexdocs.pm/pointers/0.6.0/Pointers.Mixin.html"><code class="inline">Pointers.Mixin</code></a> instead of <a href="https://hexdocs.pm/ecto/3.10.3/Ecto.Schema.html"><code class="inline">Ecto.Schema</code></a> and calling <code class="inline">mixin_schema</code> instead of
 <code class="inline">schema</code>, pretty similar to a standard Ecto schema, right? </p><p>The arguments to <code class="inline">use Pointers.Mixin</code> are:</p><ul><li><code class="inline">otp_app</code>: the OTP app name to use when loading dynamic configuration, e.g. the current extension or app (required)</li><li><code class="inline">source</code>: the underlying table name to use in the database</li></ul><p>We will cover dynamic configuration later. For now, you can use the OTP app that includes the module.</p><h2 id="multimixins" class="section-heading">
-  <a href="#multimixins">
+  <a href="#multimixins" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Multimixins
   </a>
+  <span class="text">Multimixins</span>
 </h2>
-<p>Multimixins are like mixins, except that where an object may have 0 or 1 of a particular mixins, an object may have any number of a particular multimixin.</p><p>For this to work, a multimixin must have a <em>compound primary key</em> which must contain an <code class="inline">id</code> column referencing <a href="https://hexdocs.pm/pointers/0.6.0/Pointers.Pointer.html"><code class="inline">Pointers.Pointer</code></a> and at least one other field which will collectively be unique.</p><p>An example multimixin is used for publishing an item to feeds:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.FeedPublish</span><span class="w"> </span><span class="k" data-group-id="6486689643-1">do</span><span class="w">
+<p>Multimixins are like mixins, except that where an object may have 0 or 1 of a particular mixins, an object may have any number of a particular multimixin.</p><p>For this to work, a multimixin must have a <em>compound primary key</em> which must contain an <code class="inline">id</code> column referencing <a href="https://hexdocs.pm/pointers/0.6.0/Pointers.Pointer.html"><code class="inline">Pointers.Pointer</code></a> and at least one other field which will collectively be unique.</p><p>An example multimixin is used for publishing an item to feeds:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.FeedPublish</span><span class="w"> </span><span class="k" data-group-id="3254065246-1">do</span><span class="w">
 
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Pointers.Mixin</span><span class="p">,</span><span class="w">
     </span><span class="ss">otp_app</span><span class="p">:</span><span class="w"> </span><span class="ss">:bonfire_data_social</span><span class="p">,</span><span class="w">
@@ -156,42 +180,42 @@ record or not record information for each mixin. Sample mixins include:</p><ul><
 
   </span><span class="kn">alias</span><span class="w"> </span><span class="nc">Pointers.Pointer</span><span class="w">
 
-  </span><span class="n">mixin_schema</span><span class="w"> </span><span class="k" data-group-id="6486689643-2">do</span><span class="w">
+  </span><span class="n">mixin_schema</span><span class="w"> </span><span class="k" data-group-id="3254065246-2">do</span><span class="w">
     </span><span class="n">belongs_to</span><span class="w"> </span><span class="ss">:feed</span><span class="p">,</span><span class="w"> </span><span class="nc">Pointer</span><span class="p">,</span><span class="w"> </span><span class="ss">primary_key</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="w">
-  </span><span class="k" data-group-id="6486689643-2">end</span><span class="w">
-</span><span class="k" data-group-id="6486689643-1">end</span></code></pre><p>Notice that this looks very similar to defining a mixin. Indeed, the only difference is the <code class="inline">primary_key: true</code> in this line, which adds a second field to the compound primary key.
+  </span><span class="k" data-group-id="3254065246-2">end</span><span class="w">
+</span><span class="k" data-group-id="3254065246-1">end</span></code></pre><p>Notice that this looks very similar to defining a mixin. Indeed, the only difference is the <code class="inline">primary_key: true</code> in this line, which adds a second field to the compound primary key.
 This results in ecto recording a compound primary key of <code class="inline">(id, feed_id)</code> for the schema (the id is added for you as with regular mixins).</p><h2 id="declaring-object-types" class="section-heading">
-  <a href="#declaring-object-types">
+  <a href="#declaring-object-types" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Declaring Object Types
   </a>
+  <span class="text">Declaring Object Types</span>
 </h2>
 <h3 id="picking-a-table-id" class="section-heading">
-  <a href="#picking-a-table-id">
+  <a href="#picking-a-table-id" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Picking a table id
   </a>
+  <span class="text">Picking a table id</span>
 </h3>
-<p>The first step to declaring a type is picking a unique table ID in ULID format. You could just generate one at the terminal, but since these IDs are special, we tend to assign a synthetic ULID that are readable as words so they stand out in debug output.</p><p>For example, the ID for the <code class="inline">Feed</code> table is: <code class="inline">1TFEEDS0NTHES0V1S0FM0RTA1S</code>, which can be read as &quot;It feeds on the souls of mortals&quot;. Feel free to have a little fun coming up with them, it makes debug output a little more cheery! The rules are:</p><ul><li>The alphabet is <a href="https://en.wikipedia.org/wiki/Base32#Crockford's_Base32">Crockford's Base32</a>.</li><li>They must be 26 characters in length.</li><li>The first character must be a digit in the range 0-7.</li></ul><p>To help you with this, the <a href="https://hexdocs.pm/pointers_ulid/0.2.2/Pointers.ULID.html#synthesise!/1"><code class="inline">Pointers.ULID.synthesise!/1</code></a> method takes an alphanumeric binary and tries to return you it transliterated into a valid ULID. Example usage:</p><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex(1)&gt; </span><span class="nc">Pointers.ULID</span><span class="o">.</span><span class="n">synthesise!</span><span class="p" data-group-id="8589433933-1">(</span><span class="s">&quot;itfeedsonthesouls&quot;</span><span class="p" data-group-id="8589433933-1">)</span><span class="w">
+<p>The first step to declaring a type is picking a unique table ID in ULID format. You could just generate one at the terminal, but since these IDs are special, we tend to assign a synthetic ULID that are readable as words so they stand out in debug output.</p><p>For example, the ID for the <code class="inline">Feed</code> table is: <code class="inline">1TFEEDS0NTHES0V1S0FM0RTA1S</code>, which can be read as &quot;It feeds on the souls of mortals&quot;. Feel free to have a little fun coming up with them, it makes debug output a little more cheery! The rules are:</p><ul><li>The alphabet is <a href="https://en.wikipedia.org/wiki/Base32#Crockford's_Base32">Crockford's Base32</a>.</li><li>They must be 26 characters in length.</li><li>The first character must be a digit in the range 0-7.</li></ul><p>To help you with this, the <a href="https://hexdocs.pm/pointers_ulid/0.2.2/Pointers.ULID.html#synthesise!/1"><code class="inline">Pointers.ULID.synthesise!/1</code></a> method takes an alphanumeric binary and tries to return you it transliterated into a valid ULID. Example usage:</p><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex(1)&gt; </span><span class="nc">Pointers.ULID</span><span class="o">.</span><span class="n">synthesise!</span><span class="p" data-group-id="7769904578-1">(</span><span class="s">&quot;itfeedsonthesouls&quot;</span><span class="p" data-group-id="7769904578-1">)</span><span class="w">
 
-</span><span class="mi">11</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="mf">28.299</span><span class="w"> </span><span class="p" data-group-id="8589433933-2">[</span><span class="n">error</span><span class="p" data-group-id="8589433933-2">]</span><span class="w"> </span><span class="nc">Too</span><span class="w"> </span><span class="n">short</span><span class="p">,</span><span class="w"> </span><span class="n">need</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="n">chars</span><span class="o">.</span><span class="w">
+</span><span class="mi">11</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="mf">28.299</span><span class="w"> </span><span class="p" data-group-id="7769904578-2">[</span><span class="n">error</span><span class="p" data-group-id="7769904578-2">]</span><span class="w"> </span><span class="nc">Too</span><span class="w"> </span><span class="n">short</span><span class="p">,</span><span class="w"> </span><span class="n">need</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="n">chars</span><span class="o">.</span><span class="w">
 </span><span class="ss">:ok</span><span class="w">
-</span><span class="gp unselectable">iex(2)&gt; </span><span class="nc">Pointers.ULID</span><span class="o">.</span><span class="n">synthesise!</span><span class="p" data-group-id="8589433933-3">(</span><span class="s">&quot;itfeedsonthesoulsofmortalsandothers&quot;</span><span class="p" data-group-id="8589433933-3">)</span><span class="w">
+</span><span class="gp unselectable">iex(2)&gt; </span><span class="nc">Pointers.ULID</span><span class="o">.</span><span class="n">synthesise!</span><span class="p" data-group-id="7769904578-3">(</span><span class="s">&quot;itfeedsonthesoulsofmortalsandothers&quot;</span><span class="p" data-group-id="7769904578-3">)</span><span class="w">
 
-</span><span class="mi">11</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="mf">31.819</span><span class="w"> </span><span class="p" data-group-id="8589433933-4">[</span><span class="n">warn</span><span class="p" data-group-id="8589433933-4">]</span><span class="w">  </span><span class="nc">Too</span><span class="w"> </span><span class="n">long</span><span class="p">,</span><span class="w"> </span><span class="n">chopping</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="n">chars</span><span class="w">
+</span><span class="mi">11</span><span class="p">:</span><span class="mi">20</span><span class="p">:</span><span class="mf">31.819</span><span class="w"> </span><span class="p" data-group-id="7769904578-4">[</span><span class="n">warn</span><span class="p" data-group-id="7769904578-4">]</span><span class="w">  </span><span class="nc">Too</span><span class="w"> </span><span class="n">long</span><span class="p">,</span><span class="w"> </span><span class="n">chopping</span><span class="w"> </span><span class="n">off</span><span class="w"> </span><span class="n">last</span><span class="w"> </span><span class="mi">9</span><span class="w"> </span><span class="n">chars</span><span class="w">
 </span><span class="s">&quot;1TFEEDS0NTHES0V1S0FM0RTA1S&quot;</span><span class="w">
-</span><span class="gp unselectable">iex(3)&gt; </span><span class="nc">Pointers.ULID</span><span class="o">.</span><span class="n">synthesise!</span><span class="p" data-group-id="8589433933-5">(</span><span class="s">&quot;itfeedsonthesoulsofmortals&quot;</span><span class="p" data-group-id="8589433933-5">)</span><span class="w">
+</span><span class="gp unselectable">iex(3)&gt; </span><span class="nc">Pointers.ULID</span><span class="o">.</span><span class="n">synthesise!</span><span class="p" data-group-id="7769904578-5">(</span><span class="s">&quot;itfeedsonthesoulsofmortals&quot;</span><span class="p" data-group-id="7769904578-5">)</span><span class="w">
 </span><span class="s">&quot;1TFEEDS0NTHES0V1S0FM0RTA1S&quot;</span><span class="w">
-</span><span class="gp unselectable">iex(4)&gt; </span><span class="nc">Pointers.ULID</span><span class="o">.</span><span class="n">synthesise!</span><span class="p" data-group-id="8589433933-6">(</span><span class="s">&quot;gtfeedsonthesoulsofmortals&quot;</span><span class="p" data-group-id="8589433933-6">)</span><span class="w">
+</span><span class="gp unselectable">iex(4)&gt; </span><span class="nc">Pointers.ULID</span><span class="o">.</span><span class="n">synthesise!</span><span class="p" data-group-id="7769904578-6">(</span><span class="s">&quot;gtfeedsonthesoulsofmortals&quot;</span><span class="p" data-group-id="7769904578-6">)</span><span class="w">
 
-</span><span class="mi">11</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="mf">03.268</span><span class="w"> </span><span class="p" data-group-id="8589433933-7">[</span><span class="n">warn</span><span class="p" data-group-id="8589433933-7">]</span><span class="w">  </span><span class="nc">First</span><span class="w"> </span><span class="n">character</span><span class="w"> </span><span class="n">must</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">digit</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">range</span><span class="w"> </span><span class="mi">0</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="n">replacing</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="mi">7</span><span class="w">
+</span><span class="mi">11</span><span class="p">:</span><span class="mi">21</span><span class="p">:</span><span class="mf">03.268</span><span class="w"> </span><span class="p" data-group-id="7769904578-7">[</span><span class="n">warn</span><span class="p" data-group-id="7769904578-7">]</span><span class="w">  </span><span class="nc">First</span><span class="w"> </span><span class="n">character</span><span class="w"> </span><span class="n">must</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">digit</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">range</span><span class="w"> </span><span class="mi">0</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="n">replacing</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="mi">7</span><span class="w">
 </span><span class="s">&quot;7TFEEDS0NTHES0V1S0FM0RTA1S&quot;</span></code></pre><h3 id="virtuals" class="section-heading">
-  <a href="#virtuals">
+  <a href="#virtuals" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Virtuals
   </a>
+  <span class="text">Virtuals</span>
 </h3>
-<p>Virtuals are the simplest and most common type of object. Here's a definition of block:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.Block</span><span class="w"> </span><span class="k" data-group-id="7693214843-1">do</span><span class="w">
+<p>Virtuals are the simplest and most common type of object. Here's a definition of block:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.Block</span><span class="w"> </span><span class="k" data-group-id="9862990290-1">do</span><span class="w">
 
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Pointers.Virtual</span><span class="p">,</span><span class="w">
     </span><span class="ss">otp_app</span><span class="p">:</span><span class="w"> </span><span class="ss">:bonfire_data_social</span><span class="p">,</span><span class="w">
@@ -200,229 +224,229 @@ This results in ecto recording a compound primary key of <code class="inline">(i
 
   </span><span class="kn">alias</span><span class="w"> </span><span class="nc">Bonfire.Data.Edges.Edge</span><span class="w">
 
-  </span><span class="n">virtual_schema</span><span class="w"> </span><span class="k" data-group-id="7693214843-2">do</span><span class="w">
+  </span><span class="n">virtual_schema</span><span class="w"> </span><span class="k" data-group-id="9862990290-2">do</span><span class="w">
     </span><span class="n">has_one</span><span class="w"> </span><span class="ss">:edge</span><span class="p">,</span><span class="w"> </span><span class="nc">Edge</span><span class="p">,</span><span class="w"> </span><span class="ss">foreign_key</span><span class="p">:</span><span class="w"> </span><span class="ss">:id</span><span class="w">
-  </span><span class="k" data-group-id="7693214843-2">end</span><span class="w">
-</span><span class="k" data-group-id="7693214843-1">end</span></code></pre><p>It should look quite similar to a mixin definition, except that we <code class="inline">use</code> <a href="https://hexdocs.pm/pointers/0.6.0/Pointers.Virtual.html"><code class="inline">Pointers.Virtual</code></a> this time (passing an additional <code class="inline">table_id</code> argument) and we call the <code class="inline">virtual_schema</code> macro.</p><p>The primary limitation of a virtual is that you cannot put extra fields into one. This also means that <code class="inline">belongs_to</code> is not generally permitted because it results in adding a field. <code class="inline">has_one</code> and <code class="inline">has_many</code> work just fine as they do not cause the creation of fields in the schema.</p><p>This is not usually a problem, as extra fields can be put into mixins or multimixins as appropriate.</p><p>Under the hood, a virtual has a view (in this example, called <code class="inline">bonfire_data_social_block</code>). It looks like a table with just an id, but it's populated with all the ids of blocks that are not deleted. When the view is inserted into, a record is created in the <code class="inline">pointers</code> table for you transparently. When you delete from the view, the corresponding <code class="inline">pointers</code> entry is marked deleted for you.</p><h3 id="pointables" class="section-heading">
-  <a href="#pointables">
+  </span><span class="k" data-group-id="9862990290-2">end</span><span class="w">
+</span><span class="k" data-group-id="9862990290-1">end</span></code></pre><p>It should look quite similar to a mixin definition, except that we <code class="inline">use</code> <a href="https://hexdocs.pm/pointers/0.6.0/Pointers.Virtual.html"><code class="inline">Pointers.Virtual</code></a> this time (passing an additional <code class="inline">table_id</code> argument) and we call the <code class="inline">virtual_schema</code> macro.</p><p>The primary limitation of a virtual is that you cannot put extra fields into one. This also means that <code class="inline">belongs_to</code> is not generally permitted because it results in adding a field. <code class="inline">has_one</code> and <code class="inline">has_many</code> work just fine as they do not cause the creation of fields in the schema.</p><p>This is not usually a problem, as extra fields can be put into mixins or multimixins as appropriate.</p><p>Under the hood, a virtual has a view (in this example, called <code class="inline">bonfire_data_social_block</code>). It looks like a table with just an id, but it's populated with all the ids of blocks that are not deleted. When the view is inserted into, a record is created in the <code class="inline">pointers</code> table for you transparently. When you delete from the view, the corresponding <code class="inline">pointers</code> entry is marked deleted for you.</p><h3 id="pointables" class="section-heading">
+  <a href="#pointables" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Pointables
   </a>
+  <span class="text">Pointables</span>
 </h3>
-<p>The other, lesser used, type of object is called the Pointable. The major difference is that unlike the simple case of virtuals, pointables are not backed by views, but by tables.</p><p>When a record is inserted into a pointable table, a copy is made in the <code class="inline">pointers</code> table for you transparently. When you delete from the table, the the corresponding <code class="inline">pointers</code> entry is marked deleted for you. In these ways, they behave very much like virtuals. By having a table, however, we are free to add new fields.</p><p>Pointables pay for this flexibility by being slightly more expensive than virtuals:</p><ul><li>Records must be inserted into/deleted from two tables (the pointable's table and the <code class="inline">pointers</code> table).</li><li>The pointable table needs its own primary key index.</li></ul><p>Here is a definition of a pointable type (indicating an ActivityPub activity whose type we don't recognise, stored as a JSON blob):</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.APActivity</span><span class="w"> </span><span class="k" data-group-id="4880382565-1">do</span><span class="w">
+<p>The other, lesser used, type of object is called the Pointable. The major difference is that unlike the simple case of virtuals, pointables are not backed by views, but by tables.</p><p>When a record is inserted into a pointable table, a copy is made in the <code class="inline">pointers</code> table for you transparently. When you delete from the table, the the corresponding <code class="inline">pointers</code> entry is marked deleted for you. In these ways, they behave very much like virtuals. By having a table, however, we are free to add new fields.</p><p>Pointables pay for this flexibility by being slightly more expensive than virtuals:</p><ul><li>Records must be inserted into/deleted from two tables (the pointable's table and the <code class="inline">pointers</code> table).</li><li>The pointable table needs its own primary key index.</li></ul><p>Here is a definition of a pointable type (indicating an ActivityPub activity whose type we don't recognise, stored as a JSON blob):</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.APActivity</span><span class="w"> </span><span class="k" data-group-id="0674947857-1">do</span><span class="w">
 
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Pointers.Pointable</span><span class="p">,</span><span class="w">
     </span><span class="ss">otp_app</span><span class="p">:</span><span class="w"> </span><span class="ss">:bonfire_data_social</span><span class="p">,</span><span class="w">
     </span><span class="ss">table_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;30NF1REAPACTTAB1ENVMBER0NE&quot;</span><span class="p">,</span><span class="w">
     </span><span class="ss">source</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;bonfire_data_social_apactivity&quot;</span><span class="w">
 
-  </span><span class="n">pointable_schema</span><span class="w"> </span><span class="k" data-group-id="4880382565-2">do</span><span class="w">
+  </span><span class="n">pointable_schema</span><span class="w"> </span><span class="k" data-group-id="0674947857-2">do</span><span class="w">
     </span><span class="n">field</span><span class="w"> </span><span class="ss">:json</span><span class="p">,</span><span class="w"> </span><span class="ss">:map</span><span class="w">
-  </span><span class="k" data-group-id="4880382565-2">end</span><span class="w">
-</span><span class="k" data-group-id="4880382565-1">end</span></code></pre><p>The choice of using a pointable instead of a virtual combined with one or more mixins is ultimately up to you.</p><h2 id="writing-migrations" class="section-heading">
-  <a href="#writing-migrations">
+  </span><span class="k" data-group-id="0674947857-2">end</span><span class="w">
+</span><span class="k" data-group-id="0674947857-1">end</span></code></pre><p>The choice of using a pointable instead of a virtual combined with one or more mixins is ultimately up to you.</p><h2 id="writing-migrations" class="section-heading">
+  <a href="#writing-migrations" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Writing Migrations
   </a>
+  <span class="text">Writing Migrations</span>
 </h2>
 <p>Migrations are typically included along with the schemas as public APIs you can call within your project's migrations.</p><h3 id="virtuals-1" class="section-heading">
-  <a href="#virtuals-1">
+  <a href="#virtuals-1" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Virtuals
   </a>
+  <span class="text">Virtuals</span>
 </h3>
-<p>Most virtuals are incredibly simple to migrate for:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.Post.Migration</span><span class="w"> </span><span class="k" data-group-id="4890257294-1">do</span><span class="w">
+<p>Most virtuals are incredibly simple to migrate for:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.Post.Migration</span><span class="w"> </span><span class="k" data-group-id="8072554640-1">do</span><span class="w">
 
   </span><span class="kn">import</span><span class="w"> </span><span class="nc">Pointers.Migration</span><span class="w">
   </span><span class="kn">alias</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.Post</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_post</span><span class="p" data-group-id="4890257294-2">(</span><span class="p" data-group-id="4890257294-2">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">migrate_virtual</span><span class="p" data-group-id="4890257294-3">(</span><span class="nc">Post</span><span class="p" data-group-id="4890257294-3">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_post</span><span class="p" data-group-id="8072554640-2">(</span><span class="p" data-group-id="8072554640-2">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">migrate_virtual</span><span class="p" data-group-id="8072554640-3">(</span><span class="nc">Post</span><span class="p" data-group-id="8072554640-3">)</span><span class="w">
 
-</span><span class="k" data-group-id="4890257294-1">end</span></code></pre><p>If you need to do more work, it can be a little trickier. Here's an example for <code class="inline">block</code>, which also creates a unique index on another table:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.Block.Migration</span><span class="w"> </span><span class="k" data-group-id="5099938575-1">do</span><span class="w">
+</span><span class="k" data-group-id="8072554640-1">end</span></code></pre><p>If you need to do more work, it can be a little trickier. Here's an example for <code class="inline">block</code>, which also creates a unique index on another table:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.Block.Migration</span><span class="w"> </span><span class="k" data-group-id="8044792753-1">do</span><span class="w">
 
   </span><span class="kn">import</span><span class="w"> </span><span class="nc">Ecto.Migration</span><span class="w">
   </span><span class="kn">import</span><span class="w"> </span><span class="nc">Pointers.Migration</span><span class="w">
   </span><span class="kn">import</span><span class="w"> </span><span class="nc">Bonfire.Data.Edges.Edge.Migration</span><span class="w">
   </span><span class="kn">alias</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.Block</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_block_view</span><span class="p" data-group-id="5099938575-2">(</span><span class="p" data-group-id="5099938575-2">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">migrate_virtual</span><span class="p" data-group-id="5099938575-3">(</span><span class="nc">Block</span><span class="p" data-group-id="5099938575-3">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_block_view</span><span class="p" data-group-id="8044792753-2">(</span><span class="p" data-group-id="8044792753-2">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">migrate_virtual</span><span class="p" data-group-id="8044792753-3">(</span><span class="nc">Block</span><span class="p" data-group-id="8044792753-3">)</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_block_unique_index</span><span class="p" data-group-id="5099938575-4">(</span><span class="p" data-group-id="5099938575-4">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">migrate_type_unique_index</span><span class="p" data-group-id="5099938575-5">(</span><span class="nc">Block</span><span class="p" data-group-id="5099938575-5">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_block_unique_index</span><span class="p" data-group-id="8044792753-4">(</span><span class="p" data-group-id="8044792753-4">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">migrate_type_unique_index</span><span class="p" data-group-id="8044792753-5">(</span><span class="nc">Block</span><span class="p" data-group-id="8044792753-5">)</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_block</span><span class="p" data-group-id="5099938575-6">(</span><span class="n">dir</span><span class="w"> </span><span class="o">\\</span><span class="w"> </span><span class="n">direction</span><span class="p" data-group-id="5099938575-7">(</span><span class="p" data-group-id="5099938575-7">)</span><span class="p" data-group-id="5099938575-6">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_block</span><span class="p" data-group-id="8044792753-6">(</span><span class="n">dir</span><span class="w"> </span><span class="o">\\</span><span class="w"> </span><span class="n">direction</span><span class="p" data-group-id="8044792753-7">(</span><span class="p" data-group-id="8044792753-7">)</span><span class="p" data-group-id="8044792753-6">)</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_block</span><span class="p" data-group-id="5099938575-8">(</span><span class="ss">:up</span><span class="p" data-group-id="5099938575-8">)</span><span class="w"> </span><span class="k" data-group-id="5099938575-9">do</span><span class="w">
-    </span><span class="n">migrate_block_view</span><span class="p" data-group-id="5099938575-10">(</span><span class="p" data-group-id="5099938575-10">)</span><span class="w">
-    </span><span class="n">migrate_block_unique_index</span><span class="p" data-group-id="5099938575-11">(</span><span class="p" data-group-id="5099938575-11">)</span><span class="w">
-  </span><span class="k" data-group-id="5099938575-9">end</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_block</span><span class="p" data-group-id="8044792753-8">(</span><span class="ss">:up</span><span class="p" data-group-id="8044792753-8">)</span><span class="w"> </span><span class="k" data-group-id="8044792753-9">do</span><span class="w">
+    </span><span class="n">migrate_block_view</span><span class="p" data-group-id="8044792753-10">(</span><span class="p" data-group-id="8044792753-10">)</span><span class="w">
+    </span><span class="n">migrate_block_unique_index</span><span class="p" data-group-id="8044792753-11">(</span><span class="p" data-group-id="8044792753-11">)</span><span class="w">
+  </span><span class="k" data-group-id="8044792753-9">end</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_block</span><span class="p" data-group-id="5099938575-12">(</span><span class="ss">:down</span><span class="p" data-group-id="5099938575-12">)</span><span class="w"> </span><span class="k" data-group-id="5099938575-13">do</span><span class="w">
-    </span><span class="n">migrate_block_unique_index</span><span class="p" data-group-id="5099938575-14">(</span><span class="p" data-group-id="5099938575-14">)</span><span class="w">
-    </span><span class="n">migrate_block_view</span><span class="p" data-group-id="5099938575-15">(</span><span class="p" data-group-id="5099938575-15">)</span><span class="w">
-  </span><span class="k" data-group-id="5099938575-13">end</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_block</span><span class="p" data-group-id="8044792753-12">(</span><span class="ss">:down</span><span class="p" data-group-id="8044792753-12">)</span><span class="w"> </span><span class="k" data-group-id="8044792753-13">do</span><span class="w">
+    </span><span class="n">migrate_block_unique_index</span><span class="p" data-group-id="8044792753-14">(</span><span class="p" data-group-id="8044792753-14">)</span><span class="w">
+    </span><span class="n">migrate_block_view</span><span class="p" data-group-id="8044792753-15">(</span><span class="p" data-group-id="8044792753-15">)</span><span class="w">
+  </span><span class="k" data-group-id="8044792753-13">end</span><span class="w">
 
-</span><span class="k" data-group-id="5099938575-1">end</span></code></pre><p>Notice how we have to write our <code class="inline">up</code> and <code class="inline">down</code> versions separately to get the correct ordering of operations. </p><h3 id="pointables-1" class="section-heading">
-  <a href="#pointables-1">
+</span><span class="k" data-group-id="8044792753-1">end</span></code></pre><p>Notice how we have to write our <code class="inline">up</code> and <code class="inline">down</code> versions separately to get the correct ordering of operations. </p><h3 id="pointables-1" class="section-heading">
+  <a href="#pointables-1" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Pointables
   </a>
+  <span class="text">Pointables</span>
 </h3>
 <p>As of now, pointables are a little trickier to define flexibly than virtuals because we want to
 preserve the ability for the user to define extra fields in config. There are some questions about 
-how useful this is in practice, so we might go for a simpler option in future.</p><p>Example:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.APActivity.Migration</span><span class="w">  </span><span class="k" data-group-id="9024106165-1">do</span><span class="w">
+how useful this is in practice, so we might go for a simpler option in future.</p><p>Example:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.APActivity.Migration</span><span class="w">  </span><span class="k" data-group-id="2450793002-1">do</span><span class="w">
   </span><span class="na">@moduledoc</span><span class="w"> </span><span class="no">false</span><span class="w">
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Ecto.Migration</span><span class="w">
   </span><span class="kn">import</span><span class="w"> </span><span class="nc">Pointers.Migration</span><span class="w">
   </span><span class="kn">alias</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.APActivity</span><span class="w">
 
-  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">make_apactivity_table</span><span class="p" data-group-id="9024106165-2">(</span><span class="n">exprs</span><span class="p" data-group-id="9024106165-2">)</span><span class="w"> </span><span class="k" data-group-id="9024106165-3">do</span><span class="w">
-    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="9024106165-4">do</span><span class="w">
+  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">make_apactivity_table</span><span class="p" data-group-id="2450793002-2">(</span><span class="n">exprs</span><span class="p" data-group-id="2450793002-2">)</span><span class="w"> </span><span class="k" data-group-id="2450793002-3">do</span><span class="w">
+    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="2450793002-4">do</span><span class="w">
       </span><span class="kn">require</span><span class="w"> </span><span class="nc">Pointers.Migration</span><span class="w">
-      </span><span class="nc">Pointers.Migration</span><span class="o">.</span><span class="n">create_pointable_table</span><span class="p" data-group-id="9024106165-5">(</span><span class="nc">Bonfire.Data.Social.APActivity</span><span class="p" data-group-id="9024106165-5">)</span><span class="w"> </span><span class="k" data-group-id="9024106165-6">do</span><span class="w">
+      </span><span class="nc">Pointers.Migration</span><span class="o">.</span><span class="n">create_pointable_table</span><span class="p" data-group-id="2450793002-5">(</span><span class="nc">Bonfire.Data.Social.APActivity</span><span class="p" data-group-id="2450793002-5">)</span><span class="w"> </span><span class="k" data-group-id="2450793002-6">do</span><span class="w">
         </span><span class="nc">Ecto.Migration</span><span class="o">.</span><span class="n">add</span><span class="w"> </span><span class="ss">:json</span><span class="p">,</span><span class="w"> </span><span class="ss">:jsonb</span><span class="w">
-        </span><span class="k">unquote_splicing</span><span class="p" data-group-id="9024106165-7">(</span><span class="n">exprs</span><span class="p" data-group-id="9024106165-7">)</span><span class="w">
-      </span><span class="k" data-group-id="9024106165-6">end</span><span class="w">
-    </span><span class="k" data-group-id="9024106165-4">end</span><span class="w">
-  </span><span class="k" data-group-id="9024106165-3">end</span><span class="w">
+        </span><span class="k">unquote_splicing</span><span class="p" data-group-id="2450793002-7">(</span><span class="n">exprs</span><span class="p" data-group-id="2450793002-7">)</span><span class="w">
+      </span><span class="k" data-group-id="2450793002-6">end</span><span class="w">
+    </span><span class="k" data-group-id="2450793002-4">end</span><span class="w">
+  </span><span class="k" data-group-id="2450793002-3">end</span><span class="w">
 
-  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">create_apactivity_table</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">make_apactivity_table</span><span class="p" data-group-id="9024106165-8">(</span><span class="p" data-group-id="9024106165-9">[</span><span class="p" data-group-id="9024106165-9">]</span><span class="p" data-group-id="9024106165-8">)</span><span class="w">
-  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">create_apactivity_table</span><span class="p" data-group-id="9024106165-10">(</span><span class="p" data-group-id="9024106165-11">[</span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">body</span><span class="p" data-group-id="9024106165-11">]</span><span class="p" data-group-id="9024106165-10">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">make_apactivity_table</span><span class="p" data-group-id="9024106165-12">(</span><span class="n">body</span><span class="p" data-group-id="9024106165-12">)</span><span class="w">
+  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">create_apactivity_table</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">make_apactivity_table</span><span class="p" data-group-id="2450793002-8">(</span><span class="p" data-group-id="2450793002-9">[</span><span class="p" data-group-id="2450793002-9">]</span><span class="p" data-group-id="2450793002-8">)</span><span class="w">
+  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">create_apactivity_table</span><span class="p" data-group-id="2450793002-10">(</span><span class="p" data-group-id="2450793002-11">[</span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">body</span><span class="p" data-group-id="2450793002-11">]</span><span class="p" data-group-id="2450793002-10">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">make_apactivity_table</span><span class="p" data-group-id="2450793002-12">(</span><span class="n">body</span><span class="p" data-group-id="2450793002-12">)</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">drop_apactivity_table</span><span class="p" data-group-id="9024106165-13">(</span><span class="p" data-group-id="9024106165-13">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">drop_pointable_table</span><span class="p" data-group-id="9024106165-14">(</span><span class="nc">APActivity</span><span class="p" data-group-id="9024106165-14">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">drop_apactivity_table</span><span class="p" data-group-id="2450793002-13">(</span><span class="p" data-group-id="2450793002-13">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">drop_pointable_table</span><span class="p" data-group-id="2450793002-14">(</span><span class="nc">APActivity</span><span class="p" data-group-id="2450793002-14">)</span><span class="w">
 
-  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">maa</span><span class="p" data-group-id="9024106165-15">(</span><span class="ss">:up</span><span class="p" data-group-id="9024106165-15">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">make_apactivity_table</span><span class="p" data-group-id="9024106165-16">(</span><span class="p" data-group-id="9024106165-17">[</span><span class="p" data-group-id="9024106165-17">]</span><span class="p" data-group-id="9024106165-16">)</span><span class="w">
-  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">maa</span><span class="p" data-group-id="9024106165-18">(</span><span class="ss">:down</span><span class="p" data-group-id="9024106165-18">)</span><span class="w"> </span><span class="k" data-group-id="9024106165-19">do</span><span class="w">
-    </span><span class="k">quote</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.APActivity.Migration</span><span class="o">.</span><span class="n">drop_apactivity_table</span><span class="p" data-group-id="9024106165-20">(</span><span class="p" data-group-id="9024106165-20">)</span><span class="w">
-  </span><span class="k" data-group-id="9024106165-19">end</span><span class="w">
+  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">maa</span><span class="p" data-group-id="2450793002-15">(</span><span class="ss">:up</span><span class="p" data-group-id="2450793002-15">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">make_apactivity_table</span><span class="p" data-group-id="2450793002-16">(</span><span class="p" data-group-id="2450793002-17">[</span><span class="p" data-group-id="2450793002-17">]</span><span class="p" data-group-id="2450793002-16">)</span><span class="w">
+  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">maa</span><span class="p" data-group-id="2450793002-18">(</span><span class="ss">:down</span><span class="p" data-group-id="2450793002-18">)</span><span class="w"> </span><span class="k" data-group-id="2450793002-19">do</span><span class="w">
+    </span><span class="k">quote</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.APActivity.Migration</span><span class="o">.</span><span class="n">drop_apactivity_table</span><span class="p" data-group-id="2450793002-20">(</span><span class="p" data-group-id="2450793002-20">)</span><span class="w">
+  </span><span class="k" data-group-id="2450793002-19">end</span><span class="w">
 
-  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">migrate_apactivity</span><span class="p" data-group-id="9024106165-21">(</span><span class="p" data-group-id="9024106165-21">)</span><span class="w"> </span><span class="k" data-group-id="9024106165-22">do</span><span class="w">
-    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="9024106165-23">do</span><span class="w">
-      </span><span class="k">if</span><span class="w"> </span><span class="nc">Ecto.Migration</span><span class="o">.</span><span class="n">direction</span><span class="p" data-group-id="9024106165-24">(</span><span class="p" data-group-id="9024106165-24">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">:up</span><span class="p">,</span><span class="w">
-        </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="k">unquote</span><span class="p" data-group-id="9024106165-25">(</span><span class="n">maa</span><span class="p" data-group-id="9024106165-26">(</span><span class="ss">:up</span><span class="p" data-group-id="9024106165-26">)</span><span class="p" data-group-id="9024106165-25">)</span><span class="p">,</span><span class="w">
-        </span><span class="ss">else</span><span class="p">:</span><span class="w"> </span><span class="k">unquote</span><span class="p" data-group-id="9024106165-27">(</span><span class="n">maa</span><span class="p" data-group-id="9024106165-28">(</span><span class="ss">:down</span><span class="p" data-group-id="9024106165-28">)</span><span class="p" data-group-id="9024106165-27">)</span><span class="w">
-    </span><span class="k" data-group-id="9024106165-23">end</span><span class="w">
-  </span><span class="k" data-group-id="9024106165-22">end</span><span class="w">
+  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">migrate_apactivity</span><span class="p" data-group-id="2450793002-21">(</span><span class="p" data-group-id="2450793002-21">)</span><span class="w"> </span><span class="k" data-group-id="2450793002-22">do</span><span class="w">
+    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="2450793002-23">do</span><span class="w">
+      </span><span class="k">if</span><span class="w"> </span><span class="nc">Ecto.Migration</span><span class="o">.</span><span class="n">direction</span><span class="p" data-group-id="2450793002-24">(</span><span class="p" data-group-id="2450793002-24">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">:up</span><span class="p">,</span><span class="w">
+        </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="k">unquote</span><span class="p" data-group-id="2450793002-25">(</span><span class="n">maa</span><span class="p" data-group-id="2450793002-26">(</span><span class="ss">:up</span><span class="p" data-group-id="2450793002-26">)</span><span class="p" data-group-id="2450793002-25">)</span><span class="p">,</span><span class="w">
+        </span><span class="ss">else</span><span class="p">:</span><span class="w"> </span><span class="k">unquote</span><span class="p" data-group-id="2450793002-27">(</span><span class="n">maa</span><span class="p" data-group-id="2450793002-28">(</span><span class="ss">:down</span><span class="p" data-group-id="2450793002-28">)</span><span class="p" data-group-id="2450793002-27">)</span><span class="w">
+    </span><span class="k" data-group-id="2450793002-23">end</span><span class="w">
+  </span><span class="k" data-group-id="2450793002-22">end</span><span class="w">
 
-</span><span class="k" data-group-id="9024106165-1">end</span></code></pre><h3 id="mixins" class="section-heading">
-  <a href="#mixins">
+</span><span class="k" data-group-id="2450793002-1">end</span></code></pre><h3 id="mixins" class="section-heading">
+  <a href="#mixins" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Mixins
   </a>
+  <span class="text">Mixins</span>
 </h3>
-<p>Mixins look much like pointables:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.Profile.Migration</span><span class="w"> </span><span class="k" data-group-id="8436671911-1">do</span><span class="w">
+<p>Mixins look much like pointables:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.Profile.Migration</span><span class="w"> </span><span class="k" data-group-id="4599602941-1">do</span><span class="w">
 
   </span><span class="kn">import</span><span class="w"> </span><span class="nc">Pointers.Migration</span><span class="w">
   </span><span class="kn">alias</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.Profile</span><span class="w">
 
   </span><span class="c1"># create_profile_table/{0,1}</span><span class="w">
 
-  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">make_profile_table</span><span class="p" data-group-id="8436671911-2">(</span><span class="n">exprs</span><span class="p" data-group-id="8436671911-2">)</span><span class="w"> </span><span class="k" data-group-id="8436671911-3">do</span><span class="w">
-    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="8436671911-4">do</span><span class="w">
+  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">make_profile_table</span><span class="p" data-group-id="4599602941-2">(</span><span class="n">exprs</span><span class="p" data-group-id="4599602941-2">)</span><span class="w"> </span><span class="k" data-group-id="4599602941-3">do</span><span class="w">
+    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="4599602941-4">do</span><span class="w">
       </span><span class="kn">require</span><span class="w"> </span><span class="nc">Pointers.Migration</span><span class="w">
-      </span><span class="nc">Pointers.Migration</span><span class="o">.</span><span class="n">create_mixin_table</span><span class="p" data-group-id="8436671911-5">(</span><span class="nc">Bonfire.Data.Social.Profile</span><span class="p" data-group-id="8436671911-5">)</span><span class="w"> </span><span class="k" data-group-id="8436671911-6">do</span><span class="w">
+      </span><span class="nc">Pointers.Migration</span><span class="o">.</span><span class="n">create_mixin_table</span><span class="p" data-group-id="4599602941-5">(</span><span class="nc">Bonfire.Data.Social.Profile</span><span class="p" data-group-id="4599602941-5">)</span><span class="w"> </span><span class="k" data-group-id="4599602941-6">do</span><span class="w">
         </span><span class="nc">Ecto.Migration</span><span class="o">.</span><span class="n">add</span><span class="w"> </span><span class="ss">:name</span><span class="p">,</span><span class="w"> </span><span class="ss">:text</span><span class="w">
         </span><span class="nc">Ecto.Migration</span><span class="o">.</span><span class="n">add</span><span class="w"> </span><span class="ss">:summary</span><span class="p">,</span><span class="w"> </span><span class="ss">:text</span><span class="w">
         </span><span class="nc">Ecto.Migration</span><span class="o">.</span><span class="n">add</span><span class="w"> </span><span class="ss">:website</span><span class="p">,</span><span class="w"> </span><span class="ss">:text</span><span class="w">
         </span><span class="nc">Ecto.Migration</span><span class="o">.</span><span class="n">add</span><span class="w"> </span><span class="ss">:location</span><span class="p">,</span><span class="w"> </span><span class="ss">:text</span><span class="w">
-        </span><span class="nc">Ecto.Migration</span><span class="o">.</span><span class="n">add</span><span class="w"> </span><span class="ss">:icon_id</span><span class="p">,</span><span class="w"> </span><span class="n">strong_pointer</span><span class="p" data-group-id="8436671911-7">(</span><span class="nc">Bonfire.Files.Media</span><span class="p" data-group-id="8436671911-7">)</span><span class="w">
-        </span><span class="nc">Ecto.Migration</span><span class="o">.</span><span class="n">add</span><span class="w"> </span><span class="ss">:image_id</span><span class="p">,</span><span class="w"> </span><span class="n">strong_pointer</span><span class="p" data-group-id="8436671911-8">(</span><span class="nc">Bonfire.Files.Media</span><span class="p" data-group-id="8436671911-8">)</span><span class="w">
-        </span><span class="k">unquote_splicing</span><span class="p" data-group-id="8436671911-9">(</span><span class="n">exprs</span><span class="p" data-group-id="8436671911-9">)</span><span class="w">
-      </span><span class="k" data-group-id="8436671911-6">end</span><span class="w">
-    </span><span class="k" data-group-id="8436671911-4">end</span><span class="w">
-  </span><span class="k" data-group-id="8436671911-3">end</span><span class="w">
+        </span><span class="nc">Ecto.Migration</span><span class="o">.</span><span class="n">add</span><span class="w"> </span><span class="ss">:icon_id</span><span class="p">,</span><span class="w"> </span><span class="n">strong_pointer</span><span class="p" data-group-id="4599602941-7">(</span><span class="nc">Bonfire.Files.Media</span><span class="p" data-group-id="4599602941-7">)</span><span class="w">
+        </span><span class="nc">Ecto.Migration</span><span class="o">.</span><span class="n">add</span><span class="w"> </span><span class="ss">:image_id</span><span class="p">,</span><span class="w"> </span><span class="n">strong_pointer</span><span class="p" data-group-id="4599602941-8">(</span><span class="nc">Bonfire.Files.Media</span><span class="p" data-group-id="4599602941-8">)</span><span class="w">
+        </span><span class="k">unquote_splicing</span><span class="p" data-group-id="4599602941-9">(</span><span class="n">exprs</span><span class="p" data-group-id="4599602941-9">)</span><span class="w">
+      </span><span class="k" data-group-id="4599602941-6">end</span><span class="w">
+    </span><span class="k" data-group-id="4599602941-4">end</span><span class="w">
+  </span><span class="k" data-group-id="4599602941-3">end</span><span class="w">
 
-  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">create_profile_table</span><span class="p" data-group-id="8436671911-10">(</span><span class="p" data-group-id="8436671911-10">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">make_profile_table</span><span class="p" data-group-id="8436671911-11">(</span><span class="p" data-group-id="8436671911-12">[</span><span class="p" data-group-id="8436671911-12">]</span><span class="p" data-group-id="8436671911-11">)</span><span class="w">
-  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">create_profile_table</span><span class="p" data-group-id="8436671911-13">(</span><span class="p" data-group-id="8436671911-14">[</span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="8436671911-15">{</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p" data-group-id="8436671911-15">}</span><span class="p" data-group-id="8436671911-14">]</span><span class="p" data-group-id="8436671911-13">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">make_profile_table</span><span class="p" data-group-id="8436671911-16">(</span><span class="n">body</span><span class="p" data-group-id="8436671911-16">)</span><span class="w">
+  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">create_profile_table</span><span class="p" data-group-id="4599602941-10">(</span><span class="p" data-group-id="4599602941-10">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">make_profile_table</span><span class="p" data-group-id="4599602941-11">(</span><span class="p" data-group-id="4599602941-12">[</span><span class="p" data-group-id="4599602941-12">]</span><span class="p" data-group-id="4599602941-11">)</span><span class="w">
+  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">create_profile_table</span><span class="p" data-group-id="4599602941-13">(</span><span class="p" data-group-id="4599602941-14">[</span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="4599602941-15">{</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p" data-group-id="4599602941-15">}</span><span class="p" data-group-id="4599602941-14">]</span><span class="p" data-group-id="4599602941-13">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">make_profile_table</span><span class="p" data-group-id="4599602941-16">(</span><span class="n">body</span><span class="p" data-group-id="4599602941-16">)</span><span class="w">
 
   </span><span class="c1"># drop_profile_table/0</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">drop_profile_table</span><span class="p" data-group-id="8436671911-17">(</span><span class="p" data-group-id="8436671911-17">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">drop_mixin_table</span><span class="p" data-group-id="8436671911-18">(</span><span class="nc">Profile</span><span class="p" data-group-id="8436671911-18">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">drop_profile_table</span><span class="p" data-group-id="4599602941-17">(</span><span class="p" data-group-id="4599602941-17">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">drop_mixin_table</span><span class="p" data-group-id="4599602941-18">(</span><span class="nc">Profile</span><span class="p" data-group-id="4599602941-18">)</span><span class="w">
 
   </span><span class="c1"># migrate_profile/{0,1}</span><span class="w">
 
-  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">mp</span><span class="p" data-group-id="8436671911-19">(</span><span class="ss">:up</span><span class="p" data-group-id="8436671911-19">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">make_profile_table</span><span class="p" data-group-id="8436671911-20">(</span><span class="p" data-group-id="8436671911-21">[</span><span class="p" data-group-id="8436671911-21">]</span><span class="p" data-group-id="8436671911-20">)</span><span class="w">
+  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">mp</span><span class="p" data-group-id="4599602941-19">(</span><span class="ss">:up</span><span class="p" data-group-id="4599602941-19">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">make_profile_table</span><span class="p" data-group-id="4599602941-20">(</span><span class="p" data-group-id="4599602941-21">[</span><span class="p" data-group-id="4599602941-21">]</span><span class="p" data-group-id="4599602941-20">)</span><span class="w">
 
-  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">mp</span><span class="p" data-group-id="8436671911-22">(</span><span class="ss">:down</span><span class="p" data-group-id="8436671911-22">)</span><span class="w"> </span><span class="k" data-group-id="8436671911-23">do</span><span class="w">
-    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="8436671911-24">do</span><span class="w">
-      </span><span class="nc">Bonfire.Data.Social.Profile.Migration</span><span class="o">.</span><span class="n">drop_profile_table</span><span class="p" data-group-id="8436671911-25">(</span><span class="p" data-group-id="8436671911-25">)</span><span class="w">
-    </span><span class="k" data-group-id="8436671911-24">end</span><span class="w">
-  </span><span class="k" data-group-id="8436671911-23">end</span><span class="w">
+  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">mp</span><span class="p" data-group-id="4599602941-22">(</span><span class="ss">:down</span><span class="p" data-group-id="4599602941-22">)</span><span class="w"> </span><span class="k" data-group-id="4599602941-23">do</span><span class="w">
+    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="4599602941-24">do</span><span class="w">
+      </span><span class="nc">Bonfire.Data.Social.Profile.Migration</span><span class="o">.</span><span class="n">drop_profile_table</span><span class="p" data-group-id="4599602941-25">(</span><span class="p" data-group-id="4599602941-25">)</span><span class="w">
+    </span><span class="k" data-group-id="4599602941-24">end</span><span class="w">
+  </span><span class="k" data-group-id="4599602941-23">end</span><span class="w">
 
-  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">migrate_profile</span><span class="p" data-group-id="8436671911-26">(</span><span class="p" data-group-id="8436671911-26">)</span><span class="w"> </span><span class="k" data-group-id="8436671911-27">do</span><span class="w">
-    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="8436671911-28">do</span><span class="w">
-      </span><span class="k">if</span><span class="w"> </span><span class="nc">Ecto.Migration</span><span class="o">.</span><span class="n">direction</span><span class="p" data-group-id="8436671911-29">(</span><span class="p" data-group-id="8436671911-29">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">:up</span><span class="p">,</span><span class="w">
-        </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="k">unquote</span><span class="p" data-group-id="8436671911-30">(</span><span class="n">mp</span><span class="p" data-group-id="8436671911-31">(</span><span class="ss">:up</span><span class="p" data-group-id="8436671911-31">)</span><span class="p" data-group-id="8436671911-30">)</span><span class="p">,</span><span class="w">
-        </span><span class="ss">else</span><span class="p">:</span><span class="w"> </span><span class="k">unquote</span><span class="p" data-group-id="8436671911-32">(</span><span class="n">mp</span><span class="p" data-group-id="8436671911-33">(</span><span class="ss">:down</span><span class="p" data-group-id="8436671911-33">)</span><span class="p" data-group-id="8436671911-32">)</span><span class="w">
-    </span><span class="k" data-group-id="8436671911-28">end</span><span class="w">
-  </span><span class="k" data-group-id="8436671911-27">end</span><span class="w">
+  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">migrate_profile</span><span class="p" data-group-id="4599602941-26">(</span><span class="p" data-group-id="4599602941-26">)</span><span class="w"> </span><span class="k" data-group-id="4599602941-27">do</span><span class="w">
+    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="4599602941-28">do</span><span class="w">
+      </span><span class="k">if</span><span class="w"> </span><span class="nc">Ecto.Migration</span><span class="o">.</span><span class="n">direction</span><span class="p" data-group-id="4599602941-29">(</span><span class="p" data-group-id="4599602941-29">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">:up</span><span class="p">,</span><span class="w">
+        </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="k">unquote</span><span class="p" data-group-id="4599602941-30">(</span><span class="n">mp</span><span class="p" data-group-id="4599602941-31">(</span><span class="ss">:up</span><span class="p" data-group-id="4599602941-31">)</span><span class="p" data-group-id="4599602941-30">)</span><span class="p">,</span><span class="w">
+        </span><span class="ss">else</span><span class="p">:</span><span class="w"> </span><span class="k">unquote</span><span class="p" data-group-id="4599602941-32">(</span><span class="n">mp</span><span class="p" data-group-id="4599602941-33">(</span><span class="ss">:down</span><span class="p" data-group-id="4599602941-33">)</span><span class="p" data-group-id="4599602941-32">)</span><span class="w">
+    </span><span class="k" data-group-id="4599602941-28">end</span><span class="w">
+  </span><span class="k" data-group-id="4599602941-27">end</span><span class="w">
 
-</span><span class="k" data-group-id="8436671911-1">end</span></code></pre><h3 id="multimixins-1" class="section-heading">
-  <a href="#multimixins-1">
+</span><span class="k" data-group-id="4599602941-1">end</span></code></pre><h3 id="multimixins-1" class="section-heading">
+  <a href="#multimixins-1" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Multimixins
   </a>
+  <span class="text">Multimixins</span>
 </h3>
-<p>Similar to mixins:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.FeedPublish.Migration</span><span class="w"> </span><span class="k" data-group-id="9784889638-1">do</span><span class="w">
+<p>Similar to mixins:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.FeedPublish.Migration</span><span class="w"> </span><span class="k" data-group-id="1808051512-1">do</span><span class="w">
 
   </span><span class="kn">import</span><span class="w"> </span><span class="nc">Ecto.Migration</span><span class="w">
   </span><span class="kn">import</span><span class="w"> </span><span class="nc">Pointers.Migration</span><span class="w">
   </span><span class="kn">alias</span><span class="w"> </span><span class="nc">Bonfire.Data.Social.FeedPublish</span><span class="w">
 
-  </span><span class="na">@feed_publish_table</span><span class="w"> </span><span class="nc">FeedPublish</span><span class="o">.</span><span class="c">__schema__</span><span class="p" data-group-id="9784889638-2">(</span><span class="ss">:source</span><span class="p" data-group-id="9784889638-2">)</span><span class="w">
+  </span><span class="na">@feed_publish_table</span><span class="w"> </span><span class="nc">FeedPublish</span><span class="o">.</span><span class="c">__schema__</span><span class="p" data-group-id="1808051512-2">(</span><span class="ss">:source</span><span class="p" data-group-id="1808051512-2">)</span><span class="w">
 
   </span><span class="c1"># create_feed_publish_table/{0,1}</span><span class="w">
 
-  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">make_feed_publish_table</span><span class="p" data-group-id="9784889638-3">(</span><span class="n">exprs</span><span class="p" data-group-id="9784889638-3">)</span><span class="w"> </span><span class="k" data-group-id="9784889638-4">do</span><span class="w">
-    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="9784889638-5">do</span><span class="w">
+  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">make_feed_publish_table</span><span class="p" data-group-id="1808051512-3">(</span><span class="n">exprs</span><span class="p" data-group-id="1808051512-3">)</span><span class="w"> </span><span class="k" data-group-id="1808051512-4">do</span><span class="w">
+    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="1808051512-5">do</span><span class="w">
       </span><span class="kn">require</span><span class="w"> </span><span class="nc">Pointers.Migration</span><span class="w">
-      </span><span class="nc">Pointers.Migration</span><span class="o">.</span><span class="n">create_mixin_table</span><span class="p" data-group-id="9784889638-6">(</span><span class="nc">Bonfire.Data.Social.FeedPublish</span><span class="p" data-group-id="9784889638-6">)</span><span class="w"> </span><span class="k" data-group-id="9784889638-7">do</span><span class="w">
+      </span><span class="nc">Pointers.Migration</span><span class="o">.</span><span class="n">create_mixin_table</span><span class="p" data-group-id="1808051512-6">(</span><span class="nc">Bonfire.Data.Social.FeedPublish</span><span class="p" data-group-id="1808051512-6">)</span><span class="w"> </span><span class="k" data-group-id="1808051512-7">do</span><span class="w">
         </span><span class="nc">Ecto.Migration</span><span class="o">.</span><span class="n">add</span><span class="w"> </span><span class="ss">:feed_id</span><span class="p">,</span><span class="w">
-          </span><span class="nc">Pointers.Migration</span><span class="o">.</span><span class="n">strong_pointer</span><span class="p" data-group-id="9784889638-8">(</span><span class="p" data-group-id="9784889638-8">)</span><span class="p">,</span><span class="w"> </span><span class="ss">primary_key</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="w">
-        </span><span class="k">unquote_splicing</span><span class="p" data-group-id="9784889638-9">(</span><span class="n">exprs</span><span class="p" data-group-id="9784889638-9">)</span><span class="w">
-      </span><span class="k" data-group-id="9784889638-7">end</span><span class="w">
-    </span><span class="k" data-group-id="9784889638-5">end</span><span class="w">
-  </span><span class="k" data-group-id="9784889638-4">end</span><span class="w">
+          </span><span class="nc">Pointers.Migration</span><span class="o">.</span><span class="n">strong_pointer</span><span class="p" data-group-id="1808051512-8">(</span><span class="p" data-group-id="1808051512-8">)</span><span class="p">,</span><span class="w"> </span><span class="ss">primary_key</span><span class="p">:</span><span class="w"> </span><span class="no">true</span><span class="w">
+        </span><span class="k">unquote_splicing</span><span class="p" data-group-id="1808051512-9">(</span><span class="n">exprs</span><span class="p" data-group-id="1808051512-9">)</span><span class="w">
+      </span><span class="k" data-group-id="1808051512-7">end</span><span class="w">
+    </span><span class="k" data-group-id="1808051512-5">end</span><span class="w">
+  </span><span class="k" data-group-id="1808051512-4">end</span><span class="w">
 
-  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">create_feed_publish_table</span><span class="p" data-group-id="9784889638-10">(</span><span class="p" data-group-id="9784889638-10">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">make_feed_publish_table</span><span class="p" data-group-id="9784889638-11">(</span><span class="p" data-group-id="9784889638-12">[</span><span class="p" data-group-id="9784889638-12">]</span><span class="p" data-group-id="9784889638-11">)</span><span class="w">
-  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">create_feed_publish_table</span><span class="p" data-group-id="9784889638-13">(</span><span class="p" data-group-id="9784889638-14">[</span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="9784889638-15">{</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p" data-group-id="9784889638-15">}</span><span class="p" data-group-id="9784889638-14">]</span><span class="p" data-group-id="9784889638-13">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">make_feed_publish_table</span><span class="p" data-group-id="9784889638-16">(</span><span class="n">body</span><span class="p" data-group-id="9784889638-16">)</span><span class="w">
+  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">create_feed_publish_table</span><span class="p" data-group-id="1808051512-10">(</span><span class="p" data-group-id="1808051512-10">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">make_feed_publish_table</span><span class="p" data-group-id="1808051512-11">(</span><span class="p" data-group-id="1808051512-12">[</span><span class="p" data-group-id="1808051512-12">]</span><span class="p" data-group-id="1808051512-11">)</span><span class="w">
+  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">create_feed_publish_table</span><span class="p" data-group-id="1808051512-13">(</span><span class="p" data-group-id="1808051512-14">[</span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1808051512-15">{</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="n">body</span><span class="p" data-group-id="1808051512-15">}</span><span class="p" data-group-id="1808051512-14">]</span><span class="p" data-group-id="1808051512-13">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">make_feed_publish_table</span><span class="p" data-group-id="1808051512-16">(</span><span class="n">body</span><span class="p" data-group-id="1808051512-16">)</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">drop_feed_publish_table</span><span class="p" data-group-id="9784889638-17">(</span><span class="p" data-group-id="9784889638-17">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">drop_pointable_table</span><span class="p" data-group-id="9784889638-18">(</span><span class="nc">FeedPublish</span><span class="p" data-group-id="9784889638-18">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">drop_feed_publish_table</span><span class="p" data-group-id="1808051512-17">(</span><span class="p" data-group-id="1808051512-17">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">drop_pointable_table</span><span class="p" data-group-id="1808051512-18">(</span><span class="nc">FeedPublish</span><span class="p" data-group-id="1808051512-18">)</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_feed_publish_feed_index</span><span class="p" data-group-id="9784889638-19">(</span><span class="n">dir</span><span class="w"> </span><span class="o">\\</span><span class="w"> </span><span class="n">direction</span><span class="p" data-group-id="9784889638-20">(</span><span class="p" data-group-id="9784889638-20">)</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="w"> </span><span class="o">\\</span><span class="w"> </span><span class="p" data-group-id="9784889638-21">[</span><span class="p" data-group-id="9784889638-21">]</span><span class="p" data-group-id="9784889638-19">)</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_feed_publish_feed_index</span><span class="p" data-group-id="9784889638-22">(</span><span class="ss">:up</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="p" data-group-id="9784889638-22">)</span><span class="p">,</span><span class="w">
-    </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">create_if_not_exists</span><span class="p" data-group-id="9784889638-23">(</span><span class="n">index</span><span class="p" data-group-id="9784889638-24">(</span><span class="na">@feed_publish_table</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9784889638-25">[</span><span class="ss">:feed_id</span><span class="p" data-group-id="9784889638-25">]</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="p" data-group-id="9784889638-24">)</span><span class="p" data-group-id="9784889638-23">)</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_feed_publish_feed_index</span><span class="p" data-group-id="9784889638-26">(</span><span class="ss">:down</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="p" data-group-id="9784889638-26">)</span><span class="p">,</span><span class="w">
-    </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">drop_if_exists</span><span class="p" data-group-id="9784889638-27">(</span><span class="n">index</span><span class="p" data-group-id="9784889638-28">(</span><span class="na">@feed_publish_table</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9784889638-29">[</span><span class="ss">:feed_id</span><span class="p" data-group-id="9784889638-29">]</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="p" data-group-id="9784889638-28">)</span><span class="p" data-group-id="9784889638-27">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_feed_publish_feed_index</span><span class="p" data-group-id="1808051512-19">(</span><span class="n">dir</span><span class="w"> </span><span class="o">\\</span><span class="w"> </span><span class="n">direction</span><span class="p" data-group-id="1808051512-20">(</span><span class="p" data-group-id="1808051512-20">)</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="w"> </span><span class="o">\\</span><span class="w"> </span><span class="p" data-group-id="1808051512-21">[</span><span class="p" data-group-id="1808051512-21">]</span><span class="p" data-group-id="1808051512-19">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_feed_publish_feed_index</span><span class="p" data-group-id="1808051512-22">(</span><span class="ss">:up</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="p" data-group-id="1808051512-22">)</span><span class="p">,</span><span class="w">
+    </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">create_if_not_exists</span><span class="p" data-group-id="1808051512-23">(</span><span class="n">index</span><span class="p" data-group-id="1808051512-24">(</span><span class="na">@feed_publish_table</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1808051512-25">[</span><span class="ss">:feed_id</span><span class="p" data-group-id="1808051512-25">]</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="p" data-group-id="1808051512-24">)</span><span class="p" data-group-id="1808051512-23">)</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">migrate_feed_publish_feed_index</span><span class="p" data-group-id="1808051512-26">(</span><span class="ss">:down</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="p" data-group-id="1808051512-26">)</span><span class="p">,</span><span class="w">
+    </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">drop_if_exists</span><span class="p" data-group-id="1808051512-27">(</span><span class="n">index</span><span class="p" data-group-id="1808051512-28">(</span><span class="na">@feed_publish_table</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="1808051512-29">[</span><span class="ss">:feed_id</span><span class="p" data-group-id="1808051512-29">]</span><span class="p">,</span><span class="w"> </span><span class="n">opts</span><span class="p" data-group-id="1808051512-28">)</span><span class="p" data-group-id="1808051512-27">)</span><span class="w">
 
-  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">mf</span><span class="p" data-group-id="9784889638-30">(</span><span class="ss">:up</span><span class="p" data-group-id="9784889638-30">)</span><span class="w"> </span><span class="k" data-group-id="9784889638-31">do</span><span class="w">
-    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="9784889638-32">do</span><span class="w">
-      </span><span class="nc">Bonfire.Data.Social.FeedPublish.Migration</span><span class="o">.</span><span class="n">create_feed_publish_table</span><span class="p" data-group-id="9784889638-33">(</span><span class="p" data-group-id="9784889638-33">)</span><span class="w">
-      </span><span class="nc">Bonfire.Data.Social.FeedPublish.Migration</span><span class="o">.</span><span class="n">migrate_feed_publish_feed_index</span><span class="p" data-group-id="9784889638-34">(</span><span class="p" data-group-id="9784889638-34">)</span><span class="w">
-    </span><span class="k" data-group-id="9784889638-32">end</span><span class="w">
-  </span><span class="k" data-group-id="9784889638-31">end</span><span class="w">
+  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">mf</span><span class="p" data-group-id="1808051512-30">(</span><span class="ss">:up</span><span class="p" data-group-id="1808051512-30">)</span><span class="w"> </span><span class="k" data-group-id="1808051512-31">do</span><span class="w">
+    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="1808051512-32">do</span><span class="w">
+      </span><span class="nc">Bonfire.Data.Social.FeedPublish.Migration</span><span class="o">.</span><span class="n">create_feed_publish_table</span><span class="p" data-group-id="1808051512-33">(</span><span class="p" data-group-id="1808051512-33">)</span><span class="w">
+      </span><span class="nc">Bonfire.Data.Social.FeedPublish.Migration</span><span class="o">.</span><span class="n">migrate_feed_publish_feed_index</span><span class="p" data-group-id="1808051512-34">(</span><span class="p" data-group-id="1808051512-34">)</span><span class="w">
+    </span><span class="k" data-group-id="1808051512-32">end</span><span class="w">
+  </span><span class="k" data-group-id="1808051512-31">end</span><span class="w">
 
-  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">mf</span><span class="p" data-group-id="9784889638-35">(</span><span class="ss">:down</span><span class="p" data-group-id="9784889638-35">)</span><span class="w"> </span><span class="k" data-group-id="9784889638-36">do</span><span class="w">
-    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="9784889638-37">do</span><span class="w">
-      </span><span class="nc">Bonfire.Data.Social.FeedPublish.Migration</span><span class="o">.</span><span class="n">migrate_feed_publish_feed_index</span><span class="p" data-group-id="9784889638-38">(</span><span class="p" data-group-id="9784889638-38">)</span><span class="w">
-      </span><span class="nc">Bonfire.Data.Social.FeedPublish.Migration</span><span class="o">.</span><span class="n">drop_feed_publish_table</span><span class="p" data-group-id="9784889638-39">(</span><span class="p" data-group-id="9784889638-39">)</span><span class="w">
-    </span><span class="k" data-group-id="9784889638-37">end</span><span class="w">
-  </span><span class="k" data-group-id="9784889638-36">end</span><span class="w">
+  </span><span class="kd">defp</span><span class="w"> </span><span class="nf">mf</span><span class="p" data-group-id="1808051512-35">(</span><span class="ss">:down</span><span class="p" data-group-id="1808051512-35">)</span><span class="w"> </span><span class="k" data-group-id="1808051512-36">do</span><span class="w">
+    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="1808051512-37">do</span><span class="w">
+      </span><span class="nc">Bonfire.Data.Social.FeedPublish.Migration</span><span class="o">.</span><span class="n">migrate_feed_publish_feed_index</span><span class="p" data-group-id="1808051512-38">(</span><span class="p" data-group-id="1808051512-38">)</span><span class="w">
+      </span><span class="nc">Bonfire.Data.Social.FeedPublish.Migration</span><span class="o">.</span><span class="n">drop_feed_publish_table</span><span class="p" data-group-id="1808051512-39">(</span><span class="p" data-group-id="1808051512-39">)</span><span class="w">
+    </span><span class="k" data-group-id="1808051512-37">end</span><span class="w">
+  </span><span class="k" data-group-id="1808051512-36">end</span><span class="w">
 
-  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">migrate_feed_publish</span><span class="p" data-group-id="9784889638-40">(</span><span class="p" data-group-id="9784889638-40">)</span><span class="w"> </span><span class="k" data-group-id="9784889638-41">do</span><span class="w">
-    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="9784889638-42">do</span><span class="w">
-      </span><span class="k">if</span><span class="w"> </span><span class="nc">Ecto.Migration</span><span class="o">.</span><span class="n">direction</span><span class="p" data-group-id="9784889638-43">(</span><span class="p" data-group-id="9784889638-43">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">:up</span><span class="p">,</span><span class="w">
-        </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="k">unquote</span><span class="p" data-group-id="9784889638-44">(</span><span class="n">mf</span><span class="p" data-group-id="9784889638-45">(</span><span class="ss">:up</span><span class="p" data-group-id="9784889638-45">)</span><span class="p" data-group-id="9784889638-44">)</span><span class="p">,</span><span class="w">
-        </span><span class="ss">else</span><span class="p">:</span><span class="w"> </span><span class="k">unquote</span><span class="p" data-group-id="9784889638-46">(</span><span class="n">mf</span><span class="p" data-group-id="9784889638-47">(</span><span class="ss">:down</span><span class="p" data-group-id="9784889638-47">)</span><span class="p" data-group-id="9784889638-46">)</span><span class="w">
-    </span><span class="k" data-group-id="9784889638-42">end</span><span class="w">
-  </span><span class="k" data-group-id="9784889638-41">end</span><span class="w">
+  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">migrate_feed_publish</span><span class="p" data-group-id="1808051512-40">(</span><span class="p" data-group-id="1808051512-40">)</span><span class="w"> </span><span class="k" data-group-id="1808051512-41">do</span><span class="w">
+    </span><span class="k">quote</span><span class="w"> </span><span class="k" data-group-id="1808051512-42">do</span><span class="w">
+      </span><span class="k">if</span><span class="w"> </span><span class="nc">Ecto.Migration</span><span class="o">.</span><span class="n">direction</span><span class="p" data-group-id="1808051512-43">(</span><span class="p" data-group-id="1808051512-43">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="ss">:up</span><span class="p">,</span><span class="w">
+        </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="k">unquote</span><span class="p" data-group-id="1808051512-44">(</span><span class="n">mf</span><span class="p" data-group-id="1808051512-45">(</span><span class="ss">:up</span><span class="p" data-group-id="1808051512-45">)</span><span class="p" data-group-id="1808051512-44">)</span><span class="p">,</span><span class="w">
+        </span><span class="ss">else</span><span class="p">:</span><span class="w"> </span><span class="k">unquote</span><span class="p" data-group-id="1808051512-46">(</span><span class="n">mf</span><span class="p" data-group-id="1808051512-47">(</span><span class="ss">:down</span><span class="p" data-group-id="1808051512-47">)</span><span class="p" data-group-id="1808051512-46">)</span><span class="w">
+    </span><span class="k" data-group-id="1808051512-42">end</span><span class="w">
+  </span><span class="k" data-group-id="1808051512-41">end</span><span class="w">
 
-  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">migrate_feed_publish</span><span class="p" data-group-id="9784889638-48">(</span><span class="n">dir</span><span class="p" data-group-id="9784889638-48">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">mf</span><span class="p" data-group-id="9784889638-49">(</span><span class="n">dir</span><span class="p" data-group-id="9784889638-49">)</span><span class="w">
+  </span><span class="kd">defmacro</span><span class="w"> </span><span class="nf">migrate_feed_publish</span><span class="p" data-group-id="1808051512-48">(</span><span class="n">dir</span><span class="p" data-group-id="1808051512-48">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">mf</span><span class="p" data-group-id="1808051512-49">(</span><span class="n">dir</span><span class="p" data-group-id="1808051512-49">)</span><span class="w">
 
-</span><span class="k" data-group-id="9784889638-1">end</span></code></pre><h2 id="more-examples" class="section-heading">
-  <a href="#more-examples">
+</span><span class="k" data-group-id="1808051512-1">end</span></code></pre><h2 id="more-examples" class="section-heading">
+  <a href="#more-examples" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    More examples
   </a>
+  <span class="text">More examples</span>
 </h2>
 <p>Take a look at a few of the migrations in our data libraries. Between them, they cover most
 scenarios by now:</p><ul><li><a href="https://github.com/bonfire-networks/bonfire_data_social/">bonfire_data_social</a></li><li><a href="https://github.com/bonfire-networks/bonfire_data_access_control/">bonfire_data_access_control</a></li><li><a href="https://github.com/bonfire-networks/bonfire_data_identity/">bonfire_data_identity</a></li><li><a href="https://github.com/bonfire-networks/bonfire_data_edges/">bonfire_data_edges</a> (feat. bonus triggers)</li></ul><p>If you want to know exactly what's happening, you may want to read the code for
@@ -470,7 +494,7 @@ Boundaries & Access Control
 
         <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.6) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.8) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
@@ -478,7 +502,7 @@ Boundaries & Access Control
       </footer>
     </div>
   </div>
-</section>
+</main>
 </div>
 
 

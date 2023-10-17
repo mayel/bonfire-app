@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.30.6">
-    <meta name="project" content="bonfire_umbrella v0.9.6-classic-beta.12">
+    <meta name="generator" content="ExDoc v0.30.8">
+    <meta name="project" content="bonfire_umbrella v0.9.6-cooperation-beta.26">
 
-    <title>Bonfire.Files — bonfire_umbrella v0.9.6-classic-beta.12</title>
-    <link rel="stylesheet" href="dist/html-elixir-M3TQBNKO.css" />
+    <title>Bonfire.Files — bonfire_umbrella v0.9.6-cooperation-beta.26</title>
+    <link rel="stylesheet" href="dist/html-elixir-XFYN5IVA.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-KDPBTEPL.js"></script>
-    <script src="dist/sidebar_items-1D2A101B.js"></script>
+    <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
+    <script src="dist/sidebar_items-BF8AC0A5.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/html-CP2A7WXZ.js"></script>
+    <script async src="dist/html-J2ASZTQE.js"></script>
 
 
   </head>
@@ -38,22 +38,22 @@
 
 <div class="main">
 
-<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
   <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
 </button>
 
-<section class="sidebar">
+<nav id="sidebar" class="sidebar">
   <form class="sidebar-search" action="search.html">
+    <label class="search-label">
+      <span class="sr-only">Search documentation of bonfire_umbrella</span>
+      <input name="q" type="text" class="search-input" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+    </label>
     <button type="submit" class="search-button" aria-label="Submit Search">
       <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
     </button>
-    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
-      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
+    <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+      <i class="ri-close-line ri-lg" title="Cancel search"></i>
     </button>
-    <label class="search-label">
-      <p class="sr-only">Search</p>
-      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
-    </label>
   </form>
 
   <div class="autocomplete">
@@ -72,24 +72,48 @@
 bonfire_umbrella
       </a>
       <div class="sidebar-projectVersion" translate="no">
-        v0.9.6-classic-beta.12
+        v0.9.6-cooperation-beta.26
       </div>
     </div>
-    <ul class="sidebar-listNav">
-      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+    <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
+      <li>
+        <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel" aria-selected="true" tabindex="0">
+Pages
+        </button>
+      </li>
 
-        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+        <li>
+          <button id="modules-list-tab-button" role="tab" data-type="modules" aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
+            Modules
+          </button>
+        </li>
 
 
-        <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
+        <li>
+          <button id="tasks-list-tab-button" role="tab" data-type="tasks" aria-controls="tasks-tab-panel" aria-selected="false" tabindex="-1">
+            <span translate="no">Mix</span> Tasks
+          </button>
+        </li>
 
     </ul>
   </div>
 
-  <ul id="full-list"></ul>
-</section>
+  <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
+    <ul id="extras-full-list" class="full-list"></ul>
+  </div>
 
-<section class="content">
+    <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button" hidden>
+      <ul id="modules-full-list" class="full-list"></ul>
+    </div>
+
+
+    <div id="tasks-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="tasks-list-tab-button" hidden>
+      <ul id="tasks-full-list" class="full-list"></ul>
+    </div>
+
+</nav>
+
+<main class="content">
   <output role="status" id="toast"></output>
   <div class="content-outer">
     <div id="content" class="content-inner">
@@ -107,7 +131,7 @@ bonfire_umbrella
     </a>
 
   <span translate="no">Bonfire.Files</span> 
-  <small class="app-vsn" translate="no">(bonfire_umbrella v0.9.6-classic-beta.12)</small>
+  <small class="app-vsn" translate="no">(bonfire_umbrella v0.9.6-cooperation-beta.26)</small>
 
 </h1>
 
@@ -117,10 +141,10 @@ bonfire_umbrella
 your own - a <a href="https://hexdocs.pm/bonfire_files/0.1.0/Bonfire.Files.Definition.html"><code class="inline">Bonfire.Files.Definition</code></a> is an extension of <a href="https://hexdocs.pm/waffle/1.1.7/Waffle.Definition.html"><code class="inline">Waffle.Definition</code></a>,
 however the <code class="inline">allowed_media_types/0</code> callback is added, forcing you to define
 what media types are accepted for these types of uploads.
-(You can also return <code class="inline">:all</code> to accept everything).</p><p>To use the uploader:</p><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="p" data-group-id="4808397329-1">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">media</span><span class="p" data-group-id="4808397329-1">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Bonfire.Files</span><span class="o">.</span><span class="n">upload</span><span class="p" data-group-id="4808397329-2">(</span><span class="nc">MyUploader</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="4808397329-3">%{</span><span class="ss">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./150.png&quot;</span><span class="p" data-group-id="4808397329-3">}</span><span class="p" data-group-id="4808397329-2">)</span><span class="w">
+(You can also return <code class="inline">:all</code> to accept everything).</p><p>To use the uploader:</p><pre><code class="makeup elixir" translate="no"><span class="gp unselectable">iex&gt; </span><span class="p" data-group-id="9620106233-1">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">media</span><span class="p" data-group-id="9620106233-1">}</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Bonfire.Files</span><span class="o">.</span><span class="n">upload</span><span class="p" data-group-id="9620106233-2">(</span><span class="nc">MyUploader</span><span class="p">,</span><span class="w"> </span><span class="n">context</span><span class="p">,</span><span class="w"> </span><span class="p" data-group-id="9620106233-3">%{</span><span class="ss">path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;./150.png&quot;</span><span class="p" data-group-id="9620106233-3">}</span><span class="p" data-group-id="9620106233-2">)</span><span class="w">
 </span><span class="gp unselectable">iex&gt; </span><span class="n">media</span><span class="o">.</span><span class="n">media_type</span><span class="w">
 </span><span class="s">&quot;image/png&quot;</span><span class="w">
-</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Files</span><span class="o">.</span><span class="n">remote_url</span><span class="p" data-group-id="4808397329-4">(</span><span class="nc">MyUploader</span><span class="p">,</span><span class="w"> </span><span class="n">media</span><span class="p" data-group-id="4808397329-4">)</span><span class="w">
+</span><span class="gp unselectable">iex&gt; </span><span class="nc">Bonfire.Files</span><span class="o">.</span><span class="n">remote_url</span><span class="p" data-group-id="9620106233-4">(</span><span class="nc">MyUploader</span><span class="p">,</span><span class="w"> </span><span class="n">media</span><span class="p" data-group-id="9620106233-4">)</span><span class="w">
 </span><span class="s">&quot;/uploads/my/01F3AY6JV30G06BY4DR9BTW5EH&quot;</span></code></pre>
   </section>
 
@@ -129,8 +153,8 @@ what media types are accepted for these types of uploads.
     <h1 class="section-heading">
       <a class="hover-link" href="#summary">
         <i class="ri-link-m" aria-hidden="true"></i>
-        Summary
       </a>
+      <span class="text">Summary</span>
     </h1>
 <div class="summary-functions summary">
   <h2>
@@ -232,8 +256,8 @@ the upload.</p></div>
     <h1 class="section-heading">
       <a class="hover-link" href="#functions">
         <i class="ri-link-m" aria-hidden="true"></i>
-Functions
       </a>
+      <span class="text">Functions</span>
     </h1>
     <div class="functions-list">
 <section class="detail" id="ap_publish_activity/1">
@@ -245,7 +269,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">ap_publish_activity(medias)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L300" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L305" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -267,7 +291,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">ap_receive_attachments(creator, attachments)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L346" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L351" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -289,7 +313,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">data_url(content, mime_type)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L288" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L293" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -311,7 +335,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">extract_metadata(path)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L257" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L262" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -333,7 +357,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">file_extension(path)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L125" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L130" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -355,7 +379,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">file_extension_only(path)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L129" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L134" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -377,7 +401,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">full_url(module, media)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L293" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L298" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -403,7 +427,7 @@ Functions
     </a>
     <h1 class="signature" translate="no">remote_url(module \\ nil, media, version \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L208" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L213" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -453,7 +477,7 @@ the upload.</p>
     </a>
     <h1 class="signature" translate="no">verify_media_type(definition, map)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L274" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_files/blob/main/lib/files.ex#L279" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -487,7 +511,7 @@ the upload.</p>
 
         <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.6) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.8) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
@@ -495,7 +519,7 @@ the upload.</p>
       </footer>
     </div>
   </div>
-</section>
+</main>
 </div>
 
 

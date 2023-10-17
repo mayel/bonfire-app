@@ -4,20 +4,20 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.30.6">
-    <meta name="project" content="bonfire_umbrella v0.9.6-classic-beta.12">
+    <meta name="generator" content="ExDoc v0.30.8">
+    <meta name="project" content="bonfire_umbrella v0.9.6-cooperation-beta.26">
 
-    <title>Arrows — bonfire_umbrella v0.9.6-classic-beta.12</title>
-    <link rel="stylesheet" href="dist/html-elixir-M3TQBNKO.css" />
+    <title>Arrows — bonfire_umbrella v0.9.6-cooperation-beta.26</title>
+    <link rel="stylesheet" href="dist/html-elixir-XFYN5IVA.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-KDPBTEPL.js"></script>
-    <script src="dist/sidebar_items-1D2A101B.js"></script>
+    <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
+    <script src="dist/sidebar_items-BF8AC0A5.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/html-CP2A7WXZ.js"></script>
+    <script async src="dist/html-J2ASZTQE.js"></script>
 
 
   </head>
@@ -38,22 +38,22 @@
 
 <div class="main">
 
-<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar">
+<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
   <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
 </button>
 
-<section class="sidebar">
+<nav id="sidebar" class="sidebar">
   <form class="sidebar-search" action="search.html">
+    <label class="search-label">
+      <span class="sr-only">Search documentation of bonfire_umbrella</span>
+      <input name="q" type="text" class="search-input" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+    </label>
     <button type="submit" class="search-button" aria-label="Submit Search">
       <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
     </button>
-    <button type="button" tabindex="-1" class="search-close-button" aria-label="Cancel Search">
-      <i class="ri-close-line ri-lg" aria-hidden="true" title="Cancel search"></i>
+    <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+      <i class="ri-close-line ri-lg" title="Cancel search"></i>
     </button>
-    <label class="search-label">
-      <p class="sr-only">Search</p>
-      <input name="q" type="text" class="search-input" placeholder="Search..." aria-label="Input your search terms" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
-    </label>
   </form>
 
   <div class="autocomplete">
@@ -72,24 +72,48 @@
 bonfire_umbrella
       </a>
       <div class="sidebar-projectVersion" translate="no">
-        v0.9.6-classic-beta.12
+        v0.9.6-cooperation-beta.26
       </div>
     </div>
-    <ul class="sidebar-listNav">
-      <li><a id="extras-list-link" href="#full-list">Pages</a></li>
+    <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
+      <li>
+        <button id="extras-list-tab-button" role="tab" data-type="extras" aria-controls="extras-tab-panel" aria-selected="true" tabindex="0">
+Pages
+        </button>
+      </li>
 
-        <li><a id="modules-list-link" href="#full-list">Modules</a></li>
+        <li>
+          <button id="modules-list-tab-button" role="tab" data-type="modules" aria-controls="modules-tab-panel" aria-selected="false" tabindex="-1">
+            Modules
+          </button>
+        </li>
 
 
-        <li><a id="tasks-list-link" href="#full-list"><span translate="no">Mix</span> Tasks</a></li>
+        <li>
+          <button id="tasks-list-tab-button" role="tab" data-type="tasks" aria-controls="tasks-tab-panel" aria-selected="false" tabindex="-1">
+            <span translate="no">Mix</span> Tasks
+          </button>
+        </li>
 
     </ul>
   </div>
 
-  <ul id="full-list"></ul>
-</section>
+  <div id="extras-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="extras-list-tab-button">
+    <ul id="extras-full-list" class="full-list"></ul>
+  </div>
 
-<section class="content">
+    <div id="modules-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="modules-list-tab-button" hidden>
+      <ul id="modules-full-list" class="full-list"></ul>
+    </div>
+
+
+    <div id="tasks-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="tasks-list-tab-button" hidden>
+      <ul id="tasks-full-list" class="full-list"></ul>
+    </div>
+
+</nav>
+
+<main class="content">
   <output role="status" id="toast"></output>
   <div class="content-outer">
     <div id="content" class="content-inner">
@@ -111,58 +135,58 @@ bonfire_umbrella
 </h1>
 
 <p>A handful of (mostly) arrow macros.</p><h2 id="installation" class="section-heading">
-  <a href="#installation">
+  <a href="#installation" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Installation
   </a>
+  <span class="text">Installation</span>
 </h2>
-<p>The package can be installed by adding <code class="inline">arrows</code> to your list of dependencies in <code class="inline">mix.exs</code>: --&gt;</p><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">deps</span><span class="w"> </span><span class="k" data-group-id="3340979321-1">do</span><span class="w">
-  </span><span class="p" data-group-id="3340979321-2">[</span><span class="w">
-    </span><span class="p" data-group-id="3340979321-3">{</span><span class="ss">:arrows</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;~&gt; 0.1.0&quot;</span><span class="p" data-group-id="3340979321-3">}</span><span class="w">
-  </span><span class="p" data-group-id="3340979321-2">]</span><span class="w">
-</span><span class="k" data-group-id="3340979321-1">end</span></code></pre><p>Or via git:</p><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">deps</span><span class="w"> </span><span class="k" data-group-id="5724099999-1">do</span><span class="w">
-  </span><span class="p" data-group-id="5724099999-2">[</span><span class="w">
-    </span><span class="p" data-group-id="5724099999-3">{</span><span class="ss">:arrows</span><span class="p">,</span><span class="w"> </span><span class="ss">git</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://github.com/bonfire-networks/arrows&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">branch</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;main&quot;</span><span class="p" data-group-id="5724099999-3">}</span><span class="w">
-  </span><span class="p" data-group-id="5724099999-2">]</span><span class="w">
-</span><span class="k" data-group-id="5724099999-1">end</span></code></pre><h2 id="documentation" class="section-heading">
-  <a href="#documentation">
+<p>The package can be installed by adding <code class="inline">arrows</code> to your list of dependencies in <code class="inline">mix.exs</code>: --&gt;</p><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">deps</span><span class="w"> </span><span class="k" data-group-id="0375893966-1">do</span><span class="w">
+  </span><span class="p" data-group-id="0375893966-2">[</span><span class="w">
+    </span><span class="p" data-group-id="0375893966-3">{</span><span class="ss">:arrows</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;~&gt; 0.1.0&quot;</span><span class="p" data-group-id="0375893966-3">}</span><span class="w">
+  </span><span class="p" data-group-id="0375893966-2">]</span><span class="w">
+</span><span class="k" data-group-id="0375893966-1">end</span></code></pre><p>Or via git:</p><pre><code class="makeup elixir" translate="no"><span class="kd">def</span><span class="w"> </span><span class="nf">deps</span><span class="w"> </span><span class="k" data-group-id="4834491066-1">do</span><span class="w">
+  </span><span class="p" data-group-id="4834491066-2">[</span><span class="w">
+    </span><span class="p" data-group-id="4834491066-3">{</span><span class="ss">:arrows</span><span class="p">,</span><span class="w"> </span><span class="ss">git</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;https://github.com/bonfire-networks/arrows&quot;</span><span class="p">,</span><span class="w"> </span><span class="ss">branch</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;main&quot;</span><span class="p" data-group-id="4834491066-3">}</span><span class="w">
+  </span><span class="p" data-group-id="4834491066-2">]</span><span class="w">
+</span><span class="k" data-group-id="4834491066-1">end</span></code></pre><h2 id="documentation" class="section-heading">
+  <a href="#documentation" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Documentation
   </a>
+  <span class="text">Documentation</span>
 </h2>
 <p>The Elixir <a href="https://hexdocs.pm/elixir/Kernel.html#%7C%3E/2">|&gt; (&quot;pipe&quot;) operator</a> is one of the things that seems to get people excited about elixir. Probably in part because you then don't have to keep coming up with function names. Unfortunately it's kind of limiting. 
-The moment you need to pipe a parameter into a position that isn't the first one, it breaks down and you have to drop out of the pipeline format or write a secondary function to handle it.</p><p>Not any more! By simply inserting <code class="inline">...</code> where you would like the value to be inserted, <a href="https://hexdocs.pm/arrows/0.1.0/Arrows.html"><code class="inline">Arrows</code></a> will override where it is placed. This allows you to keep on piping while accommodating that function with the annoying argument order. <a href="https://hexdocs.pm/arrows/0.1.0/Arrows.html"><code class="inline">Arrows</code></a> was inspired by <a href="https://hexdocs.pm/magritte/Magritte.html">an existing library</a>. Here is part of the test suite in lieu of examples:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ArrowsTest</span><span class="w"> </span><span class="k" data-group-id="2628254861-1">do</span><span class="w">
+The moment you need to pipe a parameter into a position that isn't the first one, it breaks down and you have to drop out of the pipeline format or write a secondary function to handle it.</p><p>Not any more! By simply inserting <code class="inline">...</code> where you would like the value to be inserted, <a href="https://hexdocs.pm/arrows/0.1.0/Arrows.html"><code class="inline">Arrows</code></a> will override where it is placed. This allows you to keep on piping while accommodating that function with the annoying argument order. <a href="https://hexdocs.pm/arrows/0.1.0/Arrows.html"><code class="inline">Arrows</code></a> was inspired by <a href="https://hexdocs.pm/magritte/Magritte.html">an existing library</a>. Here is part of the test suite in lieu of examples:</p><pre><code class="makeup elixir" translate="no"><span class="kd">defmodule</span><span class="w"> </span><span class="nc">ArrowsTest</span><span class="w"> </span><span class="k" data-group-id="2785714339-1">do</span><span class="w">
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">ExUnit.Case</span><span class="w">
   </span><span class="kn">use</span><span class="w"> </span><span class="nc">Arrows</span><span class="w">
 
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">double</span><span class="p" data-group-id="2628254861-2">(</span><span class="n">x</span><span class="p" data-group-id="2628254861-2">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">double_fst</span><span class="p" data-group-id="2628254861-3">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p" data-group-id="2628254861-3">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">double_snd</span><span class="p" data-group-id="2628254861-4">(</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p" data-group-id="2628254861-4">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w">
-  </span><span class="kd">def</span><span class="w"> </span><span class="nf">add_snd_thd</span><span class="p" data-group-id="2628254861-5">(</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p" data-group-id="2628254861-5">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">double</span><span class="p" data-group-id="2785714339-2">(</span><span class="n">x</span><span class="p" data-group-id="2785714339-2">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">double_fst</span><span class="p" data-group-id="2785714339-3">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="bp">_</span><span class="p" data-group-id="2785714339-3">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">double_snd</span><span class="p" data-group-id="2785714339-4">(</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p" data-group-id="2785714339-4">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">2</span><span class="w">
+  </span><span class="kd">def</span><span class="w"> </span><span class="nf">add_snd_thd</span><span class="p" data-group-id="2785714339-5">(</span><span class="bp">_</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p" data-group-id="2785714339-5">)</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">y</span><span class="w">
 
-  </span><span class="n">test</span><span class="w"> </span><span class="s">&quot;|&gt;&quot;</span><span class="w"> </span><span class="k" data-group-id="2628254861-6">do</span><span class="w">
-    </span><span class="n">assert</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2628254861-7">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double</span><span class="p" data-group-id="2628254861-7">)</span><span class="w">
-    </span><span class="n">assert</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2628254861-8">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double</span><span class="p" data-group-id="2628254861-9">(</span><span class="p" data-group-id="2628254861-9">)</span><span class="p" data-group-id="2628254861-8">)</span><span class="w">
-    </span><span class="n">assert</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2628254861-10">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double</span><span class="p" data-group-id="2628254861-11">(</span><span class="n">...</span><span class="p" data-group-id="2628254861-11">)</span><span class="p" data-group-id="2628254861-10">)</span><span class="w">
-    </span><span class="n">assert</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2628254861-12">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double</span><span class="p" data-group-id="2628254861-13">(</span><span class="n">double</span><span class="p" data-group-id="2628254861-14">(</span><span class="n">...</span><span class="p" data-group-id="2628254861-14">)</span><span class="p" data-group-id="2628254861-13">)</span><span class="p" data-group-id="2628254861-12">)</span><span class="w">
-    </span><span class="n">assert</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2628254861-15">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double_fst</span><span class="p" data-group-id="2628254861-16">(</span><span class="mi">1</span><span class="p" data-group-id="2628254861-16">)</span><span class="p" data-group-id="2628254861-15">)</span><span class="w">
-    </span><span class="n">assert</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2628254861-17">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double_fst</span><span class="p" data-group-id="2628254861-18">(</span><span class="n">...</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="2628254861-18">)</span><span class="p" data-group-id="2628254861-17">)</span><span class="w">
-    </span><span class="n">assert</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2628254861-19">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double_fst</span><span class="p" data-group-id="2628254861-20">(</span><span class="n">double</span><span class="p" data-group-id="2628254861-21">(</span><span class="n">...</span><span class="p" data-group-id="2628254861-21">)</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="2628254861-20">)</span><span class="p" data-group-id="2628254861-19">)</span><span class="w">
-    </span><span class="n">assert</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2628254861-22">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double_snd</span><span class="p" data-group-id="2628254861-23">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p" data-group-id="2628254861-23">)</span><span class="p" data-group-id="2628254861-22">)</span><span class="w">
-    </span><span class="n">assert</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2628254861-24">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double_snd</span><span class="p" data-group-id="2628254861-25">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">double</span><span class="p" data-group-id="2628254861-26">(</span><span class="n">...</span><span class="p" data-group-id="2628254861-26">)</span><span class="p" data-group-id="2628254861-25">)</span><span class="p" data-group-id="2628254861-24">)</span><span class="w">
-    </span><span class="n">assert</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2628254861-27">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">add_snd_thd</span><span class="p" data-group-id="2628254861-28">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="2628254861-28">)</span><span class="p" data-group-id="2628254861-27">)</span><span class="w">
-    </span><span class="n">assert</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2628254861-29">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">add_snd_thd</span><span class="p" data-group-id="2628254861-30">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p" data-group-id="2628254861-30">)</span><span class="p" data-group-id="2628254861-29">)</span><span class="w">
-    </span><span class="n">assert</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2628254861-31">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">add_snd_thd</span><span class="p" data-group-id="2628254861-32">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p">,</span><span class="w"> </span><span class="n">double</span><span class="p" data-group-id="2628254861-33">(</span><span class="n">...</span><span class="p" data-group-id="2628254861-33">)</span><span class="p" data-group-id="2628254861-32">)</span><span class="p" data-group-id="2628254861-31">)</span><span class="w">
-    </span><span class="k">for</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p" data-group-id="2628254861-34">[</span><span class="ss">:yes</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="no">false</span><span class="p" data-group-id="2628254861-34">]</span><span class="w"> </span><span class="k" data-group-id="2628254861-35">do</span><span class="w">
-      </span><span class="n">assert</span><span class="w"> </span><span class="p" data-group-id="2628254861-36">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p" data-group-id="2628254861-36">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2628254861-37">(</span><span class="n">x</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="p" data-group-id="2628254861-38">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p" data-group-id="2628254861-38">}</span><span class="p" data-group-id="2628254861-37">)</span><span class="w">
-    </span><span class="k" data-group-id="2628254861-35">end</span><span class="w">
-  </span><span class="k" data-group-id="2628254861-6">end</span><span class="w">
-</span><span class="k" data-group-id="2628254861-1">end</span></code></pre><p>A few little extra features you might notice here:</p><ul><li>You can move the parameter into a subexpression, as in <code class="inline">2 |&gt; double_fst(double(...), 1)</code> where
+  </span><span class="n">test</span><span class="w"> </span><span class="s">&quot;|&gt;&quot;</span><span class="w"> </span><span class="k" data-group-id="2785714339-6">do</span><span class="w">
+    </span><span class="n">assert</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2785714339-7">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double</span><span class="p" data-group-id="2785714339-7">)</span><span class="w">
+    </span><span class="n">assert</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2785714339-8">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double</span><span class="p" data-group-id="2785714339-9">(</span><span class="p" data-group-id="2785714339-9">)</span><span class="p" data-group-id="2785714339-8">)</span><span class="w">
+    </span><span class="n">assert</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2785714339-10">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double</span><span class="p" data-group-id="2785714339-11">(</span><span class="n">...</span><span class="p" data-group-id="2785714339-11">)</span><span class="p" data-group-id="2785714339-10">)</span><span class="w">
+    </span><span class="n">assert</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2785714339-12">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double</span><span class="p" data-group-id="2785714339-13">(</span><span class="n">double</span><span class="p" data-group-id="2785714339-14">(</span><span class="n">...</span><span class="p" data-group-id="2785714339-14">)</span><span class="p" data-group-id="2785714339-13">)</span><span class="p" data-group-id="2785714339-12">)</span><span class="w">
+    </span><span class="n">assert</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2785714339-15">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double_fst</span><span class="p" data-group-id="2785714339-16">(</span><span class="mi">1</span><span class="p" data-group-id="2785714339-16">)</span><span class="p" data-group-id="2785714339-15">)</span><span class="w">
+    </span><span class="n">assert</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2785714339-17">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double_fst</span><span class="p" data-group-id="2785714339-18">(</span><span class="n">...</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="2785714339-18">)</span><span class="p" data-group-id="2785714339-17">)</span><span class="w">
+    </span><span class="n">assert</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2785714339-19">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double_fst</span><span class="p" data-group-id="2785714339-20">(</span><span class="n">double</span><span class="p" data-group-id="2785714339-21">(</span><span class="n">...</span><span class="p" data-group-id="2785714339-21">)</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="2785714339-20">)</span><span class="p" data-group-id="2785714339-19">)</span><span class="w">
+    </span><span class="n">assert</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2785714339-22">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double_snd</span><span class="p" data-group-id="2785714339-23">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p" data-group-id="2785714339-23">)</span><span class="p" data-group-id="2785714339-22">)</span><span class="w">
+    </span><span class="n">assert</span><span class="w"> </span><span class="mi">8</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2785714339-24">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">double_snd</span><span class="p" data-group-id="2785714339-25">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">double</span><span class="p" data-group-id="2785714339-26">(</span><span class="n">...</span><span class="p" data-group-id="2785714339-26">)</span><span class="p" data-group-id="2785714339-25">)</span><span class="p" data-group-id="2785714339-24">)</span><span class="w">
+    </span><span class="n">assert</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2785714339-27">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">add_snd_thd</span><span class="p" data-group-id="2785714339-28">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p" data-group-id="2785714339-28">)</span><span class="p" data-group-id="2785714339-27">)</span><span class="w">
+    </span><span class="n">assert</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2785714339-29">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">add_snd_thd</span><span class="p" data-group-id="2785714339-30">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p" data-group-id="2785714339-30">)</span><span class="p" data-group-id="2785714339-29">)</span><span class="w">
+    </span><span class="n">assert</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2785714339-31">(</span><span class="mi">2</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="n">add_snd_thd</span><span class="p" data-group-id="2785714339-32">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p">,</span><span class="w"> </span><span class="n">double</span><span class="p" data-group-id="2785714339-33">(</span><span class="n">...</span><span class="p" data-group-id="2785714339-33">)</span><span class="p" data-group-id="2785714339-32">)</span><span class="p" data-group-id="2785714339-31">)</span><span class="w">
+    </span><span class="k">for</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="p" data-group-id="2785714339-34">[</span><span class="ss">:yes</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="no">nil</span><span class="p">,</span><span class="w"> </span><span class="no">false</span><span class="p" data-group-id="2785714339-34">]</span><span class="w"> </span><span class="k" data-group-id="2785714339-35">do</span><span class="w">
+      </span><span class="n">assert</span><span class="w"> </span><span class="p" data-group-id="2785714339-36">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p" data-group-id="2785714339-36">}</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="p" data-group-id="2785714339-37">(</span><span class="n">x</span><span class="w"> </span><span class="o">|&gt;</span><span class="w"> </span><span class="p" data-group-id="2785714339-38">{</span><span class="ss">:ok</span><span class="p">,</span><span class="w"> </span><span class="n">...</span><span class="p" data-group-id="2785714339-38">}</span><span class="p" data-group-id="2785714339-37">)</span><span class="w">
+    </span><span class="k" data-group-id="2785714339-35">end</span><span class="w">
+  </span><span class="k" data-group-id="2785714339-6">end</span><span class="w">
+</span><span class="k" data-group-id="2785714339-1">end</span></code></pre><p>A few little extra features you might notice here:</p><ul><li>You can move the parameter into a subexpression, as in <code class="inline">2 |&gt; double_fst(double(...), 1)</code> where
 double will be called before the parameter is passed to <code class="inline">double_fst</code>.</li><li>You can use <code class="inline">...</code> multiple times, substituting it in multiple places.</li><li>The right hand side need not even be a function call, you can use any expression with <code class="inline">...</code>.</li></ul><h3 id="ok-pipe" class="section-heading">
-  <a href="#ok-pipe">
+  <a href="#ok-pipe" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
-    Ok-pipe
   </a>
+  <span class="text">Ok-pipe</span>
 </h3>
 <p><a href="https://hexdocs.pm/arrows/0.1.0/Arrows.html"><code class="inline">Arrows</code></a> also provides an <code class="inline">ok-pipe</code> operator, <code class="inline">~&gt;</code>, which only pipes into the next function if the result from the last one was considered a success. It's inspired by <a href="https://hexdocs.pm/ok/readme.html">OK</a>, but we have chosen to do things slightly differently so it better fits with our regular pipe.</p><table><tbody><tr><td style="text-align: left;">input</td><td style="text-align: left;">result</td><td style="text-align: left;"></td></tr><tr><td style="text-align: left;">:-----------------------</td><td style="text-align: left;">:--------------</td><td style="text-align: left;"></td></tr><tr><td style="text-align: left;"><code class="inline">{:ok, x}</code></td><td style="text-align: left;"><code class="inline">fun.(x)</code></td><td style="text-align: left;"></td></tr><tr><td style="text-align: left;"><code class="inline">{:error, e}</code></td><td style="text-align: left;"><code class="inline">{:error, e}</code></td><td style="text-align: left;"></td></tr><tr><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"><code class="inline">nil</code></td><td style="text-align: left;"></td></tr><tr><td style="text-align: left;"><code class="inline">x when not is_nil(x)</code></td><td style="text-align: left;"><code class="inline">fun.(x)</code></td><td style="text-align: left;"></td></tr></tbody></table><p>In the case of a function returning an ok/error tuple being on the left hand side, this is straightforward to determine. In the event of <code class="inline">{:ok, x}</code>, x will be passed into the right hand side to call. In the event of <code class="inline">{:error, x}</code>, the result will be <code class="inline">{:error, x}</code>.</p><p>We also deal with a lot of functions that indicate failure by returning nil. <code class="inline">~&gt;</code> tries to 'do what I mean' for both of these so you can have one pipe operator to rule them all. If <code class="inline">nil</code> is a valid result, you must thus be sure to wrap it in an <code class="inline">ok</code> tuple when it occurs on the left hand side of <code class="inline">~&gt;</code>.</p><p><code class="inline">|&gt;</code> and <code class="inline">~&gt;</code> compose in the way you'd expect; i.e. a <code class="inline">~&gt;</code> receiving an error tuple or nil will stop executing the rest of the chain of (mixed) pipes.</p><p>Documentation can be found at <a href="https://hexdocs.pm/arrows">https://hexdocs.pm/arrows</a>.</p>
 <div class="bottom-actions">
@@ -208,7 +232,7 @@ ActivityPub
 
         <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.6) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.8) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
@@ -216,7 +240,7 @@ ActivityPub
       </footer>
     </div>
   </div>
-</section>
+</main>
 </div>
 
 
