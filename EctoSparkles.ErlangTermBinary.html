@@ -294,7 +294,7 @@ We only need to handle deserialization.</p>
     </a>
     <h1 class="signature" translate="no">dump(term)</h1>
 
-      <a href="https://github.com/bonfire-networks/ecto_sparkles/blob/main/lib/erlang_term_binary.ex#L28" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/ecto_sparkles/blob/main/lib/erlang_term_binary.ex#L39" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -360,7 +360,7 @@ We only need to handle deserialization.</p>
     </a>
     <h1 class="signature" translate="no">load(raw_binary)</h1>
 
-      <a href="https://github.com/bonfire-networks/ecto_sparkles/blob/main/lib/erlang_term_binary.ex#L22" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/ecto_sparkles/blob/main/lib/erlang_term_binary.ex#L32" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -371,7 +371,7 @@ We only need to handle deserialization.</p>
   <section class="docstring">
 
 <p>Convert the raw binary value from the database back to
-the desired term.</p>
+the desired term.</p><p>Uses <a href="https://hexdocs.pm/plug_crypto/2.0.0/Plug.Crypto.html#non_executable_binary_to_term/2"><code class="inline">Plug.Crypto.non_executable_binary_to_term/2</code></a> - a restricted version of <a href="https://www.erlang.org/doc/man/erlang.html#binary_to_term-2"><code class="inline">:erlang.binary_to_term/2</code></a> that forbids executable terms, such as anonymous functions.</p><p>By default this function does not restrict atoms, except if compiled in prod env, then the [:safe] option is set, so only existing (and loaded) atoms will be deserialized.</p>
   </section>
 </section>
 <section class="detail" id="type/0">
