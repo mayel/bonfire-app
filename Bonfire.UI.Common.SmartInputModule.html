@@ -7,13 +7,13 @@
     <meta name="generator" content="ExDoc v0.30.9">
     <meta name="project" content="bonfire_umbrella v0.9.8-cooperation-beta.24">
 
-    <title>Bonfire.Common.NavModule — bonfire_umbrella v0.9.8-cooperation-beta.24</title>
+    <title>Bonfire.UI.Common.SmartInputModule — bonfire_umbrella v0.9.8-cooperation-beta.24</title>
     <link rel="stylesheet" href="dist/html-elixir-XFYN5IVA.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
-    <script src="dist/sidebar_items-3A00F098.js"></script>
+    <script src="dist/sidebar_items-298A947A.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -125,19 +125,24 @@ Pages
 </button>
 
 
-    <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/nav_module.ex#L2" title="View Source" class="icon-action" rel="help">
+    <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/smart_input_module.ex#L1" title="View Source" class="icon-action" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
-  <span translate="no">Bonfire.Common.NavModule</span> <small>behaviour</small>
+  <span translate="no">Bonfire.UI.Common.SmartInputModule</span> <small>behaviour</small>
   <small class="app-vsn" translate="no">(bonfire_umbrella v0.9.8-cooperation-beta.24)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>Add items to extensions' navigation sidebar.</p>
+<p>Find a smart input module via the object type(s) it can create, or vice versa. Backed by a global cache of known smart input modules.</p><p>To add a module to this list, you should declare <code class="inline">@behaviour Bonfire.UI.Common.SmartInputModule</code> in it and define a <code class="inline">smart_input_module/0</code> function which returns a list of object types that it can create.</p><p>Example:</p><pre><code class="makeup elixir" translate="no"><span class="na">@behaviour</span><span class="w"> </span><span class="nc">Bonfire.UI.Common.SmartInputModule</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">smart_input_module</span><span class="p">,</span><span class="w"> </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="2569024738-1">[</span><span class="ss">:page</span><span class="p">,</span><span class="w"> </span><span class="nc">Bonfire.Pages.Page</span><span class="p" data-group-id="2569024738-1">]</span></code></pre><p>You can then open the smart input composer / object creator using that declared type, for example:</p><pre><code class="makeup elixir" translate="no"><span class="o">&lt;</span><span class="nc">Bonfire.UI.Common.SmartInputButtonLive</span><span class="w">
+  </span><span class="n">create_object_type</span><span class="o">=</span><span class="p" data-group-id="6071664152-1">{</span><span class="ss">:page</span><span class="p" data-group-id="6071664152-1">}</span><span class="w">
+  </span><span class="n">prompt</span><span class="o">=</span><span class="p" data-group-id="6071664152-2">{</span><span class="n">l</span><span class="p" data-group-id="6071664152-3">(</span><span class="s">&quot;New page&quot;</span><span class="p" data-group-id="6071664152-3">)</span><span class="p" data-group-id="6071664152-2">}</span><span class="w">
+  </span><span class="n">icon</span><span class="o">=</span><span class="s">&quot;mdi:pencil&quot;</span><span class="w">
+</span><span class="o">/</span><span class="o">&gt;</span></code></pre>
   </section>
 
 
@@ -155,11 +160,11 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#c:declared_nav/0" translate="no">declared_nav()</a>
+        <a href="#c:smart_input_module/0" translate="no">smart_input_module()</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Declares a nav module, with links or nav components</p></div>
+        <div class="summary-synopsis"><p>Declares a smart input module</p></div>
 
     </div>
 
@@ -189,29 +194,11 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#nav/0" translate="no">nav()</a>
+        <a href="#smart_input_modules_types/0" translate="no">smart_input_modules_types()</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Load all navs</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#nav/1" translate="no">nav(app)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Get navs for an extension</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#nav_function_error/2" translate="no">nav_function_error(error, args)</a>
-
-      </div>
+        <div class="summary-synopsis"><p>Returns a list of smart input modules and the object type(s) it can create, and vice versa.</p></div>
 
     </div>
 
@@ -228,16 +215,16 @@ Pages
       <span class="text">Callbacks</span>
     </h1>
     <div class="callbacks-list">
-<section class="detail" id="c:declared_nav/0">
+<section class="detail" id="c:smart_input_module/0">
 
   <div class="detail-header">
-    <a href="#c:declared_nav/0" class="detail-link" title="Link to this callback">
+    <a href="#c:smart_input_module/0" class="detail-link" title="Link to this callback">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this callback</span>
     </a>
-    <h1 class="signature" translate="no">declared_nav()</h1>
+    <h1 class="signature" translate="no">smart_input_module()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/nav_module.ex#L11" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/smart_input_module.ex#L26" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -249,11 +236,11 @@ Pages
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@callback</span> declared_nav() :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()</pre>
+          <pre translate="no"><span class="attribute">@callback</span> smart_input_module() :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()</pre>
 
       </div>
 
-<p>Declares a nav module, with links or nav components</p>
+<p>Declares a smart input module</p>
   </section>
 </section>
 
@@ -277,7 +264,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">app_modules()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/nav_module.ex#L50" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/smart_input_module.ex#L28" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -299,7 +286,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">modules()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/nav_module.ex#L55" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/smart_input_module.ex#L33" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -318,16 +305,16 @@ Pages
 <p>Callback implementation for <a href="https://hexdocs.pm/bonfire_common/0.1.0/Bonfire.Common.ExtensionBehaviour.html#c:modules/0"><code class="inline">Bonfire.Common.ExtensionBehaviour.modules/0</code></a>.</p>
   </section>
 </section>
-<section class="detail" id="nav/0">
+<section class="detail" id="smart_input_modules_types/0">
 
   <div class="detail-header">
-    <a href="#nav/0" class="detail-link" title="Link to this function">
+    <a href="#smart_input_modules_types/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">nav()</h1>
+    <h1 class="signature" translate="no">smart_input_modules_types()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/nav_module.ex#L36" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/smart_input_module.ex#L38" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -337,51 +324,7 @@ Pages
 
   <section class="docstring">
 
-<p>Load all navs</p>
-  </section>
-</section>
-<section class="detail" id="nav/1">
-
-  <div class="detail-header">
-    <a href="#nav/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">nav(app)</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/nav_module.ex#L14" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Get navs for an extension</p>
-  </section>
-</section>
-<section class="detail" id="nav_function_error/2">
-
-  <div class="detail-header">
-    <a href="#nav_function_error/2" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">nav_function_error(error, args)</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/nav_module.ex#L41" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-
+<p>Returns a list of smart input modules and the object type(s) it can create, and vice versa.</p>
   </section>
 </section>
 

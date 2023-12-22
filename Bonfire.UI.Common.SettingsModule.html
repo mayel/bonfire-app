@@ -7,13 +7,13 @@
     <meta name="generator" content="ExDoc v0.30.9">
     <meta name="project" content="bonfire_umbrella v0.9.8-cooperation-beta.24">
 
-    <title>Bonfire.Common.WidgetModule — bonfire_umbrella v0.9.8-cooperation-beta.24</title>
+    <title>Bonfire.UI.Common.SettingsModule — bonfire_umbrella v0.9.8-cooperation-beta.24</title>
     <link rel="stylesheet" href="dist/html-elixir-XFYN5IVA.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
-    <script src="dist/sidebar_items-3A00F098.js"></script>
+    <script src="dist/sidebar_items-298A947A.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -125,19 +125,19 @@ Pages
 </button>
 
 
-    <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/widget_module.ex#L2" title="View Source" class="icon-action" rel="help">
+    <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/settings_module.ex#L2" title="View Source" class="icon-action" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
 
-  <span translate="no">Bonfire.Common.WidgetModule</span> <small>behaviour</small>
+  <span translate="no">Bonfire.UI.Common.SettingsModule</span> <small>behaviour</small>
   <small class="app-vsn" translate="no">(bonfire_umbrella v0.9.8-cooperation-beta.24)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>Widgets: components that can be added to the dashboard or sidebards</p>
+<p>Settings nav &amp; components</p>
   </section>
 
 
@@ -155,11 +155,21 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#c:declared_widget/0" translate="no">declared_widget()</a>
+        <a href="#c:declared_component/0" translate="no">declared_component()</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Declares a widget component</p></div>
+        <div class="summary-synopsis"><p>Declares a component component</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#c:declared_nav/0" translate="no">declared_nav()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Declares a nav module, with links or nav components</p></div>
 
     </div>
 
@@ -179,6 +189,44 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
+        <a href="#component_function_error/2" translate="no">component_function_error(error, args)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#components/0" translate="no">components()</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Load all components at once</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#components/1" translate="no">components(extension)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Load components for an extension</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#extension_has_components?/2" translate="no">extension_has_components?(extension, modules \\ nil)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>List extensions that have settings component(s)</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
         <a href="#modules/0" translate="no">modules()</a>
 
       </div>
@@ -189,17 +237,17 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#widget/1" translate="no">widget(module)</a>
+        <a href="#modules_component/1" translate="no">modules_component(modules)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Get a widget identified by module</p></div>
+        <div class="summary-synopsis"><p>Get components identified by their module</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#widget_function_error/2" translate="no">widget_function_error(error, args)</a>
+        <a href="#modules_nav/1" translate="no">modules_nav(modules)</a>
 
       </div>
 
@@ -207,21 +255,29 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#widgets/0" translate="no">widgets()</a>
+        <a href="#nav/0" translate="no">nav()</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Load all widgets at once</p></div>
+        <div class="summary-synopsis"><p>Load all navs</p></div>
 
     </div>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#widgets/1" translate="no">widgets(extension)</a>
+        <a href="#nav/1" translate="no">nav(app)</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Load widgets for an extension</p></div>
+        <div class="summary-synopsis"><p>Get navs for an extension</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#nav_function_error/2" translate="no">nav_function_error(error, args)</a>
+
+      </div>
 
     </div>
 
@@ -238,16 +294,16 @@ Pages
       <span class="text">Callbacks</span>
     </h1>
     <div class="callbacks-list">
-<section class="detail" id="c:declared_widget/0">
+<section class="detail" id="c:declared_component/0">
 
   <div class="detail-header">
-    <a href="#c:declared_widget/0" class="detail-link" title="Link to this callback">
+    <a href="#c:declared_component/0" class="detail-link" title="Link to this callback">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this callback</span>
     </a>
-    <h1 class="signature" translate="no">declared_widget()</h1>
+    <h1 class="signature" translate="no">declared_component()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/widget_module.ex#L10" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/settings_module.ex#L11" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -259,11 +315,39 @@ Pages
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@callback</span> declared_widget() :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()</pre>
+          <pre translate="no"><span class="attribute">@callback</span> declared_component() :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()</pre>
 
       </div>
 
-<p>Declares a widget component</p>
+<p>Declares a component component</p>
+  </section>
+</section>
+<section class="detail" id="c:declared_nav/0">
+
+  <div class="detail-header">
+    <a href="#c:declared_nav/0" class="detail-link" title="Link to this callback">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this callback</span>
+    </a>
+    <h1 class="signature" translate="no">declared_nav()</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/settings_module.ex#L14" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@callback</span> declared_nav() :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()</pre>
+
+      </div>
+
+<p>Declares a nav module, with links or nav components</p>
   </section>
 </section>
 
@@ -287,7 +371,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">app_modules()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/widget_module.ex#L36" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/settings_module.ex#L117" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -300,6 +384,96 @@ Pages
 
   </section>
 </section>
+<section class="detail" id="component_function_error/2">
+
+  <div class="detail-header">
+    <a href="#component_function_error/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">component_function_error(error, args)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/settings_module.ex#L108" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="components/0">
+
+  <div class="detail-header">
+    <a href="#components/0" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">components()</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/settings_module.ex#L81" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Load all components at once</p>
+  </section>
+</section>
+<section class="detail" id="components/1">
+
+  <div class="detail-header">
+    <a href="#components/1" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">components(extension)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/settings_module.ex#L74" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>Load components for an extension</p>
+  </section>
+</section>
+<section class="detail" id="extension_has_components?/2">
+
+    <span id="extension_has_components?/1"></span>
+
+  <div class="detail-header">
+    <a href="#extension_has_components?/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">extension_has_components?(extension, modules \\ nil)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/settings_module.ex#L88" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+<p>List extensions that have settings component(s)</p>
+  </section>
+</section>
 <section class="detail" id="modules/0">
 
   <div class="detail-header">
@@ -309,7 +483,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">modules()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/widget_module.ex#L41" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/settings_module.ex#L122" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -328,16 +502,16 @@ Pages
 <p>Callback implementation for <a href="https://hexdocs.pm/bonfire_common/0.1.0/Bonfire.Common.ExtensionBehaviour.html#c:modules/0"><code class="inline">Bonfire.Common.ExtensionBehaviour.modules/0</code></a>.</p>
   </section>
 </section>
-<section class="detail" id="widget/1">
+<section class="detail" id="modules_component/1">
 
   <div class="detail-header">
-    <a href="#widget/1" class="detail-link" title="Link to this function">
+    <a href="#modules_component/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">widget(module)</h1>
+    <h1 class="signature" translate="no">modules_component(modules)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/widget_module.ex#L13" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/settings_module.ex#L59" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -347,19 +521,19 @@ Pages
 
   <section class="docstring">
 
-<p>Get a widget identified by module</p>
+<p>Get components identified by their module</p>
   </section>
 </section>
-<section class="detail" id="widget_function_error/2">
+<section class="detail" id="modules_nav/1">
 
   <div class="detail-header">
-    <a href="#widget_function_error/2" class="detail-link" title="Link to this function">
+    <a href="#modules_nav/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">widget_function_error(error, args)</h1>
+    <h1 class="signature" translate="no">modules_nav(modules)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/widget_module.ex#L27" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/settings_module.ex#L23" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -372,16 +546,16 @@ Pages
 
   </section>
 </section>
-<section class="detail" id="widgets/0">
+<section class="detail" id="nav/0">
 
   <div class="detail-header">
-    <a href="#widgets/0" class="detail-link" title="Link to this function">
+    <a href="#nav/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">widgets()</h1>
+    <h1 class="signature" translate="no">nav()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/widget_module.ex#L23" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/settings_module.ex#L37" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -391,19 +565,19 @@ Pages
 
   <section class="docstring">
 
-<p>Load all widgets at once</p>
+<p>Load all navs</p>
   </section>
 </section>
-<section class="detail" id="widgets/1">
+<section class="detail" id="nav/1">
 
   <div class="detail-header">
-    <a href="#widgets/1" class="detail-link" title="Link to this function">
+    <a href="#nav/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">widgets(extension)</h1>
+    <h1 class="signature" translate="no">nav(app)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviours/widget_module.ex#L18" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/settings_module.ex#L17" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -413,7 +587,29 @@ Pages
 
   <section class="docstring">
 
-<p>Load widgets for an extension</p>
+<p>Get navs for an extension</p>
+  </section>
+</section>
+<section class="detail" id="nav_function_error/2">
+
+  <div class="detail-header">
+    <a href="#nav_function_error/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">nav_function_error(error, args)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/extension_behaviours/settings_module.ex#L49" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 

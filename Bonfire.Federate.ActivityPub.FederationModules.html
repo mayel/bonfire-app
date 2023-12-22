@@ -13,7 +13,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
-    <script src="dist/sidebar_items-3A00F098.js"></script>
+    <script src="dist/sidebar_items-298A947A.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -139,12 +139,12 @@ Pages
   <section id="moduledoc">
 <p>A automatically-generated global list of federation modules which can queried by activity and/or object type.</p><p>To add a module to this list, you should declare <code class="inline">@behaviour Bonfire.Federate.ActivityPub.FederationModules</code> in it and define a <code class="inline">federation_module/0</code> function which returns a list of object and/or activity types which that module handles.</p><p>Example:</p><pre><code class="makeup elixir" translate="no"><span class="na">@behaviour</span><span class="w"> </span><span class="nc">Bonfire.Federate.ActivityPub.FederationModules</span><span class="w">
 </span><span class="kd">def</span><span class="w"> </span><span class="nf">federation_module</span><span class="p">,</span><span class="w">
-  </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="6051279710-1">[</span><span class="w">
+  </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="7126321077-1">[</span><span class="w">
     </span><span class="s">&quot;Announce&quot;</span><span class="p">,</span><span class="w">
-    </span><span class="p" data-group-id="6051279710-2">{</span><span class="s">&quot;Create&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Announce&quot;</span><span class="p" data-group-id="6051279710-2">}</span><span class="p">,</span><span class="w">
-    </span><span class="p" data-group-id="6051279710-3">{</span><span class="s">&quot;Undo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Announce&quot;</span><span class="p" data-group-id="6051279710-3">}</span><span class="p">,</span><span class="w">
-    </span><span class="p" data-group-id="6051279710-4">{</span><span class="s">&quot;Delete&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Announce&quot;</span><span class="p" data-group-id="6051279710-4">}</span><span class="w">
-  </span><span class="p" data-group-id="6051279710-1">]</span></code></pre><p>You should also then implement these two functions:</p><ul><li>for outgoing federation: <code class="inline">ap_publish_activity(subject_struct, verb, object_struct)</code></li><li>for incoming federation: <code class="inline">ap_receive_activity(subject_struct, activity_json, object_json)</code></li></ul>
+    </span><span class="p" data-group-id="7126321077-2">{</span><span class="s">&quot;Create&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Announce&quot;</span><span class="p" data-group-id="7126321077-2">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="7126321077-3">{</span><span class="s">&quot;Undo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Announce&quot;</span><span class="p" data-group-id="7126321077-3">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="7126321077-4">{</span><span class="s">&quot;Delete&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Announce&quot;</span><span class="p" data-group-id="7126321077-4">}</span><span class="w">
+  </span><span class="p" data-group-id="7126321077-1">]</span></code></pre><p>You should also then implement these two functions:</p><ul><li>for outgoing federation: <code class="inline">ap_publish_activity(subject_struct, verb, object_struct)</code></li><li>for incoming federation: <code class="inline">ap_receive_activity(subject_struct, activity_json, object_json)</code></li></ul>
   </section>
 
 
@@ -186,7 +186,7 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#federation_module/2" translate="no">federation_module(query, modules \\ linked_federation_modules())</a>
+        <a href="#federation_module/2" translate="no">federation_module(query, modules \\ federation_modules_data_types())</a>
 
       </div>
 
@@ -194,7 +194,7 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#federation_module!/1" translate="no">federation_module!(query)</a>
+        <a href="#federation_module!/2" translate="no">federation_module!(query, modules \\ federation_modules_data_types())</a>
 
       </div>
 
@@ -214,7 +214,7 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#linked_federation_modules/0" translate="no">linked_federation_modules()</a>
+        <a href="#federation_modules_data_types/0" translate="no">federation_modules_data_types()</a>
 
       </div>
 
@@ -300,7 +300,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">app_modules()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L91" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L92" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -322,7 +322,7 @@ Pages
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">federation_module(query, modules \\ linked_federation_modules())</h1>
+    <h1 class="signature" translate="no">federation_module(query, modules \\ federation_modules_data_types())</h1>
 
       <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L31" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
@@ -337,14 +337,16 @@ Pages
 
   </section>
 </section>
-<section class="detail" id="federation_module!/1">
+<section class="detail" id="federation_module!/2">
+
+    <span id="federation_module!/1"></span>
 
   <div class="detail-header">
-    <a href="#federation_module!/1" class="detail-link" title="Link to this function">
+    <a href="#federation_module!/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">federation_module!(query)</h1>
+    <h1 class="signature" translate="no">federation_module!(query, modules \\ federation_modules_data_types())</h1>
 
       <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L67" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
@@ -368,7 +370,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">federation_modules(queries)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L86" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L87" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -381,16 +383,16 @@ Pages
 <p>Look up many types at once, throw :not_found if any of them are not found</p>
   </section>
 </section>
-<section class="detail" id="linked_federation_modules/0">
+<section class="detail" id="federation_modules_data_types/0">
 
   <div class="detail-header">
-    <a href="#linked_federation_modules/0" class="detail-link" title="Link to this function">
+    <a href="#federation_modules_data_types/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">linked_federation_modules()</h1>
+    <h1 class="signature" translate="no">federation_modules_data_types()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L100" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L101" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -414,7 +416,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">maybe_federation_module(query, fallback \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L76" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L77" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -436,7 +438,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">modules()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L95" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L96" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
