@@ -13,7 +13,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
-    <script src="dist/sidebar_items-749FA43A.js"></script>
+    <script src="dist/sidebar_items-3A00F098.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -21,7 +21,7 @@
 
 
   </head>
-  <body data-type="modules" class="page-module">
+  <body data-type="modules" class="page-behaviour">
     <script>
 
       try {
@@ -130,20 +130,21 @@ Pages
       <span class="sr-only">View Source</span>
     </a>
 
-  <span translate="no">Bonfire.Federate.ActivityPub.FederationModules</span> 
+  <span translate="no">Bonfire.Federate.ActivityPub.FederationModules</span> <small>behaviour</small>
   <small class="app-vsn" translate="no">(bonfire_umbrella v0.9.8-cooperation-beta.24)</small>
 
 </h1>
 
 
   <section id="moduledoc">
-<p>A Global cache of known federation modules to be queried by activity and/or object type.</p><p>Use of the FederationModules Service requires:</p><ol><li>Exporting <code class="inline">federation_module/0</code> in relevant modules (in context modules indicating what activity or object types the module can handle)</li><li>To populate <code class="inline">:bonfire, :federation_search_path</code> in config with the list of OTP applications where federation modules are declared.</li><li>Start the <a href="https://hexdocs.pm/bonfire_federate_activitypub/0.1.0/Bonfire.Federate.ActivityPub.FederationModules.html#content"><code class="inline">Bonfire.Federate.ActivityPub.FederationModules</code></a> application before querying.</li><li>OTP 21.2 or greater, though we recommend using the most recent
-release available.</li></ol><p>While this module is a GenServer, it is only responsible for setup
-of the cache and then exits with :ignore having done so. It is not
-recommended to restart the service as this will lead to a stop the
-world garbage collection of all processes and the copying of the
-entire cache to each process that has queried it since its last
-local garbage collection.</p>
+<p>A automatically-generated global list of federation modules which can queried by activity and/or object type.</p><p>To add a module to this list, you should declare <code class="inline">@behaviour Bonfire.Federate.ActivityPub.FederationModules</code> in it and define a <code class="inline">federation_module/0</code> function which returns a list of object and/or activity types which that module handles.</p><p>Example:</p><pre><code class="makeup elixir" translate="no"><span class="na">@behaviour</span><span class="w"> </span><span class="nc">Bonfire.Federate.ActivityPub.FederationModules</span><span class="w">
+</span><span class="kd">def</span><span class="w"> </span><span class="nf">federation_module</span><span class="p">,</span><span class="w">
+  </span><span class="ss">do</span><span class="p">:</span><span class="w"> </span><span class="p" data-group-id="1745004410-1">[</span><span class="w">
+    </span><span class="s">&quot;Announce&quot;</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="1745004410-2">{</span><span class="s">&quot;Create&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Announce&quot;</span><span class="p" data-group-id="1745004410-2">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="1745004410-3">{</span><span class="s">&quot;Undo&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Announce&quot;</span><span class="p" data-group-id="1745004410-3">}</span><span class="p">,</span><span class="w">
+    </span><span class="p" data-group-id="1745004410-4">{</span><span class="s">&quot;Delete&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Announce&quot;</span><span class="p" data-group-id="1745004410-4">}</span><span class="w">
+  </span><span class="p" data-group-id="1745004410-1">]</span></code></pre><p>You should also then implement these two functions:</p><ul><li>for outgoing federation: <code class="inline">ap_publish_activity(subject_struct, verb, object_struct)</code></li><li>for incoming federation: <code class="inline">ap_receive_activity(subject_struct, activity_json, object_json)</code></li></ul>
   </section>
 
 
@@ -154,18 +155,18 @@ local garbage collection.</p>
       </a>
       <span class="text">Summary</span>
     </h1>
-<div class="summary-types summary">
+<div class="summary-callbacks summary">
   <h2>
-    <a href="#types">Types</a>
+    <a href="#callbacks">Callbacks</a>
   </h2>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#t:query/0" translate="no">query()</a>
+        <a href="#c:federation_module/0" translate="no">federation_module()</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>A query is either a federation_module name atom or (Pointer) id binary</p></div>
+        <div class="summary-synopsis"><p>Get a Federation Module identified by activity and/or object type, given a activity and/or object (string or {activity, object} tuple).</p></div>
 
     </div>
 
@@ -177,17 +178,7 @@ local garbage collection.</p>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#child_spec/1" translate="no">child_spec(init_arg)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Returns a specification to start this module under a supervisor.</p></div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#data/0" translate="no">data()</a>
+        <a href="#app_modules/0" translate="no">app_modules()</a>
 
       </div>
 
@@ -195,19 +186,9 @@ local garbage collection.</p>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#federation_function_error/2" translate="no">federation_function_error(error, args)</a>
+        <a href="#federation_module/2" translate="no">federation_module(query, modules \\ linked_federation_modules())</a>
 
       </div>
-
-    </div>
-
-    <div class="summary-row">
-      <div class="summary-signature">
-        <a href="#federation_module/1" translate="no">federation_module(query)</a>
-
-      </div>
-
-        <div class="summary-synopsis"><p>Get a Federation Module identified by activity and/or object type, as string or {activity, object} tuple.</p></div>
 
     </div>
 
@@ -223,7 +204,7 @@ local garbage collection.</p>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#federation_modules/1" translate="no">federation_modules(modules)</a>
+        <a href="#federation_modules/1" translate="no">federation_modules(queries)</a>
 
       </div>
 
@@ -233,7 +214,7 @@ local garbage collection.</p>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#maybe_federation_module/1" translate="no">maybe_federation_module(query)</a>
+        <a href="#linked_federation_modules/0" translate="no">linked_federation_modules()</a>
 
       </div>
 
@@ -241,7 +222,7 @@ local garbage collection.</p>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#populate/0" translate="no">populate()</a>
+        <a href="#maybe_federation_module/2" translate="no">maybe_federation_module(query, fallback \\ nil)</a>
 
       </div>
 
@@ -249,11 +230,11 @@ local garbage collection.</p>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#start_link/1" translate="no">start_link(_)</a>
+        <a href="#modules/0" translate="no">modules()</a>
 
       </div>
 
-        <div class="summary-synopsis"><p>Populates the global cache with federation_module data via introspection.</p></div>
+        <div class="summary-synopsis"><p>Callback implementation for <a href="https://hexdocs.pm/bonfire_common/0.1.0/Bonfire.Common.ExtensionBehaviour.html#c:modules/0"><code class="inline">Bonfire.Common.ExtensionBehaviour.modules/0</code></a>.</p></div>
 
     </div>
 
@@ -262,24 +243,24 @@ local garbage collection.</p>
   </section>
 
 
-  <section id="types" class="details-list">
+  <section id="callbacks" class="details-list">
     <h1 class="section-heading">
-      <a class="hover-link" href="#types">
+      <a class="hover-link" href="#callbacks">
         <i class="ri-link-m" aria-hidden="true"></i>
       </a>
-      <span class="text">Types</span>
+      <span class="text">Callbacks</span>
     </h1>
-    <div class="types-list">
-<section class="detail" id="t:query/0">
+    <div class="callbacks-list">
+<section class="detail" id="c:federation_module/0">
 
   <div class="detail-header">
-    <a href="#t:query/0" class="detail-link" title="Link to this type">
+    <a href="#c:federation_module/0" class="detail-link" title="Link to this callback">
       <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this type</span>
+      <span class="sr-only">Link to this callback</span>
     </a>
-    <h1 class="signature" translate="no">query()</h1>
+    <h1 class="signature" translate="no">federation_module()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L31" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L30" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -291,11 +272,11 @@ local garbage collection.</p>
 
       <div class="specs">
 
-          <pre translate="no"><span class="attribute">@type</span> query() :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">tuple</a>()</pre>
+          <pre translate="no"><span class="attribute">@callback</span> federation_module() :: <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">any</a>()</pre>
 
       </div>
 
-<p>A query is either a federation_module name atom or (Pointer) id binary</p>
+<p>Get a Federation Module identified by activity and/or object type, given a activity and/or object (string or {activity, object} tuple).</p>
   </section>
 </section>
 
@@ -310,38 +291,16 @@ local garbage collection.</p>
       <span class="text">Functions</span>
     </h1>
     <div class="functions-list">
-<section class="detail" id="child_spec/1">
+<section class="detail" id="app_modules/0">
 
   <div class="detail-header">
-    <a href="#child_spec/1" class="detail-link" title="Link to this function">
+    <a href="#app_modules/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">child_spec(init_arg)</h1>
+    <h1 class="signature" translate="no">app_modules()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L26" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-<p>Returns a specification to start this module under a supervisor.</p><p>See <a href="https://hexdocs.pm/elixir/Supervisor.html"><code class="inline">Supervisor</code></a>.</p>
-  </section>
-</section>
-<section class="detail" id="data/0">
-
-  <div class="detail-header">
-    <a href="#data/0" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">data()</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L37" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L91" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -354,16 +313,18 @@ local garbage collection.</p>
 
   </section>
 </section>
-<section class="detail" id="federation_function_error/2">
+<section class="detail" id="federation_module/2">
+
+    <span id="federation_module/1"></span>
 
   <div class="detail-header">
-    <a href="#federation_function_error/2" class="detail-link" title="Link to this function">
+    <a href="#federation_module/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">federation_function_error(error, args)</h1>
+    <h1 class="signature" translate="no">federation_module(query, modules \\ linked_federation_modules())</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L106" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L31" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -374,34 +335,6 @@ local garbage collection.</p>
   <section class="docstring">
 
 
-  </section>
-</section>
-<section class="detail" id="federation_module/1">
-
-  <div class="detail-header">
-    <a href="#federation_module/1" class="detail-link" title="Link to this function">
-      <i class="ri-link-m" aria-hidden="true"></i>
-      <span class="sr-only">Link to this function</span>
-    </a>
-    <h1 class="signature" translate="no">federation_module(query)</h1>
-
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L53" class="icon-action" rel="help" title="View Source">
-       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
-       <span class="sr-only">View Source</span>
-     </a>
-
-
-  </div>
-
-  <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> federation_module(query :: <a href="#t:query/0">query</a>()) :: {:ok, <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()} | {:error, :not_found}</pre>
-
-      </div>
-
-<p>Get a Federation Module identified by activity and/or object type, as string or {activity, object} tuple.</p>
   </section>
 </section>
 <section class="detail" id="federation_module!/1">
@@ -413,7 +346,7 @@ local garbage collection.</p>
     </a>
     <h1 class="signature" translate="no">federation_module!(query)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L87" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L67" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -433,9 +366,9 @@ local garbage collection.</p>
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">federation_modules(modules)</h1>
+    <h1 class="signature" translate="no">federation_modules(queries)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L91" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L86" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -444,26 +377,20 @@ local garbage collection.</p>
   </div>
 
   <section class="docstring">
-
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> federation_modules([<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>() | <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()]) :: [<a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>()]</pre>
-
-      </div>
 
 <p>Look up many types at once, throw :not_found if any of them are not found</p>
   </section>
 </section>
-<section class="detail" id="maybe_federation_module/1">
+<section class="detail" id="linked_federation_modules/0">
 
   <div class="detail-header">
-    <a href="#maybe_federation_module/1" class="detail-link" title="Link to this function">
+    <a href="#linked_federation_modules/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">maybe_federation_module(query)</h1>
+    <h1 class="signature" translate="no">linked_federation_modules()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L96" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L100" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -476,16 +403,18 @@ local garbage collection.</p>
 
   </section>
 </section>
-<section class="detail" id="populate/0">
+<section class="detail" id="maybe_federation_module/2">
+
+    <span id="maybe_federation_module/1"></span>
 
   <div class="detail-header">
-    <a href="#populate/0" class="detail-link" title="Link to this function">
+    <a href="#maybe_federation_module/2" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">populate()</h1>
+    <h1 class="signature" translate="no">maybe_federation_module(query, fallback \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L123" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L76" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -498,16 +427,16 @@ local garbage collection.</p>
 
   </section>
 </section>
-<section class="detail" id="start_link/1">
+<section class="detail" id="modules/0">
 
   <div class="detail-header">
-    <a href="#start_link/1" class="detail-link" title="Link to this function">
+    <a href="#modules/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">start_link(_)</h1>
+    <h1 class="signature" translate="no">modules()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L35" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_federate_activitypub/blob/main/lib/federation_modules.ex#L95" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -517,13 +446,7 @@ local garbage collection.</p>
 
   <section class="docstring">
 
-      <div class="specs">
-
-          <pre translate="no"><span class="attribute">@spec</span> start_link(ignored :: <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">term</a>()) :: <a href="https://hexdocs.pm/elixir/GenServer.html#t:on_start/0">GenServer.on_start</a>()</pre>
-
-      </div>
-
-<p>Populates the global cache with federation_module data via introspection.</p>
+<p>Callback implementation for <a href="https://hexdocs.pm/bonfire_common/0.1.0/Bonfire.Common.ExtensionBehaviour.html#c:modules/0"><code class="inline">Bonfire.Common.ExtensionBehaviour.modules/0</code></a>.</p>
   </section>
 </section>
 

@@ -13,7 +13,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
-    <script src="dist/sidebar_items-749FA43A.js"></script>
+    <script src="dist/sidebar_items-3A00F098.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -137,7 +137,7 @@ Pages
 
 
   <section id="moduledoc">
-<p>A Global cache of known Behaviours in Bonfire</p><p>Use of the ExtensionBehaviour Service requires ddding <code class="inline">@behaviour Bonfire.Common.ExtensionBehaviour</code> in your behaviour modules. This modules when then index those behaviours <em>and</em> all the modules that implement those behaviours at startup.</p><p>While this module is a GenServer, it is only responsible for setup
+<p>A Global cache of known Behaviours in Bonfire</p><p>Use of the ExtensionBehaviour Service requires declaring <code class="inline">@behaviour Bonfire.Common.ExtensionBehaviour</code> in your behaviour module. This module will then index those behaviours <em>and</em> all the modules that implement those behaviours at app startup.</p><p>While this module is a GenServer, it is only responsible for setup
 of the cache and then exits with :ignore having done so. It is not
 recommended to restart the service as this will lead to a stop the
 world garbage collection of all processes and the copying of the
@@ -176,11 +176,19 @@ local garbage collection.</p>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#adopters_of_behaviour/1" translate="no">adopters_of_behaviour(behaviour)</a>
+        <a href="#adopters_of_behaviour/1" translate="no">adopters_of_behaviour(behaviour \\ __MODULE__)</a>
 
       </div>
 
         <div class="summary-synopsis"><p>Given a behaviour module, filters app modules to only those that implement that behaviour</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#apply_modules/2" translate="no">apply_modules(modules, fun)</a>
+
+      </div>
 
     </div>
 
@@ -236,7 +244,7 @@ local garbage collection.</p>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#find_adopters_of_behaviours/1" translate="no">find_adopters_of_behaviours(behaviours \\ find_behaviours())</a>
+        <a href="#find_adopters_of_behaviours/1" translate="no">find_adopters_of_behaviours(behaviours \\ find_extension_behaviours())</a>
 
       </div>
 
@@ -244,7 +252,7 @@ local garbage collection.</p>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#linked_modules/2" translate="no">linked_modules(modules, fun)</a>
+        <a href="#find_extension_behaviours/0" translate="no">find_extension_behaviours()</a>
 
       </div>
 
@@ -252,7 +260,7 @@ local garbage collection.</p>
 
     <div class="summary-row">
       <div class="summary-signature">
-        <a href="#module_behaviours/1" translate="no">module_behaviours(module)</a>
+        <a href="#module_behaviours/1" translate="no">module_behaviours(module \\ __MODULE__)</a>
 
       </div>
 
@@ -331,12 +339,14 @@ local garbage collection.</p>
     <div class="functions-list">
 <section class="detail" id="adopters_of_behaviour/1">
 
+    <span id="adopters_of_behaviour/0"></span>
+
   <div class="detail-header">
     <a href="#adopters_of_behaviour/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">adopters_of_behaviour(behaviour)</h1>
+    <h1 class="signature" translate="no">adopters_of_behaviour(behaviour \\ __MODULE__)</h1>
 
       <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L57" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
@@ -349,6 +359,28 @@ local garbage collection.</p>
   <section class="docstring">
 
 <p>Given a behaviour module, filters app modules to only those that implement that behaviour</p>
+  </section>
+</section>
+<section class="detail" id="apply_modules/2">
+
+  <div class="detail-header">
+    <a href="#apply_modules/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">apply_modules(modules, fun)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L164" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
   </section>
 </section>
 <section class="detail" id="apps_to_scan/0">
@@ -384,7 +416,7 @@ local garbage collection.</p>
     </a>
     <h1 class="signature" translate="no">behaviour_app_modules(behaviour, behaviours \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L145" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L146" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -408,7 +440,7 @@ local garbage collection.</p>
     </a>
     <h1 class="signature" translate="no">behaviour_modules(behaviour, behaviours \\ nil)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L152" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L153" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -430,7 +462,7 @@ local garbage collection.</p>
     </a>
     <h1 class="signature" translate="no">behaviours()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L138" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L139" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -452,7 +484,7 @@ local garbage collection.</p>
     </a>
     <h1 class="signature" translate="no">cached_behaviours()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L136" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L137" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -496,7 +528,7 @@ local garbage collection.</p>
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">find_adopters_of_behaviours(behaviours \\ find_behaviours())</h1>
+    <h1 class="signature" translate="no">find_adopters_of_behaviours(behaviours \\ find_extension_behaviours())</h1>
 
       <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L31" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
@@ -511,16 +543,16 @@ local garbage collection.</p>
 
   </section>
 </section>
-<section class="detail" id="linked_modules/2">
+<section class="detail" id="find_extension_behaviours/0">
 
   <div class="detail-header">
-    <a href="#linked_modules/2" class="detail-link" title="Link to this function">
+    <a href="#find_extension_behaviours/0" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">linked_modules(modules, fun)</h1>
+    <h1 class="signature" translate="no">find_extension_behaviours()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L162" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L24" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -535,14 +567,16 @@ local garbage collection.</p>
 </section>
 <section class="detail" id="module_behaviours/1">
 
+    <span id="module_behaviours/0"></span>
+
   <div class="detail-header">
     <a href="#module_behaviours/1" class="detail-link" title="Link to this function">
       <i class="ri-link-m" aria-hidden="true"></i>
       <span class="sr-only">Link to this function</span>
     </a>
-    <h1 class="signature" translate="no">module_behaviours(module)</h1>
+    <h1 class="signature" translate="no">module_behaviours(module \\ __MODULE__)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L126" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L127" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -564,7 +598,7 @@ local garbage collection.</p>
     </a>
     <h1 class="signature" translate="no">populate()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L190" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L202" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -586,7 +620,7 @@ local garbage collection.</p>
     </a>
     <h1 class="signature" translate="no">start_link(_)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L182" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/modularity/extension_behaviour.ex#L194" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
