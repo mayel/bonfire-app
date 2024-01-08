@@ -13,7 +13,7 @@
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
     <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
-    <script src="dist/sidebar_items-68C1B5CF.js"></script>
+    <script src="dist/sidebar_items-F0E8D4A9.js"></script>
 
       <script src="docs_config.js"></script>
 
@@ -125,7 +125,7 @@ Pages
 </button>
 
 
-    <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/common.ex#L2" title="View Source" class="icon-action" rel="help">
+    <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo_utils.ex#L2" title="View Source" class="icon-action" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
       <span class="sr-only">View Source</span>
     </a>
@@ -185,6 +185,31 @@ Pages
 
     <div class="summary-row">
       <div class="summary-signature">
+        <a href="#change_synced_timestamp/3" translate="no">change_synced_timestamp(changeset, bool_field, timestamp_field)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>If a changeset includes a change to <code class="inline">bool_field</code>, we ensure that the
+<code class="inline">timestamp</code> field is updated if required. In the case of true, this
+means setting it to now if it is null and in the case of false, this
+means setting it to null if it is not null.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#change_synced_timestamps/5" translate="no">change_synced_timestamps(changeset, bool_field, on_field, off_field, default \\ true)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>If a changeset includes a change to <code class="inline">bool_field</code>, we change two
+timestamps columns (representing activated and deactivated) so that
+only one is set to a non-null value at a time.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
         <a href="#match_admin/0" translate="no">match_admin()</a>
 
       </div>
@@ -206,6 +231,34 @@ Pages
         <a href="#validate_email_domain/2" translate="no">validate_email_domain(changeset, field)</a>
 
       </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#validate_exactly_one/3" translate="no">validate_exactly_one(changeset, columns, message)</a>
+
+      </div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#validate_http_url/2" translate="no">validate_http_url(changeset, field)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Validates that a URL uses HTTP(S) and has a correct format.</p></div>
+
+    </div>
+
+    <div class="summary-row">
+      <div class="summary-signature">
+        <a href="#validate_not_expired/4" translate="no">validate_not_expired(cs, now \\ DateTime.utc_now(), column \\ :expires_at, message \\ &quot;expired&quot;)</a>
+
+      </div>
+
+        <div class="summary-synopsis"><p>Validates that the entity has not expired</p></div>
 
     </div>
 
@@ -231,7 +284,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">change_disabled(changeset)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/common.ex#L68" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo_utils.ex#L67" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -259,7 +312,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">change_muted(changeset)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/common.ex#L63" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo_utils.ex#L62" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -287,7 +340,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">change_public(changeset)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/common.ex#L58" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo_utils.ex#L57" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -306,6 +359,71 @@ Pages
 <p>Keeps published_at in accord with is_public</p>
   </section>
 </section>
+<section class="detail" id="change_synced_timestamp/3">
+
+  <div class="detail-header">
+    <a href="#change_synced_timestamp/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">change_synced_timestamp(changeset, bool_field, timestamp_field)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo_utils.ex#L111" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> change_synced_timestamp(<a href="https://hexdocs.pm/ecto/3.11.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) ::
+  <a href="https://hexdocs.pm/ecto/3.11.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
+
+<p>If a changeset includes a change to <code class="inline">bool_field</code>, we ensure that the
+<code class="inline">timestamp</code> field is updated if required. In the case of true, this
+means setting it to now if it is null and in the case of false, this
+means setting it to null if it is not null.</p>
+  </section>
+</section>
+<section class="detail" id="change_synced_timestamps/5">
+
+    <span id="change_synced_timestamps/4"></span>
+
+  <div class="detail-header">
+    <a href="#change_synced_timestamps/5" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">change_synced_timestamps(changeset, bool_field, on_field, off_field, default \\ true)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo_utils.ex#L137" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> change_synced_timestamps(<a href="https://hexdocs.pm/ecto/3.11.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) ::
+  <a href="https://hexdocs.pm/ecto/3.11.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
+
+<p>If a changeset includes a change to <code class="inline">bool_field</code>, we change two
+timestamps columns (representing activated and deactivated) so that
+only one is set to a non-null value at a time.</p>
+  </section>
+</section>
 <section class="detail" id="match_admin/0">
 
   <div class="detail-header">
@@ -315,7 +433,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">match_admin()</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/common.ex#L22" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo_utils.ex#L21" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -339,7 +457,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">validate_email(changeset, field)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/common.ex#L32" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo_utils.ex#L31" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -367,7 +485,7 @@ Pages
     </a>
     <h1 class="signature" translate="no">validate_email_domain(changeset, field)</h1>
 
-      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/common.ex#L43" class="icon-action" rel="help" title="View Source">
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo_utils.ex#L42" class="icon-action" rel="help" title="View Source">
        <i class="ri-code-s-slash-line" aria-hidden="true"></i>
        <span class="sr-only">View Source</span>
      </a>
@@ -384,6 +502,91 @@ Pages
       </div>
 
 
+  </section>
+</section>
+<section class="detail" id="validate_exactly_one/3">
+
+  <div class="detail-header">
+    <a href="#validate_exactly_one/3" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">validate_exactly_one(changeset, columns, message)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo_utils.ex#L190" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+
+  </section>
+</section>
+<section class="detail" id="validate_http_url/2">
+
+  <div class="detail-header">
+    <a href="#validate_http_url/2" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">validate_http_url(changeset, field)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo_utils.ex#L72" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> validate_http_url(<a href="https://hexdocs.pm/ecto/3.11.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>()) :: <a href="https://hexdocs.pm/ecto/3.11.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
+
+<p>Validates that a URL uses HTTP(S) and has a correct format.</p>
+  </section>
+</section>
+<section class="detail" id="validate_not_expired/4">
+
+    <span id="validate_not_expired/1"></span>
+
+    <span id="validate_not_expired/2"></span>
+
+    <span id="validate_not_expired/3"></span>
+
+  <div class="detail-header">
+    <a href="#validate_not_expired/4" class="detail-link" title="Link to this function">
+      <i class="ri-link-m" aria-hidden="true"></i>
+      <span class="sr-only">Link to this function</span>
+    </a>
+    <h1 class="signature" translate="no">validate_not_expired(cs, now \\ DateTime.utc_now(), column \\ :expires_at, message \\ &quot;expired&quot;)</h1>
+
+      <a href="https://github.com/bonfire-networks/bonfire_common/blob/main/lib/repo/repo_utils.ex#L89" class="icon-action" rel="help" title="View Source">
+       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
+       <span class="sr-only">View Source</span>
+     </a>
+
+
+  </div>
+
+  <section class="docstring">
+
+      <div class="specs">
+
+          <pre translate="no"><span class="attribute">@spec</span> validate_not_expired(<a href="https://hexdocs.pm/ecto/3.11.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>(), <a href="https://hexdocs.pm/elixir/DateTime.html#t:t/0">DateTime.t</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#basic-types">atom</a>(), <a href="https://hexdocs.pm/elixir/typespecs.html#built-in-types">binary</a>()) ::
+  <a href="https://hexdocs.pm/ecto/3.11.1/Ecto.Changeset.html#t:t/0">Ecto.Changeset.t</a>()</pre>
+
+      </div>
+
+<p>Validates that the entity has not expired</p>
   </section>
 </section>
 
