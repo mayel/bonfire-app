@@ -4,20 +4,21 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="ExDoc v0.30.9">
-    <meta name="project" content="bonfire_umbrella v0.9.8-cooperation-beta.31">
+    <meta name="generator" content="ExDoc v0.31.2">
+    <meta name="project" content="bonfire_umbrella v0.9.10-cooperation-beta.36">
 
-    <title>Development guide — bonfire_umbrella v0.9.8-cooperation-beta.31</title>
-    <link rel="stylesheet" href="dist/html-elixir-XFYN5IVA.css" />
+
+    <title>Development guide — bonfire_umbrella v0.9.10-cooperation-beta.36</title>
+    <link rel="stylesheet" href="dist/html-elixir-JKHCEBPC.css" />
 
 
     <script src="dist/handlebars.runtime-NWIB6V2M.js"></script>
-    <script src="dist/handlebars.templates-EPF2X7PV.js"></script>
-    <script src="dist/sidebar_items-F0185EB7.js"></script>
+    <script src="dist/handlebars.templates-A7S2WMC7.js"></script>
+    <script src="dist/sidebar_items-33100858.js"></script>
 
       <script src="docs_config.js"></script>
 
-    <script async src="dist/html-J2ASZTQE.js"></script>
+    <script async src="dist/html-JRPQ5PR6.js"></script>
 
 
   </head>
@@ -38,41 +39,28 @@
 
 <div class="main">
 
-<button class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
+<button id="sidebar-menu" class="sidebar-button sidebar-toggle" aria-label="toggle sidebar" aria-controls="sidebar">
   <i class="ri-menu-line ri-lg" title="Collapse/expand sidebar"></i>
 </button>
 
-<nav id="sidebar" class="sidebar">
-  <form class="sidebar-search" action="search.html">
-    <label class="search-label">
-      <span class="sr-only">Search documentation of bonfire_umbrella</span>
-      <input name="q" type="text" class="search-input" placeholder="Search..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
-    </label>
-    <button type="submit" class="search-button" aria-label="Submit Search">
-      <i class="ri-search-2-line" aria-hidden="true" title="Submit search"></i>
-    </button>
-    <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
-      <i class="ri-close-line ri-lg" title="Cancel search"></i>
-    </button>
-  </form>
+<div class="background-layer"></div>
 
-  <div class="autocomplete">
-    <div class="autocomplete-results">
-    </div>
-  </div>
+<nav id="sidebar" class="sidebar">
 
   <div class="sidebar-header">
+    <div class="sidebar-projectInfo">
 
-      <a href="https://bonfirenetworks.org">
-        <img src="assets/logo.png" alt="bonfire_umbrella" class="sidebar-projectImage">
-      </a>
+        <a href="https://bonfirenetworks.org" class="sidebar-projectImage">
+          <img src="assets/logo.png" alt="bonfire_umbrella" />
+        </a>
 
-    <div class="sidebar-projectDetails">
-      <a href="https://bonfirenetworks.org" class="sidebar-projectName" translate="no">
+      <div>
+        <a href="https://bonfirenetworks.org" class="sidebar-projectName" translate="no">
 bonfire_umbrella
-      </a>
-      <div class="sidebar-projectVersion" translate="no">
-        v0.9.8-cooperation-beta.31
+        </a>
+        <div class="sidebar-projectVersion" translate="no">
+          v0.9.10-cooperation-beta.36
+        </div>
       </div>
     </div>
     <ul id="sidebar-listNav" class="sidebar-listNav" role="tablist">
@@ -89,12 +77,6 @@ Pages
         </li>
 
 
-        <li>
-          <button id="tasks-list-tab-button" role="tab" data-type="tasks" aria-controls="tasks-tab-panel" aria-selected="false" tabindex="-1">
-            <span translate="no">Mix</span> Tasks
-          </button>
-        </li>
-
     </ul>
   </div>
 
@@ -107,23 +89,37 @@ Pages
     </div>
 
 
-    <div id="tasks-tab-panel" class="sidebar-tabpanel" role="tabpanel" aria-labelledby="tasks-list-tab-button" hidden>
-      <ul id="tasks-full-list" class="full-list"></ul>
-    </div>
-
 </nav>
 
 <main class="content">
   <output role="status" id="toast"></output>
   <div class="content-outer">
     <div id="content" class="content-inner">
+      <div class="top-search">
+        <div class="search-settings">
+          <form class="search-bar" action="search.html">
+            <label class="search-label">
+              <span class="sr-only">Search documentation of bonfire_umbrella</span>
+              <input name="q" type="text" class="search-input" placeholder="Press / to search" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" />
+            </label>
+            <button type="submit" class="search-button" aria-label="Submit Search">
+              <i class="ri-search-2-line ri-lg" aria-hidden="true" title="Submit search"></i>
+            </button>
+            <button type="button" tabindex="-1" class="search-close-button" aria-hidden="true">
+              <i class="ri-close-line ri-lg" title="Cancel search"></i>
+            </button>
+          </form>
+          <div class="autocomplete">
+          </div>
+          <button class="icon-settings display-settings">
+            <i class="ri-settings-3-line"></i>
+            <span class="sr-only">Settings</span>
+          </button>
+        </div>
+
+      </div>
 
 <h1>
-<button class="icon-action display-settings">
-  <i class="ri-settings-3-line"></i>
-  <span class="sr-only">Settings</span>
-</button>
-
 
     <a href="https://github.com/bonfire-networks/bonfire-app/blob/main/docs/HACKING.md#L1" title="View Source" class="icon-action" rel="help">
       <i class="ri-code-s-slash-line" aria-hidden="true"></i>
@@ -160,7 +156,7 @@ Pages
   </a>
   <span class="text">Pick a flavour</span>
 </h3>
-<p>Bonfire is a flexible platform that powers a variety of social networks. The first thing you have to choose is which app (or &quot;flavour&quot;) you want to hack on:</p><ul><li><code class="inline">classic</code> (&quot;Bonfire Social&quot;, a basic social network that interoperates with the fediverse)</li><li><code class="inline">community</code> (for groups and communities)</li><li><code class="inline">cooperation</code> (for building cooperative economic networks)</li></ul><p>Note that at the current time, the core team are focusing most of their efforts on the classic flavour and this is where we recommend you start.</p><p>You first need to install <a href="https://github.com/casey/just#packages">just</a> which is a handy tool (a <code class="inline">make</code> alternative) to run commands defined in <code class="inline">./justfile</code>.</p><p>So for example if you want to run the <code class="inline">classic</code> flavour, with a fully-docker-managed setup (see the other options available below), run:</p><ul><li><code class="inline">export FLAVOUR=classic WITH_DOCKER=total</code> </li></ul><p>You may also want to put this in the appropriate place in your system so your choice of flavour is remembered for next time (eg. <code class="inline">~/.bashrc</code> or <code class="inline">~/.zshrc</code>)</p><ul><li><p>Make sure docker daemon is running if you chose a docker managed setup.</p></li><li><p>Then run <code class="inline">just config</code> to initialise some config.</p></li></ul><h3 id="configure-1" class="section-heading">
+<p>Bonfire is a flexible platform that powers a variety of social networks. The first thing you have to choose is which app (or &quot;flavour&quot;) you want to hack on:</p><ul><li><code class="inline">classic</code> (&quot;Bonfire Social&quot;, a basic social network that interoperates with the fediverse)</li><li><code class="inline">community</code> (for topics and groups)</li><li><code class="inline">open-science</code> (for next-gen scientific communities)</li><li><code class="inline">coordination</code> (for coordinating around tasks and projects)</li><li><code class="inline">cooperation</code> (for building cooperative economic networks)</li></ul><p>Note that at the current time, the core team are focusing most of their efforts on the classic flavour and this is where we recommend you start.</p><p>You first need to install <a href="https://github.com/casey/just#packages">just</a> which is a handy tool (a <code class="inline">make</code> alternative) to run commands defined in <code class="inline">./justfile</code>.</p><p>So for example if you want to run the <code class="inline">classic</code> flavour, with a fully-docker-managed setup (see the other options available below), run:</p><ul><li><code class="inline">export FLAVOUR=classic WITH_DOCKER=total</code> </li></ul><p>You may also want to put this in the appropriate place in your system so your choice of flavour is remembered for next time (eg. <code class="inline">~/.bashrc</code> or <code class="inline">~/.zshrc</code>)</p><ul><li><p>Make sure docker daemon is running if you chose a docker managed setup.</p></li><li><p>Then run <code class="inline">just config</code> to initialise some config.</p></li></ul><h3 id="configure-1" class="section-heading">
   <a href="#configure-1" class="hover-link">
     <i class="ri-link-m" aria-hidden="true"></i>
   </a>
@@ -284,7 +280,7 @@ conveniences built in once you know how they all work. The gotcha is that while 
 </h3>
 <p>Example:</p><pre><code class="makeup elixir" translate="no"><span class="gt">** (DBConnection.ConnectionError) tcp recv: closed (the connection was closed by the pool, possibly due to a timeout or because the pool has been terminated)</span></code></pre><p>In this case, the seeds were unable to complete because a query took too long to execute on your machine. You can configure the timeout to be larger in the <code class="inline">dev</code> environment:</p><ol><li>Open <code class="inline">config/dev.exs</code> in your editor.</li><li>Find the database configuration (search for <a href="https://hexdocs.pm/bonfire_common/0.1.0/Bonfire.Common.Repo.html"><code class="inline">Bonfire.Common.Repo</code></a>).</li><li>Add <code class="inline">timeout: 60_000</code> to the list of options:</li></ol><pre><code class="makeup elixir" translate="no"><span class="n">config</span><span class="w"> </span><span class="ss">:bonfire</span><span class="p">,</span><span class="w"> </span><span class="nc">Bonfire.Common.Repo</span><span class="p">,</span><span class="w">
   </span><span class="ss">timeout</span><span class="p">:</span><span class="w"> </span><span class="mi">60_000</span><span class="p">,</span><span class="w">
-  </span><span class="p" data-group-id="9122284147-1">[</span><span class="n">...</span><span class="p" data-group-id="9122284147-1">]</span></code></pre>
+  </span><span class="p" data-group-id="1842721565-1">[</span><span class="n">...</span><span class="p" data-group-id="1842721565-1">]</span></code></pre>
 <div class="bottom-actions">
   <div class="bottom-actions-item">
 
@@ -328,11 +324,12 @@ Deployment guide
 
         <p class="built-using">
           Built using
-          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.30.9) for the
+          <a href="https://github.com/elixir-lang/ex_doc" title="ExDoc" target="_blank" rel="help noopener" translate="no">ExDoc</a> (v0.31.2) for the
 
             <a href="https://elixir-lang.org" title="Elixir" target="_blank" translate="no">Elixir programming language</a>
 
         </p>
+
       </footer>
     </div>
   </div>
