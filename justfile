@@ -413,7 +413,7 @@ dep-clean dep:
 # Clone a git dep and use the local version, eg: `just dep-clone-local bonfire_me https://github.com/bonfire-networks/bonfire_me`
 dep-clone-local dep repo:
 	git clone $repo $EXT_PATH$dep 2> /dev/null || (cd $EXT_PATH$dep ; git pull)
-	just dep.go.local dep=$dep
+	just dep-go-local dep=$dep
 
 # Clone all bonfire deps / extensions
 deps-clone-local-all:
