@@ -1,6 +1,10 @@
-# Development guide
+# Installation
 
-_These instructions are for hacking on Bonfire. If you wish to deploy in production, please refer to our deployment guide instead._
+> #### Info {: .info}
+>
+> These instructions are for hacking on Bonfire. If you wish to deploy in production, please refer to our deployment guide instead.
+
+
 
 Hello, potential contributor! :-)
 
@@ -11,6 +15,10 @@ Happy hacking!
 ## Status: beta - have fun and provide feedback 🙏
 
 Bonfire is currently beta software. While it's fun to play with it, we would not recommend running any production instances (meaning not using it for your primary fediverse identity) yet because it's not quite ready for that today. 
+
+## System Requirements
+
+- [Just](https://github.com/casey/just#packages): a handy tool (a `make` alternative) to run commands defined in `./justfile`.
 
 ## Download
 
@@ -33,62 +41,82 @@ Bonfire is a flexible platform that powers a variety of social networks. The fir
 - `coordination` (for coordinating around tasks and projects)
 - `cooperation` (for building cooperative economic networks)
 
-Note that at the current time, the core team are focusing most of their efforts on the classic flavour and this is where we recommend you start.
+Note that at the current time, the core team are focusing most of their efforts on the `classic` flavour and this is where we **recommend** you start.
 
-You first need to install [just](https://github.com/casey/just#packages) which is a handy tool (a `make` alternative) to run commands defined in `./justfile`.
 
-So for example if you want to run the `classic` flavour, with a fully-docker-managed setup (see the other options available below), run:
+So for example if you want to run the `classic` flavour run:
 
-- `export FLAVOUR=classic WITH_DOCKER=total` 
+```sh
+export FLAVOUR=classic
+``` 
 
 You may also want to put this in the appropriate place in your system so your choice of flavour is remembered for next time (eg. `~/.bashrc` or `~/.zshrc`)
 
-- Make sure docker daemon is running if you chose a docker managed setup.
 
-- Then run `just config` to initialise some config.
+### Choose your development environment
 
-### Configure
+You can choose to run bonfire in a variety of ways, from fully managed via docker-compose, to bare metal with local postgres and elixir, to a combination of the two, we also offer the possibility to run Bonfire with nix.
 
-- Then edit the config (especially the secrets) for the current flavour in `./.env`
+<!-- tabs-open -->
 
-### Option A - the entry way (fully managed via docker-compose, recommended when you're first exploring)
+### Total
 
-- Dependencies:
-  - Recent versions of Docker & [docker-compose](https://docs.docker.com/compose/install/)
+The entry-way is fully managed via docker-compose, recommended when you're first exploring
 
-- Make sure you've set the environment variable to indicate your choice: `export WITH_DOCKER=total`
+#### Dependencies 
 
-- Make sure you've edited your .env file (see above) before getting started and proceed to Hello world!
+- Recent versions of Docker & [docker-compose](https://docs.docker.com/compose/install/)
+- Make sure you've set the environment variable to indicate your choice:
 
-### Option B - the easy way (with bare-metal elixir, and docker-managed tooling, database & search index, recommended for active development)
+```bash
+export WITH_DOCKER=total
+```
 
+### Easy
+
+The easy way consist in using bare-metal elixir, and docker-managed tooling, database & search index, recommended for active development.
+
+> #### Info {: .info}
+>
 > Note: you can use a tool like [mise](https://mise.jdx.dev/) or asdf to setup the environment (run `mise install` in the root directory).
 
-- Dependencies:
+
+#### Dependencies:
   - Recent versions of [Elixir](https://elixir-lang.org/install.html) (1.15+) and OTP/erlang (25+)
   - [yarn](https://yarnpkg.com)
   - Recent versions of Docker & [docker-compose](https://docs.docker.com/compose/install/)
 
-- Make sure you've set the env to indicate your choice: `export WITH_DOCKER=easy`
+- Make sure you've set the env to indicate your choice
 
-- Make sure you've edited your .env file (see above) before getting started and proceed to Hello world!
+```bash
+export WITH_DOCKER=easy
+```
 
-### Option C - the partial way (with bare-metal elixir and tooling, and docker-managed database & search index)
+### Partial
+The partial way consist in using bare-metal elixir and tooling, and docker-managed database & search index.
 
+> #### Info {: .info}
+>
 > Note: you can use a tool like [mise](https://mise.jdx.dev/) or asdf to setup the environment (run `mise install` in the root directory).
 
-- Dependencies:
-  - Recent versions of [Elixir](https://elixir-lang.org/install.html) (1.15+) and OTP/erlang (25+)
-  - Recent versions of [Rust](https://www.rust-lang.org/tools/install) and Cargo
-  - [yarn](https://yarnpkg.com)
-  - Recent versions of Docker & [docker-compose](https://docs.docker.com/compose/install/)
 
-- Make sure you've set the environment variable to indicate your choice: `export WITH_DOCKER=partial`
+#### Dependencies:
 
-- Make sure you've edited your .env file (see above) before getting started and proceed to Hello world!
+- Recent versions of [Elixir](https://elixir-lang.org/install.html) (1.15+) and OTP/erlang (25+)
+- Recent versions of [Rust](https://www.rust-lang.org/tools/install) and Cargo
+- [yarn](https://yarnpkg.com)
+- Recent versions of Docker & [docker-compose](https://docs.docker.com/compose/install/)
 
-### Option D - the bare metal (if you don't use docker)
+- Make sure you've set the environment variable to indicate your choice
 
+```bash
+export WITH_DOCKER=partial
+```
+
+### No Docker
+
+> #### Info {: .info}
+>
 > Note: you can use a tool like [mise](https://mise.jdx.dev/) or asdf to setup the environment (run `mise install` in the root directory). You will still need to install Postgres and Meili seperately though.
 
 - Dependencies:
@@ -98,24 +126,25 @@ You may also want to put this in the appropriate place in your system so your ch
   - Postgres 12+ (or rather [Postgis](https://postgis.net/install/) if using the bonfire_geolocate extension)
   - [Meili Search](https://docs.meilisearch.com/learn/getting_started/installation.html) (optional)
 
-- You will need to set the relevant environment variables in the .env file (see above) to match your local install of Postgres.
-
 - If you want search capabilities, you'll also need to setup a Meili server and set the relevant env variables as well.
 
-- Make sure you've set the environment variable to indicate your choice: `export WITH_DOCKER=no` and proceed to Hello world!
+- Make sure you've set the environment variable to indicate your choice
 
-### Option E - the nix one (dev environment with Nix)
+```bash
+export WITH_DOCKER=no
+```
 
-Dependencies:
+### The nix way 
+
+You can also choose to use nix to setup your development environment.
+
+#### Dependencies:
 
 - Run a recent version of Nix or NixOS: https://nixos.org/download.html
-
 - Enable Flakes: https://nixos.wiki/wiki/Flakes#Installing_flakes
-
 - Install [direnv](https://direnv.net/) through nix if you don't have the tool already: `nix profile install nixpkgs#direnv` and add it to your shell: https://direnv.net/docs/hook.html
-
 - Clone the bonfire-app repo if you haven't already and allow direnv to use environment variables:
-  ```
+  ```bash
   git clone https://github.com/bonfire-networks/bonfire-app
   cd `bonfire-app`
   direnv allow
@@ -140,51 +169,73 @@ just nix-db stop
 just nix-db start
 ```
 
-## Hello world!
+<!-- tabs-close -->
 
-- From a fresh checkout of this repository, this command will fetch the app's dependencies and setup the database (the same commands apply for all three options above):
+
+### Configure
+
+Edit the config (especially the secrets) for the current flavour in `./.env`
+
+The only required config to startup bonfire are the secrets for sessions/cookies (`SECRET_KEY_BASE`, `SIGNING_SALT`, `ENCRYPTION_SALT`), you can generate strings for these by running:
+
+```sh
+just secrets
+```
+
+(You need to manually copy/paste the value on the `.env` file, we will soon automatize this task)
+
+
+Then run `just config` to initialise the needed config.
+
+```sh
+just config
+```
+
+## Light a fire!
+
+From a fresh checkout of this repository, this command will fetch the app's dependencies and setup the database (the same commands apply for all three options above):
 
 ```
 just setup-dev
 ```
 
-- You should then be able to run the app with:
+This command will take a while to complete. Soon we will streamiline the setup process to be more lightway, bare with us for the moment.
+
+You should now be able to run the app with:
 
 ```
 just dev
 ```
 
-- See the `just` commands below for more things you may want to do.
+Read more about the available `just` commands in the [`just` commands](./just-commands) page.
 
 ## Onboarding
 
-By default, the back-end listens on port 4000 (TCP), so you can access it on http://localhost:4000/
+### Getting Started
 
-Your first step will be to create an account to log in with. The
-easiest way to do this is with our mix task:
+The back-end server runs on port 4000 (TCP) by default. Access it by navigating to http://localhost:4000/ in your web browser.
 
-```
-$ just mix bonfire.account.new
-Enter an email address: root@localhost
-Enter a password:
-```
+### Creating an Account
 
-Your password must be at least 10 characters long and the output could be more helpful if you don't do that. This task seems to work most reliably if you open a second terminal window with the devserver running. We're not sure why.
+To create an account, go to http://localhost:4000/signup and enter your email address and password.
+When running the server locally, you won't receive a confirmation email. However, you can find the confirmation link in the server logs.
+Search for a link starting with https://localhost:4000/signup/email/confirm/ in the logs and follow the complete link to confirm your account.
 
-You should then be able to log in and create a user through the web interface.
+### Admin Permissions
 
-If you would like to become an administrator, there is a mix task for that too:
+The first user registered on the platform is automatically granted Admin permissions.
 
-```shell
-just mix bonfire.user.admin.promote your_username 
-```
+### Successful Onboarding
+
+After successfully creating and confirming your account, you should see an empty dashboard.
+
+That's it! You have now successfully onboarded and can start using the application.
 
 ## The Bonfire Environment
 
-We like to think of bonfire as a comfortable way of developing software - there are a lot of
-conveniences built in once you know how they all work. The gotcha is that while you don't know them, it can be a bit overwhelming. Don't worry, we've got your back.
+We like to think of bonfire as a comfortable way of developing software - there are a lot of conveniences built in once you know how they all work. The gotcha is that while you don't know them, it can be a bit overwhelming. Don't worry, we've got your back.
 
-* [Architecture](./ARCHITECTURE.md) - an overview of the stack and code structure.
+- [Architecture](./ARCHITECTURE.md) - an overview of the stack and code structure.
 - [Bonfire-flavoured Elixir](./BONFIRE-FLAVOURED-ELIXIR.md) - an introduction to the way we write Elixir.
 - [Bonfire's Database: an Introduction](./DATABASE.md) - an overview of how our database is designed.
 - [Boundaries](./BOUNDARIES.md) - an introduction to our access control system.
@@ -197,7 +248,7 @@ The code is somewhat documented inline. You can generate HTML docs (using `Exdoc
 
 ## Additional information
 
-- messctl is a little utility for programmatically updating the .deps files from which the final elixir dependencies list is compiled by the mess script. The only use of it is in the dep-\* tasks of the Makefile. It is used by some of the project developers and the build does not rely on it.
+- `messctl` is a little utility for programmatically updating the .deps files from which the final elixir dependencies list is compiled by the mess script. The only use of it is in the dep-\* tasks of the Makefile. It is used by some of the project developers and the build does not rely on it.
 
 - `./extensions/` is used to hack on local copies of Bonfire extensions. You can clone an extension from its git repo and use the local version during development, eg: `just dep-clone-local bonfire_me https://github.com/bonfire-networks/bonfire_me`
 
@@ -212,20 +263,6 @@ The code is somewhat documented inline. You can generate HTML docs (using `Exdoc
 By default, the `justfile` requires symlinks, which can be enabled with the help of [this link](https://stackoverflow.com/a/59761201).
 
 See the [pull request adding WSL support](https://github.com/bonfire-networks/bonfire-app/pull/111) for details about usage without symlinks.
-
-## `just` commands
-
-Run `just` followed by any of these commands when appropriate rather than directly using the equivalent commands like `mix`, `docker`, `docker-compose`, etc. For example, `just setup` will get you started, and `just dev` will run the app.
-
-You can first set an env variable to control which mode these commands will assume you're using. Here are your options:
-
-- `WITH_DOCKER=total` : use docker for everything (default)
-- `WITH_DOCKER=partial` : use docker for services like the DB
-- `WITH_DOCKER=easy` : use docker for services like the DB & compiled utilities like messctl
-- `WITH_DOCKER=no` : please no
-
-Run `just help` to see the list of possible commands and what they do.
-
 
 ## Troubleshooting
 

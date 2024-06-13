@@ -1,4 +1,6 @@
-# Deployment guide
+# Hosting guide
+
+A short guide to running Bonfire in a production environment and setting up a digital space connected to the fediverse.
 
 ### WARNING: beta status - have fun but don't rely on it yet 🙏
 
