@@ -47,8 +47,8 @@ There are different types of persona who can be interested in reading these docs
 
 Bonfire aims to be beginner-friendly, but to keep the documentation focused on the framework's functionalities, we assume a basic understanding of the following technologies:
 
-- **Elixir**: If you're new to Elixir or need a refresher, start with the [Elixir Getting Started guide](https://elixir-lang.org/getting-started.html).
-- **Phoenix/LiveView**: Bonfire's official client is built with Phoenix LiveView. If you're unfamiliar with LiveView, check out the [Phoenix LiveView Getting Started guide](https://hexdocs.pm/phoenix_live_view/Phoenix.LiveView.AsyncResult.html) or the [Phoenix LiveView - Getting Started video course](https://pragmaticstudio.com/phoenix-liveview) by Pragmatic Studio.
+- **Elixir**: If you're new to Elixir or need a refresher, start with the [Elixir Getting Started guide](https://elixir-lang.org/).
+- **Phoenix/LiveView**: Bonfire's official client is built with Phoenix LiveView. If you're unfamiliar with LiveView, check out the [Phoenix LiveView Getting Started guide](https://hexdocs.pm/phoenix_live_view/Phoenix) or the [Phoenix LiveView - Getting Started video course](https://pragmaticstudio.com/phoenix-liveview) by Pragmatic Studio.
 - **PostgreSQL**: Bonfire uses PostgreSQL as its primary database. Basic knowledge of SQL and PostgreSQL is helpful.
 
 Bonfire also provides a [GraphQL API](/docs/topics/GRAPHQL.md) for developers who want to build custom frontends.
