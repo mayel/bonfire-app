@@ -199,7 +199,7 @@ From a fresh checkout of this repository, this command will fetch the app's depe
 just setup-dev
 ```
 
-This command will take a while to complete. Soon we will streamiline the setup process to be more lightway, bare with us for the moment.
+This command will take a while to complete. Soon we will streamiline the setup process to be more lightway, bear with us for the moment.
 
 You should now be able to run the app with:
 

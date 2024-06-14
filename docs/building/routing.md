@@ -13,5 +13,15 @@ In order to add a new route to Bonfire, you need to create a Routes module in yo
 
 The Routes file follows the standard Phoenix/Liveview syntax and structure.
 
+## Add a new route
+
 To add a new routes to the Router, you need to add include it to the main Router. 
-It is as simple as adding `use_if_enabled(Project.ExtensionName.Web.Routes)` in the [Bonfire.Web.Router.Routes](https://github.com/bonfire-networks/bonfire_spark/blob/main/lib/web/router.ex) file.
+
+You need to clone and enable `bonfire_spark` locally.
+
+> #### Info {: .info}
+>
+> You need a workaround to be able to enable bonfire_spark locally. We have an open issue about it. You need to clone or rename the extesion from bonfire_spark to bonfire in your extensions folder and subsequentally rename it as bonfire in your deps.flavour.path file.
+
+Once you have bonfire_spark enabled locally, include your new extension router with `use_if_enabled(Project.ExtensionName.Web.Routes)` in the [Bonfire.Web.Router.Routes](https://github.com/bonfire-networks/bonfire_spark/blob/main/lib/web/router.ex) file.
+

@@ -11,7 +11,6 @@ This setup means you might likely soon find yourself contributing to multiple ex
 
 They help you effortlessly synchronize the latest updates across different extensions or efficiently push your updates to all relevant repositories. Understanding these facilities is key to a smooth and productive development experience in the Bonfire ecosystem.
       
-
 Most of these tools are driven by [just](https://github.com/casey/just#just) and their code can be seen in the [justfile](https://github.com/bonfire-networks/bonfire-app/blob/main/justfile) (which is quite similar to a `Makefile`). Below is a small selection of the most used commands.
       
       

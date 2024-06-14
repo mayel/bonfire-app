@@ -2,11 +2,12 @@
 
 A short guide to running Bonfire in a production environment and setting up a digital space connected to the fediverse.
 
-### WARNING: beta status - have fun but don't rely on it yet 🙏
+> #### Warning {: .warning}
+>
+> Bonfire is currently beta software. While it's fun to play with it, we would not recommend running any production instances yet (meaning not using it for your primary fediverse identity) because it's not quite ready for that today. 
 
-Bonfire is currently beta software. While it's fun to play with it, we would not recommend running any production instances yet (meaning not using it for your primary fediverse identity) because it's not quite ready for that today. 
 
-_These instructions are for setting up Bonfire in production. If you want to run the backend in development, please refer to our developer guide instead._
+_These instructions are for setting up Bonfire in production. If you want to run the backend in development, please refer to our [Installation guide](./hacking) instead._
 
 
 ## Security Warning
@@ -17,11 +18,24 @@ We recommend only granting an account to people you trust to minimise the attack
 
 ## Step - 0 - Decide how you want to deploy and manage the app
 
-* Option A - Install using [Co-op Cloud](https://coopcloud.tech) (recommended) which is an alternative to corporate cloud services built by tech co-ops, and provides handy tools for setting up and managing many self-hosted free software tools using ready-to-use "recipes". Very useful if you'd like to host Bonfire alongside other open and/or federated projects. 
-* Option B - Install using Docker containers 
+
+<!-- tabs-open -->
+
+### Co-op Cloud
+
+Install using [Co-op Cloud](https://coopcloud.tech) (recommended) which is an alternative to corporate cloud services built by tech co-ops, and provides handy tools for setting up and managing many self-hosted free software tools using ready-to-use "recipes". Very useful if you'd like to host Bonfire alongside other open and/or federated projects. 
+
+### Docker
+
+Install using Docker containers 
   * Option B1 - Using pre-built Docker images (easy mode)
   * Option B2 - Building your own Docker image (if you want to make code changes or add your own extensions)
-* Option C - Manual installation (without Docker)
+
+
+### Manual 
+Install without Docker
+
+<!-- tabs-close -->
 
 ## Step 1 - Download and configure the app
 
