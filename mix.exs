@@ -215,7 +215,7 @@ defmodule Bonfire.Umbrella.MixProject do
       "docs/building/create-a-new-page.md",
       "docs/building/add-a-new-widget.md",
       "docs/building/add-a-page-to-the-sidebar.md",
-      "docs/building/add-an-extension-settings.md",
+      "docs/building/add-an-extension-settings.md"
     ],
     deps_prefixes: [
       docs: [
@@ -345,7 +345,7 @@ defmodule Bonfire.Umbrella.MixProject do
         groups_for_extras: [
           "Getting Started": Path.wildcard("docs/*"),
           "Building on Bonfire": Path.wildcard("docs/building/*"),
-          "Concepts": Path.wildcard("docs/topics/*"),
+          Concepts: Path.wildcard("docs/topics/*"),
           "Flavours of Bonfire": Path.wildcard("flavours/*/*"),
           "Data schemas": Path.wildcard("{extensions,deps,forks}/bonfire_data_*/*"),
           "UI extensions": Path.wildcard("{extensions,deps,forks}/bonfire_ui_*/*"),
