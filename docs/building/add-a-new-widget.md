@@ -1,12 +1,14 @@
 # Add a new widget
 
-Widgets are reusable components that encapsulate data and provide context-specific information to users based on the pages they are currently visiting. They are typically placed in the right sidebar of a webpage, and developers can define which widgets should appear on each page and in what order. Users may have the option to enable, disable, or rearrange the order of widgets when available.
+Widgets are reusable components that encapsulate data and provide context-specific information to users based on the pages they are currently visiting. They are typically placed in the right sidebar ( refers to the [Design Guidelines](topics/design_guidelines.md) section to learn more about Bonfire user experience), and developers can define which widgets should appear on each page and in what order. 
 
-A widget usually consists of a title and data formatted in various ways, such as links, data visualizations, actions, or information fetched from third-party apps. In this section, we will create a new widget that utilizes the user's location (if provided) and the `bonfire_geolocate` library to obtain longitude and latitude coordinates. These coordinates will then be used to retrieve the location's weather information using an external library. Additionally, we will create a setting that allows users to optionally include the widget on their profile.
+Developers can include options for users to enable, disable, or rearrange the order of widgets when possible.
 
-This example is simple yet meaningful because it touches upon different parts of the Bonfire framework during the tutorial. The code for this widget is available at: https://github.com/bonfire-networks/bonfire_ui_me
+A widget usually consists of a title and data formatted in various ways, such as links, data visualizations, actions, or information fetched from third-party apps. In this section, we will create a new widget that utilizes the user's location (if provided) and the [bonfire_geolocate](https://github.com/bonfire-networks/bonfire_geolocate) library to obtain the correct coordinates. These coordinates will then be used to retrieve the location's weather information using an external library. Additionally, we will create a setting that allows users to optionally include the widget on their profile.
 
-![weather widget](https://prod-files-secure.s3.us-west-2.amazonaws.com/8bca28ec-9ff8-43b6-85b3-62c4ff1f83f6/e0f95e25-7fe2-4a8e-a3a4-cfdace4cc897/Screenshot_2024-06-17_alle_10.15.58.png)
+This example is simple yet meaningful because it touches upon different parts of the Bonfire framework during the tutorial. The code for this widget is available [here](https://github.com/bonfire-networks/bonfire_geolocate/tree/main/lib/web/components/widgets).
+
+![weather widget](https://i.imgur.com/S6OaPGg.png)
 
 ## Let’s code!
 
@@ -28,11 +30,11 @@ end
 
 ```
 
-We use `:stateless_component`, a [function](notion://www.notion.so/Add-a-new-widget-62970e3602ba42e3891ad80afa419448) that wraps the `Surface.Component` and includes a list of [helpers](notion://www.notion.so/Add-a-new-widget-62970e3602ba42e3891ad80afa419448) widely used across most components.
+We use `:stateless_component`, a [function](https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/web.ex#L543) that wraps the `Surface.Component` and includes a list of [helpers](https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/web.ex#L575) widely used across most components.
 
 Since we want to include the widget on the user profile, we can gather the location data from there, so we define the `location` prop.
 
-Widgets are wrapped in a `WidgetBlockLive` surface component that takes care of injecting a style and the basic prop as the title. The initial implementation of our `widget_forecast_live.sface` looks like this:
+Widgets are wrapped in a [WidgetBlockLive](https://github.com/bonfire-networks/bonfire_ui_common/blob/main/lib/components/widgets/widget_block_live.ex) component that takes care of injecting a style and the basic prop as the title. The initial implementation of our `widget_forecast_live.sface` looks like this:
 
 ```elixir
 <Bonfire.UI.Common.WidgetBlockLive widget_title={e(@location, "")}>
@@ -56,9 +58,9 @@ sidebar_widgets = [
 
 ```
 
-We'll include our widget in the profile page, the view for which lives in the [Bonfire.UI.Me](http://bonfire.ui.me/) extension, a library that deals with all the views related to user profiles and settings.
+We'll include our widget in the user profile page, located in the [Bonfire.UI.Me](https://github.com/bonfire-networks/bonfire_ui_me) extension, a library that deals with all the views related to user profiles and settings.
 
-The `Bonfire.UI.Me.ProfileLive` `mount` function looks like:
+The `Bonfire.UI.Me.ProfileLive` [mount function](https://github.com/bonfire-networks/bonfire_ui_me/blob/main/lib/views/profile/profile_live.ex#L34) looks like:
 
 ```elixir
   def mount(_params, _session, socket) do
@@ -69,17 +71,15 @@ The `Bonfire.UI.Me.ProfileLive` `mount` function looks like:
 
 ```
 
-The `default_assigns` function includes data needed for dealing with multiple kinds of interactions and permissions. It also fetches the user from the database and ensures all the data is loaded correctly. The location data is fetched in `profiles_live_handler.ex:95`, and the widget is included in `profiles_live_handler.ex:274`.
+The `default_assigns` function includes data needed for dealing with multiple kinds of interactions and permissions. It also fetches the user from the database and ensures all the data is loaded correctly. The location data is fetched in [profiles_live_handler.ex:95](https://github.com/bonfire-networks/bonfire_ui_me/blob/main/lib/live_handlers/profiles_live_handler.ex#L95), and the widget is included in [profiles_live_handler.ex:274](https://github.com/bonfire-networks/bonfire_ui_me/blob/main/lib/live_handlers/profiles_live_handler.ex#L274).
 
 ## Adding Settings
 
 To ensure the user can decide whether they want to include the widget when visiting any user page, we're creating a new setting that optionally shows the widget based on user input.
 
-In `profiles_live_handler.ex:274`, the widget is preceded by `weather_widget_enabled`, a boolean that controls whether the widget should be displayed or not. It makes use of the `Settings.get` function. You can learn more about defining and returning settings in our [Add an Extension Settings] section.
+In `profiles_live_handler.ex:274`, the widget is preceded by `weather_widget_enabled`, a boolean that controls whether the widget should be displayed or not. It makes use of the `Settings.get` function. You can learn more about defining and returning settings in our [Add an Extension Settings](/building/add-an-extension-settings.md) section.
 
-We're adding the settings in the `edit_profile` section (we may later refactor this to add the setting in the defined extension, but this is still a work in progress).
-
-We add the settings in `edit_profile_live.sface` like this:
+We're adding the settings in the [edit_profile_info_live.sface](https://github.com/bonfire-networks/bonfire_ui_me/blob/main/lib/components/settings/profile/edit_profile_info_live.sface#L99) component (we may later refactor this to add the setting in the defined extension, but this is still a work in progress):
 
 ```elixir
 <form data-scope="set-weather" phx-change="Bonfire.Common.Settings:set">
@@ -95,7 +95,7 @@ We add the settings in `edit_profile_live.sface` like this:
 
 At this point, we should be able to see our basic weather widget on our profile page and decide to switch it on and off.
 
-What remains is to include the logic for returning and displaying the weather. We will use the Forecastr library, which is already used in our application and added in the `bonfire_spark` extension.
+What remains is to include the logic for returning and displaying the weather. We will use the Forecastr library, which is already used in our application and added in the [bonfire_spark](https://github.com/bonfire-networks/bonfire_spark) extension.
 
 The Forecastr library makes use of the Pirate Weather service, so we need a Pirate Weather API KEY. You can generate one on [pirateweather.net](http://pirateweather.net/) and add it at the bottom of your `.env` file:
 
@@ -137,6 +137,14 @@ The final component code looks like:
 
 ```
 
-## Next steps
+## Next Steps
+Although this weather widget is relatively basic, it significantly enhances the user experience by providing relevant metadata fetched from external services. This example demonstrates the potential for integrating additional information and functionality into widgets to create a more engaging and informative user interface.
+To further improve this widget, developers can consider including more data points, such as:
 
-Even if basic, this widget enriches the user experience adding metadata fetched external services. The widget can include more data eg. current moon position and phase, the daily amount of daylight hours, when the sun rises or set and more.
+- Current moon position and phase
+- Daily amount of daylight hours
+- Sunrise and sunset times
+- Extended weather forecasts
+- Weather alerts and notifications
+
+By incorporating these additional features, the widget can provide users with a more comprehensive overview of their location's weather and astronomical information, making it a valuable addition to their profile page.

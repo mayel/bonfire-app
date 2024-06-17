@@ -187,7 +187,7 @@ defmodule Bonfire.Umbrella.MixProject do
   # TODO: put these in ENV or an external writeable config file similar to deps.*
   @config [
     # note that the flavour will automatically be added where the dash appears
-    version: "0.9.10-beta.79",
+    version: "0.9.10-beta.80",
     elixir: ">= #{System.get_env("ELIXIR_VERSION", "1.13.4")}",
     flavour: @flavour,
     default_flavour: @default_flavour,
@@ -199,6 +199,7 @@ defmodule Bonfire.Umbrella.MixProject do
       "docs/just-commands.md",
       "docs/DEPLOY.md",
       "docs/topics/ARCHITECTURE.md",
+      "docs/topics/design_guidelines.md",
       "docs/topics/BONFIRE-FLAVOURED-ELIXIR.md",
       "docs/topics/DATABASE.md",
       "docs/topics/BOUNDARIES.md",
