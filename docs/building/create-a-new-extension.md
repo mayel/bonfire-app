@@ -10,11 +10,11 @@ By the end of this page, you should have a solid understanding of how to develop
 To start building your own extension, you can utilise our custom mix generator task. Simply navigate to the Bonfire app root folder in your terminal and type:
         
 ```
-mix extension.new *your_extension_name*
+mix bonfire.extension.new *your_extension_name*
 ```
 
 This command creates a new directory in `./extensions` named `*your_extension_name*`, complete with all the necessary files and scaffolding.
-Once your extension folder is set up, you're ready to dive into coding. If your extension includes new pages, you need to link them in the main router. To do this, include `use_if_enabled(Bonfire.ExtensionTemplate.Web.Routes)` within your app's Router module.
+Once your extension folder is set up, you're ready to dive into coding. If your extension includes new pages, you need to link them in the main router. To do this, include `use_if_enabled(Bonfire.ExtensionTemplate.Web.Routes)` within your app's Router module, located at `./extensions/bonfire/lib/bonfire_spark_web/router.ex`.
 
 > #### Info {: .info}
 >
