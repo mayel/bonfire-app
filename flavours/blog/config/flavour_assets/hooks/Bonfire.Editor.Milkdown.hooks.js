@@ -571,7 +571,7 @@ const createEditor = async (_this, hidden_input, composer$) => {
 
 export default {
   mounted() {
-    console.log("FACCA")
+    console.log("ssss")
     window.addEventListener("bonfire:focus-composer", (event) => {
       const composerContainer = document.querySelector("#composer_container");
       if (composerContainer) {
