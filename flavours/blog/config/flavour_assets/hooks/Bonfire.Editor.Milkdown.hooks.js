@@ -312,7 +312,7 @@ const emojiItemRenderer = (item, text) => {
 const mentionSlash = slashFactory('mentions-slash');
 const emojisSlash = slashFactory('emojis-slash');
 // const slash = slashFactory('slash');
-let isUpdatingMarkdown = false;
+// let isUpdatingMarkdown = false;
 
 const createEditor = async (_this, hidden_input, composer$) => {
   const editor = await Editor
@@ -330,12 +330,15 @@ const createEditor = async (_this, hidden_input, composer$) => {
     ctx.get(listenerCtx)
     .markdownUpdated((ctx, markdown, prevMarkdown) => {
       const transformedMarkdown = markdown
-      .replace(/!\[(.*?)\]\(.*?\)/g, '$1');
+      .replace(/!\[(.*?)\]\(.*?\)/g, '$1')
+      .replace(/\\#(\w+)/g, '#$1');
     hidden_input.value = transformedMarkdown;
+    console.log("hidden_input.value");
     console.log(hidden_input.value);
     const inputEvent = new Event('input', { 
       bubbles: true, 
     });
+    
     hidden_input.dispatchEvent(inputEvent);
     })
       ctx.update(editorViewOptionsCtx, (prev) => ({
@@ -532,6 +535,23 @@ const createEditor = async (_this, hidden_input, composer$) => {
 
 export default {
   mounted() {
+    console.log("TESSST2")
+    window.addEventListener("bonfire:focus-composer", (event) => {
+      const composerContainer = document.querySelector("#composer_container");
+      if (composerContainer) {
+        const contentEditableDiv = composerContainer.querySelector("[contenteditable]");
+        if (contentEditableDiv) {
+          contentEditableDiv.focus();
+          // Place the cursor at the end of the content
+          const range = document.createRange();
+          const selection = window.getSelection();
+          range.selectNodeContents(contentEditableDiv);
+          range.collapse(false);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+      }
+    });
     const hidden_input = document.getElementById('editor_hidden_input');
     const composer$ = this.el.querySelector('#editor')
     createEditor(this, hidden_input, composer$)
