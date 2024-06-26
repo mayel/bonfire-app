@@ -13,7 +13,6 @@ import { slashFactory } from '@milkdown/plugin-slash';
 import { gemoji } from "gemoji";
 import { clipboard } from '@milkdown/plugin-clipboard';
 import { createPopup } from '@picmo/popup-picker';
-
 import { Plugin, PluginKey } from '@milkdown/prose/state';
 import { Decoration, DecorationSet } from '@milkdown/prose/view';
 
@@ -46,7 +45,7 @@ const MENTION_REGEX = new RegExp(`(?:\\s|^)(${MENTION_PREFIX}${VALID_CHARS}{${MI
 const EMOJI_REGEX = new RegExp(`(?:\\s|^)(${EMOJI_PREFIX}${VALID_CHARS}{${MIN_PREFIX_LENGTH},})$`)
 
 
-import '@milkdown/theme-nord/style.css';
+// import '@milkdown/theme-nord/style.css';
 
 const markdown = ``
 
@@ -55,7 +54,7 @@ function mentionsPluginView(view) {
   const content = document.createElement('ul');
   content.tabIndex = 1;
 
-  content.className = 'm-0 p-0 menu w-72 bg-base-100 shadow-lg ring-2';
+  content.className = 'm-0 p-0 absolute menu w-72 bg-base-100 border border-base-content/10 shadow-lg';
   let list = ''
 
   const provider = new SlashProvider({
@@ -72,7 +71,8 @@ function mentionsPluginView(view) {
       
 
       const mentions = currentText.match(MENTION_REGEX)
-
+      console.log("mentions")
+      console.log(mentions)
       // Display the menu if the last character is `@` followed by 2 chars.
       if (mentions) {
         // get the characters that follows the `@` in currentText
@@ -116,7 +116,7 @@ function emojisPluginView() {
   const content = document.createElement('ul');
   content.tabIndex = 1;
 
-  content.className = 'm-0 p-0 menu w-72 bg-base-100 shadow-lg ring-2';
+  content.className = 'm-0 p-0 absolute menu w-72 bg-base-100 border border-base-content/10 shadow-lg';
   let list = ''
       
   const provider = new SlashProvider({
@@ -312,7 +312,9 @@ const emojiItemRenderer = (item, text) => {
 const mentionSlash = slashFactory('mentions-slash');
 const emojisSlash = slashFactory('emojis-slash');
 // const slash = slashFactory('slash');
-let isUpdatingMarkdown = false;
+// let isUpdatingMarkdown = false;
+
+
 
 const createEditor = async (_this, hidden_input, composer$) => {
   const editor = await Editor
@@ -330,12 +332,19 @@ const createEditor = async (_this, hidden_input, composer$) => {
     ctx.get(listenerCtx)
     .markdownUpdated((ctx, markdown, prevMarkdown) => {
       const transformedMarkdown = markdown
-      .replace(/!\[(.*?)\]\(.*?\)/g, '$1');
+      .replace(/!\[(.*?)\]\(.*?\)/g, '$1')
+      // Remove backslash before # at the start of a line or after a space
+      .replace(/(^|\s)\\#/g, '$1#')
+      // Remove backslash before underscore in hashtags
+      .replace(/(#[^_\s]+)\\(_[^_\s]+)/g, '$1$2');
+  
     hidden_input.value = transformedMarkdown;
+    console.log("hidden_input.value");
     console.log(hidden_input.value);
     const inputEvent = new Event('input', { 
       bubbles: true, 
     });
+    
     hidden_input.dispatchEvent(inputEvent);
     })
       ctx.update(editorViewOptionsCtx, (prev) => ({
@@ -349,7 +358,7 @@ const createEditor = async (_this, hidden_input, composer$) => {
   // .config(nord)
   .use(commonmark)
   .use(remarkInlineLinkPlugin)
-  .use(gfm)
+  // .use(gfm)
   .use(emoji)
   .use(listener)
   .use(mentionSlash)
@@ -532,9 +541,36 @@ const createEditor = async (_this, hidden_input, composer$) => {
 
 export default {
   mounted() {
+    console.log("ssss")
+    window.addEventListener("bonfire:focus-composer", (event) => {
+      const composerContainer = document.querySelector("#composer_container");
+      if (composerContainer) {
+        const contentEditableDiv = composerContainer.querySelector("[contenteditable]");
+        if (contentEditableDiv) {
+          contentEditableDiv.focus();
+          // Place the cursor at the end of the content
+          const range = document.createRange();
+          const selection = window.getSelection();
+          range.selectNodeContents(contentEditableDiv);
+          range.collapse(false);
+          selection.removeAllRanges();
+          selection.addRange(range);
+        }
+      }
+    });
     const hidden_input = document.getElementById('editor_hidden_input');
     const composer$ = this.el.querySelector('#editor')
     createEditor(this, hidden_input, composer$)
+  },
+
+  destroyed() {
+    // Clean up event listener when the component is destroyed
+    window.removeEventListener("bonfire:focus-composer", this.focusComposerHandler);
+    
+    // Clean up editor if necessary
+    // if (this.editor && typeof this.editor.destroy === 'function') {
+    //   this.editor.destroy();
+    // }
   }
 }
 

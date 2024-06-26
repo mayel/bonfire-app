@@ -13,7 +13,6 @@ import { slashFactory } from '@milkdown/plugin-slash';
 import { gemoji } from "gemoji";
 import { clipboard } from '@milkdown/plugin-clipboard';
 import { createPopup } from '@picmo/popup-picker';
-import { createNode } from '@milkdown/utils';
 import { Plugin, PluginKey } from '@milkdown/prose/state';
 import { Decoration, DecorationSet } from '@milkdown/prose/view';
 
@@ -46,7 +45,7 @@ const MENTION_REGEX = new RegExp(`(?:\\s|^)(${MENTION_PREFIX}${VALID_CHARS}{${MI
 const EMOJI_REGEX = new RegExp(`(?:\\s|^)(${EMOJI_PREFIX}${VALID_CHARS}{${MIN_PREFIX_LENGTH},})$`)
 
 
-import '@milkdown/theme-nord/style.css';
+// import '@milkdown/theme-nord/style.css';
 
 const markdown = ``
 
@@ -55,7 +54,7 @@ function mentionsPluginView(view) {
   const content = document.createElement('ul');
   content.tabIndex = 1;
 
-  content.className = 'm-0 p-0 menu w-72 bg-base-100 shadow-lg ring-2';
+  content.className = 'm-0 p-0 absolute menu w-72 bg-base-100 border border-base-content/10 shadow-lg';
   let list = ''
 
   const provider = new SlashProvider({
@@ -116,7 +115,7 @@ function emojisPluginView() {
   const content = document.createElement('ul');
   content.tabIndex = 1;
 
-  content.className = 'm-0 p-0 menu w-72 bg-base-100 shadow-lg ring-2';
+  content.className = 'm-0 p-0 absolute menu w-72 bg-base-100 border border-base-content/10 shadow-lg';
   let list = ''
       
   const provider = new SlashProvider({
@@ -314,37 +313,7 @@ const emojisSlash = slashFactory('emojis-slash');
 // const slash = slashFactory('slash');
 // let isUpdatingMarkdown = false;
 
-const customHeading = createNode((utils) => {
-  const heading = commonmark.nodes.heading.create(utils);
-  return {
-    ...heading,
-    view: {
-      ...heading.view,
-      tag: 'h4', // Always use h4 tag
-    },
-    parseSpec: {
-      ...heading.parseSpec,
-      getAttrs: (tok) => ({ level: 4 }), // Always set level to 4
-    },
-    toMarkdown: {
-      ...heading.toMarkdown,
-      match: (node) => node.type.name === 'heading',
-      runner: (state, node) => {
-        state.write('#### '); // Always use four #
-        state.renderInline(node);
-        state.closeBlock(node);
-      },
-    },
-  };
-});
 
-const customCommonmark = {
-  ...commonmark,
-  nodes: {
-    ...commonmark.nodes,
-    heading: customHeading,
-  },
-};
 
 const createEditor = async (_this, hidden_input, composer$) => {
   const editor = await Editor
@@ -386,9 +355,9 @@ const createEditor = async (_this, hidden_input, composer$) => {
       }))
   })
   // .config(nord)
-  .use(customCommonmark)
+  .use(commonmark)
   .use(remarkInlineLinkPlugin)
-  .use(gfm)
+  // .use(gfm)
   .use(emoji)
   .use(listener)
   .use(mentionSlash)
