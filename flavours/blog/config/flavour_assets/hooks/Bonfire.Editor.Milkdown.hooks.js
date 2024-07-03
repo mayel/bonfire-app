@@ -45,7 +45,7 @@ const MENTION_REGEX = new RegExp(`(?:\\s|^)(${MENTION_PREFIX}${VALID_CHARS}{${MI
 const EMOJI_REGEX = new RegExp(`(?:\\s|^)(${EMOJI_PREFIX}${VALID_CHARS}{${MIN_PREFIX_LENGTH},})$`)
 
 
-// import '@milkdown/theme-nord/style.css';
+import '@milkdown/theme-nord/style.css';
 
 const markdown = ``
 
@@ -54,7 +54,7 @@ function mentionsPluginView(view) {
   const content = document.createElement('ul');
   content.tabIndex = 1;
 
-  content.className = 'm-0 p-0 absolute menu w-72 bg-base-100 border border-base-content/10 shadow-lg';
+  content.className = 'milkdown-menu absolute m-0 p-0 menu w-72 bg-base-100 border border-base-content/10 shadow-lg';
   let list = ''
 
   const provider = new SlashProvider({
@@ -71,7 +71,8 @@ function mentionsPluginView(view) {
       
 
       const mentions = currentText.match(MENTION_REGEX)
-
+      console.log("mentions")
+      console.log(mentions)
       // Display the menu if the last character is `@` followed by 2 chars.
       if (mentions) {
         // get the characters that follows the `@` in currentText
@@ -115,7 +116,7 @@ function emojisPluginView() {
   const content = document.createElement('ul');
   content.tabIndex = 1;
 
-  content.className = 'm-0 p-0 absolute menu w-72 bg-base-100 border border-base-content/10 shadow-lg';
+  content.className = 'milkdown-menu absolute m-0 p-0 menu w-72 bg-base-100 border border-base-content/10 shadow-lg';
   let list = ''
       
   const provider = new SlashProvider({
@@ -354,7 +355,7 @@ const createEditor = async (_this, hidden_input, composer$) => {
           spellcheck: 'false' },
       }))
   })
-  // .config(nord)
+  //.config(nord)
   .use(commonmark)
   .use(remarkInlineLinkPlugin)
   // .use(gfm)
@@ -567,9 +568,9 @@ export default {
     window.removeEventListener("bonfire:focus-composer", this.focusComposerHandler);
     
     // Clean up editor if necessary
-    if (this.editor && typeof this.editor.destroy === 'function') {
-      this.editor.destroy();
-    }
+    // if (this.editor && typeof this.editor.destroy === 'function') {
+    //   this.editor.destroy();
+    // }
   }
 }
 
