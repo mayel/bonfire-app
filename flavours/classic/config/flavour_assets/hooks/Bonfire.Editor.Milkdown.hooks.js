@@ -337,6 +337,9 @@ const createEditor = async (_this, hidden_input, composer$) => {
       .replace(/(#[^_\s]+)\\(_[^_\s]+)/g, '$1$2');
   
     hidden_input.value = transformedMarkdown;
+
+      console.log("transformedMarkdown")
+      console.log(transformedMarkdown)
     const inputEvent = new Event('input', { 
       bubbles: true, 
     });
@@ -353,7 +356,7 @@ const createEditor = async (_this, hidden_input, composer$) => {
   })
   //.config(nord)
   .use(commonmark)
-  .use(remarkInlineLinkPlugin)
+  // .use(remarkInlineLinkPlugin)
   // .use(gfm)
   .use(emoji)
   .use(listener)
