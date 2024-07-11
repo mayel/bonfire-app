@@ -18,7 +18,7 @@ Once your extension folder is set up, you're ready to dive into coding. If your 
 
 > #### Info {: .info}
 >
-> The Bonfire main router lives in bonfire_spark extension. Refer to the [Routing](/docs/building/routing/) page to learn how to add new routes.
+> The Bonfire main router lives in `bonfire` extension. Refer to the [Routing](/docs/building/routing/) page to learn how to add new routes.
 
 Additionally, consider these steps to enhance your extension:
 

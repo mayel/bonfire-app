@@ -95,7 +95,7 @@ We're adding the settings in the [edit_profile_info_live.sface](https://github.c
 
 At this point, we should be able to see our basic weather widget on our profile page and decide to switch it on and off.
 
-What remains is to include the logic for returning and displaying the weather. We will use the Forecastr library, which is already used in our application and added in the [bonfire_spark](https://github.com/bonfire-networks/bonfire_spark) extension.
+What remains is to include the logic for returning and displaying the weather. We will use the Forecastr library, which is already used in our application and added in the [bonfire](https://github.com/bonfire-networks/bonfire) extension.
 
 The Forecastr library makes use of the Pirate Weather service, so we need a Pirate Weather API KEY. You can generate one on [pirateweather.net](http://pirateweather.net/) and add it at the bottom of your `.env` file:
 

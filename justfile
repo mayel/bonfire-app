@@ -115,7 +115,7 @@ init services="db": _pre-init
 	chmod 644 .erlang.cookie
 
 _ln-spark-deps:
-	cd config && (find ../extensions/bonfire/ -type f -name "deps.*" -exec ln -sfn {} ./ \; || find ../deps/bonfire/ -type f -name "deps.*" -exec ln -sfn {} ./ \; || echo "Could not symlink the bonfire_spark deps") && ls -la ./
+	cd config && (find ../extensions/bonfire/ -type f -name "deps.*" -exec ln -sfn {} ./ \; || find ../deps/bonfire/ -type f -name "deps.*" -exec ln -sfn {} ./ \; || echo "Could not symlink the bonfire deps") && ls -la ./
 
 @_pre-setup-env flavour='classic':
 	echo "Using flavour '$flavour' at flavours/$flavour with env '$MIX_ENV' with vars from ./flavours/$flavour/config/$ENV_ENV/.env "
@@ -635,7 +635,7 @@ rel-config: config _rel-init _rel-prepare
 	rm -rf flavours/*/config/*/dev
 	cp -rfL flavours/classic data/current_flavour
 	cp -rfL $FLAVOUR_PATH/* data/current_flavour/
-	cp -rfL extensions/bonfire/deps.* data/current_flavour/config/ || cp -rfL deps/bonfire/deps.* data/current_flavour/config/ || echo "Could not copy the deps definitions from the bonfire_spark dep"
+	cp -rfL extensions/bonfire/deps.* data/current_flavour/config/ || cp -rfL deps/bonfire/deps.* data/current_flavour/config/ || echo "Could not copy the deps definitions from the bonfire dep"
 
 # copy current flavour's config, without using symlinks
 @_rel-prepare: _rel-config-prepare

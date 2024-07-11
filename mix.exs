@@ -20,7 +20,7 @@ defmodule Bonfire.Umbrella.MixProject do
 
   # including it by default breaks Dockerfile.release but not including it like this breaks CI...
   @main_deps if(System.get_env("WITH_GIT_DEPS") == "0",
-               do: [{:bonfire, git: "https://github.com/bonfire-networks/bonfire_spark"}],
+               do: [{:bonfire, git: "https://github.com/bonfire-networks/bonfire"}],
                else: []
              )
   @maybe_api_deps if(System.get_env("WITH_API_GRAPHQL") == "yes",
@@ -405,7 +405,7 @@ defmodule Bonfire.Umbrella.MixProject do
     ]
   end
 
-  # def application, do: Bonfire.Spark.MixProject.application()
+  # def application, do: Bonfire.MixProject.application()
 
   def cli do
     [

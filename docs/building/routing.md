@@ -4,7 +4,7 @@ The Bonfire routing system provides a modular and extensible way to define route
 It allows developers to include routes directly from their extensions based on their availability and configuration. 
 The routes are organized into pipelines and scopes to handle authentication and authorization requirements.
 
-The Router module is declared in the [router.ex](https://github.com/bonfire-networks/bonfire_spark/blob/main/lib/web/router.ex) file in the [bonfire_spark](https://github.com/bonfire-networks/bonfire_spark) extension.
+The Router module is declared in the [router.ex](https://github.com/bonfire-networks/bonfire/blob/main/lib/web/router.ex) file in the [bonfire](https://github.com/bonfire-networks/bonfire) extension.
 
 The `Bonfire.Web.Router.Routes` module defines all the routes for active Bonfire extensions that will be included in the Bonfire app. It also includes routes for GraphQl and AcitvityPub specific endpoints.
 
@@ -17,11 +17,9 @@ The Routes file follows the standard Phoenix/Liveview syntax and structure.
 
 To add a new routes to the Router, you need to add include it to the main Router. 
 
-You need to clone and enable `bonfire_spark` locally.
-
 > #### Info {: .info}
 >
-> You need a workaround to be able to enable bonfire_spark locally. We have an open issue about it. You need to clone or rename the extesion from bonfire_spark to bonfire in your extensions folder and subsequentally rename it as bonfire in your deps.flavour.path file.
+> At the moment, you need a workaround to be able to enable the `bonfire` dependency locally: clone it in your `./extensions` folder and then add it to your` deps.flavour.path` file.
 
-Once you have bonfire_spark enabled locally, include your new extension router with `use_if_enabled(Project.ExtensionName.Web.Routes)` in the [Bonfire.Web.Router.Routes](https://github.com/bonfire-networks/bonfire_spark/blob/main/lib/web/router.ex) file.
+Once you have the `bonfire` dep enabled locally, include your new extension router with `use_if_enabled(Project.ExtensionName.Web.Routes)` in the [Bonfire.Web.Router.Routes](https://github.com/bonfire-networks/bonfire/blob/main/lib/web/router.ex) file.
 
