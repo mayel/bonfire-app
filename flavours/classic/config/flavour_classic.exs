@@ -1,6 +1,6 @@
 import Config
 
-config :bonfire_social, Bonfire.Social.Pins, modularity: :disabled
+config :bonfire_social, Bonfire.Social.Pins, modularity: :enabled
 
 config :bonfire_label, modularity: :disabled
 
