@@ -254,13 +254,15 @@ config :sentry,
   context_lines: 15,
   tags: %{app_version: Mix.Project.config()[:version]}
 
-for dep <-
-      Bonfire.Mixer.mess_other_flavour_dep_names(flavour)
-      |> Bonfire.Mixer.log(
-        "NOTE: these extensions are not part of the #{flavour} flavour and will be available but disabled by default"
-      ) do
-  config dep,
-    modularity: :disabled
+if Bonfire.Mixer.compile_disabled?() do
+  for dep <-
+        Bonfire.Mixer.mess_other_flavour_dep_names(flavour)
+        |> Bonfire.Mixer.log(
+          "NOTE: these extensions are not part of the #{flavour} flavour and will be available but disabled by default"
+        ) do
+    config dep,
+      modularity: :disabled
+  end
 end
 
 if System.get_env("WITH_API_GRAPHQL") != "yes" do

@@ -137,6 +137,16 @@ if not Code.ensure_loaded?(Bonfire.Mixer) do
 
     def forks_path(), do: System.get_env("FORKS_PATH", "extensions/")
 
+    def compile_disabled? do
+      case System.get_env("COMPILE_DISABLED_EXTENSIONS", "prod") do
+        "prod" -> System.get_env("MIX_ENV") == "prod"
+        "1" -> true
+        "yes" -> true
+        "all" -> true
+        _ -> false
+      end
+    end
+
     def mess_sources(flavour) do
       mess_source_files(System.get_env("WITH_FORKS", "1"), System.get_env("WITH_GIT_DEPS", "1"))
       |> maybe_all_flavour_sources(flavour, System.get_env("WITH_ALL_FLAVOUR_DEPS", "1"))

@@ -103,7 +103,8 @@ init services="db": _pre-init
 	mkdir -p config
 	mkdir -p ./flavours/$flavour/config/prod/
 	mkdir -p ./flavours/$flavour/config/dev/
-	just _ln-spark-deps
+	touch ./flavours/$flavour/config/deps.flavour.path
+	just _ln-spark-deps	
 	cd config && ln -sfn ../flavours/classic/config/* ./ && ln -sfn ../flavours/$flavour/config/* ./
 	touch ./config/deps.path
 	mkdir -p data

@@ -52,11 +52,15 @@ if not Code.ensure_loaded?(Mess) do
     end
 
     defp enum_deps({:disabled, sublist}) do
-      sublist
-      |> Enum.flat_map(&enum_deps/1)
-      |> Enum.map(&Map.put(&1, :disabled, true))
+      if Bonfire.Mixer.compile_disabled?() do
+        sublist
+        |> Enum.flat_map(&enum_deps/1)
+        |> Enum.map(&Map.put(&1, :disabled, true))
 
-      # |> IO.inspect(label: "disabled")
+        # |> IO.inspect(label: "disabled")
+      else
+        []
+      end
     end
 
     defp enum_deps({kind, path}) do
