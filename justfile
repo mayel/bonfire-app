@@ -917,8 +917,11 @@ localise-extract:
 	just rand
 	just rand
 
-@mix-secrets: ln-mix-tasks
-	cd lib/mix/tasks/secrets/ && mix escript.build && ./secrets 128 3
+@mix-secrets: 
+	{{ if path_exists("lib/mix/tasks")=="true" { "echo ." } else {"just ln-mix-tasks"} }}
+	cd lib/mix/tasks/secrets/ && mix escript.build 
+	./lib/mix/tasks/secrets/secrets --file .env
+# ./lib/mix/tasks/secrets/secrets 128 3
 
 @ln-mix-tasks:
 	just mix deps.get
