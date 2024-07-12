@@ -208,6 +208,9 @@ config :mime, :types, %{
   "audio/mp3" => ["mp3"],
   "audio/ogg" => ["oga"],
   "audio/wav" => ["wav"],
+  "audio/m4a" => ["m4a"],
+  "audio/x-m4a" => ["m4a"],
+  "audio/mp4" => ["m4a", "mp4"],
   # "audio/webm"=> ["webm"],
   "audio/opus" => ["opus"],
   "audio/flac" => ["flac"],
@@ -222,7 +225,9 @@ config :mime, :types, %{
 
 # define which is preferred when more than one
 config :mime, :extensions, %{
-  "mkv" => "video/x-matroska"
+  "mkv" => "video/x-matroska",
+  "m4a" => "audio/m4a",
+  "mp4" => "video/mp4"
 }
 
 config :os_mon,
