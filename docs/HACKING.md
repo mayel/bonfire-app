@@ -174,7 +174,13 @@ just nix-db start
 
 ### Configure
 
-Edit the config (especially the secrets) for the current flavour in `./.env`
+Run `just config` to initialise the needed config.
+
+```sh
+just config
+```
+
+Then you can edit the config for the current flavour in `./.env`
 
 The only required config to startup bonfire are the secrets for sessions/cookies (`SECRET_KEY_BASE`, `SIGNING_SALT`, `ENCRYPTION_SALT`), you can generate strings for these by running:
 
@@ -182,14 +188,6 @@ The only required config to startup bonfire are the secrets for sessions/cookies
 just secrets
 ```
 
-(You need to manually copy/paste the value on the `.env` file, we will soon automatize this task)
-
-
-Then run `just config` to initialise the needed config.
-
-```sh
-just config
-```
 
 ## Light a fire!
 
